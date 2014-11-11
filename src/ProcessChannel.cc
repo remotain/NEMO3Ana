@@ -702,7 +702,7 @@ namespace ProcessChannel {
 	// Process two electrons external channel: 
 	// Apply cut and make plot over data set 'd'
 	// 
-	// STATUS: TODO
+	// STATUS: DONE 11/11/2014
 	//
 	//////////////////////////////////////////////////////////////////////////////
 	bool ProcessTwoElectronExternal( DataSet *d ){
@@ -809,12 +809,6 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nCloseDelayedCslusters" , d->GetName()) , "; N. close delayed clusters; No.Events", 21, -0.5, 20.5             ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_SS_In"  , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_SS_In"  , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_SS_Out" , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_SS_Out" , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_OS"     , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_OS"     , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
@@ -1045,33 +1039,10 @@ namespace ProcessChannel {
 		    double tot_e = el_energy_[0] + el_energy_[1];
 			
 		    if (run < 3396) {
-		      
-		        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1", d->GetName()) ) -> Fill(tot_e);
-
-		        if (el_side_[0] == el_side_[1]) {
-					if (el_side_[0] == 0) {
-						histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_SS_In", d->GetName()) ) -> Fill(tot_e);
-		          	} else {
-						histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_SS_Out", d->GetName()) ) -> Fill(tot_e);
-		          	}
-		        } else {
-					histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_OS", d->GetName()) ) -> Fill(tot_e);
-		        }
-
-		    } else {
-				
-				histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2", d->GetName()) ) -> Fill(tot_e);
-
-		        if (el_side_[0] == el_side_[1]) {
-		          if (el_side_[0] == 0) {
-		            histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_SS_In", d->GetName()) ) -> Fill(tot_e);
-		          } else {
-		            histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_SS_Out", d->GetName()) ) -> Fill(tot_e);
-		          }
-		        } else {
-					histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_OS", d->GetName()) ) -> Fill(tot_e);
-		        }
-		      
+				histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1", d->GetName()) ) -> Fill(tot_e);
+			}
+		    else {
+				histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2", d->GetName()) ) -> Fill(tot_e);		      
 		    }
 
 		}
