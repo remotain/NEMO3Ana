@@ -6,6 +6,16 @@
 
 ClassImp(HistoCollection);
 
+TH1D * HistoCollection::Find( const char* name ) 
+{ 
+
+	TH1D * obj = (TH1D*) _collection->FindObject(name); 
+	
+	if ( !obj ) Error("Find()", "Histo '%s' not found in collection", name);
+		
+	return obj;
+};
+
 Int_t HistoCollection::Write()
 {
 	TDirectory * d = gFile->mkdir(GetName());

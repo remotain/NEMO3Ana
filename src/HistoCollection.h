@@ -21,7 +21,7 @@ public:
 	~HistoCollection(){ };
 
 	void Add( TH1 * h ) { _collection->Add(h); };
-	TH1D * Find( const char* name ) { return (TH1D*)_collection->FindObject(name); };
+	TH1D * Find( const char* name );
 	
 	THashList * GetCollection(){ return _collection; };
 	
