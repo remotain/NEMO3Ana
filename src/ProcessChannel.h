@@ -34,7 +34,7 @@ namespace ProcessChannel {
 	TString GetChannelToProcess( );	
 		
 	void AddDataSet( DataSet * d);
-    THashList * GetDataSetCollection();
+	THashList * GetDataSetCollection();
 	
 	bool Run();
 	

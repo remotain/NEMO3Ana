@@ -214,11 +214,11 @@ namespace ProcessChannel {
 	    TVector3 *eVertex    = new TVector3(0,0,0) ; tree->SetBranchAddress("eVertex"    , &eVertex    );
 	    TVector3 *trueVertex = new TVector3(0,0,0) ; tree->SetBranchAddress("trueVertex" , &trueVertex );
 	
-		// Loop
+	    // Loop
 
-		Long64_t nentries = tree->GetEntriesFast();
+	    Long64_t nentries = tree->GetEntriesFast();
 
-		Long64_t nbytes = 0, nb = 0;	
+	    Long64_t nbytes = 0, nb = 0;	
 
 	    for (Long64_t iEvt = 0; iEvt < nentries; iEvt++) {
 		
@@ -238,16 +238,18 @@ namespace ProcessChannel {
 			// 3. no hotspot
 		
 			// Apply radon map
-		    double weight = 1;    
-		    if (strcmp(d->GetName(), "SWire_Bi214")  or 
-				strcmp(d->GetName(), "Swire_Pb214") )  weight = radonWeight;
-		    if (strcmp(d->GetName(), "SFoil_Bi214")  or
-		        strcmp(d->GetName(), "SFoil_Pb214") )  weight = sfoilRadonWeight;
-		    if (strcmp(d->GetName(), "SWire_Bi210") )  weight = bi210Weight;
+		    double weight = 1.0;    
+		    if (strcmp(d->GetName(), "SWire_Bi214") == 0 or 
+			strcmp(d->GetName(), "SWire_Pb214") == 0 )  weight = radonWeight;
+		    if (strcmp(d->GetName(), "SFoil_Bi214") == 0  or
+		        strcmp(d->GetName(), "SFoil_Pb214") == 0 )  weight = sfoilRadonWeight;
+		    if (strcmp(d->GetName(), "SWire_Bi210") == 0 )  weight = bi210Weight;
 		
+		    std::cout << strcmp(d->GetName(), "SWire_Bi214") << " " <<  weight << std::endl;
+
 			// Fill histogram
-			histo_collection->Find( TString::Format("%s_h_run"              , d->GetName()) ) -> Fill(run, weight);
-			histo_collection->Find( TString::Format("%s_h_electronEnergy"   , d->GetName()) ) -> Fill(el_energy, weight);
+		    histo_collection->Find( TString::Format("%s_h_run"              , d->GetName()) ) -> Fill(run,weight);
+		    histo_collection->Find( TString::Format("%s_h_electronEnergy"   , d->GetName()) ) -> Fill(el_energy, weight);
 			histo_collection->Find( TString::Format("%s_h_trackLength"      , d->GetName()) ) -> Fill(el_pathLength, weight);
 			histo_collection->Find( TString::Format("%s_h_trackSign"        , d->GetName()) ) -> Fill(el_trkSign, weight);
 			histo_collection->Find( TString::Format("%s_h_electronIobt"     , d->GetName()) ) -> Fill(el_caloiobt, weight);
