@@ -245,8 +245,6 @@ namespace ProcessChannel {
 		        strcmp(d->GetName(), "SFoil_Pb214") == 0 )  weight = sfoilRadonWeight;
 		    if (strcmp(d->GetName(), "SWire_Bi210") == 0 )  weight = bi210Weight;
 		
-		    std::cout << strcmp(d->GetName(), "SWire_Bi214") << " " <<  weight << std::endl;
-
 			// Fill histogram
 		    histo_collection->Find( TString::Format("%s_h_run"              , d->GetName()) ) -> Fill(run,weight);
 		    histo_collection->Find( TString::Format("%s_h_electronEnergy"   , d->GetName()) ) -> Fill(el_energy, weight);
