@@ -18,7 +18,7 @@ public:
 	HistoCollection(const char* name, const char* title)       : TNamed(name, title) { _collection = new THashList(); };
 	HistoCollection(const TString& name, const TString& title) : TNamed(name, title) { _collection = new THashList(); };
 
-	~HistoCollection(){ };
+	~HistoCollection(){ _collection->Delete(); };
 
 	void Add( TH1 * h ) { _collection->Add(h); };
 	TH1D * Find( const char* name );

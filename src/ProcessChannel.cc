@@ -37,10 +37,9 @@ namespace ProcessChannel {
 	TString GetOutputFilePath() { return _OutputFilePath; };
 	TString GetOutputFileName() { return _OutputFileName; };
 
-	// Set channel to process
+	// Set/Get channel to process
 	ChannelType_t _ChannelToProcess;
 	void SetChannelToProcess( ChannelType_t c){ _ChannelToProcess = c; };
-
 	TString GetChannelToProcess(){
 		
 		switch(_ChannelToProcess) {
@@ -277,12 +276,10 @@ namespace ProcessChannel {
 		histo_collection->Write();
 		
 		//histo_collection->SaveAs("test.pdf");
-	
-		// Delete explicit histogram declaration
-		delete hAnaCutFlow; delete hRecoCutFlow;
 		
 		// Delete the remaining crap
-		histo_collection->Delete();	
+		histo_collection->Delete();
+		tree->Delete();
 		f0->Close() ; f1->Close() ; 
 		_InputFile->Close(); _OutputFile->Close();
 	
@@ -685,11 +682,9 @@ namespace ProcessChannel {
 		
 		//histo_collection->SaveAs("test.pdf");
 	
-		// Delete explicit histogram declaration
-		delete hAnaCutFlow; delete hRecoCutFlow;
-		
 		// Delete the remaining crap
 		histo_collection->Delete();	
+		tree->Delete();
 		f0->Close() ; f1->Close() ; 
 		_InputFile->Close(); _OutputFile->Close();
 	
@@ -1053,12 +1048,10 @@ namespace ProcessChannel {
 		histo_collection->Write();
 		
 		//histo_collection->SaveAs("test.pdf");
-	
-		// Delete explicit histogram declaration
-		delete hAnaCutFlow; delete hRecoCutFlow;
-		
+			
 		// Delete the remaining crap
-		histo_collection->Delete();	
+		histo_collection->Delete();
+		tree->Delete();	
 		f0->Close() ; f1->Close() ; 
 		_InputFile->Close(); _OutputFile->Close();
 	
