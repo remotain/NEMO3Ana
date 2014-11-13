@@ -36,7 +36,7 @@ namespace ProcessChannel {
 	void AddDataSet( DataSet * d);
 	THashList * GetDataSetCollection();
 	
-	bool Run();
+	bool Run( Long64_t n_max = -1 );
 	
 	// Process channel
 	bool ProcessOneElectron                 ( DataSet *d );

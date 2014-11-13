@@ -61,19 +61,24 @@ namespace ProcessChannel {
 	void AddDataSet( DataSet * d){ _DataSetCollection->Add(d); };
     THashList * GetDataSetCollection() { return _DataSetCollection; };
 
+	// Number of events in the loop. -1 : all events.
+	Long64_t _n_max = -1;
+
 	//////////////////////////////////////////////////////////////////////////////
 	//
 	// Run over all data set found in _DataSetCollection
 	//		
 	//////////////////////////////////////////////////////////////////////////////
-	bool Run(){
+	bool Run( Long64_t n_max){
 
 		TIter next(_DataSetCollection);
 		DataSet * d;
 
+		_n_max = n_max;
+
 		while( (d = (DataSet *) next()) ) {
 				
-			std::cout << std::endl << "Processing: " << d->GetName()<< std::endl;
+			std::cout << std::endl << "Data set: " << d->GetName()<< std::endl;
 
 			bool status = kFALSE;
 
@@ -215,15 +220,16 @@ namespace ProcessChannel {
 	    TVector3 *trueVertex = new TVector3(0,0,0) ; tree->SetBranchAddress("trueVertex" , &trueVertex );
 	
 	    // Loop
-
-	    Long64_t nentries = tree->GetEntriesFast();
+		Long64_t nentries = tree->GetEntriesFast();
+		if ( _n_max != -1) nentries = _n_max;
 
 	    Long64_t nbytes = 0, nb = 0;	
 
 	    for (Long64_t iEvt = 0; iEvt < nentries; iEvt++) {
 		
-		    if (iEvt % 500000 == 0) {
-		      std::cout << "\t " << iEvt << "/" << nentries << std::endl;
+			int frac = (int)round(100*iEvt/nentries);
+		    if ( iEvt % (int)round(1+(0.1*nentries)) == 0) {
+		      std::cout << "Process: " << frac << "% (" << iEvt << "/" << nentries << ")" << std::endl;
 		    }
 		
 	       	nb = tree->GetEntry(iEvt); nbytes += nb;
@@ -240,7 +246,7 @@ namespace ProcessChannel {
 			// Apply radon map
 		    double weight = 1.0;    
 		    if (strcmp(d->GetName(), "SWire_Bi214") == 0 or 
-			strcmp(d->GetName(), "SWire_Pb214") == 0 )  weight = radonWeight;
+				strcmp(d->GetName(), "SWire_Pb214") == 0 )  weight = radonWeight;
 		    if (strcmp(d->GetName(), "SFoil_Bi214") == 0  or
 		        strcmp(d->GetName(), "SFoil_Pb214") == 0 )  weight = sfoilRadonWeight;
 		    if (strcmp(d->GetName(), "SWire_Bi210") == 0 )  weight = bi210Weight;
@@ -494,15 +500,16 @@ namespace ProcessChannel {
 	    TVector3* trueVertex = new TVector3(0,0,0); tree->SetBranchAddress("trueVertex", &trueVertex);
 		
 		// Loop
-
 		Long64_t nentries = tree->GetEntriesFast();
+		if ( _n_max != -1) nentries = _n_max;
 
 		Long64_t nbytes = 0, nb = 0;	
 
 	    for (Long64_t iEvt = 0; iEvt < nentries; iEvt++) {
 		
-		    if (iEvt % 500000 == 0) {
-		      std::cout << "\t " << iEvt << "/" << nentries << std::endl;
+			int frac = (int)round(100*iEvt/nentries);
+		    if ( iEvt % (int)round(1+(0.1*nentries)) == 0) {
+		      		      std::cout << "Process: " << frac << "% (" << iEvt << "/" << nentries << ")" << std::endl;
 		    }
 		
 	       	nb = tree->GetEntry(iEvt); nbytes += nb;
@@ -560,11 +567,11 @@ namespace ProcessChannel {
 
 			// Apply radon map
 		    double weight = 1;    
-		    if (strcmp(d->GetName(), "SWire_Bi214")  or 
-				strcmp(d->GetName(), "Swire_Pb214") )  weight = radonWeight;
-		    if (strcmp(d->GetName(), "SFoil_Bi214")  or
-		        strcmp(d->GetName(), "SFoil_Pb214") )  weight = sfoilRadonWeight;
-		    if (strcmp(d->GetName(), "SWire_Bi210") )  weight = bi210Weight;
+		    if (strcmp(d->GetName(), "SWire_Bi214") == 0 or 
+				strcmp(d->GetName(), "SWire_Pb214") == 0 )  weight = radonWeight;
+		    if (strcmp(d->GetName(), "SFoil_Bi214") == 0  or
+		        strcmp(d->GetName(), "SFoil_Pb214") == 0 )  weight = sfoilRadonWeight;
+		    if (strcmp(d->GetName(), "SWire_Bi210") == 0 )  weight = bi210Weight;
 		
 			// Fill histogram
 		    histo_collection->Find(TString::Format("%s_h_run"                    , d->GetName()) ) -> Fill(run                    , weight);
@@ -889,15 +896,16 @@ namespace ProcessChannel {
 	    TVector3* trueVertex = new TVector3(0,0,0); tree->SetBranchAddress("trueVertex", &trueVertex);
 		
 		// Loop
-
 		Long64_t nentries = tree->GetEntriesFast();
+		if ( _n_max != -1) nentries = _n_max;
 
 		Long64_t nbytes = 0, nb = 0;	
 
 	    for (Long64_t iEvt = 0; iEvt < nentries; iEvt++) {
 		
-		    if (iEvt % 500000 == 0) {
-		      std::cout << "\t " << iEvt << "/" << nentries << std::endl;
+			int frac = (int)round(100*iEvt/nentries);
+		    if ( iEvt % (int)round(1+(0.1*nentries)) == 0) {
+				std::cout << "Process: " << frac << "% (" << iEvt << "/" << nentries << ")" << std::endl;
 		    }
 		
 	       	nb = tree->GetEntry(iEvt); nbytes += nb;
@@ -950,11 +958,11 @@ namespace ProcessChannel {
 
 			// Apply radon map
 		    double weight = 1;    
-		    if (strcmp(d->GetName(), "SWire_Bi214")  or 
-				strcmp(d->GetName(), "Swire_Pb214") )  weight = radonWeight;
-		    if (strcmp(d->GetName(), "SFoil_Bi214")  or
-		        strcmp(d->GetName(), "SFoil_Pb214") )  weight = sfoilRadonWeight;
-		    if (strcmp(d->GetName(), "SWire_Bi210") )  weight = bi210Weight;
+		    if (strcmp(d->GetName(), "SWire_Bi214") == 0 or 
+				strcmp(d->GetName(), "SWire_Pb214") == 0 )  weight = radonWeight;
+		    if (strcmp(d->GetName(), "SFoil_Bi214") == 0  or
+		        strcmp(d->GetName(), "SFoil_Pb214") == 0 )  weight = sfoilRadonWeight;
+		    if (strcmp(d->GetName(), "SWire_Bi210") == 0 )  weight = bi210Weight;
 		
 			// Fill histogram
 		    histo_collection->Find(TString::Format("%s_h_run"                    , d->GetName()) ) -> Fill(run                    , weight);
