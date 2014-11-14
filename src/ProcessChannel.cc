@@ -2114,25 +2114,25 @@ namespace ProcessChannel {
  		    if (run < 3396) {
 				
 				if ( el_side == 0 and alphaSide == 0) {
-					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aIn"   , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eIn_aIn"   , d->GetName()) )->Fill(alphaLength);
 				} else if( el_side == 1 and alphaSide == 1) {
-					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aOut" , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eOut_aOut" , d->GetName()) )->Fill(alphaLength);
 				} else if( el_side == 0 and alphaSide == 1) {
-					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aOut"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eIn_aOut"  , d->GetName()) )->Fill(alphaLength);
 				} else if( el_side == 1 and alphaSide == 0) {
-					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aIn"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eOut_aIn"  , d->GetName()) )->Fill(alphaLength);
 				}
 				
 			} else {
 
 				if ( el_side == 0 and alphaSide == 0) {
-					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aIn"   , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aIn"   , d->GetName()) )->Fill(alphaLength);
 				} else if( el_side == 1 and alphaSide == 1) {                             
-					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aOut" , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aOut" , d->GetName()) )->Fill(alphaLength);
 				} else if( el_side == 0 and alphaSide == 1) {                             
-					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aOut"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aOut"  , d->GetName()) )->Fill(alphaLength);
 				} else if( el_side == 1 and alphaSide == 0) {                             
-					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aIn"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aIn"  , d->GetName()) )->Fill(alphaLength);
 				}
 
 			}
