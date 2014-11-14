@@ -2070,7 +2070,6 @@ namespace ProcessChannel {
 			unsigned int currentcut = 0;
 			hAnaCutFlow -> Fill(currentcut++);
 			
-	        hAnaCutFlow -> Fill(currentcut++);
 	        if(sectorId != 18)    continue; hAnaCutFlow->Fill(currentcut++);
 	        if(el_energy   < 0.2) continue; hAnaCutFlow->Fill(currentcut++);
 	        if(alphaLength > 40)  continue; hAnaCutFlow->Fill(currentcut++);
