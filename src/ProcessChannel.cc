@@ -1676,7 +1676,6 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexZ"               , d->GetName()) , "; Z / cm ; No.Events / 0.5 cm", 520, -130, 130							 ) );                     
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexSector"          , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19							         ) );                        
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"         , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130       	 ) );
-	    histo_collection -> Add( new TH1D( TString::Format("%s_h_trackSign"             , d->GetName()) , "; Sign; No.Events", 5, -2.5, 2.5                                          ) );
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_minGammaEnergy"        , d->GetName()) , "; Min E(#gamma) / MeV; No.Events/0.1 MeV", 50, 0, 5                       ) );
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_maxGammaEnergy"        , d->GetName()) , "; Max E(#gamma) / MeV; No.Events/0.1 MeV", 50, 0, 5                       ) );
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_minE_cosTheta"         , d->GetName()) , "; Cos(#Theta) e - #gamma_{min}; No.Events", 12, -1, 1                     ) );
