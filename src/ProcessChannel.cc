@@ -1803,10 +1803,10 @@ namespace ProcessChannel {
 			unsigned int currentcut = 0;
 			hAnaCutFlow -> Fill(currentcut++);
 
-	        if ( sourceId    > 1)                                        continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( sectorId != 18 )                                        continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( nHighEnergyClusters_ != 2)                              continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            continue; hAnaCutFlow->Fill(currentcut++);
-	        if ( el_energy_   < 0.4)                                      continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( el_energy_   < 0.4)                                     continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) continue; hAnaCutFlow->Fill(currentcut++);
 	        if (
 	          !((gmc_ext_prob_g_to_e_[0] < 0.01 and gmc_ext_prob_e_to_g_[0] < 0.01) and 
@@ -1904,11 +1904,254 @@ namespace ProcessChannel {
 	// Process one electron one alpha channel: 
 	// Apply cut and make plot over data set 'd'
 	// 
-	// STATUS: TODO
+	// STATUS: DONE 14/11/2014
 	//		
 	//////////////////////////////////////////////////////////////////////////////		
 	bool ProcessOneElectronOneAlpha( DataSet *d ){
+
+		TString tmp_name = _InputFilePath + d->GetName() + "/" + _InputFileName;
+		TFile * _InputFile = new TFile(tmp_name,"READ");
+	
+		if(_InputFile->IsZombie()) return kFALSE;
+
+		_InputFile->Print();
+	
+		// Define histograms
+		HistoCollection * histo_collection = new HistoCollection(d->GetName(), "");
+		histo_collection->GetCollection()->SetOwner(kTRUE);
+		TH1D::SetDefaultSumw2(kTRUE);
+
+		// Retry Reco cut flow histogram
+		TDirectoryFile * f0 = (TDirectoryFile*) _InputFile->Get("CutFlowManager");
+	    TH1F* hRecoCutFlow = (TH1F*)f0->FindObjectAny("CutFlowManager_hCutFlow_")->Clone(TString::Format("%s_h_RecoCutFlow", d->GetName()));
+		histo_collection->Add( hRecoCutFlow );
+
+		// Make Ana cut flow histogram
+	    std::vector<std::string>* cutNames = new std::vector<std::string>();
+	    cutNames->push_back("All events ");
+	    cutNames->push_back("Cd-116 sector (18) ");
+	    cutNames->push_back("Energy of the electron > 200 keV ");
+	    cutNames->push_back("Length of alpha track < $40\\,\\rm{cm}$ ");
+	    cutNames->push_back("At least 4 delayed hits in the Alpha cluster");
+
+	    unsigned int nCuts = cutNames->size();
+	    TH1D* hAnaCutFlow  = new TH1D( TString::Format("%s_h_AnaCutFlow", d->GetName() ),"Analysis cut flow", nCuts+1, -0.5, nCuts+0.5);
+	    for (unsigned int i = 0; i < cutNames->size(); i++){
+	      hAnaCutFlow->GetXaxis()->SetBinLabel(i+1,cutNames->at(i).c_str());
+	    }
 		
+		histo_collection->Add( hAnaCutFlow );
+
+		// Make all other histos		
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_run"                   , d->GetName() ) , "Run Number; Run; "  , 200, 1000, 9500                                                   ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_sectorId"              , d->GetName() ) , "Sector Id; Sector; ",  21, -0.5, 20.5                                                   ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_sourceId"              , d->GetName() ) , "Source Id; Source; ",   4, -1.5, 2.5                                                    ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy"        , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                       ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electroniobt"          , d->GetName() ) , "Address of block hit by electron; IOBT; No.Events", 5, -0.5, 4.5                        ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_trackLength"           , d->GetName() ) , "Track Length; Track Length / cm; No.Events / cm", 200, 0, 200                           ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_trackSign"             , d->GetName() ) , "Track Sign; Sign of Track Curvature / cm; No.Events / cm", 10, -2, 2                    ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexZ"               , d->GetName() ) , "Z of electron interzection; Z / cm ; No.Events / cm", 260, -130, 130                    ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexSector"          , d->GetName() ) , "Sector number of electron interzection; Sector Number; No.Events", 200, 0, 20           ) );
+	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"         , d->GetName() ) , "; Sector Number; Z_{vertex} / cm", 200, 0, 20, 260, -130, 130                           ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_nGammas"               , d->GetName() ) , "Number of non associated #gamma; No. Gammas; No.Events", 15, -0.5, 14.5                 ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_gammaLowEnergy"        , d->GetName() ) , "Total energy of not associated #gamma; E / MeV; No.Events/0.1 MeV", 35, 0, 3.5          ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaNHits"            , d->GetName() ) , "Number of delayed hits in #alpha; N.Hits / MeV; No.Events", 15, -0.5, 14.5              ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaTime"             , d->GetName() ) , "Time of delayed #alpha; Time / #mus; No.Events / 20 #mus", 40, 0, 800                   ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaMaxTimeDiff"      , d->GetName() ) , "Maximum time difference; Max Time Diff / #mus;  No.Events / 0.1 #mus", 25, 0, 2.5       ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength"           , d->GetName() ) , "Length of the #alpha track; Alpha length / cm; No.Events / cm", 55, 0, 55               ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaVertexZ"          , d->GetName() ) , "Z of alpha intersection; Z / cm; No.Events / cm", 260, -130, 130                        ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaVertexSector"     , d->GetName() ) , "Sector number of alpha intersection; Sector Number; No.Events", 200, 0, 20              ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaVertexDist"       , d->GetName() ) , "Distance between electron and alpha vtx; Distance / cm; No.Events / 0.1 cm", 100, 0, 10 ) );
+	    histo_collection -> Add( new TH2D( TString::Format("%s_h_layer_vs_side"         , d->GetName() ) , "Layer vs Side; Side; Layer", 4, -1.5, 2.5, 10, -0.5, 9.5                                ) );
+
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aIn"   , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aOut" , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aOut"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aIn"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aIn"   , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aOut" , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aOut"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aIn"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+
+		// Get TTree
+		TDirectoryFile * f1 = (TDirectoryFile*) _InputFile->Get(_InputDirName);	
+		TTree * tree = (TTree *) f1->Get(_InputTreeName);
+
+		// Declaration of leaf types
+	    Int_t           run                      ; tree->SetBranchAddress("run"                       , &run                      );
+	    Int_t           event                    ; tree->SetBranchAddress("event"                     , &event                    );
+	    Int_t           runType                  ; tree->SetBranchAddress("runType"                   , &runType                  );
+	    Int_t           timeStampSec             ; tree->SetBranchAddress("timeStampSec"              , &timeStampSec             );
+	    Int_t           timeStampNanoS           ; tree->SetBranchAddress("timeStampNanoS"            , &timeStampNanoS           );
+	    Double_t        radonWeight              ; tree->SetBranchAddress("radonWeight"               , &radonWeight              );
+	    Double_t        bi210Weight              ; tree->SetBranchAddress("bi210Weight"               , &bi210Weight              );
+	    Double_t        sfoilRadonWeight         ; tree->SetBranchAddress("sfoilRadonWeight"          , &sfoilRadonWeight         );
+	    Int_t           foilSide                 ; tree->SetBranchAddress("foilSide"                  , &foilSide                 );
+	    Int_t           sectorId                 ; tree->SetBranchAddress("sectorId"                  , &sectorId                 );
+	    Int_t           sourceId                 ; tree->SetBranchAddress("sourceId"                  , &sourceId                 );
+	    Int_t           isInHotSpot              ; tree->SetBranchAddress("isInHotSpot"               , &isInHotSpot              );
+	    Double_t        vertexSector             ; tree->SetBranchAddress("vertexSector"              , &vertexSector             );
+	    Double_t        el_energy                ; tree->SetBranchAddress("el_energy"                 , &el_energy                );
+	    Int_t           el_side                  ; tree->SetBranchAddress("el_side"                   , &el_side                  );
+	    Double_t        el_dEnergy               ; tree->SetBranchAddress("el_dEnergy"                , &el_dEnergy               );
+	    Double_t        el_beta                  ; tree->SetBranchAddress("el_beta"                   , &el_beta                  );
+	    Double_t        el_dBeta                 ; tree->SetBranchAddress("el_dBeta"                  , &el_dBeta                 );
+	    Double_t        el_pathLength            ; tree->SetBranchAddress("el_pathLength"             , &el_pathLength            );
+	    Double_t        el_energyLoss            ; tree->SetBranchAddress("el_energyLoss"             , &el_energyLoss            );
+	    Double_t        el_measTime              ; tree->SetBranchAddress("el_measTime"               , &el_measTime              );
+	    Double_t        el_dMeasTime             ; tree->SetBranchAddress("el_dMeasTime"              , &el_dMeasTime             );
+	    Double_t        el_thTof                 ; tree->SetBranchAddress("el_thTof"                  , &el_thTof                 );
+	    Double_t        el_dThTof                ; tree->SetBranchAddress("el_dThTof"                 , &el_dThTof                );
+	    Int_t           el_caloiobt              ; tree->SetBranchAddress("el_caloiobt"               , &el_caloiobt              );
+	    Int_t           el_calofcll              ; tree->SetBranchAddress("el_calofcll"               , &el_calofcll              );
+	    Int_t           el_caloHsFlag            ; tree->SetBranchAddress("el_caloHsFlag"             , &el_caloHsFlag            );
+	    Double_t        el_trkSign               ; tree->SetBranchAddress("el_trkSign"                , &el_trkSign               );
+	    Long64_t        el_tdc_count             ; tree->SetBranchAddress("el_tdc_count"              , &el_tdc_count             );
+	    Double_t        trueVertexSector         ; tree->SetBranchAddress("trueVertexSector"          , &trueVertexSector         );
+	    Int_t           trueVertexLayer          ; tree->SetBranchAddress("trueVertexLayer"           , &trueVertexLayer          );
+	    Double_t        trueSectorId             ; tree->SetBranchAddress("trueSectorId"              , &trueSectorId             );
+	    Double_t        trueSourceId             ; tree->SetBranchAddress("trueSourceId"              , &trueSourceId             );
+	    Int_t           nGammas                  ; tree->SetBranchAddress("nGammas"                   , &nGammas                  );
+	    Int_t           nLowEnergyGammas         ; tree->SetBranchAddress("nLowEnergyGammas"          , &nLowEnergyGammas         );
+	    Int_t           nHighEnergyGammas        ; tree->SetBranchAddress("nHighEnergyGammas"         , &nHighEnergyGammas        );
+	    Double_t        totELowEnergyGammas      ; tree->SetBranchAddress("totELowEnergyGammas"       , &totELowEnergyGammas      );
+	    Double_t        totEHighEnergyGammas     ; tree->SetBranchAddress("totEHighEnergyGammas"      , &totEHighEnergyGammas     );
+	    Int_t           gm_pmtNumber_[50]        ; tree->SetBranchAddress("gm_pmtNumber_"             , gm_pmtNumber_             );
+	    Int_t           gm_sectorNumber_[50]     ; tree->SetBranchAddress("gm_sectorNumber_"          , gm_sectorNumber_          );
+	    Int_t           gm_iobt_[50]             ; tree->SetBranchAddress("gm_iobt_"                  , gm_iobt_                  );
+	    Int_t           gm_fcll_[50]             ; tree->SetBranchAddress("gm_fcll_"                  , gm_fcll_                  );
+	    Int_t           gm_blockNumber_[50]      ; tree->SetBranchAddress("gm_blockNumber_"           , gm_blockNumber_           );
+	    Int_t           gm_ldFlag_[50]           ; tree->SetBranchAddress("gm_ldFlag_"                , gm_ldFlag_                );
+	    Double_t        gm_ldCorr_[50]           ; tree->SetBranchAddress("gm_ldCorr_"                , gm_ldCorr_                );
+	    Double_t        gm_ldCorrErr_[50]        ; tree->SetBranchAddress("gm_ldCorrErr_"             , gm_ldCorrErr_             );
+	    Int_t           gm_hsFlag_[50]           ; tree->SetBranchAddress("gm_hsFlag_"                , gm_hsFlag_                );
+	    Double_t        gm_energy_[50]           ; tree->SetBranchAddress("gm_energy_"                , gm_energy_                );
+	    Double_t        gm_dEnergy_[50]          ; tree->SetBranchAddress("gm_dEnergy_"               , gm_dEnergy_               );
+	    Double_t        gm_measTime_[50]         ; tree->SetBranchAddress("gm_measTime_"              , gm_measTime_              );
+	    Double_t        gm_dMeasTime_[50]        ; tree->SetBranchAddress("gm_dMeasTime_"             , gm_dMeasTime_             );
+	    Double_t        gm_dPathLength_[50]      ; tree->SetBranchAddress("gm_dPathLength_"           , gm_dPathLength_           );
+	    Double_t        gm_thickness_[50]        ; tree->SetBranchAddress("gm_thickness_"             , gm_thickness_             );
+	    Double_t        gm_blockWidth_[50]       ; tree->SetBranchAddress("gm_blockWidth_"            , gm_blockWidth_            );
+	    Double_t        gm_blockHeight_[50]      ; tree->SetBranchAddress("gm_blockHeight_"           , gm_blockHeight_           );
+	    Double_t        gm_scintToPMTTime_[50]   ; tree->SetBranchAddress("gm_scintToPMTTime_"        , gm_scintToPMTTime_        );
+	    Int_t           alphaNHits               ; tree->SetBranchAddress("alphaNHits"                , &alphaNHits               );
+	    Double_t        alphaTime                ; tree->SetBranchAddress("alphaTime"                 , &alphaTime                );
+	    Double_t        alphaMaxTimeDiff         ; tree->SetBranchAddress("alphaMaxTimeDiff"          , &alphaMaxTimeDiff         );
+	    Double_t        alphaLength              ; tree->SetBranchAddress("alphaLength"               , &alphaLength              );
+	    Double_t        alphaClosestHitDistFoil  ; tree->SetBranchAddress("alphaClosestHitDistFoil"   , &alphaClosestHitDistFoil  );
+	    Double_t        alphaClosestHitDistWire  ; tree->SetBranchAddress("alphaClosestHitDistWire"   , &alphaClosestHitDistWire  );
+	    Double_t        alphaFurthestHitDistFoil ; tree->SetBranchAddress("alphaFurthestHitDistFoil"  , &alphaFurthestHitDistFoil );
+	    Int_t           alphaSide                ; tree->SetBranchAddress("alphaSide"                 , &alphaSide                );
+	    Bool_t          alphaNearWire_           ; tree->SetBranchAddress("alphaNearWire_"            , &alphaNearWire_           );
+	    Double_t        alphaVertexZ             ; tree->SetBranchAddress("alphaVertexZ"              , &alphaVertexZ             );
+	    Double_t        alphaVertexSector        ; tree->SetBranchAddress("alphaVertexSector"         , &alphaVertexSector        );
+	    Double_t        alphaVertexDist          ; tree->SetBranchAddress("alphaVertexDist"           , &alphaVertexDist          );
+
+
+	    TVector3* eVertex    = new TVector3(0,0,0) ; tree->SetBranchAddress("eVertex"    , &eVertex    );
+	    TVector3* trueVertex = new TVector3(0,0,0) ; tree->SetBranchAddress("trueVertex" , &trueVertex );
+	    TVector3* el_ip      = new TVector3(0,0,0) ; tree->SetBranchAddress("el_ip"      , &el_ip      );
+		
+		// Loop
+		Long64_t nentries = tree->GetEntriesFast();
+		if ( _n_max != -1) nentries = _n_max;
+
+		Long64_t nbytes = 0, nb = 0;	
+
+	    for (Long64_t iEvt = 0; iEvt < nentries; iEvt++) {
+		
+			int frac = (int)round(100*iEvt/nentries);
+		    if ( iEvt % (int)round(1+(0.1*nentries)) == 0) {
+				std::cout << "Process: " << frac << "% (" << iEvt << "/" << nentries << ")" << std::endl;
+		    }
+		
+	       	nb = tree->GetEntry(iEvt); nbytes += nb;
+				
+			unsigned int currentcut = 0;
+			hAnaCutFlow -> Fill(currentcut++);
+			
+	        hAnaCutFlow -> Fill(currentcut++);
+	        if(sectorId != 18)    continue; hAnaCutFlow->Fill(currentcut++);
+	        if(el_energy   < 0.2) continue; hAnaCutFlow->Fill(currentcut++);
+	        if(alphaLength > 40)  continue; hAnaCutFlow->Fill(currentcut++);
+	        if(alphaNHits  < 4)   continue; hAnaCutFlow->Fill(currentcut++);
+
+			// Apply radon map
+		    double weight = 1;
+			std::string name (d->GetName());
+		    if (std::string::npos != name.find("SWire_Bi214") or 
+				std::string::npos != name.find("SWire_Pb214") )  weight = radonWeight;
+		    if (std::string::npos != name.find("SFoil_Bi214")  or
+		        std::string::npos != name.find("SFoil_Pb214") )  weight = sfoilRadonWeight;
+		    if (std::string::npos != name.find("SWire_Bi210") )  weight = bi210Weight;
+			
+	        histo_collection -> Find( TString::Format("%s_h_run"               , d->GetName()) ) -> Fill(run                        , weight );    
+	        histo_collection -> Find( TString::Format("%s_h_sectorId"          , d->GetName()) ) -> Fill(sectorId                   , weight );
+	        histo_collection -> Find( TString::Format("%s_h_sourceId"          , d->GetName()) ) -> Fill(sourceId                   , weight );
+	        histo_collection -> Find( TString::Format("%s_h_electronEnergy"    , d->GetName()) ) -> Fill(el_energy                  , weight );
+	        histo_collection -> Find( TString::Format("%s_h_electroniobt"      , d->GetName()) ) -> Fill(el_caloiobt                , weight );
+	        histo_collection -> Find( TString::Format("%s_h_trackLength"       , d->GetName()) ) -> Fill(el_pathLength              , weight );
+	        histo_collection -> Find( TString::Format("%s_h_trackSign"         , d->GetName()) ) -> Fill(el_trkSign                 , weight );
+	        histo_collection -> Find( TString::Format("%s_h_vertexZ"           , d->GetName()) ) -> Fill(eVertex->z()               , weight );
+	        histo_collection -> Find( TString::Format("%s_h_vertexSector"      , d->GetName()) ) -> Fill(vertexSector               , weight );
+	        histo_collection -> Find( TString::Format("%s_h_nGammas"           , d->GetName()) ) -> Fill(nGammas                    , weight );
+	        histo_collection -> Find( TString::Format("%s_h_gammaLowEnergy"    , d->GetName()) ) -> Fill(totELowEnergyGammas        , weight );
+	        histo_collection -> Find( TString::Format("%s_h_alphaNHits"        , d->GetName()) ) -> Fill(alphaNHits                 , weight );
+	        histo_collection -> Find( TString::Format("%s_h_alphaTime"         , d->GetName()) ) -> Fill(alphaTime/1000             , weight );
+	        histo_collection -> Find( TString::Format("%s_h_alphaMaxTimeDiff"  , d->GetName()) ) -> Fill(alphaMaxTimeDiff/1000      , weight );
+	        histo_collection -> Find( TString::Format("%s_h_alphaLength"       , d->GetName()) ) -> Fill(alphaLength                , weight );
+	        histo_collection -> Find( TString::Format("%s_h_alphaVertexZ"      , d->GetName()) ) -> Fill(alphaVertexZ               , weight );
+	        histo_collection -> Find( TString::Format("%s_h_alphaVertexSector" , d->GetName()) ) -> Fill(alphaVertexSector          , weight );
+	        histo_collection -> Find( TString::Format("%s_h_alphaVertexDist"   , d->GetName()) ) -> Fill(alphaVertexDist            , weight );
+			
+			histo_collection -> Find( TString::Format("%s_h_vtx_z_vs_sect"     , d->GetName()) ) -> Fill(vertexSector , eVertex->z()    );
+	        histo_collection -> Find( TString::Format("%s_h_layer_vs_side"     , d->GetName()) ) -> Fill(foilSide     , trueVertexLayer );
+ 
+	        // string e_a_side_t[4] = {"e In - #alpha In", "e In - #alpha Out", 
+	        //                         "e Out - #alpha In", "e Out - #alpha Out"};
+	        //int side_id = el_side*2 + alphaSide;
+ 
+ 		    if (run < 3396) {
+				
+				if ( el_side == 0 and alphaSide == 0) {
+					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aIn"   , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+				} else if( el_side == 1 and alphaSide == 1) {
+					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aOut" , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+				} else if( el_side == 0 and alphaSide == 1) {
+					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aOut"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+				} else if( el_side == 1 and alphaSide == 0) {
+					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aIn"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+				}
+				
+			} else {
+
+				if ( el_side == 0 and alphaSide == 0) {
+					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aIn"   , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+				} else if( el_side == 1 and alphaSide == 1) {                             
+					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aOut" , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+				} else if( el_side == 0 and alphaSide == 1) {                             
+					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aOut"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+				} else if( el_side == 1 and alphaSide == 0) {                             
+					histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aIn"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+				}
+
+			}
+			
+		}
+
+		std::cout << "before output file" << std::endl;
+		TFile * _OutputFile = new TFile(_OutputFilePath + _OutputFileName, "UPDATE");
+		_OutputFile->Print();
+		histo_collection->Write();
+		
+		//histo_collection->SaveAs("test.pdf");
+			
+		// Delete the remaining crap
+		histo_collection->Delete();
+		tree->Delete();	
+		f0->Close() ; f1->Close() ; 
+		_InputFile->Close(); _OutputFile->Close();
+	
 		return kTRUE;
 	}
 
