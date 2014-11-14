@@ -153,7 +153,7 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_electronIobt"          , d->GetName()) , "; IOBT; No.Events", 5, -0.5, 4.5                                   ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ"               , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
 		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect"         , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector"          , d->GetName()) , "; Sector Number; No.Events", 200, 0, 20                            ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector"          , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_trueVertexZ"           , d->GetName()) , "; True - Z_{vertex} / cm ; No.Events / cm", 260, -130, 130         ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_trueVertexSector"      , d->GetName()) , "; True - Sector Number; No.Events", 200, 0, 20                     ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_sectorId"              , d->GetName()) , "; Sector; No.Events",  21, -0.5, 20.5                              ) );
@@ -395,7 +395,8 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nCaloHits"              , d->GetName()) , "; N. Calo Hits; No.Events" , 15, -0.5, 14.5                         ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nRawCaloHits"           , d->GetName()) , "; N. Raw Calo Hits; No.Events" , 15, -0.5, 14.5                     ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vertexZ"                , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_vertexSector"           , d->GetName()) , "; Sector Number; No.Events", 200, 0, 20                             ) );
+		histo_collection->Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"          , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vertexSector"           , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_trueVertexZ"            , d->GetName()) , "; True - Z_{vertex} / cm ; No.Events / cm", 260, -130, 130          ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_trueVertexSector"       , d->GetName()) , "; True - Sector Number; No.Events", 200, 0, 20                      ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta"               , d->GetName()) , "; Cos(#Theta); No.Events", 100, -1, 1                               ) );
@@ -668,6 +669,8 @@ namespace ProcessChannel {
 		    histo_collection->Find(TString::Format("%s_h_vtx_el_1_y"             , d->GetName()) ) -> Fill(el_vtx_y_[1]           , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_el_1_z"             , d->GetName()) ) -> Fill(el_vtx_z_[1]           , weight);
 			 
+			histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect"    , d->GetName()) ) -> Fill(vertexSector, eVertex->z()); 
+			 
 		    double tot_e = el_energy_[0] + el_energy_[1];
 			
 		    if (run < 3396) {
@@ -807,7 +810,8 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nCaloHits"              , d->GetName()) , "; N. Calo Hits; No.Events" , 15, -0.5, 14.5                         ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nRawCaloHits"           , d->GetName()) , "; N. Raw Calo Hits; No.Events" , 15, -0.5, 14.5                     ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vertexZ"                , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_vertexSector"           , d->GetName()) , "; Sector Number; No.Events", 200, 0, 20                             ) );
+		histo_collection->Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"          , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vertexSector"           , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_trueVertexZ"            , d->GetName()) , "; True - Z_{vertex} / cm ; No.Events / cm", 260, -130, 130          ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_trueVertexSector"       , d->GetName()) , "; True - Sector Number; No.Events", 200, 0, 20                      ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta"               , d->GetName()) , "; Cos(#Theta); No.Events", 100, -1, 1                               ) );
@@ -1068,6 +1072,8 @@ namespace ProcessChannel {
 		    histo_collection->Find(TString::Format("%s_h_vtx_el_1_x"             , d->GetName()) ) -> Fill(el_vtx_x_[1]           , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_el_1_y"             , d->GetName()) ) -> Fill(el_vtx_y_[1]           , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_el_1_z"             , d->GetName()) ) -> Fill(el_vtx_z_[1]           , weight);
+			
+			histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect"    , d->GetName()) ) -> Fill(vertexSector, eVertex->z()); 
 			 
 		    double tot_e = el_energy_[0] + el_energy_[1];
 			
@@ -1149,8 +1155,8 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy"  , d->GetName()) , "; E_{e} / MeV; No.Events / 0.05 MeV", 100, 0, 5						) );	                     
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_trackLength"     , d->GetName()) , "; Track Length / cm; No.Events / cm", 200, 0, 200						) );	                   
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexZ"         , d->GetName()) , "; Z / cm ; No.Events / 0.5 cm", 520, -130, 130							) );                     
-	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexSector"    , d->GetName()) , "; Sector Number; No.Events", 200, 0, 20							    ) );                        
-	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"   , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 200, 0, 20, 260, -130, 130       	) );						
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexSector"    , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                               ) );
+	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"   , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130       	) );						
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_gammaEnergy"     , d->GetName()) , "; E_{#gamma} / MeV; No.Events / 0.1 MeV", 50, 0, 5						) );	                  
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_cosTheta"        , d->GetName()) , "; Cos(#Theta) e - #gamma_{min}; No.Events", 12, -1, 1					) );		               
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_probInt"         , d->GetName()) , "; Int. Prob. e - #gamma_{min}; No.Events",  12, 0, 1					) );		                
@@ -1394,8 +1400,8 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy"  , d->GetName()) , "; E_{e} / MeV; No.Events / 0.05 MeV", 100, 0, 5						) );	                     
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_trackLength"     , d->GetName()) , "; Track Length / cm; No.Events / cm", 200, 0, 200						) );	                   
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexZ"         , d->GetName()) , "; Z / cm ; No.Events / 0.5 cm", 520, -130, 130							) );                     
-	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexSector"    , d->GetName()) , "; Sector Number; No.Events", 200, 0, 20							    ) );                        
-	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"   , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 200, 0, 20, 260, -130, 130       	) );						
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexSector"    , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19							    ) );                        
+	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"   , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130       	) );						
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_gammaEnergy"     , d->GetName()) , "; E_{#gamma} / MeV; No.Events / 0.1 MeV", 50, 0, 5						) );	                  
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_cosTheta"        , d->GetName()) , "; Cos(#Theta) e - #gamma_{min}; No.Events", 12, -1, 1					) );		               
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_probInt"         , d->GetName()) , "; Int. Prob. e - #gamma_{min}; No.Events",  12, 0, 1					) );		                
@@ -1584,11 +1590,11 @@ namespace ProcessChannel {
 		    else {
 
 				if( gmc_iobt_[0] == 0 ) {
-					histo_collection->Find(TString::Format("%s_h_tot_energy_P1_In"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+					histo_collection->Find(TString::Format("%s_h_tot_energy_P2_In"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 				} else if( gmc_iobt_[0] == 1 ) {
-					histo_collection->Find(TString::Format("%s_h_tot_energy_P1_Out"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+					histo_collection->Find(TString::Format("%s_h_tot_energy_P2_Out"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 				} else if( gmc_iobt_[0] == 2 or gmc_iobt_[0] == 3 ) {
-					histo_collection->Find(TString::Format("%s_h_tot_energy_P1_Pet"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);			
+					histo_collection->Find(TString::Format("%s_h_tot_energy_P2_Pet"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);			
 				}
 			}
 		}
