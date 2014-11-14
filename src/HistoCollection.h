@@ -10,6 +10,7 @@
 #include "TString.h"
 #include "THashList.h"
 #include "TH1.h"
+#include "TH2.h"
 
 class HistoCollection : public TNamed {
 
@@ -21,6 +22,8 @@ public:
 	~HistoCollection(){ _collection->Delete(); };
 
 	void Add( TH1 * h ) { _collection->Add(h); };
+	void Add( TH2 * h ) { _collection->Add(h); };
+
 	TH1D * Find( const char* name );
 	
 	THashList * GetCollection(){ return _collection; };
