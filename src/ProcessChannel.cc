@@ -1155,7 +1155,7 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy"  , d->GetName()) , "; E_{e} / MeV; No.Events / 0.05 MeV", 100, 0, 5						) );	                     
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_trackLength"     , d->GetName()) , "; Track Length / cm; No.Events / cm", 200, 0, 200						) );
 		histo_collection -> Add( new TH1D( TString::Format("%s_h_trackSign"       , d->GetName()) , "; Sign; No.Events", 5, -2.5, 2.5                                          ) );	                   	                   
-	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexZ"         , d->GetName()) , "; Z / cm ; No.Events / 0.5 cm", 520, -130, 130							) );                     
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexZ"         , d->GetName()) , "; Z / cm ; No.Events / 0.5 cm", 260, -130, 130							) );                     
 		histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexSector"    , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                               ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"   , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130       	) );						
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_gammaEnergy"     , d->GetName()) , "; E_{#gamma} / MeV; No.Events / 0.1 MeV", 50, 0, 5						) );	                  
@@ -1401,7 +1401,7 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy"  , d->GetName()) , "; E_{e} / MeV; No.Events / 0.05 MeV", 100, 0, 5						) );	                     
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_trackLength"     , d->GetName()) , "; Track Length / cm; No.Events / cm", 200, 0, 200						) );
 		histo_collection -> Add( new TH1D( TString::Format("%s_h_trackSign"       , d->GetName()) , "; Sign; No.Events", 5, -2.5, 2.5                                          ) );	                   
-	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexZ"         , d->GetName()) , "; Z / cm ; No.Events / 0.5 cm", 520, -130, 130							) );                     
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexZ"         , d->GetName()) , "; Z / cm ; No.Events / 0.5 cm", 260, -130, 130							) );                     
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexSector"    , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19							    ) );                        
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"   , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130       	) );						
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_gammaEnergy"     , d->GetName()) , "; E_{#gamma} / MeV; No.Events / 0.1 MeV", 50, 0, 5						) );	                  
@@ -1673,7 +1673,7 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy"        , d->GetName()) , "; E_{e} / MeV; No.Events / 0.05 MeV", 100, 0, 5						     ) );	                     
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_trackLength"           , d->GetName()) , "; Track Length / cm; No.Events / cm", 200, 0, 200						 ) );
 		histo_collection -> Add( new TH1D( TString::Format("%s_h_trackSign"             , d->GetName()) , "; Sign; No.Events", 5, -2.5, 2.5                                          ) );
-	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexZ"               , d->GetName()) , "; Z / cm ; No.Events / 0.5 cm", 520, -130, 130							 ) );                     
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexZ"               , d->GetName()) , "; Z / cm ; No.Events / 0.5 cm", 260, -130, 130							 ) );                     
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexSector"          , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19							         ) );                        
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"         , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130       	 ) );
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_minGammaEnergy"        , d->GetName()) , "; Min E(#gamma) / MeV; No.Events/0.1 MeV", 50, 0, 5                       ) );
