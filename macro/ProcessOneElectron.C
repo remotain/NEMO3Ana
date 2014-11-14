@@ -1,17 +1,17 @@
 {
 		
-	gSystem->Load("build/lib/libNEMO3Ana.dylib");
-	gROOT->ProcessLine(".x macro/LoadAllDataSample.C+");
+	gSystem->Load("/afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/build/lib/libNEMO3Ana.so");
+	gROOT->ProcessLine(".x /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/LoadAllDataSample.C+");
 
 	// Set Channel to process
 	ProcessChannel::SetChannelToProcess(ProcessChannel::kOneElectron);
 
 	// Set basic path	
-	ProcessChannel::SetInputFilePath ("/Users/alberto/Software/SuperNEMO/work/nemo3/");
+	ProcessChannel::SetInputFilePath ("/sps/nemo/scratch/remoto/nemo3/data/SingleElectron/");
 	ProcessChannel::SetInputFileName ("SingleElectronAnalysis_output.root");
 	ProcessChannel::SetInputDirName  ("SingleElectronSearch");
 	ProcessChannel::SetInputTreeName ("SingleElectronSearch");	
-	ProcessChannel::SetOutputFilePath("/Users/alberto/Software/SuperNEMO/work/nemo3/plot_test/");
+	ProcessChannel::SetOutputFilePath("/sps/nemo/scratch/remoto/nemo3/plot/");
 	ProcessChannel::SetOutputFileName("OneElectronHistos.root");
 	
 	

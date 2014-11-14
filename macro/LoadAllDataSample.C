@@ -1,6 +1,6 @@
 {
 
-	gSystem->Load("build/lib/libNEMO3Ana.dylib");
+	gSystem->Load("/afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/build/lib/libNEMO3Ana.so");
 	
 	// Run time
 	double Data_TotalRunTime            =     167629292;
@@ -82,5 +82,5 @@
 	ProcessChannel::AddDataSet ( new DataSet ( "SteelFrame_Co60"   ,   7999944800     ,   29122389*Phase1Fraction ,   29122389*Phase2Fraction ) );
 	ProcessChannel::AddDataSet ( new DataSet ( "SteelFrame_K40"    ,  59999460900     ,   22205606*Phase1Fraction ,   22205606*Phase2Fraction ) );
 	ProcessChannel::AddDataSet ( new DataSet ( "SteelFrame_Tl208"  ,   2999970300     ,   15164507*Phase1Fraction ,   15164507*Phase2Fraction ) );
-	
+
 }

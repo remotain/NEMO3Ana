@@ -4,15 +4,15 @@
 	gROOT->ProcessLine(".x /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/LoadAllDataSample.C+");
 	
 	// Set Channel to process
-	ProcessChannel::SetChannelToProcess(ProcessChannel::kTwoElectronExternal);
+	ProcessChannel::SetChannelToProcess(ProcessChannel::kOneElectronOneGammaInternal);
 
 	// Set basic path	
-	ProcessChannel::SetInputFilePath ("/sps/nemo/scratch/remoto/nemo3/data/TwoElectronNtuples_Ext/");
-	ProcessChannel::SetInputFileName ("TwoElectronNtuplizerExe_Ext_output.root");
-	ProcessChannel::SetInputDirName  ("TwoElectronNtuplizer");
-	ProcessChannel::SetInputTreeName ("TwoElectronNtuplizer");	
+	ProcessChannel::SetInputFilePath ("/sps/nemo/scratch/remoto/nemo3/data/ElectronGamma/");
+	ProcessChannel::SetInputFileName ("ElectronGammaAnalysis_output.root");
+	ProcessChannel::SetInputDirName  ("ElectronGammaSearch");
+	ProcessChannel::SetInputTreeName ("ElectronGammaSearch");	
 	ProcessChannel::SetOutputFilePath("/sps/nemo/scratch/remoto/nemo3/plot/");
-	ProcessChannel::SetOutputFileName("TwoElectronExtHistos.root");
+	ProcessChannel::SetOutputFileName("OneElectronOneGammaInt.root");
 		
 	// Run
 	TBenchmark * benchmark = new TBenchmark();
