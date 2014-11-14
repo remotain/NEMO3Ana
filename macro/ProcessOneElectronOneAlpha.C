@@ -4,7 +4,7 @@
 	gROOT->ProcessLine(".x /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/LoadAlphaDataSample.C+");
 
 	// Set Channel to process
-	ProcessChannel::SetChannelToProcess(ProcessChannel::kOneElectrononeAlpha);
+	ProcessChannel::SetChannelToProcess(ProcessChannel::kOneElectronOneAlpha);
 
 	// Set basic path	
 	ProcessChannel::SetInputFilePath ("/sps/nemo/scratch/remoto/nemo3/data/ElectronAlpha/");
