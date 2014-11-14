@@ -1951,8 +1951,8 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_trackLength"           , d->GetName() ) , "Track Length; Track Length / cm; No.Events / cm", 200, 0, 200                           ) );
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_trackSign"             , d->GetName() ) , "Track Sign; Sign of Track Curvature / cm; No.Events / cm", 10, -2, 2                    ) );
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexZ"               , d->GetName() ) , "Z of electron interzection; Z / cm ; No.Events / cm", 260, -130, 130                    ) );
-	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexSector"          , d->GetName() ) , "Sector number of electron interzection; Sector Number; No.Events", 200, 0, 20           ) );
-	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"         , d->GetName() ) , "; Sector Number; Z_{vertex} / cm", 200, 0, 20, 260, -130, 130                           ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_vertexSector"          , d->GetName() ) , "Sector number of electron interzection; Sector Number; No.Events", 100, 18, 19          ) );
+	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"         , d->GetName() ) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130                          ) );
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_nGammas"               , d->GetName() ) , "Number of non associated #gamma; No. Gammas; No.Events", 15, -0.5, 14.5                 ) );
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_gammaLowEnergy"        , d->GetName() ) , "Total energy of not associated #gamma; E / MeV; No.Events/0.1 MeV", 35, 0, 3.5          ) );
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaNHits"            , d->GetName() ) , "Number of delayed hits in #alpha; N.Hits / MeV; No.Events", 15, -0.5, 14.5              ) );
