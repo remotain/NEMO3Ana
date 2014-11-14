@@ -21,7 +21,7 @@
 	
 	Air_Bi214  Cd116_Bi214  Data  Mylar_Bi214  SFoil_Bi214  SScin_Bi214  SWire_Bi214
 	
-    ProcessChannel::AddDataSet (new DataSet("Data", 0, 0, 0, 0, 0));
+    ProcessChannel::AddDataSet (new DataSet("Data", 0, 0, 0));
 	ProcessChannel::AddDataSet (new DataSet("Air_Bi214"   , 70999881900.0*fractionOfGoodRuns ,  42850760.0*Phase1Fraction ,  42850760.0*Phase2Fraction ));
     ProcessChannel::AddDataSet (new DataSet("Cd116_Bi214" ,   100000000.0*fractionOfGoodRuns ,  61433684.0*Phase1Fraction ,  61433684.0*Phase2Fraction ));
     ProcessChannel::AddDataSet (new DataSet("Mylar_Bi214" ,   100000000.0*fractionOfGoodRuns ,  63403711.0*Phase1Fraction ,  63403711.0*Phase2Fraction ));
