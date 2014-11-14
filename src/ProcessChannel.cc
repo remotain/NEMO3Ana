@@ -1621,7 +1621,7 @@ namespace ProcessChannel {
 	// Process one electron two gamma internal channel: 
 	// Apply cut and make plot over data set 'd'
 	// 
-	// STATUS: TODO
+	// STATUS: DONE 14/11/2014
 	//		
 	//////////////////////////////////////////////////////////////////////////////		
 	bool ProcessOneElectronTwoGammaInternal( DataSet *d ){
