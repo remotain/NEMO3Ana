@@ -36,6 +36,11 @@ namespace ProcessChannel {
 	void AddDataSet( DataSet * d);
 	THashList * GetDataSetCollection();
 	
+	bool IsHotSpot  (double z, double s);
+	bool IsHotSpot  (double z, double s);
+	bool IsWarmSpot (double z, double s);
+	bool IsColdSpot (double z, double s);
+	
 	bool Run( Long64_t n_max = -1 );
 	
 	// Process channel
