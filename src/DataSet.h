@@ -31,6 +31,10 @@ public:
 
 	~DataSet() { };
 	
+	unsigned long GetGeneratedEvents      () { return _GeneratedEvents;      };
+   	unsigned long GetAcceptedEventsPhase1 () { return _AcceptedEventsPhase1; };
+   	unsigned long GetAcceptedEventsPhase2 () { return _AcceptedEventsPhase2; };
+	
 private:
 
 	unsigned long _GeneratedEvents;
