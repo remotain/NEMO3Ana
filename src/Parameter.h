@@ -17,7 +17,7 @@ public:
 	Parameter(
 		const TString &name,
 		const TString &title,
-		double order,
+		int order,
 		double val_init,
 		double val_max,
 		double val_min,
@@ -33,7 +33,7 @@ public:
 				
 				} ;
 
-	double GetOrder   () { return _Order;   };
+	int GetOrder   () { return _Order;   };
 	double GetValInit () { return _ValInit; };
 	double GetValMax  () { return _ValMax;  };
 	double GetValMin  () { return _ValMin;  };
@@ -43,7 +43,7 @@ public:
 	
 private:
 
-	double _Order;
+	int _Order;
 	double _ValInit;
 	double _ValMax;
 	double _ValMin;
