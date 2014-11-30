@@ -19,27 +19,27 @@ public:
 		const TString &title,
 		const TString &dataset_name,
 		const TString &parameter_name,
-		double normalisation
+		double norm
 		
 		) : TNamed(name, title) {
 			
 			_DataSetName   = dataset_name;
 			_ParameterName = parameter_name;
-			_Normalisation = normalisation;
+			_Norm          = norm;
 			
-			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSetName.Data(), _ParameterName.Data(), _Normalisation);
+			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSetName.Data(), _ParameterName.Data(), _Norm);
 				
 				};
 
 	~Component() { };
 	
-	double GetNormalisation(){ return _Normalisation; };
+	double GetNorm(){ return _Norm; };
 	
 private:
 
 	TString _DataSetName;
 	TString _ParameterName;
-	double  _Normalisation;
+	double  _Norm;
 
 ClassDef(Component, 1);
 

@@ -58,6 +58,7 @@ endif (CMAKE_SYSTEM_NAME MATCHES Darwin)
 set(CPP_FILES 
 ${CMAKE_CURRENT_SOURCE_DIR}/src/DataManagement.cc
 ${CMAKE_CURRENT_SOURCE_DIR}/src/ProcessChannel.cc
+${CMAKE_CURRENT_SOURCE_DIR}/src/Observable.cc
 ${CMAKE_CURRENT_SOURCE_DIR}/src/Component.cc
 ${CMAKE_CURRENT_SOURCE_DIR}/src/Parameter.cc
 ${CMAKE_CURRENT_SOURCE_DIR}/src/DataSet.cc
@@ -68,6 +69,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/src/HistoCollection.cc
 set(HPP_FILES 
 ${CMAKE_CURRENT_SOURCE_DIR}/src/DataManagement.h
 ${CMAKE_CURRENT_SOURCE_DIR}/src/ProcessChannel.h
+${CMAKE_CURRENT_SOURCE_DIR}/src/Observable.h
 ${CMAKE_CURRENT_SOURCE_DIR}/src/Component.h
 ${CMAKE_CURRENT_SOURCE_DIR}/src/Parameter.h
 ${CMAKE_CURRENT_SOURCE_DIR}/src/DataSet.h
