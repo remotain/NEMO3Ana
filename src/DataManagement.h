@@ -17,6 +17,6 @@ namespace DataManagement {
 	THashList * GetParameterCollection();
 	
 	void AddComponent( Component * tmp);
-	THashList * GetComponentCollection();
-	
+	THashList * GetParameterCollection();
+
 };
