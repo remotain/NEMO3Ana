@@ -23,7 +23,11 @@ public:
 		
 		) : TNamed(name, title) {
 			
-			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSetName, _ParameterName, _Normalisation);
+			_DataSetName   = dataset_name;
+			_ParameterName = parameter_name;
+			_Normalisation = normalisation;
+			
+			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSetName.Data(), _ParameterName.Data(), _Normalisation);
 				
 				};
 
