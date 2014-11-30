@@ -6,7 +6,7 @@
 	ProcessChannel::SetChannelToProcess(ProcessChannel::kOneElectron);
 	
 	// Load one sample only for test
-	ProcessChannel::AddDataSet ( new DataSet ( "Data" , 0, 0, 0 ) );
+	DataManagement::AddDataSet ( new DataSet ( "Data" , 0, 0, 0 ) );
 
 	// Set basic path	
 	ProcessChannel::SetInputFilePath ("/Users/alberto/Software/SuperNEMO/work/nemo3/");

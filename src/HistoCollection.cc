@@ -54,3 +54,7 @@ void HistoCollection::SaveAs(const char* filename, Option_t* option)
 	Error("SaveAs", "cannot open file: %s", filename);	
 	
 }
+
+void HistoCollection::Load(TDirectory * dir){
+	
+}

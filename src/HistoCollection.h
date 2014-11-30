@@ -31,6 +31,7 @@ public:
 	Int_t Write();
 	void SaveAs(const char* filename = "", Option_t* option = "");
 
+	void Load(TDirectory * dir);
 
 private:
 

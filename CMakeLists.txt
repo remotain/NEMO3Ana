@@ -56,6 +56,7 @@ endif (CMAKE_SYSTEM_NAME MATCHES Darwin)
 
 # fill list of source files 
 set(CPP_FILES 
+${CMAKE_CURRENT_SOURCE_DIR}/src/DataManagement.cc
 ${CMAKE_CURRENT_SOURCE_DIR}/src/ProcessChannel.cc
 ${CMAKE_CURRENT_SOURCE_DIR}/src/DataSet.cc
 ${CMAKE_CURRENT_SOURCE_DIR}/src/HistoCollection.cc
@@ -63,6 +64,7 @@ ${CMAKE_CURRENT_SOURCE_DIR}/src/HistoCollection.cc
 
 # fill list of header files 
 set(HPP_FILES 
+${CMAKE_CURRENT_SOURCE_DIR}/src/DataManagement.h
 ${CMAKE_CURRENT_SOURCE_DIR}/src/ProcessChannel.h
 ${CMAKE_CURRENT_SOURCE_DIR}/src/DataSet.h
 ${CMAKE_CURRENT_SOURCE_DIR}/src/HistoCollection.h
