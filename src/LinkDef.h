@@ -12,6 +12,8 @@
 #pragma link C++ class DataSet++;
 #pragma link C++ class HistoCollection++;
 
+#pragma link C++ namespace DataManagement++;
+
 #pragma link C++ namespace ProcessChannel++;
 #pragma link C++ enum ProcessChannel::ChannelType_t;
 

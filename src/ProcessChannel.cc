@@ -11,6 +11,7 @@
 #include <iostream>
 #include <string>
 
+#include "DataManagement.h"
 #include "ProcessChannel.h"
 #include "HistoCollection.h"
 
@@ -126,22 +127,17 @@ namespace ProcessChannel {
 		
 	}
 
-	// Data Set collection
-	THashList * _DataSetCollection = new THashList();
-	void AddDataSet( DataSet * d){ _DataSetCollection->Add(d); };
-    THashList * GetDataSetCollection() { return _DataSetCollection; };
-
 	// Number of events in the loop. -1 : all events.
 	Long64_t _n_max = -1;
 
 	//////////////////////////////////////////////////////////////////////////////
 	//
-	// Run over all data set found in _DataSetCollection
+	// Run over all data set found in DataManagement::GetDataSetCollection()
 	//		
 	//////////////////////////////////////////////////////////////////////////////
 	bool Run( Long64_t n_max){
 
-		TIter next(_DataSetCollection);
+		TIter next(DataManagement::GetDataSetCollection());
 		DataSet * d;
 
 		_n_max = n_max;

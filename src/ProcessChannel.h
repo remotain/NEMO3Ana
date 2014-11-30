@@ -33,8 +33,6 @@ namespace ProcessChannel {
 	void SetChannelToProcess(ChannelType_t c);
 	TString GetChannelToProcess( );	
 		
-	void AddDataSet( DataSet * d);
-	THashList * GetDataSetCollection();
 	
 	bool IsHotSpot  (double z, double s);
 	bool IsHotSpot  (double z, double s);
