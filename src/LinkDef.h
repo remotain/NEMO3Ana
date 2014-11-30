@@ -9,6 +9,7 @@
 
 #pragma link C++ global gROOT;
 
+#pragma link C++ class Parameter++;
 #pragma link C++ class DataSet++;
 #pragma link C++ class HistoCollection++;
 

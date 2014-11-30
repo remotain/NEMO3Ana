@@ -57,4 +57,11 @@ void HistoCollection::SaveAs(const char* filename, Option_t* option)
 
 void HistoCollection::Load(TDirectory * dir){
 	
+	/* This function is intended to load histogram from a file. there exist two possible use:
+	
+	1 - Load all histogram from the directory.
+	2 - Load histogram which name statisfy a give patter or reg_exp. 
+	   
+	*/
+	
 }

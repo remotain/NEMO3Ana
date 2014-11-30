@@ -20,16 +20,15 @@ public:
 		double val_init,
 		double val_max,
 		double val_min,
-		double val_step,
-		
+		double val_step		
 		) : TNamed(name, name) {
 			
 			_ValInit = val_init;   
 			_ValMax  = val_max;  
 			_ValMin  = val_min;  
 			_ValStep = val_step;   
-			
-			Info("Parameter()","New parameter %s (%d,%d,%d,%d)", GetName(), _ValInit, _ValMax, _ValMin, _ValStep);
+						
+			Info("Parameter()","New parameter %s (%f,%f,%f,%f)", GetName(), _ValInit, _ValMax, _ValMin, _ValStep);
 				
 				} ;
 
@@ -42,10 +41,10 @@ public:
 	
 private:
 
-	double _ValInit,
-	double _ValMax,
-	double _ValMin,
-	double _ValStep,
+	double _ValInit;
+	double _ValMax;
+	double _ValMin;
+	double _ValStep;
 
 ClassDef(Parameter, 1);
 
