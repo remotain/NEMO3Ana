@@ -2,6 +2,7 @@
 #include "TFile.h"
 #include "TCanvas.h"
 #include "TDirectory.h"
+#include "TKey.h"
 #include <cstring>
 
 ClassImp(HistoCollection);
@@ -57,11 +58,15 @@ void HistoCollection::SaveAs(const char* filename, Option_t* option)
 
 void HistoCollection::Load(TDirectory * dir){
 	
-	/* This function is intended to load histogram from a file. there exist two possible use:
+	TList * list = dir->GetListOfKeys();
+	TIter next(list); TKey * k;
 	
-	1 - Load all histogram from the directory.
-	2 - Load histogram which name statisfy a give patter or reg_exp. 
-	   
-	*/
+	while( ( k = (TKey*) next() ) ) {
+		
+		_collection->Add( (TH1 *) k->ReadObj() );
+		Info("Load()","Add %s to collection", k->GetName());
+		
+	}
+	
 	
 }

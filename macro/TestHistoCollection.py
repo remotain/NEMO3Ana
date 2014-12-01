@@ -11,7 +11,7 @@ from ROOT import *
 gSystem.Load("/Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/build/lib/libNEMO3Ana.dylib");
 
 #Load one sample only for test
-ProcessChannel.AddDataSet ( DataSet ( "Data" , 0, 0, 0 ) );
+DataManagement.AddDataSet ( DataSet ( "Data" , 0, 0, 0 ) );
 
 hcol = HistoCollection("Data", "Data");
 
