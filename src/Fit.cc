@@ -33,17 +33,17 @@ namespace Fit{
 			h_mc->Reset();
 			
 			// Loop Over Component collection
-			TIter next( obs->GetComponentCollection() );
+			TMapIter next( obs->GetComponentMap() );
 			while ( Component * comp = (Component *) next() ){
 				
 				// Get the histogram
-				TH1D * h_comp = (TH1D*) comp->GetHisto();
+				TH1D * h_comp = (TH1D*) obs->GetComponentMap()->GetValue(comp);
 								
 				// Get the corresponding parameter by name from DataManagement::ParameterCollection()
 				Parameter * param = (Parameter *) DataManagement::GetParameterCollection()->FindObject(comp->GetParameterName());
 				
 				// Compute normalisation
-				double norm = comp->GetNorm() * x[param->GetOrder()]; 
+				double norm = comp->GetNorm() * x[param->GetOrder()] * DataManagement::GetLiveTime(obs->GetPhase()) / DataManagement::FindDataSet(comp->GetDataSetName())->GetGeneratedEvents(); 
 				
 				// Add histogram to the sum
 				h_mc->Add(h_comp, norm);

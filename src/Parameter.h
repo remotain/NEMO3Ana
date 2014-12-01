@@ -15,8 +15,8 @@ class Parameter : public TNamed {
 public:
 
 	Parameter(
-		const TString &name,
-		const TString &title,
+		const char * name,
+		const char * title,
 		int order,
 		double val_init,
 		double val_max,

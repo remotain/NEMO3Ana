@@ -16,19 +16,22 @@ namespace DataManagement {
 	void SetTotalAcceptedRunTimeP2  (double val); double GetTotalAcceptedRunTimeP2  ();
 	void SetTotalAcceptedDeadTimeP2 (double val); double GetTotalAcceptedDeadTimeP2 ();
 	
-	double GetTotalLiveRunTimeP1();
-	double GetTotalLiveRunTimeP2();
-	
+	double GetLiveTime(PhaseType_t);
+		
 	void AddDataSet( DataSet * tmp);
+	DataSet * FindDataSet(const char * name);
 	THashList * GetDataSetCollection();
 	
 	void AddObservable( Observable * tmp);
+	Observable * FindObservable(const char * name);
 	THashList * GetObservableCollection();
 	
 	void AddParameter( Parameter * tmp);
+	Parameter * FindParameter(const char * name);
 	THashList * GetParameterCollection();
 	
 	void AddComponent( Component * tmp);
+	Component * FindComponent(const char * name);
 	THashList * GetParameterCollection();
 
 };

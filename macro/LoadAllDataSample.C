@@ -15,8 +15,8 @@
 	double Data_AccptRunTimeP1 = DataManagement::GetTotalAcceptedRunTimeP1() - DataManagement::GetTotalAcceptedDeadTimeP1();
 	double Data_AccptRunTimeP2 = DataManagement::GetTotalAcceptedRunTimeP2() - DataManagement::GetTotalAcceptedDeadTimeP2();
 
-	double Phase1Fraction = Data_AccptRunTimeP1/Data_TotalAcceptedRunTime;
-	double Phase2Fraction = Data_AccptRunTimeP2/Data_TotalAcceptedRunTime;
+	double Phase1Fraction = Data_AccptRunTimeP1/DataManagement::GetTotalAcceptedRunTime();
+	double Phase2Fraction = Data_AccptRunTimeP2/DataManagement::GetTotalAcceptedRunTime();
 	
 	// Add Data Set to be process
 	DataManagement::AddDataSet ( new DataSet ( "Data" , 0, 0, 0 ) );

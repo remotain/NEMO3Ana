@@ -8,23 +8,32 @@
 #include "TROOT.h"
 #include "TNamed.h"
 #include "TString.h"
+#include "TMap.h"
 #include "THashList.h"
 #include "TH1.h"
 
 #include "Component.h"
+
+enum PhaseType_t {
+	kAll,
+	kPhaseOne, 
+	kPhaseTwo
+};
 
 class Observable : public TNamed {
 
 public:
 
 	Observable(
-		const TString &name,
-		const TString &title,
+		const char * name,
+		const char * title,
+		PhaseType_t phase,
 		TH1 * data
 		) : TNamed(name, title) {
 			
 			_Data = data;
-			_ComponentCollection = new THashList();
+			//_PhaseType = phase;
+			_ComponentMap = new TMap(50);
 			
 			Info("Observable()","New Observable %s ", GetName());
 				
@@ -32,16 +41,21 @@ public:
 
 	~Observable() { };
 	
-	TH1 * GetData (){ return _Data; };
-	THashList * GetComponentCollection() { return _ComponentCollection; };
+	PhaseType_t GetPhase(){ return _PhaseType; };
+	TH1  * GetData(){ return _Data; };
+	TMap * GetComponentMap() { return _ComponentMap; };
 	
-	void AddComponent( Component * c) { _ComponentCollection->Add(c); };
-	void AddComponent( THashList * c) { _ComponentCollection->AddAll(c); };
+	void AddComponent( Component * c, TH1 * h) { 
+		_ComponentMap->Add(c, h); 
+		
+		Info("AddComponent()", "%s , %s", c->GetName(), h->GetName());
+	};
 	
 private:
 
 	TH1 * _Data;
-	THashList * _ComponentCollection;
+	PhaseType_t _PhaseType;
+	TMap * _ComponentMap;
 
 ClassDef(Observable, 1);
 

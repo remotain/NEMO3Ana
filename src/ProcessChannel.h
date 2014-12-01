@@ -27,7 +27,7 @@ namespace ProcessChannel {
 		kOneElectronOneGammaInternal ,
 		kOneElectronOneGammaExternal ,
 		kOneElectronTwoGammaInternal ,
-		kOneElectronOneAlpha         ,
+		kOneElectronOneAlpha
 	};
 	
 	void SetChannelToProcess(ChannelType_t c);
