@@ -46,9 +46,8 @@ public:
 	TMap * GetComponentMap() { return _ComponentMap; };
 	
 	void AddComponent( Component * c, TH1 * h) { 
-		_ComponentMap->Add(c, h); 
-		
 		Info("AddComponent()", "%s , %s", c->GetName(), h->GetName());
+		_ComponentMap->Add(c, h); 
 	};
 	
 private:

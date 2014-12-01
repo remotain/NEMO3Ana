@@ -1,4 +1,6 @@
 
+#include <iostream>
+
 #include "DataManagement.h"
 #include "Parameter.h"
 #include "Observable.h"
@@ -38,23 +40,27 @@ namespace Fit{
 				
 				// Get the histogram
 				TH1D * h_comp = (TH1D*) obs->GetComponentMap()->GetValue(comp);
-								
+
 				// Get the corresponding parameter by name from DataManagement::ParameterCollection()
 				Parameter * param = (Parameter *) DataManagement::GetParameterCollection()->FindObject(comp->GetParameterName());
 				
 				// Compute normalisation
 				double norm = comp->GetNorm() * x[param->GetOrder()] * DataManagement::GetLiveTime(obs->GetPhase()) / DataManagement::FindDataSet(comp->GetDataSetName())->GetGeneratedEvents(); 
-				
+					
 				// Add histogram to the sum
 				h_mc->Add(h_comp, norm);
-			
+
 			}
-				
+					
 			// Loop over the data histogram bin
 			for (unsigned int i = 1; i <= h_data->GetNbinsX(); i++){
-
+				
 				// Compute the likelihood
-				l_likelihood += h_data->GetBinContent(i) * TMath::Log(h_mc->GetBinContent(i)) - h_mc->GetBinContent(i);
+				if( h_mc->GetBinContent(i) == 0 ) {
+					l_likelihood += - h_mc->GetBinContent(i);
+				} else {
+					l_likelihood += h_data->GetBinContent(i) * TMath::Log(h_mc->GetBinContent(i)) - h_mc->GetBinContent(i);
+				}
 				
 			}
 		
@@ -70,9 +76,9 @@ namespace Fit{
 	// Run the fitter
 	//		
 	//////////////////////////////////////////////////////////////////////////////	
-	void Run(){
+	void Run(const char * minimizerType, const char * algoType){
 		
-		ROOT::Math::Minimizer* min = ROOT::Math::Factory::CreateMinimizer("Minuit2", "Migrad");
+		ROOT::Math::Minimizer* min = ROOT::Math::Factory::CreateMinimizer(minimizerType, algoType);
 		
 		// set tolerance , etc...
 		min->SetMaxFunctionCalls(1000000);
@@ -101,20 +107,6 @@ namespace Fit{
 		
 		// do the minimization
 		min->Minimize(); 
- 
-		//const double *xs = min->X();
-		//std::cout << "Minimum: f(" << xs[0] << "," << xs[1] << "): " 
-		//          << min->MinValue()  << std::endl;
-        //
-		//// expected minimum is 0
-		//if ( min->MinValue()  < 1.E-4  && f(xs) < 1.E-4) 
-		//   std::cout << "Minimizer " << minName << " - " << algoName 
-		//             << "   converged to the right minimum" << std::endl;
-		//else {
-		//   std::cout << "Minimizer " << minName << " - " << algoName 
-		//             << "   failed to converge !!!" << std::endl;
-		//   Error("NumericalMinimization","fail to converge");
-		//}
 		
 	}
 

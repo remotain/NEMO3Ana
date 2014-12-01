@@ -22,7 +22,7 @@
 	//////////////////////////////////////////////////////////////////////////////
 	DataManagement::AddParameter( new Parameter("Externals" , "External Backgrounds" , 0 , 1.0 , 1.1 , 0.9 , 0.001 ) );
 	DataManagement::AddParameter( new Parameter("Radon"     , "Radon Backgrounds"    , 1 , 1.0 , 1.1 , 0.9 , 0.001 ) );
-	DataManagement::AddParameter( new Parameter("Internal"  , "Internal Backgrounds" , 2 , 1.0 , 1.1 , 0.9 , 0.001 ) );
+	DataManagement::AddParameter( new Parameter("Internals" , "Internal Backgrounds" , 2 , 1.0 , 1.1 , 0.9 , 0.001 ) );
 	DataManagement::AddParameter( new Parameter("2b2nu"     , "2e2#nu"               , 3 , 1.0 , 1.1 , 0.9 , 0.001 ) );
 	//////////////////////////////////////////////////////////////////////////////
 	//
@@ -85,26 +85,26 @@
 	// Define Externals components
 	//
 	//////////////////////////////////////////////////////////////////////////////
-	DataManagement::AddComponent( new Component("Cd116_Tl208_cold"  , "^{208}Tl Cold region  " , "Cd116_Tl208"  , "Internals" , 1.7e-2       ));
-	DataManagement::AddComponent( new Component("Cd116_Ac228_cold"  , "^{228}Ac Cold region  " , "Cd116_Ac228"  , "Internals" , 2.782*1.7e-2 ));
-	DataManagement::AddComponent( new Component("Cd116_Bi212_cold"  , "^{212}Bi Cold region  " , "Cd116_Bi212"  , "Internals" , 2.782*1.7e-2 ));
-	DataManagement::AddComponent( new Component("Cd116_Bi214_cold"  , "^{214}Bi Cold region  " , "Cd116_Bi214"  , "Internals" , 0.162        ));
-	DataManagement::AddComponent( new Component("Cd116_Pb214_cold"  , "^{214}Pb Cold region  " , "Cd116_Pb214"  , "Internals" , 0.162        ));
-	DataManagement::AddComponent( new Component("Cd116_Cs137_cold"  , "^{137}Cs Cold region  " , "Cd116_Cs137"  , "Internals" , 1.210        ));
-	DataManagement::AddComponent( new Component("Cd116_K40_cold"    , "^{40}K Mo Cold region " , "Cd116_K40"    , "Internals" , 3.393        ));
-	DataManagement::AddComponent( new Component("Cd116_Pa234m_cold" , "^{234m}Pa Cold region " , "Cd116_Pa234m" , "Internals" , 0.260        ));
-
-	DataManagement::AddComponent( new Component("Cd116_Tl208_warm"  , "^{208}Tl Warm region  " , "Cd116_Tl208"  , "Internals" , 4.1e-2       ));
-	DataManagement::AddComponent( new Component("Cd116_Ac228_warm"  , "^{228}Ac Warm region  " , "Cd116_Ac228"  , "Internals" , 2.782*4.1e-2 ));
-	DataManagement::AddComponent( new Component("Cd116_Bi212_warm"  , "^{212}Bi Warm region  " , "Cd116_Bi212"  , "Internals" , 2.782*4.1e-2 ));
-	DataManagement::AddComponent( new Component("Cd116_Bi214_warm"  , "^{214}Bi Warm region  " , "Cd116_Bi214"  , "Internals" , 0.389        ));
-	DataManagement::AddComponent( new Component("Cd116_Pb214_warm"  , "^{214}Pb Warm region  " , "Cd116_Pb214"  , "Internals" , 0.389        ));
-	DataManagement::AddComponent( new Component("Cd116_Cs137_warm"  , "^{137}Cs Warm region  " , "Cd116_Cs137"  , "Internals" , 1.210        ));
-	DataManagement::AddComponent( new Component("Cd116_K40_warm"    , "^{40}K Mo Warm region " , "Cd116_K40"    , "Internals" , 8.390        ));
-	DataManagement::AddComponent( new Component("Cd116_Pa234m_warm" , "^{234m}Pa Warm region " , "Cd116_Pa234m" , "Internals" , 1.010        ));
-
-	DataManagement::AddComponent( new Component("Mylar_Bi214"       , "^{214}Bi Mylar        " , "Mylar_Bi214"  , "Internals",  0.000653      ));
-	DataManagement::AddComponent( new Component("Mylar_Pb214"       , "^{214}Pb Mylar        " , "Mylar_Pb214"  , "Internals",  0.000653      ));
+	DataManagement::AddComponent( new Component("Cd116_Tl208_cold"  , "^{208}Tl Cold region  " , "Cd116_Tl208"    , "Internals" , 1.7e-2       ));
+	DataManagement::AddComponent( new Component("Cd116_Ac228_cold"  , "^{228}Ac Cold region  " , "Cd116_Ac228"    , "Internals" , 2.782*1.7e-2 ));
+	DataManagement::AddComponent( new Component("Cd116_Bi212_cold"  , "^{212}Bi Cold region  " , "Cd116_Bi212"    , "Internals" , 2.782*1.7e-2 ));
+	DataManagement::AddComponent( new Component("Cd116_Bi214_cold"  , "^{214}Bi Cold region  " , "Cd116_Bi214"    , "Internals" , 0.162        ));
+	DataManagement::AddComponent( new Component("Cd116_Pb214_cold"  , "^{214}Pb Cold region  " , "Cd116_pb214_VT" , "Internals" , 0.162        ));
+	DataManagement::AddComponent( new Component("Cd116_Cs137_cold"  , "^{137}Cs Cold region  " , "Cd116_Cs137"    , "Internals" , 1.210        ));
+	DataManagement::AddComponent( new Component("Cd116_K40_cold"    , "^{40}K Mo Cold region " , "Cd116_K40"      , "Internals" , 3.393        ));
+	DataManagement::AddComponent( new Component("Cd116_Pa234m_cold" , "^{234m}Pa Cold region " , "Cd116_Pa234m"   , "Internals" , 0.260        ));
+                                                                                                                  
+	DataManagement::AddComponent( new Component("Cd116_Tl208_warm"  , "^{208}Tl Warm region  " , "Cd116_Tl208"    , "Internals" , 4.1e-2       ));
+	DataManagement::AddComponent( new Component("Cd116_Ac228_warm"  , "^{228}Ac Warm region  " , "Cd116_Ac228"    , "Internals" , 2.782*4.1e-2 ));
+	DataManagement::AddComponent( new Component("Cd116_Bi212_warm"  , "^{212}Bi Warm region  " , "Cd116_Bi212"    , "Internals" , 2.782*4.1e-2 ));
+	DataManagement::AddComponent( new Component("Cd116_Bi214_warm"  , "^{214}Bi Warm region  " , "Cd116_Bi214"    , "Internals" , 0.389        ));
+	DataManagement::AddComponent( new Component("Cd116_Pb214_warm"  , "^{214}Pb Warm region  " , "Cd116_pb214_VT" , "Internals" , 0.389        ));
+	DataManagement::AddComponent( new Component("Cd116_Cs137_warm"  , "^{137}Cs Warm region  " , "Cd116_Cs137"    , "Internals" , 1.210        ));
+	DataManagement::AddComponent( new Component("Cd116_K40_warm"    , "^{40}K Mo Warm region " , "Cd116_K40"      , "Internals" , 8.390        ));
+	DataManagement::AddComponent( new Component("Cd116_Pa234m_warm" , "^{234m}Pa Warm region " , "Cd116_Pa234m"   , "Internals" , 1.010        ));
+                                                                                                                  
+	DataManagement::AddComponent( new Component("Mylar_Bi214"       , "^{214}Bi Mylar        " , "Mylar_Bi214"    , "Internals",  0.000653      ));
+	DataManagement::AddComponent( new Component("Mylar_Pb214"       , "^{214}Pb Mylar        " , "Mylar_Pb214"    , "Internals",  0.000653      ));
 
 	//DataManagement::AddComponents( new Component("Cd116_cold_Co60"   , "^{60}Co Cold region   " , "Cd116_Co60"   , "Internals" , 1.98e-3               ));
 	//DataManagement::AddComponents( new Component("Cd116_cold_Tl207"  , "^{207}Tl Cold region  " , "MoCom_Tl207"  , "Internals_MoCom",  Act_MoCom_Tl207      ));
@@ -114,7 +114,8 @@
 	// Define 2b2nu components
 	//
 	//////////////////////////////////////////////////////////////////////////////
-	DataManagement::AddComponent( new Component("2b2nu" , "2e2#nu" , "Cd116_2b2n_m14" , "Internals",  1 ));
+	double mass = 1. ; // g
+	DataManagement::AddComponent( new Component("2b2nu" , "2e2#nu" , "Cd116_2b2n_m14" , "2b2nu",  1 ));
 
 	//////////////////////////////////////////////////////////////////////////////
 	//	
@@ -170,6 +171,12 @@
 	
 	DataManagement::AddObservable( e_energy_P1 );	
 
-	Fit::Run();
+	Fit::Run("Minuit", "Migrad");
+
+	// TODO
+	// 1 - Implement a xcheck of the DataSet being used. The DataSet name is not enough!
+	// 2 - Compute initial normalisation for 2b2nu
+	// 3 - Handle posterio parameter (Get a new ParameterCollection from the fitter ?)
+	// 4 - Plotting macro => W/o see what's going on I'm kind of blinded.
 
 }

@@ -17,13 +17,14 @@ public:
 	Parameter(
 		const char * name,
 		const char * title,
-		int order,
+		unsigned int order,
 		double val_init,
 		double val_max,
 		double val_min,
 		double val_step		
 		) : TNamed(name, name) {
 			
+			_Order   = order;
 			_ValInit = val_init;   
 			_ValMax  = val_max;  
 			_ValMin  = val_min;  
@@ -33,7 +34,7 @@ public:
 				
 				} ;
 
-	int GetOrder   () { return _Order;   };
+	unsigned int GetOrder   () { return _Order;   };
 	double GetValInit () { return _ValInit; };
 	double GetValMax  () { return _ValMax;  };
 	double GetValMin  () { return _ValMin;  };
@@ -43,7 +44,7 @@ public:
 	
 private:
 
-	int _Order;
+	unsigned int _Order;
 	double _ValInit;
 	double _ValMax;
 	double _ValMin;
