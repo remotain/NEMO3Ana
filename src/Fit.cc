@@ -40,12 +40,9 @@ namespace Fit{
 				
 				// Get the histogram
 				TH1D * h_comp = (TH1D*) obs->GetComponentMap()->GetValue(comp);
-
-				// Get the corresponding parameter by name from DataManagement::ParameterCollection()
-				Parameter * param = (Parameter *) DataManagement::GetParameterCollection()->FindObject(comp->GetParameterName());
 				
 				// Compute normalisation
-				double norm = comp->GetNorm() * x[param->GetOrder()] * DataManagement::GetLiveTime(obs->GetPhase()) / DataManagement::FindDataSet(comp->GetDataSetName())->GetGeneratedEvents(); 
+				double norm = comp->GetNorm() * x[comp->GetParameter()->GetOrder()] * DataManagement::GetLiveTime( kAll ) / comp->GetDataSet()->GetGeneratedEvents();
 					
 				// Add histogram to the sum
 				h_mc->Add(h_comp, norm);
@@ -63,6 +60,8 @@ namespace Fit{
 				}
 				
 			}
+			
+			h_mc->Delete();
 		
 		}
 		
@@ -83,7 +82,7 @@ namespace Fit{
 		// set tolerance , etc...
 		min->SetMaxFunctionCalls(1000000);
 		min->SetTolerance(0.001);
-		min->SetPrintLevel(1);
+		min->SetPrintLevel(2);
 
 		// create funciton wrapper for minmizer
 		ROOT::Math::Functor f(&Fcn, DataManagement::GetParameterCollection()->GetEntries() ); 
@@ -102,6 +101,8 @@ namespace Fit{
 			    param->GetValMin(), 
 			    param->GetValMax()
 		    );
+
+			//if( param->GetValMin() == param->GetValMax() ) min->FixVariable(param->GetOrder());
 
 		} 
 		

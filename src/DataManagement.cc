@@ -41,6 +41,17 @@ namespace DataManagement{
 		}
 	};
 
+	double _IsotopeMass         = 0.; 
+	double _IsotopeMassError    = 0.;
+	double _IsotopeAtomicWeight = 0.;
+
+	void SetIsotopeMass (double val, double valerr) { _IsotopeMass = val; _IsotopeMassError = valerr; }; 
+	void SetIsotopeAtomicWeight (double val) { _IsotopeAtomicWeight = val; };
+		
+	double GetIsotopeMass         () { return _IsotopeMass         ; };
+	double GetIsotopeMassError    () { return _IsotopeMassError    ; };
+	double GetIsotopeAtomicWeight () { return _IsotopeAtomicWeight ; };	
+
 	// Data Set collection
 	THashList * _DataSetCollection = new THashList();
 	void AddDataSet( DataSet * tmp){ _DataSetCollection->Add(tmp); };

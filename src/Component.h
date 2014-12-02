@@ -11,6 +11,9 @@
 #include "THashList.h"
 #include "TH1.h"
 
+#include "DataSet.h"
+#include "Parameter.h"
+
 class Component : public TNamed {
 
 public:
@@ -18,32 +21,43 @@ public:
 	Component(
 		const TString &name,
 		const TString &title,
-		const TString &dataset_name,
-		const TString &parameter_name,
+		DataSet * data_set,
+		Parameter * param,
 		double norm
 					
 		) : TNamed(name, title) {
 			
-			_DataSetName   = dataset_name;
-			_ParameterName = parameter_name;
+			_DataSet       = data_set;
+			_Parameter     = param;
 			_Norm          = norm;
-			
-			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSetName.Data(), _ParameterName.Data(), _Norm);
+			_FillColor     = kWhite;
+			_LineColor     = kBlack;
+				
+			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSet->GetName(), _Parameter->GetName(), _Norm);
 				
 				};
 
 	~Component() { };
 	
-	TString GetDataSetName(){ return _DataSetName; };
-	TString GetParameterName(){ return _ParameterName; };
+	void SetFillColor( Color_t color) { _FillColor = color; };
+	void SetLineColor( Color_t color) { _LineColor = color; };
+		
+	Color_t GetFillColor() { return _FillColor; };
+	Color_t GetLineColor() { return _LineColor; };
+			
+	DataSet * GetDataSet(){ return _DataSet; };
+	Parameter * GetParameter(){ return _Parameter; };
 
-	double GetNorm  (){ return _Norm; };
+	double GetNorm (){ return _Norm; };
 	
 private:
 
-	TString _DataSetName;
-	TString _ParameterName;
-	double  _Norm;
+	Parameter * _Parameter;
+	DataSet   * _DataSet;
+	TString     _ParameterName;
+	double      _Norm;
+	Color_t     _FillColor;
+	Color_t     _LineColor;
 
 ClassDef(Component, 1);
 

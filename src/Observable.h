@@ -32,29 +32,52 @@ public:
 		) : TNamed(name, title) {
 			
 			_Data = data;
-			//_PhaseType = phase;
+			_PhaseType = phase;
 			_ComponentMap = new TMap(50);
 			
+			_MarkerStyle = 20;
+			_MarkerColor = kBlack;
+
 			Info("Observable()","New Observable %s ", GetName());
 				
 				};
 
 	~Observable() { };
 	
+	void SetMarkerStyle( Style_t style) { _MarkerStyle = style; };
+	void SetMarkerColor( Color_t color) {_MarkerColor = color; };
+	
+	Style_t GetMarkerStyle() {return _MarkerStyle; };
+	Color_t GetMarkerColor() {return _MarkerColor; };
+	
 	PhaseType_t GetPhase(){ return _PhaseType; };
 	TH1  * GetData(){ return _Data; };
 	TMap * GetComponentMap() { return _ComponentMap; };
 	
+	double GetComponentNorm      (Component * c);
+	double GetComponentNumEvent  (Component * c);
+	
+	//TH1 *  GetComponentNormHisto (Component * c) { 
+	//	TH1D * _tmp = (TH1D *) _ComponentMap->GetValue(c)->Clone( TString::Format("norm_%s", _ComponentMap->GetValue(c)0>GetName())) ; 
+	//	_tmp->Scale(GetComponentNorm(c)); 
+	//	return _tmp; 
+	//};
+		
 	void AddComponent( Component * c, TH1 * h) { 
 		Info("AddComponent()", "%s , %s", c->GetName(), h->GetName());
 		_ComponentMap->Add(c, h); 
 	};
+	
+	virtual void Draw(Option_t* option = "");
 	
 private:
 
 	TH1 * _Data;
 	PhaseType_t _PhaseType;
 	TMap * _ComponentMap;
+
+	Style_t _MarkerStyle;
+	Color_t _MarkerColor;
 
 ClassDef(Observable, 1);
 

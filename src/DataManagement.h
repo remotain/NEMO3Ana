@@ -17,6 +17,13 @@ namespace DataManagement {
 	void SetTotalAcceptedDeadTimeP2 (double val); double GetTotalAcceptedDeadTimeP2 ();
 	
 	double GetLiveTime(PhaseType_t);
+	
+	void SetIsotopeMass    (double val, double valerr); 
+	void SetIsotopeAtomicWeight (double val);
+		
+	double GetIsotopeMass();
+	double GetIsotopeMassError();
+	double GetIsotopeAtomicWeight();	
 		
 	void AddDataSet( DataSet * tmp);
 	DataSet * FindDataSet(const char * name);
