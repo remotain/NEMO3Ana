@@ -90,24 +90,55 @@ namespace Fit{
 		min->SetFunction(f);
  
 		// Set the free variables to be minimized!
-		TIter next( DataManagement::GetParameterCollection() );
-		while ( Parameter * param = (Parameter *) next() ){
+		TIter next2( DataManagement::GetParameterCollection() );
+		while ( Parameter * param = (Parameter *) next2() ){
 			
-			min->SetLimitedVariable(
-				param->GetOrder(), 
-			    param->GetName(), 
-			    param->GetValInit(), 
-			    param->GetValStep(), 
-			    param->GetValMin(), 
-			    param->GetValMax()
-		    );
+			if( param->IsLimited() ) {
+			
+				min->SetLimitedVariable(
+					param->GetOrder(), 
+				    param->GetName(), 
+				    param->GetValInit(), 
+				    param->GetValStep(), 
+				    param->GetValMin(), 
+				    param->GetValMax()
+						);
+					
+			}  else if ( param->IsFixed() ) {
+				
+				min->SetFixedVariable(
+					param->GetOrder(), 
+				    param->GetName(),
+				    param->GetValInit()
+						);
 
-			//if( param->GetValMin() == param->GetValMax() ) min->FixVariable(param->GetOrder());
-
-		} 
+			} else {
+				
+				min->SetVariable(
+					param->GetOrder(), 
+				    param->GetName(),
+				    param->GetValInit(), 
+				    param->GetValStep()
+						);
+					
+			}
+			 
+		}
 		
 		// do the minimization
 		min->Minimize(); 
+		
+		const double *xs = min->X();
+		const double *es = min->Errors();
+		
+		// Get the  variables after the fit!
+		TIter next( DataManagement::GetParameterCollection() );
+		while ( Parameter * param = (Parameter *) next() ){
+			
+			param->SetValInit(xs[param->GetOrder()]);
+
+		}
+		
 		
 	}
 

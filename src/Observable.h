@@ -37,6 +37,7 @@ public:
 			
 			_MarkerStyle = 20;
 			_MarkerColor = kBlack;
+			_MarkerSize  = 0.5;
 
 			Info("Observable()","New Observable %s ", GetName());
 				
@@ -46,9 +47,11 @@ public:
 	
 	void SetMarkerStyle( Style_t style) { _MarkerStyle = style; };
 	void SetMarkerColor( Color_t color) {_MarkerColor = color; };
+	void SetMarkerSize( Size_t size) {_MarkerSize = size; };
 	
-	Style_t GetMarkerStyle() {return _MarkerStyle; };
-	Color_t GetMarkerColor() {return _MarkerColor; };
+	Style_t GetMarkerStyle() { return _MarkerStyle; };
+	Color_t GetMarkerColor() { return _MarkerColor; };
+	Size_t  GetMarkerSize()  { return _MarkerSize;  };
 	
 	PhaseType_t GetPhase(){ return _PhaseType; };
 	TH1  * GetData(){ return _Data; };
@@ -78,7 +81,8 @@ private:
 
 	Style_t _MarkerStyle;
 	Color_t _MarkerColor;
-
+	Size_t  _MarkerSize;
+	
 ClassDef(Observable, 1);
 
 };

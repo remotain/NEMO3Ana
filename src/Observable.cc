@@ -47,7 +47,7 @@ void Observable::Draw(Option_t* option){
 		TH1D * h_comp = (TH1D*) _ComponentMap->GetValue(comp);
 		h_comp->SetFillColor( comp->GetFillColor() );
 		h_comp->SetLineColor( comp->GetLineColor() );
-
+		h_comp->SetLineWidth(1);
 		TH1D * tmp = (TH1D*) h_comp->Clone( TString::Format("tmp_%s", h_comp->GetName() ) );
 		tmp->Scale( GetComponentNorm(comp) );
 
@@ -78,7 +78,10 @@ void Observable::Draw(Option_t* option){
 	_Data->SetTitleFont(43);
 	_Data->SetTitleSize(18);
 	_Data->SetTitle(GetTitle());
-	
+	_Data->SetLineWidth(1);
+	_Data->SetMarkerColor( _MarkerColor );
+	_Data->SetMarkerStyle( _MarkerStyle );	
+	_Data->SetMarkerSize( _MarkerSize );
 	_Data->SetStats(kFALSE);
 	_Data->GetYaxis()->CenterTitle(kTRUE);
 	_Data->GetYaxis()->SetLabelFont(43);
@@ -95,8 +98,6 @@ void Observable::Draw(Option_t* option){
 	
 	_Data->Draw(option);
 	stack->Draw(TString::Format("A,SAME,HIST,%s",option));
-	_Data->SetMarkerColor( _MarkerColor );
-	_Data->SetMarkerStyle( _MarkerStyle );
 	_Data->Draw("SAME");
 	leg->Draw();
 	
