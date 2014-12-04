@@ -2237,16 +2237,18 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaVertexDist"       , d->GetName() ) , "Distance between electron and alpha vtx; Distance / cm; No.Events / 0.1 cm", 100, 0, 10 ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_layer_vs_side"         , d->GetName() ) , "Layer vs Side; Side; Layer", 4, -1.5, 2.5, 10, -0.5, 9.5                                ) );
 
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1"           , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2"           , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aIn"   , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aOut" , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aOut"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aIn"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aIn"   , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aOut" , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aOut"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aIn"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55 ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P1"        , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P2"        , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1"           , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2"           , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aIn"   , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aOut" , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aOut"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aIn"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aIn"   , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aOut" , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aOut"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aIn"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
 
 		// Get TTree
 		TDirectoryFile * f1 = (TDirectoryFile*) _InputFile->Get(_InputDirName);	
@@ -2386,8 +2388,9 @@ namespace ProcessChannel {
 	        //int side_id = el_side*2 + alphaSide;
  
  		    if (run < 3396) {
-				
-				histo_collection -> Find( TString::Format("%s_h_alphaLength_P1"   , d->GetName()) )->Fill(alphaLength);
+
+				histo_collection -> Find( TString::Format("%s_h_electronEnergy_P1" , d->GetName()) )->Fill(alphaLength);
+				histo_collection -> Find( TString::Format("%s_h_alphaLength_P1"    , d->GetName()) )->Fill(alphaLength);
 				
 				if ( el_side == 0 and alphaSide == 0) {
 					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eIn_aIn"   , d->GetName()) )->Fill(alphaLength);
@@ -2400,8 +2403,9 @@ namespace ProcessChannel {
 				}
 				
 			} else {
-
-				histo_collection -> Find( TString::Format("%s_h_alphaLength_P2"   , d->GetName()) )->Fill(alphaLength);
+				
+				histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2" , d->GetName()) )->Fill(alphaLength);
+				histo_collection -> Find( TString::Format("%s_h_alphaLength_P2"    , d->GetName()) )->Fill(alphaLength);
 
 				if ( el_side == 0 and alphaSide == 0) {
 					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aIn"   , d->GetName()) )->Fill(alphaLength);

@@ -27,6 +27,7 @@ public:
 			_ValStep   = val_step;   
 			_ValMax    = 0;
 			_ValMin    = 0;
+			_ValError  = 0;
 			_IsFixed   = false;
 			_IsLimited = false;
 						
@@ -36,16 +37,18 @@ public:
 
 	unsigned int GetOrder   () { return _Order;   };
 	
-	double GetValInit () { return _ValInit; };
-	double GetValMax  () { return _ValMax;  };
-	double GetValMin  () { return _ValMin;  };
-	double GetValStep () { return _ValStep; };
+	double GetValInit  () { return _ValInit;  };
+	double GetValMax   () { return _ValMax;   };
+	double GetValMin   () { return _ValMin;   };
+	double GetValStep  () { return _ValStep;  };
+	double GetValError () { return _ValError; };
 	
-	void SetValInit ( double val ) { _ValInit = val; };
-	void SetValMax  ( double val ) { _ValMax  = val; };
-	void SetValMin  ( double val ) { _ValMin  = val; };
-	void SetValStep ( double val ) { _ValStep = val; };		
-
+	void SetValInit  ( double val ) { _ValInit  = val; };
+	void SetValMax   ( double val ) { _ValMax   = val; };
+	void SetValMin   ( double val ) { _ValMin   = val; };
+	void SetValStep  ( double val ) { _ValStep  = val; };		
+	void SetValError ( double val ) { _ValError = val; };
+	
 	bool IsFixed () { return _IsFixed; };
 	void SetFix  () { _IsFixed = true; _IsLimited = false; };
 
@@ -61,6 +64,7 @@ private:
 	double _ValMax;
 	double _ValMin;
 	double _ValStep;
+	double _ValError;
 	
 	bool _IsFixed;
 	bool _IsLimited;

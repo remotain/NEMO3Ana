@@ -54,9 +54,13 @@ namespace Fit{
 				
 				// Compute the likelihood
 				if( h_mc->GetBinContent(i) == 0 ) {
+					
 					l_likelihood += - h_mc->GetBinContent(i);
+
 				} else {
+
 					l_likelihood += h_data->GetBinContent(i) * TMath::Log(h_mc->GetBinContent(i)) - h_mc->GetBinContent(i);
+
 				}
 				
 			}
@@ -136,7 +140,7 @@ namespace Fit{
 		while ( Parameter * param = (Parameter *) next() ){
 			
 			param->SetValInit(xs[param->GetOrder()]);
-
+			param->SetValError(es[param->GetOrder()]);
 		}
 		
 		

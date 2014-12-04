@@ -12,7 +12,8 @@ ClassImp(Observable);
 
 double Observable::GetComponentNorm(Component * c) { 
 
-	double norm = c->GetNorm() * c->GetParameter()->GetValInit() * DataManagement::GetTotalAcceptedRunTime() / c->GetDataSet()->GetGeneratedEvents(); 
+	double norm = c->GetNorm() * c->GetParameter()->GetValInit() * DataManagement::GetLiveTime( kAll ) / c->GetDataSet()->GetGeneratedEvents(); 
+	
 	return norm; 
 
 };
@@ -32,7 +33,7 @@ void Observable::Draw(Option_t* option){
 	hsum->Reset();
 	
 	TLegend * leg = new TLegend(0.01, 0.6, 0.99, .90);
-	leg->SetNColumns(5);
+	leg->SetNColumns(4);
 	leg->SetFillColor(kWhite);
 	leg->SetTextFont(43);
 	leg->SetTextSize(10);
