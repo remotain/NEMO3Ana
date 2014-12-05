@@ -39,6 +39,10 @@ public:
 			_MarkerColor = kBlack;
 			_MarkerSize  = 0.5;
 
+			_chi2  =  0.0 ;
+			_ndf   = -1   ;
+			_igood = -1   ;
+	
 			Info("Observable()","New Observable %s ", GetName());
 				
 				};
@@ -57,8 +61,8 @@ public:
 	TH1  * GetData(){ return _Data; };
 	TMap * GetComponentMap() { return _ComponentMap; };
 	
-	double GetComponentNorm      (Component * c);
-	double GetComponentNumEvent  (Component * c);
+	double GetComponentNorm      (Component * c, double &err);
+	double GetComponentNumEvent  (Component * c, double &err);
 	
 	//TH1 *  GetComponentNormHisto (Component * c) { 
 	//	TH1D * _tmp = (TH1D *) _ComponentMap->GetValue(c)->Clone( TString::Format("norm_%s", _ComponentMap->GetValue(c)0>GetName())) ; 
@@ -68,7 +72,7 @@ public:
 		
 	void AddComponent( Component * c, TH1 * h) { 
 		Info("AddComponent()", "%s , %s", c->GetName(), h->GetName());
-		_ComponentMap->Add(c, h); 
+		_ComponentMap->Add(c, h);
 	};
 	
 	virtual void Draw(Option_t* option = "");
@@ -82,6 +86,13 @@ private:
 	Style_t _MarkerStyle;
 	Color_t _MarkerColor;
 	Size_t  _MarkerSize;
+	
+	// for chi2
+	Double_t _chi2;
+	Int_t    _ndf;
+	Int_t    _igood;
+	
+	
 	
 ClassDef(Observable, 1);
 

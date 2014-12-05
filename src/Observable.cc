@@ -2,6 +2,7 @@
 #include "DataManagement.h"
 
 #include "THStack.h"
+#include "TMath.h"
 #include "TString.h"
 #include "TLegend.h"
 #include "TPad.h"
@@ -10,18 +11,28 @@
 
 ClassImp(Observable);
 
-double Observable::GetComponentNorm(Component * c) { 
+double Observable::GetComponentNorm(Component * c, double &err) { 
 
 	double norm = c->GetNorm() * c->GetParameter()->GetValInit() * DataManagement::GetLiveTime( kAll ) / c->GetDataSet()->GetGeneratedEvents(); 
-	
+	err = norm * c->GetParameter()->GetValError() / c->GetParameter()->GetValInit();
 	return norm; 
 
 };
 
-double Observable::GetComponentNumEvent(Component * c) { 
+double Observable::GetComponentNumEvent(Component * c, double &err) { 
 	
-	TH1D * htmp = (TH1D *) _ComponentMap->GetValue(c); 
-	return GetComponentNorm(c) * htmp->Integral(); 
+	TH1D * htmp = (TH1D *) _ComponentMap->GetValue(c);
+	
+	double int_err = 0.;
+	double integral = htmp->IntegralAndError(0, htmp->GetNbinsX(), int_err);
+	
+	double norm_err = 0.;
+	double norm = GetComponentNorm(c, norm_err);
+		
+	double num_evt = norm * integral; 
+	err = num_evt * TMath::Sqrt((norm_err/norm)*(norm_err/norm) + (int_err/integral)*(int_err/integral));
+	
+	return num_evt; 
 
 };
 
@@ -38,30 +49,38 @@ void Observable::Draw(Option_t* option){
 	leg->SetTextFont(43);
 	leg->SetTextSize(10);
 	
-	double tot_evt_mc = 0.;
+	double tot_evt_mc ,tot_evt_mc_err = 0.;
 	leg->AddEntry(_Data, TString::Format("%s (%0.f evt.)", "Data", _Data->Integral() ), "PL");
 	
 	// Loop Over Component collection
-	TMapIter next( _ComponentMap );
-	while ( Component * comp = (Component *) next() ){
+	TMapIter next( _ComponentMap,  kIterForward);
+	while ( Component * comp = (Component *) next() ){ 
+	
+		double err =0.;
 	
 		TH1D * h_comp = (TH1D*) _ComponentMap->GetValue(comp);
 		h_comp->SetFillColor( comp->GetFillColor() );
 		h_comp->SetLineColor( comp->GetLineColor() );
 		h_comp->SetLineWidth(1);
 		TH1D * tmp = (TH1D*) h_comp->Clone( TString::Format("tmp_%s", h_comp->GetName() ) );
-		tmp->Scale( GetComponentNorm(comp) );
+		tmp->Scale( GetComponentNorm(comp,err) );
 
 		stack->Add(tmp);
 		hsum->Add(tmp);
 		
-		tot_evt_mc += GetComponentNumEvent(comp);
+		tot_evt_mc += GetComponentNumEvent(comp,err);
+		tot_evt_mc_err += err*err;
 		
-		leg->AddEntry(h_comp, TString::Format("%s (%0.f evt.)", comp->GetTitle(), GetComponentNumEvent(comp) ), "F");
+		leg->AddEntry(h_comp, TString::Format("%s (%0.f #pm %0.f evt.)", comp->GetTitle(), GetComponentNumEvent(comp,err), err ), "F");
 	
 	}
+	
+	tot_evt_mc_err = TMath::Sqrt(tot_evt_mc_err);
+	
+	_Data->Chi2TestX(hsum, _chi2, _ndf, _igood, "UW,P,CHI2/NDF") ;
 
-	leg->AddEntry((TObject*) 0, TString::Format("Total MC (%0.f evt.)", tot_evt_mc ), "");
+	leg->AddEntry((TObject*) 0, TString::Format("Total MC (%0.f #pm %0.f evt.)", tot_evt_mc, tot_evt_mc_err), "");
+	leg->AddEntry((TObject*) 0, TString::Format("#chi^2/dof (%.3f/%d)", _chi2, _ndf), "");
 
 	TCanvas * canvas = new TCanvas(GetName(), GetTitle());
 
