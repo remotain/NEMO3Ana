@@ -34,6 +34,7 @@ public:
 			_Data = data;
 			_PhaseType = phase;
 			_ComponentMap = new TMap(50);
+			_ComponentList = new TList();
 			
 			_MarkerStyle = 20;
 			_MarkerColor = kBlack;
@@ -63,16 +64,11 @@ public:
 	
 	double GetComponentNorm      (Component * c, double &err);
 	double GetComponentNumEvent  (Component * c, double &err);
-	
-	//TH1 *  GetComponentNormHisto (Component * c) { 
-	//	TH1D * _tmp = (TH1D *) _ComponentMap->GetValue(c)->Clone( TString::Format("norm_%s", _ComponentMap->GetValue(c)0>GetName())) ; 
-	//	_tmp->Scale(GetComponentNorm(c)); 
-	//	return _tmp; 
-	//};
 		
 	void AddComponent( Component * c, TH1 * h) { 
 		Info("AddComponent()", "%s , %s", c->GetName(), h->GetName());
 		_ComponentMap->Add(c, h);
+		_ComponentList->Add(c);
 	};
 	
 	virtual void Draw(Option_t* option = "");
@@ -81,7 +77,8 @@ private:
 
 	TH1 * _Data;
 	PhaseType_t _PhaseType;
-	TMap * _ComponentMap;
+	TMap  * _ComponentMap;
+	TList * _ComponentList;
 
 	Style_t _MarkerStyle;
 	Color_t _MarkerColor;

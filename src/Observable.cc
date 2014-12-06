@@ -44,7 +44,7 @@ void Observable::Draw(Option_t* option){
 	hsum->Reset();
 	
 	TLegend * leg = new TLegend(0.01, 0.6, 0.99, .90);
-	leg->SetNColumns(4);
+	leg->SetNColumns(2);
 	leg->SetFillColor(kWhite);
 	leg->SetTextFont(43);
 	leg->SetTextSize(10);
@@ -53,7 +53,8 @@ void Observable::Draw(Option_t* option){
 	leg->AddEntry(_Data, TString::Format("%s (%0.f evt.)", "Data", _Data->Integral() ), "PL");
 	
 	// Loop Over Component collection
-	TMapIter next( _ComponentMap,  kIterForward);
+	//TMapIter next( _ComponentMap,  kIterForward);
+	TIter next( _ComponentList,  kIterForward);
 	while ( Component * comp = (Component *) next() ){ 
 	
 		double err =0.;
@@ -82,12 +83,13 @@ void Observable::Draw(Option_t* option){
 	leg->AddEntry((TObject*) 0, TString::Format("Total MC (%0.f #pm %0.f evt.)", tot_evt_mc, tot_evt_mc_err), "");
 	leg->AddEntry((TObject*) 0, TString::Format("#chi^2/dof (%.3f/%d)", _chi2, _ndf), "");
 
-	TCanvas * canvas = new TCanvas(GetName(), GetTitle());
+	TCanvas * canvas = new TCanvas(GetName(), GetTitle(), 500, 500);
 
 	// Upper plot will be in pad1                                               
     TPad *pad1 = new TPad("pad1", "pad1", 0, 0.3, 1, 1.0);
     pad1->SetBottomMargin(0); // Upper and lower plot are joined                
 	pad1->SetTickx();
+	pad1->SetTicky();
 	pad1->SetLogy(kTRUE);
 	pad1->SetTopMargin(0.45) ;
 	pad1->SetRightMargin(0.05) ;
@@ -96,7 +98,7 @@ void Observable::Draw(Option_t* option){
 	
 	gStyle->SetTitleBorderSize(0);
 	_Data->SetTitleFont(43);
-	_Data->SetTitleSize(18);
+	_Data->SetTitleSize(15);
 	_Data->SetTitle(GetTitle());
 	_Data->SetLineWidth(1);
 	_Data->SetMarkerColor( _MarkerColor );
@@ -105,15 +107,15 @@ void Observable::Draw(Option_t* option){
 	_Data->SetStats(kFALSE);
 	_Data->GetYaxis()->CenterTitle(kTRUE);
 	_Data->GetYaxis()->SetLabelFont(43);
-	_Data->GetYaxis()->SetLabelSize(18);
+	_Data->GetYaxis()->SetLabelSize(15);
 	_Data->GetYaxis()->SetTitleFont(43);
-	_Data->GetYaxis()->SetTitleSize(18);
+	_Data->GetYaxis()->SetTitleSize(15);
 	_Data->GetYaxis()->SetTitleOffset(1.55);
 	_Data->GetXaxis()->CenterTitle(kTRUE);
 	_Data->GetXaxis()->SetLabelFont(43);
-	_Data->GetXaxis()->SetLabelSize(18);
+	_Data->GetXaxis()->SetLabelSize(15);
 	_Data->GetXaxis()->SetTitleFont(43);
-	_Data->GetXaxis()->SetTitleSize(18);
+	_Data->GetXaxis()->SetTitleSize(15);
 	_Data->GetXaxis()->SetTitleOffset(1.55);
 	
 	_Data->Draw(option);
@@ -127,6 +129,7 @@ void Observable::Draw(Option_t* option){
     pad2->SetBottomMargin(0.4);
 	pad2->SetRightMargin(0.05) ;
 	pad2->SetTickx();
+	pad2->SetTicky();
     pad2->Draw();
     pad2->cd();
 	
@@ -138,13 +141,13 @@ void Observable::Draw(Option_t* option){
 	hratio->GetYaxis()->SetTitle("Data/MC") ; 
 	hratio->GetYaxis()->CenterTitle(kTRUE);
 	hratio->GetYaxis()->SetLabelFont(43);
-	hratio->GetYaxis()->SetLabelSize(18);
+	hratio->GetYaxis()->SetLabelSize(15);
 	hratio->GetXaxis()->SetLabelFont(43);
-	hratio->GetXaxis()->SetLabelSize(18);
+	hratio->GetXaxis()->SetLabelSize(15);
 	hratio->GetXaxis()->SetTitleFont(43);
-	hratio->GetXaxis()->SetTitleSize(20);
+	hratio->GetXaxis()->SetTitleSize(15);
 	hratio->GetYaxis()->SetTitleFont(43);
-	hratio->GetYaxis()->SetTitleSize(18);
+	hratio->GetYaxis()->SetTitleSize(15);
 	hratio->GetXaxis()->SetTitleOffset(4.);
 	hratio->GetYaxis()->SetTitleOffset(1.55);
 	hratio->GetYaxis()->SetRangeUser(0.0,2.5);
