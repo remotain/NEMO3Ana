@@ -201,7 +201,7 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
-	    cutNames->push_back("Energy of the electron > 200 keV ");
+	    cutNames->push_back("Energy of the electron > 300 keV ");
 	    cutNames->push_back("Negative track sign");
 
 	    unsigned int nCuts = cutNames->size();
@@ -316,9 +316,9 @@ namespace ProcessChannel {
 			hAnaCutFlow -> Fill(currentcut++);
 
 			// Implement selection
-			if (sectorId != 18)    continue; hAnaCutFlow -> Fill(currentcut++); // Cd foil only
-			if (el_trkSign > 0)    continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
-			if (el_energy < 0.200) continue; hAnaCutFlow -> Fill(currentcut++); // E > 2 MeV only
+			if (sectorId != 18)  continue; hAnaCutFlow -> Fill(currentcut++); // Cd foil only
+			if (el_trkSign > 0)  continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
+			if (el_energy < 0.3) continue; hAnaCutFlow -> Fill(currentcut++); // E > 300 keV only
 			// 3. no hotspot
 		
 			// Apply radon map
@@ -439,7 +439,7 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
-	    cutNames->push_back("Energy of the electron > 200 keV ");
+	    cutNames->push_back("Energy of the electron > 300 keV ");
 		cutNames->push_back("Sum track length > 80 cm ");
 		cutNames->push_back("Internal probability > 0.04");
 		cutNames->push_back("External probability < 0.01");
@@ -635,7 +635,7 @@ namespace ProcessChannel {
 
 			// Implement selection
 		    if (sectorId != 18)                                    continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (el_energy_[0] < 0.2 or el_energy_[1] < 0.2)        continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3)        continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_pathLength_[0] + el_pathLength_[1] < 80)        continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probInt < 0.04)                                    continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probExt_0_to_1 > 0.01 or probExt_1_to_0 > 0.01)    continue; hAnaCutFlow -> Fill(currentcut++);
@@ -857,7 +857,7 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
-	    cutNames->push_back("Energy one electron > 200 keV ");
+	    cutNames->push_back("Energy one electron > 300 keV ");
 		cutNames->push_back("Internal probability < 0.01");
 		cutNames->push_back("External probability > 0.04");
 		cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4");
@@ -1044,7 +1044,7 @@ namespace ProcessChannel {
 
 			// Implement selection
 		    if (sectorId != 18)                                    continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (el_energy_[0] < 0.2 and el_energy_[1] < 0.2)       continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (el_energy_[0] < 0.3 and el_energy_[1] < 0.3)       continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probInt > 0.01)                                    continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probExt_0_to_1 < 0.04 and probExt_1_to_0 < 0.04)   continue; hAnaCutFlow -> Fill(currentcut++);
 
@@ -1239,7 +1239,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
 	    cutNames->push_back("One gamma cluster with energy > 150 keV ");
-	    cutNames->push_back("Energy one electron > 200 keV ");
+	    cutNames->push_back("Energy one electron > 300 keV ");
 		cutNames->push_back("Internal probability > 0.04");
 		cutNames->push_back("Max External probability (e->g ; g->e) < 0.01");
 
@@ -1400,7 +1400,7 @@ namespace ProcessChannel {
 			// Implement selection
 		    if ( sectorId != 18 )            continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( nHighEnergyClusters_ != 1 ) continue; hAnaCutFlow -> Fill(currentcut++);
-		    if ( el_energy_ < 0.2 )          continue; hAnaCutFlow -> Fill(currentcut++);
+		    if ( el_energy_ < 0.3 )          continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( gmc_int_prob_[0] < 0.04 )   continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( ext_prob > 0.01 ) 			 continue; hAnaCutFlow -> Fill(currentcut++);
 
@@ -1524,7 +1524,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
 	    cutNames->push_back("One gamma cluster with energy > 150 keV ");
-	    cutNames->push_back("Energy one electron > 200 keV ");
+	    cutNames->push_back("Energy one electron > 300 keV ");
 	    cutNames->push_back("External Probability > 0.04");
 	    cutNames->push_back("Internal Probability < 0.01");
 
@@ -1707,7 +1707,7 @@ namespace ProcessChannel {
 			// Implement selection
 		    if ( sectorId != 18 )            	  continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( nHighEnergyClusters_ != 1 ) 	  continue; hAnaCutFlow -> Fill(currentcut++);
-		    if ( el_energy_ < 0.2 )          	  continue; hAnaCutFlow -> Fill(currentcut++);
+		    if ( el_energy_ < 0.3 )          	  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( gmc_int_prob_[0] > 0.01 )   	  continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( gmc_ext_prob_g_to_e_[0] < 0.04 ) continue; hAnaCutFlow -> Fill(currentcut++);
 
@@ -1886,7 +1886,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("All events ");
 	    cutNames->push_back("Cd-116 sector (18) ");
 	    cutNames->push_back("Two gamma cluster with energy > 150 keV ");
-	    cutNames->push_back("Energy of the electron > 200 keV ");
+	    cutNames->push_back("Energy of the electron > 300 keV ");
 	    cutNames->push_back("Internal Probability > 0.04");
 	    cutNames->push_back("External Probability < 0.01");
 	    //cutNames->push_back("E_e > 4.0 MeV - 1.5 * Sum E_gamma");
@@ -2051,7 +2051,7 @@ namespace ProcessChannel {
 	        if ( sectorId != 18 )                                        continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( nHighEnergyClusters_ != 2)                              continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            continue; hAnaCutFlow->Fill(currentcut++);
-	        if ( el_energy_   < 0.4)                                     continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( el_energy_   < 0.3)                                     continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) continue; hAnaCutFlow->Fill(currentcut++);
 	        if (
 	          !((gmc_ext_prob_g_to_e_[0] < 0.01 and gmc_ext_prob_e_to_g_[0] < 0.01) and 
@@ -2203,7 +2203,7 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 	    cutNames->push_back("Cd-116 sector (18) ");
-	    cutNames->push_back("Energy of the electron > 200 keV ");
+	    cutNames->push_back("Energy of the electron > 300 keV ");
 	    cutNames->push_back("Length of alpha track < $40\\,\\rm{cm}$ ");
 	    cutNames->push_back("At least 4 delayed hits in the Alpha cluster");
 
@@ -2237,20 +2237,43 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaVertexDist"       , d->GetName() ) , "Distance between electron and alpha vtx; Distance / cm; No.Events / 0.1 cm", 100, 0, 10 ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_layer_vs_side"         , d->GetName() ) , "Layer vs Side; Side; Layer", 4, -1.5, 2.5, 10, -0.5, 9.5                                ) );
 
-	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaTime_P1"             , d->GetName() ) , "Time of delayed #alpha; Time / #mus; No.Events / 20 #mus", 40, 0, 800                ) );
-	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaTime_P2"             , d->GetName() ) , "Time of delayed #alpha; Time / #mus; No.Events / 20 #mus", 40, 0, 800                ) );
-	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P1"        , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
-	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P2"        , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1"           , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2"           , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aIn"   , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aOut" , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aOut"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aIn"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aIn"   , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aOut" , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aOut"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
-		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aIn"  , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+		// P1 plots
+
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaTime_P1"                , d->GetName() ) , "Time of delayed #alpha; Time / #mus; No.Events / 20 #mus", 40, 0, 800                ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P1"           , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1"              , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );		
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaTime_P1_eIn_aIn"        , d->GetName() ) , "Time of delayed #alpha; Time / #mus; No.Events / 20 #mus", 40, 0, 800                ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P1_eIn_aIn"   , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aIn"      , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaTime_P1_eOut_aOut"      , d->GetName() ) , "Time of delayed #alpha; Time / #mus; No.Events / 20 #mus", 40, 0, 800                ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P1_eOut_aOut" , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aOut"    , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaTime_P1_eIn_aOut"       , d->GetName() ) , "Time of delayed #alpha; Time / #mus; No.Events / 20 #mus", 40, 0, 800                ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P1_eIn_aOut"  , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eIn_aOut"     , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaTime_P1_eOut_aIn"       , d->GetName() ) , "Time of delayed #alpha; Time / #mus; No.Events / 20 #mus", 40, 0, 800                ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P1_eOut_aIn"  , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P1_eOut_aIn"     , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+
+		// P2 plots
+
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaTime_P2"                , d->GetName() ) , "Time of delayed #alpha; Time / #mus; No.Events / 20 #mus", 40, 0, 800                ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P2"           , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2"              , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );		
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaTime_P2_eIn_aIn"        , d->GetName() ) , "Time of delayed #alpha; Time / #mus; No.Events / 20 #mus", 40, 0, 800                ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P2_eIn_aIn"   , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aIn"      , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaTime_P2_eOut_aOut"      , d->GetName() ) , "Time of delayed #alpha; Time / #mus; No.Events / 20 #mus", 40, 0, 800                ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P2_eOut_aOut" , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aOut"    , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaTime_P2_eIn_aOut"       , d->GetName() ) , "Time of delayed #alpha; Time / #mus; No.Events / 20 #mus", 40, 0, 800                ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P2_eIn_aOut"  , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eIn_aOut"     , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaTime_P2_eOut_aIn"       , d->GetName() ) , "Time of delayed #alpha; Time / #mus; No.Events / 20 #mus", 40, 0, 800                ) );
+	    histo_collection -> Add( new TH1D( TString::Format("%s_h_electronEnergy_P2_eOut_aIn"  , d->GetName() ) , "Energy of Electron; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
+		histo_collection -> Add( new TH1D( TString::Format("%s_h_alphaLength_P2_eOut_aIn"     , d->GetName() ) , "; #alpha length / cm; No.Events / cm", 55, 0, 55                                     ) );
+
+
 
 		// Get TTree
 		TDirectoryFile * f1 = (TDirectoryFile*) _InputFile->Get(_InputDirName);	
@@ -2350,7 +2373,7 @@ namespace ProcessChannel {
 			hAnaCutFlow -> Fill(currentcut++);
 			
 	        if(sectorId != 18)    continue; hAnaCutFlow->Fill(currentcut++);
-	        if(el_energy   < 0.2) continue; hAnaCutFlow->Fill(currentcut++);
+	        if(el_energy   < 0.3) continue; hAnaCutFlow->Fill(currentcut++);
 	        if(alphaLength > 40)  continue; hAnaCutFlow->Fill(currentcut++);
 	        if(alphaNHits  < 4)   continue; hAnaCutFlow->Fill(currentcut++);
 
@@ -2397,13 +2420,25 @@ namespace ProcessChannel {
 				histo_collection -> Find( TString::Format("%s_h_alphaLength_P1"    , d->GetName()) )->Fill(alphaLength    , weight);
 				
 				if ( el_side == 0 and alphaSide == 0) {
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eIn_aIn"   , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eIn_aIn"    , d->GetName()) )->Fill(alphaLength    , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaTime_P1_eIn_aIn"      , d->GetName()) )->Fill(alphaTime/1000 , weight);
+					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P1_eIn_aIn" , d->GetName()) )->Fill(el_energy      , weight);
+
 				} else if( el_side == 1 and alphaSide == 1) {
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eOut_aOut" , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eOut_aOut"    , d->GetName()) )->Fill(alphaLength    , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaTime_P1_eOut_aOut"      , d->GetName()) )->Fill(alphaTime/1000 , weight);
+					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P1_eOut_aOut" , d->GetName()) )->Fill(el_energy      , weight);
+
 				} else if( el_side == 0 and alphaSide == 1) {
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eIn_aOut"  , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eIn_aOut"    , d->GetName()) )->Fill(alphaLength    , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaTime_P1_eIn_aOut"      , d->GetName()) )->Fill(alphaTime/1000 , weight);
+					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P1_eIn_aOut" , d->GetName()) )->Fill(el_energy      , weight);
+
 				} else if( el_side == 1 and alphaSide == 0) {
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eOut_aIn"  , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eOut_aIn"    , d->GetName()) )->Fill(alphaLength    , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaTime_P1_eOut_aIn"      , d->GetName()) )->Fill(alphaTime/1000 , weight);
+					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P1_eOut_aIn" , d->GetName()) )->Fill(el_energy      , weight);
+
 				}
 				
 			} else {
@@ -2413,13 +2448,25 @@ namespace ProcessChannel {
 				histo_collection -> Find( TString::Format("%s_h_alphaLength_P2"    , d->GetName()) )->Fill(alphaLength , weight);
 
 				if ( el_side == 0 and alphaSide == 0) {
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aIn"   , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aIn"    , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2_eIn_aIn" , d->GetName()) )->Fill(el_energy   , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aIn"    , d->GetName()) )->Fill(alphaLength , weight);
+
 				} else if( el_side == 1 and alphaSide == 1) {                             
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aOut" , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aOut"    , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2_eOut_aOut" , d->GetName()) )->Fill(el_energy   , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aOut"    , d->GetName()) )->Fill(alphaLength , weight);
+
 				} else if( el_side == 0 and alphaSide == 1) {                             
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aOut"  , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aOut"    , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2_eIn_aOut" , d->GetName()) )->Fill(el_energy   , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aOut"    , d->GetName()) )->Fill(alphaLength , weight);
+
 				} else if( el_side == 1 and alphaSide == 0) {                             
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aIn"  , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aIn"    , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2_eOut_aIn" , d->GetName()) )->Fill(el_energy   , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aIn"    , d->GetName()) )->Fill(alphaLength , weight);
+
 				}
 
 			}
