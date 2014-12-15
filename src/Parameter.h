@@ -51,6 +51,7 @@ public:
 	
 	bool IsFixed () { return _IsFixed; };
 	void SetFix  () { _IsFixed = true; _IsLimited = false; };
+	void Release () { _IsFixed = false; };
 
 	bool IsLimited () { return _IsLimited; };
 	void SetLimit(double min, double max) { _IsFixed = false; _IsLimited = true; _ValMin = min; _ValMax = max; };

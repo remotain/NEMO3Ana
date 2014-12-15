@@ -18,7 +18,7 @@
 
 	RooRealVar Time("Time","#alpha Time Delay", 0., 700.,"#mus"); 
 		
-	RooDataHist Hist("Hist", "Data", Time, hcoll->Find( "Data_h_alphaTime" ) );
+	RooDataHist Hist("Hist", "Data", Time, hcoll->Find( "Data_h_alphaTime_P1" ) );
 	
 	RooRealVar Bkg      ( "Bkg"      , "Background" , 1 , 0. , 10 ) ; 
 	RooRealVar Activity ( "Activity" , "A"          , 5 , 0. , 10 ) ; 
@@ -26,7 +26,7 @@
 	
 	RooGenericPdf Pdf("Pdf","Activity * exp( - log(2) * Time / Thalf )",RooArgSet(Activity, Time, Thalf)) ;
 	
-	Pdf.fitTo( Hist, RooFit::Range(20,660) );
+	Pdf.fitTo( Hist, RooFit::Range(20,640) );
 	
 	RooPlot* frame = Time.frame() ;
 	Hist.plotOn(frame , RooFit::Name("Hist")) ;

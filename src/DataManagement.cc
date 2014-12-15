@@ -41,6 +41,10 @@ namespace DataManagement{
 		}
 	};
 
+	double GetTotalLiveTime(){
+		return _TotalAcceptedRunTime - _TotalAcceptedDeadTime;
+	}
+
 	double _IsotopeMass         = 0.; 
 	double _IsotopeMassError    = 0.;
 	double _IsotopeAtomicWeight = 0.;

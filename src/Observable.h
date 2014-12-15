@@ -39,6 +39,7 @@ public:
 			_MarkerStyle = 20;
 			_MarkerColor = kBlack;
 			_MarkerSize  = 0.5;
+			_LogScale    = kFALSE;
 
 			_chi2  =  0.0 ;
 			_ndf   = -1   ;
@@ -50,19 +51,21 @@ public:
 
 	~Observable() { };
 	
-	void SetMarkerStyle( Style_t style) { _MarkerStyle = style; };
-	void SetMarkerColor( Color_t color) {_MarkerColor = color; };
-	void SetMarkerSize( Size_t size) {_MarkerSize = size; };
+	void SetMarkerStyle( Style_t style) {  _MarkerStyle = style; };
+	void SetMarkerColor( Color_t color) { _MarkerColor  = color; };
+	void SetMarkerSize( Size_t size)    { _MarkerSize   = size;  };
+	void SetLogScale( Bool_t islog )    { _LogScale     = islog; };
 	
 	Style_t GetMarkerStyle() { return _MarkerStyle; };
 	Color_t GetMarkerColor() { return _MarkerColor; };
 	Size_t  GetMarkerSize()  { return _MarkerSize;  };
+	Bool_t  GetLogScale()    { return _LogScale;    };
 	
 	PhaseType_t GetPhase(){ return _PhaseType; };
 	TH1  * GetData(){ return _Data; };
 	TMap * GetComponentMap() { return _ComponentMap; };
 	
-	double GetComponentNorm      (Component * c, double &err);
+	//	double GetComponentNorm      (Component * c, double &err);
 	double GetComponentNumEvent  (Component * c, double &err);
 		
 	void AddComponent( Component * c, TH1 * h) { 
@@ -83,6 +86,7 @@ private:
 	Style_t _MarkerStyle;
 	Color_t _MarkerColor;
 	Size_t  _MarkerSize;
+	Bool_t  _LogScale;
 	
 	// for chi2
 	Double_t _chi2;

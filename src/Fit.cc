@@ -42,7 +42,7 @@ namespace Fit{
 				TH1D * h_comp = (TH1D*) obs->GetComponentMap()->GetValue(comp);
 				
 				// Compute normalisation
-				double norm = comp->GetNorm() * x[comp->GetParameter()->GetOrder()] * DataManagement::GetLiveTime( kAll ) / comp->GetDataSet()->GetGeneratedEvents();
+				double norm = comp->GetAdjustment() * x[comp->GetParameter()->GetOrder()] * DataManagement::GetTotalLiveTime( ) / comp->GetDataSet()->GetGeneratedEvents();
 					
 				// Add histogram to the sum
 				h_mc->Add(h_comp, norm);

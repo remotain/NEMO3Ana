@@ -10,6 +10,7 @@
 #include "TString.h"
 #include "THashList.h"
 #include "TH1.h"
+#include "TMath.h"
 
 #include "DataSet.h"
 #include "Parameter.h"
@@ -23,19 +24,40 @@ public:
 		const TString &title,
 		DataSet * data_set,
 		Parameter * param,
-		double norm
-					
+		double adj    = 1.,
+		double adjerr = 0.					
 		) : TNamed(name, title) {
 			
 			_DataSet       = data_set;
 			_Parameter     = param;
-			_Norm          = norm;
+			_Adjustment    = adj;
+			_AdjustmentErr = adjerr;
 			_FillColor     = kWhite;
 			_LineColor     = kBlack;
 				
-			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSet->GetName(), _Parameter->GetName(), _Norm);
+			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSet->GetName(), _Parameter->GetName(), _Adjustment);
 				
 				};
+	
+	Component(
+		const TString &name,
+		const TString &title,
+		DataSet * data_set,
+		double adj    = 1.,
+		double adjerr = 0.
+		) : TNamed(name, title) {
+	
+			_DataSet       = data_set;
+			_Parameter     = 0;
+			_Adjustment    = adj;
+			_AdjustmentErr = adjerr;
+			_FillColor     = kWhite;
+			_LineColor     = kBlack;
+	
+			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSet->GetName(), _Parameter->GetName(), _Adjustment);
+	
+				};
+
 
 	~Component() { };
 	
@@ -48,14 +70,19 @@ public:
 	DataSet * GetDataSet(){ return _DataSet; };
 	Parameter * GetParameter(){ return _Parameter; };
 
-	double GetNorm (){ return _Norm; };
+	double GetAdjustment    (){ return _Adjustment; };
+	double GetAdjustmentErr (){ return _AdjustmentErr; };
+	
+	double GetNorm();
+	double GetNormErr();	
 	
 private:
 
 	Parameter * _Parameter;
 	DataSet   * _DataSet;
 	TString     _ParameterName;
-	double      _Norm;
+	double      _Adjustment;
+	double      _AdjustmentErr;
 	Color_t     _FillColor;
 	Color_t     _LineColor;
 

@@ -15,9 +15,10 @@ namespace DataManagement {
 	void SetTotalAcceptedDeadTimeP1 (double val); double GetTotalAcceptedDeadTimeP1 ();
 	void SetTotalAcceptedRunTimeP2  (double val); double GetTotalAcceptedRunTimeP2  ();
 	void SetTotalAcceptedDeadTimeP2 (double val); double GetTotalAcceptedDeadTimeP2 ();
-	
+
 	double GetLiveTime(PhaseType_t);
-	
+	double GetTotalLiveTime();
+		
 	void SetIsotopeMass    (double val, double valerr); 
 	void SetIsotopeAtomicWeight (double val);
 		

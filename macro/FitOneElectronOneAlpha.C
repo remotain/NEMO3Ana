@@ -42,7 +42,7 @@
 	// Define components P1
 	//
 	//////////////////////////////////////////////////////////////////////////////
-	DataManagement::AddComponent( new Component( "Mylar_Bi214_P1" , "^{210}B1 Mylar P1   " , DataManagement::FindDataSet( "Mylar_Bi214" ) , DataManagement::FindParameter( "Mylar_Bi214"    ) , 1.0 )); DataManagement::FindComponent( "Mylar_Bi214_P1" )->SetFillColor( kGreen  +  1 );
+	DataManagement::AddComponent( new Component( "Mylar_Bi214_P1" , "^{214}B1 Mylar P1   " , DataManagement::FindDataSet( "Mylar_Bi214" ) , DataManagement::FindParameter( "Mylar_Bi214"    ) , 1.0 )); DataManagement::FindComponent( "Mylar_Bi214_P1" )->SetFillColor( kGreen  +  1 );
 	DataManagement::AddComponent( new Component( "SFoil_Bi214_P1" , "^{214}B1 SFoil P1   " , DataManagement::FindDataSet( "SFoil_Bi214" ) , DataManagement::FindParameter( "SFoil_Bi214_P1" ) , 1.0 )); DataManagement::FindComponent( "SFoil_Bi214_P1" )->SetFillColor( kViolet +  0 );
 	DataManagement::AddComponent( new Component( "SScin_Bi214_P1" , "^{214}B1 SScin P1   " , DataManagement::FindDataSet( "SScin_Bi214" ) , DataManagement::FindParameter( "SScin_Bi214_P1" ) , 1.0 )); DataManagement::FindComponent( "SScin_Bi214_P1" )->SetFillColor( kOrange +  1 );
 	DataManagement::AddComponent( new Component( "SWire_Bi214_P1" , "^{214}B1 SWire P1   " , DataManagement::FindDataSet( "SWire_Bi214" ) , DataManagement::FindParameter( "SWire_Bi214_P1" ) , 1.0 )); DataManagement::FindComponent( "SWire_Bi214_P1" )->SetFillColor( kAzure  +  1 );
@@ -52,7 +52,7 @@
 	// Define components P2
 	//
 	//////////////////////////////////////////////////////////////////////////////
-	DataManagement::AddComponent( new Component( "Mylar_Bi214_P2" , "^{210}B1 Mylar P2   " , DataManagement::FindDataSet( "Mylar_Bi214" ) , DataManagement::FindParameter( "Mylar_Bi214"    ) , 1.0 )); DataManagement::FindComponent( "Mylar_Bi214_P2" )->SetFillColor( kGreen  +  1 );
+	DataManagement::AddComponent( new Component( "Mylar_Bi214_P2" , "^{214}B1 Mylar P2   " , DataManagement::FindDataSet( "Mylar_Bi214" ) , DataManagement::FindParameter( "Mylar_Bi214"    ) , 1.0 )); DataManagement::FindComponent( "Mylar_Bi214_P2" )->SetFillColor( kGreen  +  1 );
 	DataManagement::AddComponent( new Component( "SFoil_Bi214_P2" , "^{214}B1 SFoil P2   " , DataManagement::FindDataSet( "SFoil_Bi214" ) , DataManagement::FindParameter( "SFoil_Bi214_P2" ) , 1.0 )); DataManagement::FindComponent( "SFoil_Bi214_P2" )->SetFillColor( kViolet +  0 );
 	DataManagement::AddComponent( new Component( "SScin_Bi214_P2" , "^{214}B1 SScin P2   " , DataManagement::FindDataSet( "SScin_Bi214" ) , DataManagement::FindParameter( "SScin_Bi214_P2" ) , 1.0 )); DataManagement::FindComponent( "SScin_Bi214_P2" )->SetFillColor( kOrange +  1 );
 	DataManagement::AddComponent( new Component( "SWire_Bi214_P2" , "^{214}B1 SWire P2   " , DataManagement::FindDataSet( "SWire_Bi214" ) , DataManagement::FindParameter( "SWire_Bi214_P2" ) , 1.0 )); DataManagement::FindComponent( "SWire_Bi214_P2" )->SetFillColor( kAzure  +  1 );
