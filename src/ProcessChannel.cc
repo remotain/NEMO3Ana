@@ -1182,9 +1182,11 @@ namespace ProcessChannel {
 		    double tot_e = el_energy_[0] + el_energy_[1];
 			
 		    if (run < 3396) {
+				//if( ! IsHotSpot(el_vtx_z_, vertexSector) )
 				histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1", d->GetName()) ) -> Fill(tot_e , weight);
 			}
 		    else {
+				//if( ! IsHotSpot(el_vtx_z_, vertexSector) )
 				histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2", d->GetName()) ) -> Fill(tot_e , weight);		      
 		    }
 
@@ -1764,8 +1766,8 @@ namespace ProcessChannel {
 
 		    if (run < 3396) {
 				
-				if( ! IsHotSpot(el_vtx_z_, vertexSector) )
-					histo_collection->Find(TString::Format("%s_h_tot_energy_P1"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+				//if( ! IsHotSpot(el_vtx_z_, vertexSector) )
+				histo_collection->Find(TString::Format("%s_h_tot_energy_P1"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 				
 				if( gmc_iobt_[0] == 0 ) {
 					
@@ -1806,8 +1808,8 @@ namespace ProcessChannel {
 
 		    else {
 				
-				if( ! IsHotSpot(el_vtx_z_, vertexSector) )
-					histo_collection->Find(TString::Format("%s_h_tot_energy_P2"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+				//if( ! IsHotSpot(el_vtx_z_, vertexSector) )
+				histo_collection->Find(TString::Format("%s_h_tot_energy_P2"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 
 				if( gmc_iobt_[0] == 0 ) {
 
