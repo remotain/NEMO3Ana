@@ -110,10 +110,10 @@
 	Observable * alphaLength_P1_IN_OUT  = new Observable("alphaLength_P1_IN_OUT"  , "1e1a - alpha track length - Phase 1 e IN #alpha OUT  " , kPhaseOne , hcoll->Find( "Data_h_alphaLength_P1_eIn_aOut"  ) ); alphaLength_P1_IN_OUT  -> SetLogScale(kFALSE);
 	Observable * alphaLength_P1_OUT_IN  = new Observable("alphaLength_P1_OUT_IN"  , "1e1a - alpha track length - Phase 1 e OUT #alpha IN  " , kPhaseOne , hcoll->Find( "Data_h_alphaLength_P1_eOut_aIn"  ) ); alphaLength_P1_OUT_IN  -> SetLogScale(kFALSE);
 
-	Observable * electronEnergy_P1_IN_IN   = new Observable("electronEnergy_P1_IN_IN"   , "1e1a - electron energy - Phase 1 e IN #alpha IN   " , kPhaseTwo , hcoll->Find( "Data_h_electronEnergy_P1_eIn_aIn"   ) ); electronEnergy_P1_IN_IN   -> SetLogScale(kFALSE);
-	Observable * electronEnergy_P1_OUT_OUT = new Observable("electronEnergy_P1_OUT_OUT" , "1e1a - electron energy - Phase 1 e OUT #alpha OUT " , kPhaseTwo , hcoll->Find( "Data_h_electronEnergy_P1_eOut_aOut" ) ); electronEnergy_P1_OUT_OUT -> SetLogScale(kFALSE);
-	Observable * electronEnergy_P1_IN_OUT  = new Observable("electronEnergy_P1_IN_OUT"  , "1e1a - electron energy - Phase 1 e IN #alpha OUT  " , kPhaseTwo , hcoll->Find( "Data_h_electronEnergy_P1_eIn_aOut"  ) ); electronEnergy_P1_IN_OUT  -> SetLogScale(kFALSE);
-	Observable * electronEnergy_P1_OUT_IN  = new Observable("electronEnergy_P1_OUT_IN"  , "1e1a - electron energy - Phase 1 e OUT #alpha IN  " , kPhaseTwo , hcoll->Find( "Data_h_electronEnergy_P1_eOut_aIn"  ) ); electronEnergy_P1_OUT_IN  -> SetLogScale(kFALSE);
+	Observable * electronEnergy_P1_IN_IN   = new Observable("electronEnergy_P1_IN_IN"   , "1e1a - electron energy - Phase 1 e IN #alpha IN   " , kPhaseOne , hcoll->Find( "Data_h_electronEnergy_P1_eIn_aIn"   ) ); electronEnergy_P1_IN_IN   -> SetLogScale(kFALSE);
+	Observable * electronEnergy_P1_OUT_OUT = new Observable("electronEnergy_P1_OUT_OUT" , "1e1a - electron energy - Phase 1 e OUT #alpha OUT " , kPhaseOne , hcoll->Find( "Data_h_electronEnergy_P1_eOut_aOut" ) ); electronEnergy_P1_OUT_OUT -> SetLogScale(kFALSE);
+	Observable * electronEnergy_P1_IN_OUT  = new Observable("electronEnergy_P1_IN_OUT"  , "1e1a - electron energy - Phase 1 e IN #alpha OUT  " , kPhaseOne , hcoll->Find( "Data_h_electronEnergy_P1_eIn_aOut"  ) ); electronEnergy_P1_IN_OUT  -> SetLogScale(kFALSE);
+	Observable * electronEnergy_P1_OUT_IN  = new Observable("electronEnergy_P1_OUT_IN"  , "1e1a - electron energy - Phase 1 e OUT #alpha IN  " , kPhaseOne , hcoll->Find( "Data_h_electronEnergy_P1_eOut_aIn"  ) ); electronEnergy_P1_OUT_IN  -> SetLogScale(kFALSE);
 
 
 	Observable * alphaLength_P2_IN_IN   = new Observable("alphaLength_P2_IN_IN"   , "1e1a - alpha track length - Phase 2 e IN #alpha IN   " , kPhaseTwo , hcoll->Find( "Data_h_alphaLength_P2_eIn_aIn"   ) ); alphaLength_P2_IN_IN   -> SetLogScale(kFALSE);

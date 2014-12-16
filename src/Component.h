@@ -54,7 +54,7 @@ public:
 			_FillColor     = kWhite;
 			_LineColor     = kBlack;
 	
-			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSet->GetName(), _Parameter->GetName(), _Adjustment);
+			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSet->GetName(), "Null", _Adjustment);
 	
 				};
 
