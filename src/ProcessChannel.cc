@@ -355,9 +355,9 @@ namespace ProcessChannel {
 			histo_collection->Find( TString::Format("%s_h_nGammas"          , d->GetName()) ) -> Fill(nClusters_            , weight);
 			histo_collection->Find( TString::Format("%s_h_totGammaEnergy"   , d->GetName()) ) -> Fill(totUnderlyingEnergy_  , weight);
 		  
-			histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect"    , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
-
-			if( IsHotSpot(el_vtx_z_, vertexSector) )
+			if( !IsHotSpot(el_vtx_z_, vertexSector) )
+				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect"    , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
+			else if( IsHotSpot(el_vtx_z_, vertexSector) )
 				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 			else if( IsWarmSpot(el_vtx_z_, vertexSector) )
 				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_warm" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
@@ -367,9 +367,9 @@ namespace ProcessChannel {
 			// Phase 1 & 2
 		    if (run < 3396) {
 				
-				histo_collection->Find(TString::Format("%s_h_e_energy_P1", d->GetName())) -> Fill(el_energy , weight);
-			 
-				if( IsHotSpot(el_vtx_z_, vertexSector) )
+				if( !IsHotSpot(el_vtx_z_, vertexSector) )
+					histo_collection->Find(TString::Format("%s_h_e_energy_P1", d->GetName())) -> Fill(el_energy , weight);			 
+				else if( IsHotSpot(el_vtx_z_, vertexSector) )
 					histo_collection->Find(TString::Format("%s_h_e_energy_P1_hot"  , d->GetName())) -> Fill(el_energy , weight);
 				else if( IsWarmSpot(el_vtx_z_, vertexSector) )
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P1_warm" , d->GetName())) -> Fill(el_energy , weight);
@@ -378,9 +378,9 @@ namespace ProcessChannel {
 		
 			} else {
 			
-				histo_collection->Find(TString::Format("%s_h_e_energy_P2", d->GetName())) -> Fill(el_energy , weight);
-			 
-				if( IsHotSpot(el_vtx_z_, vertexSector) )
+				if( !IsHotSpot(el_vtx_z_, vertexSector) )
+					histo_collection->Find(TString::Format("%s_h_e_energy_P2", d->GetName())) -> Fill(el_energy , weight);
+				else if( IsHotSpot(el_vtx_z_, vertexSector) )
 					histo_collection->Find(TString::Format("%s_h_e_energy_P2_hot"  , d->GetName())) -> Fill(el_energy , weight);
 				else if( IsWarmSpot(el_vtx_z_, vertexSector) )
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P2_warm" , d->GetName())) -> Fill(el_energy , weight);
@@ -446,7 +446,8 @@ namespace ProcessChannel {
 		cutNames->push_back("No unassociated hits opposite to the electrons");
 	    cutNames->push_back("No electron hits petal near the foil");
 		cutNames->push_back("|dz_vtx| < 4 cm and radial distance < 2");
-
+		cutNames->push_back("Not an hot spot");
+		
 	    unsigned int nCuts = cutNames->size();
 	    TH1D* hAnaCutFlow  = new TH1D( TString::Format("%s_h_AnaCutFlow", d->GetName() ),"Analysis cut flow", nCuts+1, -0.5, nCuts+0.5);
 	    for (unsigned int i = 0; i < cutNames->size(); i++){
@@ -644,6 +645,8 @@ namespace ProcessChannel {
 		    if ((el_caloiobt[0] > 1 and (el_calofcll[0] == 1 or el_calofcll[0] == 2)) or 
 		        (el_caloiobt[1] > 1 and (el_calofcll[1] == 1 or el_calofcll[1] == 2))) continue; hAnaCutFlow->Fill(currentcut++);
 
+			if ( IsHotSpot(eVertex->z(), vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++);
+
 			// Set min and max variables
 		    double el_energy_min   , el_energy_max   ;
 		    double el_dEnergy_min  , el_dEnergy_max  ; 
@@ -773,12 +776,13 @@ namespace ProcessChannel {
 		    histo_collection->Find(TString::Format("%s_h_vtx_el_1_y"             , d->GetName()) ) -> Fill(el_vtx_y_[1]           , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_el_1_z"             , d->GetName()) ) -> Fill(el_vtx_z_[1]           , weight);
 			 
+
 			histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect"    , d->GetName()) ) -> Fill(vertexSector, eVertex->z()); 
 			 
 		    double tot_e = el_energy_[0] + el_energy_[1];
 			
 		    if (run < 3396) {
-		      
+		      	
 		        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1", d->GetName()) ) -> Fill(tot_e , weight);
 
 		        if (el_side_[0] == el_side_[1]) {
@@ -861,6 +865,7 @@ namespace ProcessChannel {
 		cutNames->push_back("Internal probability < 0.01");
 		cutNames->push_back("External probability > 0.04");
 		cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4");
+		cutNames->push_back("Not an hot spot");
 
 	    unsigned int nCuts = cutNames->size();
 	    TH1D* hAnaCutFlow  = new TH1D( TString::Format("%s_h_AnaCutFlow", d->GetName() ),"Analysis cut flow", nCuts+1, -0.5, nCuts+0.5);
@@ -1043,11 +1048,12 @@ namespace ProcessChannel {
 			hAnaCutFlow -> Fill(currentcut++);
 
 			// Implement selection
-		    if (sectorId != 18)                                    continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (el_energy_[0] < 0.3 and el_energy_[1] < 0.3)       continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (probInt > 0.01)                                    continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (probExt_0_to_1 < 0.04 and probExt_1_to_0 < 0.04)   continue; hAnaCutFlow -> Fill(currentcut++);
-
+		    if (sectorId != 18)                                  continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (el_energy_[0] < 0.3 and el_energy_[1] < 0.3)     continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (probInt > 0.01)                                  continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (probExt_0_to_1 < 0.04 and probExt_1_to_0 < 0.04) continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( IsHotSpot(eVertex->z(), vertexSector) ) 	     continue; hAnaCutFlow -> Fill(currentcut++);
+			
 			// Set min and max variables
 		    double el_energy_min   , el_energy_max   ;
 		    double el_dEnergy_min  , el_dEnergy_max  ; 
@@ -1244,7 +1250,8 @@ namespace ProcessChannel {
 	    cutNames->push_back("Energy one electron > 300 keV ");
 		cutNames->push_back("Internal probability > 0.04");
 		cutNames->push_back("Max External probability (e->g ; g->e) < 0.01");
-
+		cutNames->push_back("Not an hot spot");
+		
 	    unsigned int nCuts = cutNames->size();
 	    TH1D* hAnaCutFlow  = new TH1D( TString::Format("%s_h_AnaCutFlow", d->GetName() ),"Analysis cut flow", nCuts+1, -0.5, nCuts+0.5);
 	    for (unsigned int i = 0; i < cutNames->size(); i++){
@@ -1400,12 +1407,12 @@ namespace ProcessChannel {
 	          gmc_ext_prob_g_to_e_[0] : gmc_ext_prob_e_to_g_[0];
 
 			// Implement selection
-		    if ( sectorId != 18 )            continue; hAnaCutFlow -> Fill(currentcut++);
-			if ( nHighEnergyClusters_ != 1 ) continue; hAnaCutFlow -> Fill(currentcut++);
-		    if ( el_energy_ < 0.3 )          continue; hAnaCutFlow -> Fill(currentcut++);
-		    if ( gmc_int_prob_[0] < 0.04 )   continue; hAnaCutFlow -> Fill(currentcut++);
-		    if ( ext_prob > 0.01 ) 			 continue; hAnaCutFlow -> Fill(currentcut++);
-
+		    if ( sectorId != 18 )                     continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( nHighEnergyClusters_ != 1 )          continue; hAnaCutFlow -> Fill(currentcut++);
+		    if ( el_energy_ < 0.3 )                   continue; hAnaCutFlow -> Fill(currentcut++);
+		    if ( gmc_int_prob_[0] < 0.04 )            continue; hAnaCutFlow -> Fill(currentcut++);
+		    if ( ext_prob > 0.01 ) 			          continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( IsHotSpot(el_vtx_z_, vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++);
 			// Apply radon map
 		    double weight = 1; 
 			std::string name (d->GetName());   
@@ -1444,32 +1451,32 @@ namespace ProcessChannel {
 
 			histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect"    , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 
-			if( IsHotSpot(el_vtx_z_, vertexSector) )
-				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
-			else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+			//if( IsHotSpot(el_vtx_z_, vertexSector) )
+			//	histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
+			if( IsWarmSpot(el_vtx_z_, vertexSector) )
 				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_warm" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 			else if( IsColdSpot(el_vtx_z_, vertexSector) )
 				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_cold" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 
 
 		    if (run < 3396) {
+					
+				histo_collection->Find(TString::Format("%s_h_tot_energy_P1"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 				
-				if( ! IsHotSpot(el_vtx_z_, vertexSector) )
-					histo_collection->Find(TString::Format("%s_h_tot_energy_P1"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
-				else if( IsHotSpot(el_vtx_z_, vertexSector) )
-					histo_collection->Find(TString::Format("%s_h_tot_energy_P1_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
-				else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+				//else if( IsHotSpot(el_vtx_z_, vertexSector) )
+				//	histo_collection->Find(TString::Format("%s_h_tot_energy_P1_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+				if( IsWarmSpot(el_vtx_z_, vertexSector) )
 					histo_collection->Find(TString::Format("%s_h_tot_energy_P1_warm" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 				else if( IsColdSpot(el_vtx_z_, vertexSector) )
 					histo_collection->Find(TString::Format("%s_h_tot_energy_P1_cold" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 
 			} else{ 
 				
-				if( ! IsHotSpot(el_vtx_z_, vertexSector) )
-					histo_collection->Find(TString::Format("%s_h_tot_energy_P2"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
-				else if( IsHotSpot(el_vtx_z_, vertexSector) )
-					histo_collection->Find(TString::Format("%s_h_tot_energy_P2_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
-				else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+				histo_collection->Find(TString::Format("%s_h_tot_energy_P2"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+				
+				//else if( IsHotSpot(el_vtx_z_, vertexSector) )
+				//	histo_collection->Find(TString::Format("%s_h_tot_energy_P2_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+				if( IsWarmSpot(el_vtx_z_, vertexSector) )
 					histo_collection->Find(TString::Format("%s_h_tot_energy_P2_warm" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 				else if( IsColdSpot(el_vtx_z_, vertexSector) )
 					histo_collection->Find(TString::Format("%s_h_tot_energy_P2_cold" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
@@ -1529,6 +1536,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("Energy one electron > 300 keV ");
 	    cutNames->push_back("External Probability > 0.04");
 	    cutNames->push_back("Internal Probability < 0.01");
+	    cutNames->push_back("Not an hot spot");
 
 	    unsigned int nCuts = cutNames->size();
 	    TH1D* hAnaCutFlow  = new TH1D( TString::Format("%s_h_AnaCutFlow", d->GetName() ),"Analysis cut flow", nCuts+1, -0.5, nCuts+0.5);
@@ -1711,12 +1719,13 @@ namespace ProcessChannel {
 	           gmc_ext_prob_g_to_e_[0] : gmc_ext_prob_e_to_g_[0];
 
 			// Implement selection
-		    if ( sectorId != 18 )            	  continue; hAnaCutFlow -> Fill(currentcut++);
-			if ( nHighEnergyClusters_ != 1 ) 	  continue; hAnaCutFlow -> Fill(currentcut++);
-		    if ( el_energy_ < 0.3 )          	  continue; hAnaCutFlow -> Fill(currentcut++);
-		    if ( gmc_int_prob_[0] > 0.01 )   	  continue; hAnaCutFlow -> Fill(currentcut++);
-			if ( gmc_ext_prob_g_to_e_[0] < 0.04 ) continue; hAnaCutFlow -> Fill(currentcut++);
-
+		    if ( sectorId != 18 )            	      continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( nHighEnergyClusters_ != 1 ) 	      continue; hAnaCutFlow -> Fill(currentcut++);
+		    if ( el_energy_ < 0.3 )          	      continue; hAnaCutFlow -> Fill(currentcut++);
+		    if ( gmc_int_prob_[0] > 0.01 )   	      continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( gmc_ext_prob_g_to_e_[0] < 0.04 )     continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( IsHotSpot(el_vtx_z_, vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++);
+			
 			// Apply radon map
 		    double weight = 1;
 			std::string name (d->GetName());
@@ -1755,27 +1764,26 @@ namespace ProcessChannel {
 
 			histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect"    , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 
-			if( IsHotSpot(el_vtx_z_, vertexSector) )
-				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
-			else if( IsWarmSpot(el_vtx_z_, vertexSector) )
-				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_warm" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
-			else if( IsColdSpot(el_vtx_z_, vertexSector) )
-				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_cold" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
+			//if( IsHotSpot(el_vtx_z_, vertexSector) )
+			//	histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
+			//else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+			//	histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_warm" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
+			//else if( IsColdSpot(el_vtx_z_, vertexSector) )
+			//	histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_cold" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 
 			//string wall[4]   = {"In","Out","Pet","Pet"};
 
 		    if (run < 3396) {
 				
-				//if( ! IsHotSpot(el_vtx_z_, vertexSector) )
 				histo_collection->Find(TString::Format("%s_h_tot_energy_P1"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 				
 				if( gmc_iobt_[0] == 0 ) {
 					
 					histo_collection->Find(TString::Format("%s_h_tot_energy_P1_In"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 					
-					if( IsHotSpot(el_vtx_z_, vertexSector) )
-						histo_collection->Find(TString::Format("%s_h_tot_energy_P1_In_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
-					else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+					//if( IsHotSpot(el_vtx_z_, vertexSector) )
+					//	histo_collection->Find(TString::Format("%s_h_tot_energy_P1_In_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+					if( IsWarmSpot(el_vtx_z_, vertexSector) )
 						histo_collection->Find(TString::Format("%s_h_tot_energy_P1_In_warm" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 					else if( IsColdSpot(el_vtx_z_, vertexSector) )
 						histo_collection->Find(TString::Format("%s_h_tot_energy_P1_In_cold" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
@@ -1784,9 +1792,9 @@ namespace ProcessChannel {
 
 					histo_collection->Find(TString::Format("%s_h_tot_energy_P1_Out"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 
-					if( IsHotSpot(el_vtx_z_, vertexSector) )
-						histo_collection->Find(TString::Format("%s_h_tot_energy_P1_Out_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
-					else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+					//if( IsHotSpot(el_vtx_z_, vertexSector) )
+					//	histo_collection->Find(TString::Format("%s_h_tot_energy_P1_Out_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+					if( IsWarmSpot(el_vtx_z_, vertexSector) )
 						histo_collection->Find(TString::Format("%s_h_tot_energy_P1_Out_warm" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 					else if( IsColdSpot(el_vtx_z_, vertexSector) )
 						histo_collection->Find(TString::Format("%s_h_tot_energy_P1_Out_cold" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
@@ -1796,9 +1804,9 @@ namespace ProcessChannel {
 
 					histo_collection->Find(TString::Format("%s_h_tot_energy_P1_Pet"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 
-					if( IsHotSpot(el_vtx_z_, vertexSector) )
-						histo_collection->Find(TString::Format("%s_h_tot_energy_P1_Pet_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
-					else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+					//if( IsHotSpot(el_vtx_z_, vertexSector) )
+					//	histo_collection->Find(TString::Format("%s_h_tot_energy_P1_Pet_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+					if( IsWarmSpot(el_vtx_z_, vertexSector) )
 						histo_collection->Find(TString::Format("%s_h_tot_energy_P1_Pet_warm" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 					else if( IsColdSpot(el_vtx_z_, vertexSector) )
 						histo_collection->Find(TString::Format("%s_h_tot_energy_P1_Pet_cold" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
@@ -1815,9 +1823,9 @@ namespace ProcessChannel {
 
 					histo_collection->Find(TString::Format("%s_h_tot_energy_P2_In"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 
-					if( IsHotSpot(el_vtx_z_, vertexSector) )
-						histo_collection->Find(TString::Format("%s_h_tot_energy_P2_In_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
-					else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+					//if( IsHotSpot(el_vtx_z_, vertexSector) )
+					//	histo_collection->Find(TString::Format("%s_h_tot_energy_P2_In_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+					if( IsWarmSpot(el_vtx_z_, vertexSector) )
 						histo_collection->Find(TString::Format("%s_h_tot_energy_P2_In_warm" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 					else if( IsColdSpot(el_vtx_z_, vertexSector) )
 						histo_collection->Find(TString::Format("%s_h_tot_energy_P2_In_cold" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
@@ -1826,9 +1834,9 @@ namespace ProcessChannel {
 					
 					histo_collection->Find(TString::Format("%s_h_tot_energy_P2_Out"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 
-					if( IsHotSpot(el_vtx_z_, vertexSector) )
-						histo_collection->Find(TString::Format("%s_h_tot_energy_P2_Out_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
-					else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+					//if( IsHotSpot(el_vtx_z_, vertexSector) )
+					//	histo_collection->Find(TString::Format("%s_h_tot_energy_P2_Out_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+					if( IsWarmSpot(el_vtx_z_, vertexSector) )
 						histo_collection->Find(TString::Format("%s_h_tot_energy_P2_Out_warm" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 					else if( IsColdSpot(el_vtx_z_, vertexSector) )
 						histo_collection->Find(TString::Format("%s_h_tot_energy_P2_Out_cold" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
@@ -1837,9 +1845,9 @@ namespace ProcessChannel {
 					
 					histo_collection->Find(TString::Format("%s_h_tot_energy_P2_Pet"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);			
 
-					if( IsHotSpot(el_vtx_z_, vertexSector) )
-						histo_collection->Find(TString::Format("%s_h_tot_energy_P2_Pet_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
-					else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+					//if( IsHotSpot(el_vtx_z_, vertexSector) )
+					//	histo_collection->Find(TString::Format("%s_h_tot_energy_P2_Pet_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+					if( IsWarmSpot(el_vtx_z_, vertexSector) )
 						histo_collection->Find(TString::Format("%s_h_tot_energy_P2_Pet_warm" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 					else if( IsColdSpot(el_vtx_z_, vertexSector) )
 						histo_collection->Find(TString::Format("%s_h_tot_energy_P2_Pet_cold" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
@@ -1902,6 +1910,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("Internal Probability > 0.04");
 	    cutNames->push_back("External Probability < 0.01");
 	    //cutNames->push_back("E_e > 4.0 MeV - 1.5 * Sum E_gamma");
+		cutNames->push_back("Not an hot spot");
 
 	    unsigned int nCuts = cutNames->size();
 	    TH1D* hAnaCutFlow  = new TH1D( TString::Format("%s_h_AnaCutFlow", d->GetName() ),"Analysis cut flow", nCuts+1, -0.5, nCuts+0.5);
@@ -2071,6 +2080,7 @@ namespace ProcessChannel {
 	            )
 	          )                                                          continue; hAnaCutFlow->Fill(currentcut++);
       	  	//if ( score_function < 0)                                     continue; hAnaCutFlow->Fill(currentcut++);
+			if( IsHotSpot(el_vtx_z_, vertexSector) )					continue; hAnaCutFlow->Fill(currentcut++);
 			
 	        // Identify high and low energy gamma and calculate the score function
 	        int high_id, low_id;
@@ -2132,9 +2142,9 @@ namespace ProcessChannel {
  
 			histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect"    , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 
-			if( IsHotSpot(el_vtx_z_, vertexSector) )
-				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
-			else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+			//if( IsHotSpot(el_vtx_z_, vertexSector) )
+			//	histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
+			if( IsWarmSpot(el_vtx_z_, vertexSector) )
 				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_warm" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 			else if( IsColdSpot(el_vtx_z_, vertexSector) )
 				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_cold" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
@@ -2144,9 +2154,9 @@ namespace ProcessChannel {
 
 				histo_collection -> Find( TString::Format("%s_h_energy_score_fun_P1"  , d->GetName()) ) -> Fill( score_function);
 
-				if( IsHotSpot(el_vtx_z_, vertexSector) )
-					histo_collection->Find(TString::Format("%s_h_energy_score_fun_P1_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
-				else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+				//if( IsHotSpot(el_vtx_z_, vertexSector) )
+				//	histo_collection->Find(TString::Format("%s_h_energy_score_fun_P1_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+				if( IsWarmSpot(el_vtx_z_, vertexSector) )
 					histo_collection->Find(TString::Format("%s_h_energy_score_fun_P1_warm" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 				else if( IsColdSpot(el_vtx_z_, vertexSector) )
 					histo_collection->Find(TString::Format("%s_h_energy_score_fun_P1_cold" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
@@ -2156,9 +2166,9 @@ namespace ProcessChannel {
 
 				histo_collection -> Find( TString::Format("%s_h_energy_score_fun_P2"  , d->GetName()) ) -> Fill( score_function);
 
-				if( IsHotSpot(el_vtx_z_, vertexSector) )
-					histo_collection->Find(TString::Format("%s_h_energy_score_fun_P2_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
-				else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+				//if( IsHotSpot(el_vtx_z_, vertexSector) )
+				//	histo_collection->Find(TString::Format("%s_h_energy_score_fun_P2_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+				if( IsWarmSpot(el_vtx_z_, vertexSector) )
 					histo_collection->Find(TString::Format("%s_h_energy_score_fun_P2_warm" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 				else if( IsColdSpot(el_vtx_z_, vertexSector) )
 					histo_collection->Find(TString::Format("%s_h_energy_score_fun_P2_cold" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
@@ -2218,6 +2228,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("Energy of the electron > 300 keV ");
 	    cutNames->push_back("Length of alpha track < $40\\,\\rm{cm}$ ");
 	    cutNames->push_back("At least 4 delayed hits in the Alpha cluster");
+		cutNames->push_back("Is an hot spot");
 
 	    unsigned int nCuts = cutNames->size();
 	    TH1D* hAnaCutFlow  = new TH1D( TString::Format("%s_h_AnaCutFlow", d->GetName() ),"Analysis cut flow", nCuts+1, -0.5, nCuts+0.5);
@@ -2384,11 +2395,12 @@ namespace ProcessChannel {
 			unsigned int currentcut = 0;
 			hAnaCutFlow -> Fill(currentcut++);
 			
-	        if(sectorId != 18)    continue; hAnaCutFlow->Fill(currentcut++);
-	        if(el_energy   < 0.3) continue; hAnaCutFlow->Fill(currentcut++);
-	        if(alphaLength > 40)  continue; hAnaCutFlow->Fill(currentcut++);
-	        if(alphaNHits  < 4)   continue; hAnaCutFlow->Fill(currentcut++);
-
+	        if(sectorId != 18)                          continue; hAnaCutFlow->Fill(currentcut++);
+	        if(el_energy   < 0.3)                       continue; hAnaCutFlow->Fill(currentcut++);
+	        if(alphaLength > 40)                        continue; hAnaCutFlow->Fill(currentcut++);
+	        if(alphaNHits  < 4)                         continue; hAnaCutFlow->Fill(currentcut++);
+			if( IsHotSpot(eVertex->z(), vertexSector) ) continue; hAnaCutFlow->Fill(currentcut++);
+	
 			// Apply radon map
 		    double weight = 1;
 			std::string name (d->GetName());
