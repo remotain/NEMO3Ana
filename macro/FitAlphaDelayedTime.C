@@ -9,7 +9,7 @@
 	// Load OneElectronHistos in HistoCollection
 	HistoCollection * hcoll = new HistoCollection("OneElectronOneAlphaHistos", "OneElectronOneAlphaHistos");
 
-	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20141120/OneElectronOneAlphaHistos.root");
+	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20141218/OneElectronOneAlphaHistos_2hits.root");
 	TDirectory * fdir = 0;
 
 	fdir = (TDirectory *) f->Get("Data"); fdir->cd();
@@ -18,12 +18,16 @@
 
 	RooRealVar Time("Time","#alpha Time Delay", 0., 700.,"#mus"); 
 		
-	RooDataHist Hist("Hist", "Data", Time, hcoll->Find( "Data_h_alphaTime_P1" ) );
+	RooDataHist Hist("Hist", "Data", Time, hcoll->Find( "Data_h_alphaTime" ) );
 	
-	RooRealVar Bkg      ( "Bkg"      , "Background" , 1 , 0. , 10 ) ; 
+	RooRealVar Bkg      ( "Bkg"      , "B"          , 0. , 0. , 10 ) ; 
+	Bkg.setConstant(kTRUE);
+	
 	RooRealVar Activity ( "Activity" , "A"          , 5 , 0. , 10 ) ; 
 	RooRealVar Thalf    ( "Thalf"    , "T_{1/2}"    , 164.3 , 0. , 200. ) ;
+	//Thalf.setConstant(kTRUE);
 	
+	//RooGenericPdf Pdf("Pdf","Bkg + Activity * exp( - log(2) * Time / Thalf )",RooArgSet(Bkg, Activity, Time, Thalf)) ;
 	RooGenericPdf Pdf("Pdf","Activity * exp( - log(2) * Time / Thalf )",RooArgSet(Activity, Time, Thalf)) ;
 	
 	Pdf.fitTo( Hist, RooFit::Range(20,640) );
@@ -39,7 +43,9 @@
 	_canvas->SetRightMargin(0.05) ;
 	_canvas->SetLeftMargin(0.20) ;
 	_canvas->SetBottomMargin(0.20);
-		
+	_canvas->SetLogy(kTRUE);
+	
+	frame->GetYaxis()->SetRangeUser(6,800);
 	frame->GetYaxis()->CenterTitle(kTRUE);
 	frame->GetYaxis()->SetLabelFont(43);
 	frame->GetYaxis()->SetLabelSize(25);
@@ -55,10 +61,11 @@
 	
 	gStyle->SetOptTitle(kFALSE);
 	
-	TLegend * leg = new TLegend(0.65,0.90,0.93,0.45);
+	TLegend * leg = new TLegend(0.25,0.26,0.55,0.62);
 	
 	leg->AddEntry(frame->findObject("Hist") , "Data", "PL");
 	leg->AddEntry(frame->findObject("Pdf")  , "Model", "L");
+	//leg->AddEntry((TObject *) 0,TString::Format("%s = %.2f #pm%.2f ", Bkg->GetTitle(), Bkg->getVal(), Bkg->getError()), ""); 		
 	leg->AddEntry((TObject *) 0,TString::Format("%s = %.2f #pm%.2f ", Activity->GetTitle(), Activity->getVal(), Activity->getError()), ""); 		
 	leg->AddEntry((TObject *) 0,TString::Format("%s = %.2f #pm%.2f #mus", Thalf->GetTitle(), Thalf->getVal(), Thalf->getError()), ""); 		
 	leg->AddEntry((TObject *) 0,TString::Format("#chi^{2}/dof = %.2f ", frame->chiSquare("Pdf","Hist")), "");
