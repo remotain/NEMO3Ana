@@ -35,7 +35,11 @@ void Observable::Draw(Option_t* option){
 	hsum->Reset();
 	
 	TLegend * leg = new TLegend(0.05, 0.6, 0.95, .90);
-	leg->SetNColumns(2);
+	
+	if(_ComponentList->GetEntries() < 8 )
+		leg->SetNColumns(2);
+	else 
+		leg->SetNColumns(3);
 	
 	double tot_evt_mc ,tot_evt_mc_err = 0.;
 	leg->AddEntry(_Data, TString::Format("%s (%0.f evt.)", "Data", _Data->Integral() ), "PL");
@@ -51,7 +55,13 @@ void Observable::Draw(Option_t* option){
 		h_comp->SetLineWidth(1);
 		TH1D * tmp = (TH1D*) h_comp->Clone( TString::Format("tmp_%s", h_comp->GetName() ) );
 		tmp->Scale( comp->GetNorm() );
-
+		
+		// Renormalise the errors
+		//for (unsigned int i = 1; i <= tmp->GetNbinsX(); i++){
+		//	double tmp_err = tmp->GetBinContent(i)*TMath::Sqrt(tmp->GetBinError(i)*tmp->GetBinError(i) + comp->GetNormErr()*comp->GetNormErr());
+		//	tmp->SetBinError(i, tmp_err); 
+		//}
+			
 		stack->Add(tmp);
 		hsum->Add(tmp);
 		
@@ -59,7 +69,7 @@ void Observable::Draw(Option_t* option){
 		tot_evt_mc += GetComponentNumEvent(comp,err);
 		tot_evt_mc_err += err*err;
 		
-		leg->AddEntry(h_comp, TString::Format("%s (%0.f #pm %0.f evt.)", comp->GetTitle(), GetComponentNumEvent(comp,err), err ), "F");
+		leg->AddEntry(h_comp, TString::Format("%s (%.1f #pm %.1f evt.)", comp->GetTitle(), GetComponentNumEvent(comp,err), err ), "F");
 	
 	}
 	
@@ -68,17 +78,17 @@ void Observable::Draw(Option_t* option){
 	_Data->Chi2TestX(hsum, _chi2, _ndf, _igood, "UW,P,CHI2/NDF") ;
 
 	leg->AddEntry((TObject*) 0, TString::Format("Total MC (%0.f #pm %0.f evt.)", tot_evt_mc, tot_evt_mc_err), "");
-	leg->AddEntry((TObject*) 0, TString::Format("#chi^2/dof (%.3f/%d)", _chi2, _ndf), "");
+	leg->AddEntry((TObject*) 0, TString::Format("#chi^2/dof (%.1f/%d)", _chi2, _ndf), "");
 
 	TCanvas * canvas = new TCanvas(GetName(), GetTitle(), 500, 500);
 
 	// Upper plot will be in pad1                                               
     TPad *pad1 = new TPad("pad1", "pad1", 0, 0.3, 1, 1.0);
-    pad1->SetBottomMargin(0); // Upper and lower plot are joined                
 	pad1->SetLogy( _LogScale );
 	pad1->SetTickx();
 	pad1->SetTicky();
 	pad1->SetTopMargin(0.45) ;
+	pad1->SetBottomMargin(0.01) ;
 	pad1->SetRightMargin(0.05) ;
     pad1->Draw();
 	pad1->cd();
@@ -101,7 +111,7 @@ void Observable::Draw(Option_t* option){
 	
 	canvas->cd();	
     TPad *pad2 = new TPad("pad2", "pad2", 0, 0.05, 1, 0.3);
-    pad2->SetTopMargin(0);
+    pad2->SetTopMargin(0.1);
     pad2->SetBottomMargin(0.4);
 	pad2->SetRightMargin(0.05) ;
 	pad2->SetTickx();
