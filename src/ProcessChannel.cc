@@ -2227,7 +2227,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("Cd-116 sector (18) ");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
 	    cutNames->push_back("Length of alpha track < $40\\,\\rm{cm}$ ");
-	    cutNames->push_back("At least 4 delayed hits in the Alpha cluster");
+	    cutNames->push_back("At least 2 delayed hits in the Alpha cluster");
 		cutNames->push_back("Is an hot spot");
 
 	    unsigned int nCuts = cutNames->size();
@@ -2398,7 +2398,7 @@ namespace ProcessChannel {
 	        if(sectorId != 18)                          continue; hAnaCutFlow->Fill(currentcut++);
 	        if(el_energy   < 0.3)                       continue; hAnaCutFlow->Fill(currentcut++);
 	        if(alphaLength > 40)                        continue; hAnaCutFlow->Fill(currentcut++);
-	        if(alphaNHits  < 4)                         continue; hAnaCutFlow->Fill(currentcut++);
+	        if(alphaNHits  < 2)                         continue; hAnaCutFlow->Fill(currentcut++);
 			if( IsHotSpot(eVertex->z(), vertexSector) ) continue; hAnaCutFlow->Fill(currentcut++);
 	
 			// Apply radon map
