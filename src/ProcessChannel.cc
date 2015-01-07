@@ -316,9 +316,9 @@ namespace ProcessChannel {
 			hAnaCutFlow -> Fill(currentcut++);
 
 			// Implement selection
-			if (sectorId != 18 && IsExcludedSpot(el_vtx_z_, vertexSector))  continue; hAnaCutFlow -> Fill(currentcut++); // Cd foil only
-			if (el_trkSign > 0)  											continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
-			if (el_energy < 0.3) 											continue; hAnaCutFlow -> Fill(currentcut++); // E > 300 keV only
+			if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++); // Cd foil only
+			if ( el_trkSign > 0)  						  continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
+			if ( el_energy < 0.3) 						  continue; hAnaCutFlow -> Fill(currentcut++); // E > 300 keV only
 			// 3. no hotspot
 		
 			// Apply radon map
@@ -635,7 +635,7 @@ namespace ProcessChannel {
 			hAnaCutFlow -> Fill(currentcut++);
 
 			// Implement selection
-		    if (sectorId != 18 && IsExcludedSpot(eVertex->z(), vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (sectorId != 18 || IsExcludedSpot(eVertex->z(), vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3)        			continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_pathLength_[0] + el_pathLength_[1] < 80)        			continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probInt < 0.04)                                    			continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1048,7 +1048,7 @@ namespace ProcessChannel {
 			hAnaCutFlow -> Fill(currentcut++);
 
 			// Implement selection
-		    if (sectorId != 18 && IsExcludedSpot(eVertex->z(), vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (sectorId != 18 || IsExcludedSpot(eVertex->z(), vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_energy_[0] < 0.3 and el_energy_[1] < 0.3)     			continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probInt > 0.01)                                  			continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probExt_0_to_1 < 0.04 and probExt_1_to_0 < 0.04) 			continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1407,7 +1407,7 @@ namespace ProcessChannel {
 	          gmc_ext_prob_g_to_e_[0] : gmc_ext_prob_e_to_g_[0];
 
 			// Implement selection
-		    if ( sectorId != 18 && IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
+		    if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( nHighEnergyClusters_ != 1 )          						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( el_energy_ < 0.3 )                   						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( gmc_int_prob_[0] < 0.04 )            						continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1719,7 +1719,7 @@ namespace ProcessChannel {
 	           gmc_ext_prob_g_to_e_[0] : gmc_ext_prob_e_to_g_[0];
 
 			// Implement selection
-		    if ( sectorId != 18 && IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
+		    if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( nHighEnergyClusters_ != 1 ) 	      						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( el_energy_ < 0.3 )          	      						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( gmc_int_prob_[0] > 0.01 )   	      						continue; hAnaCutFlow -> Fill(currentcut++);
@@ -2069,7 +2069,7 @@ namespace ProcessChannel {
 			unsigned int currentcut = 0;
 			hAnaCutFlow -> Fill(currentcut++);
 
-	        if ( sectorId != 18 && IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( nHighEnergyClusters_ != 2)                              	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
@@ -2395,7 +2395,7 @@ namespace ProcessChannel {
 			unsigned int currentcut = 0;
 			hAnaCutFlow -> Fill(currentcut++);
 			
-	        if(sectorId != 18 && IsExcludedSpot(eVertex->z(), vertexSector))   continue; hAnaCutFlow->Fill(currentcut++);
+	        if(sectorId != 18 || IsExcludedSpot(eVertex->z(), vertexSector))   continue; hAnaCutFlow->Fill(currentcut++);
 	        if(el_energy   < 0.3)                       					continue; hAnaCutFlow->Fill(currentcut++);
 	        if(alphaLength > 40)                        					continue; hAnaCutFlow->Fill(currentcut++);
 	        if(alphaNHits  < 2)                         					continue; hAnaCutFlow->Fill(currentcut++);
