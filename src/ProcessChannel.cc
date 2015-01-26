@@ -439,6 +439,7 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
+		cutNames->push_back("Negative track sign");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
 		cutNames->push_back("Sum track length > 80 cm ");
 		cutNames->push_back("Internal probability > 0.04");
@@ -636,11 +637,12 @@ namespace ProcessChannel {
 
 			// Implement selection
 		    if (sectorId != 18 || IsExcludedSpot(eVertex->z(), vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3)        			continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (el_pathLength_[0] + el_pathLength_[1] < 80)        			continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (probInt < 0.04)                                    			continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (probExt_0_to_1 > 0.01 or probExt_1_to_0 > 0.01)    			continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (elOnSameSide and nCloseNAPromptHits_Opposite != 0) 			continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					  continue; hAnaCutFlow -> Fill(currentcut++);
+			if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3)        			  continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (el_pathLength_[0] + el_pathLength_[1] < 80)        			  continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (probInt < 0.04)                                    			  continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (probExt_0_to_1 > 0.01 or probExt_1_to_0 > 0.01)    			  continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (elOnSameSide and nCloseNAPromptHits_Opposite != 0) 			  continue; hAnaCutFlow -> Fill(currentcut++);
 			
 		    if ((el_caloiobt[0] > 1 and (el_calofcll[0] == 1 or el_calofcll[0] == 2)) or 
 		        (el_caloiobt[1] > 1 and (el_calofcll[1] == 1 or el_calofcll[1] == 2))) continue; hAnaCutFlow->Fill(currentcut++);
@@ -861,7 +863,8 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
-	    cutNames->push_back("Energy one electron > 300 keV ");
+	    cutNames->push_back("Track with opposite curvature");
+	    cutNames->push_back("Energy one electron > 300 keV");
 		cutNames->push_back("Internal probability < 0.01");
 		cutNames->push_back("External probability > 0.04");
 		cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4");
@@ -1049,10 +1052,11 @@ namespace ProcessChannel {
 
 			// Implement selection
 		    if (sectorId != 18 || IsExcludedSpot(eVertex->z(), vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (el_energy_[0] < 0.3 and el_energy_[1] < 0.3)     			continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (probInt > 0.01)                                  			continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (probExt_0_to_1 < 0.04 and probExt_1_to_0 < 0.04) 			continue; hAnaCutFlow -> Fill(currentcut++);
-			if ( IsHotSpot(eVertex->z(), vertexSector) ) 	     			continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (el_trkSign[0] == el_trkSign[1] )							  continue; hAnaCutFlow -> Fill(currentcut++);
+			if (el_energy_[0] < 0.3 and el_energy_[1] < 0.3)     			  continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (probInt > 0.01)                                  			  continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (probExt_0_to_1 < 0.04 and probExt_1_to_0 < 0.04) 			  continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( IsHotSpot(eVertex->z(), vertexSector) ) 	     			  continue; hAnaCutFlow -> Fill(currentcut++);
 			
 			// Set min and max variables
 		    double el_energy_min   , el_energy_max   ;
@@ -1246,6 +1250,7 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
+		cutNames->push_back("Negative track sign ");
 	    cutNames->push_back("One gamma cluster with energy > 150 keV ");
 	    cutNames->push_back("Energy one electron > 300 keV ");
 		cutNames->push_back("Internal probability > 0.04");
@@ -1408,6 +1413,7 @@ namespace ProcessChannel {
 
 			// Implement selection
 		    if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( el_trkSign >= 0 )											continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( nHighEnergyClusters_ != 1 )          						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( el_energy_ < 0.3 )                   						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( gmc_int_prob_[0] < 0.04 )            						continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1532,6 +1538,7 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
+		cutNames->push_back("Negative track sign ");
 	    cutNames->push_back("One gamma cluster with energy > 150 keV ");
 	    cutNames->push_back("Energy one electron > 300 keV ");
 	    cutNames->push_back("External Probability > 0.04");
@@ -1569,11 +1576,13 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_warm" , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130      ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_cold" , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130      ) );
 
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1"     , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6            ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1"     , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P1"       , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"             ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_g_energy_P1"       , d->GetName()) , "; E_{#gamma}; No. Events / 0.05 MeV"        ,  120, 0, 6  ) );
 
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_In"  , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6            ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_Out" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6            ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_Pet" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6            ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_In"  , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_Out" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_Pet" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
 
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_In_hot"  , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6            ) );
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_Out_hot" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6            ) );
@@ -1587,7 +1596,9 @@ namespace ProcessChannel {
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_Out_cold" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6            ) );
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_Pet_cold" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6            ) );
 
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2"     , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6            ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2"     , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P2"       , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"             ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_g_energy_P2"       , d->GetName()) , "; E_{#gamma}; No. Events / 0.05 MeV"        ,  120, 0, 6  ) );
 		
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2_In"  , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6            ) );
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2_Out" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6            ) );
@@ -1720,6 +1731,7 @@ namespace ProcessChannel {
 
 			// Implement selection
 		    if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( el_trkSign >=0 ) 											continue; hAnaCutFlow->Fill(currentcut++);
 			if ( nHighEnergyClusters_ != 1 ) 	      						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( el_energy_ < 0.3 )          	      						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( gmc_int_prob_[0] > 0.01 )   	      						continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1775,7 +1787,9 @@ namespace ProcessChannel {
 
 		    if (run < 3396) {
 				
-				histo_collection->Find(TString::Format("%s_h_tot_energy_P1"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+				histo_collection->Find(TString::Format("%s_h_tot_energy_P1" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+				histo_collection->Find(TString::Format("%s_h_e_energy_P1"   , d->GetName()) ) -> Fill(el_energy_                 , weight);
+				histo_collection->Find(TString::Format("%s_h_g_energy_P1"   , d->GetName()) ) -> Fill(gmc_energy_[0]             , weight);
 				
 				if( gmc_iobt_[0] == 0 ) {
 					
@@ -1817,7 +1831,9 @@ namespace ProcessChannel {
 		    else {
 				
 				//if( ! IsHotSpot(el_vtx_z_, vertexSector) )
-				histo_collection->Find(TString::Format("%s_h_tot_energy_P2"  , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+				histo_collection->Find(TString::Format("%s_h_tot_energy_P2" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+				histo_collection->Find(TString::Format("%s_h_e_energy_P2"   , d->GetName()) ) -> Fill(el_energy_                 , weight);
+				histo_collection->Find(TString::Format("%s_h_g_energy_P2"   , d->GetName()) ) -> Fill(gmc_energy_[0]             , weight);
 
 				if( gmc_iobt_[0] == 0 ) {
 
@@ -1905,6 +1921,7 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 	    cutNames->push_back("Cd-116 sector (18) ");
+		cutNames->push_back("Negative track sign ");
 	    cutNames->push_back("Two gamma cluster with energy > 150 keV ");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
 	    cutNames->push_back("Internal Probability > 0.04");
@@ -1950,12 +1967,22 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_warm"    , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130            ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_cold"    , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130            ) );
 		
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P1"      , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P1" , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1"       , d->GetName()) , "; E_{#gamma,Low} + E_{#gamma,High}+ E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P1"         , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"           ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_glow_energy_P1"      , d->GetName()) , "; E_{#gamma,Low}; No. Events / 0.05 MeV"  ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_ghigh_energy_P1"     , d->GetName()) , "; E_{#gamma,High}; No. Events / 0.05 MeV" ,  120, 0, 6  ) );
+
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P1_hot"  , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P1_warm" , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P1_cold" , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
 
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P2"      , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P2" , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2"       , d->GetName()) , "; E_{#gamma,Low} + E_{#gamma,High}+ E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P2"         , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"           ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_glow_energy_P2"      , d->GetName()) , "; E_{#gamma,Low}; No. Events / 0.05 MeV"  ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_ghigh_energy_P2"     , d->GetName()) , "; E_{#gamma,High}; No. Events / 0.05 MeV" ,  120, 0, 6  ) );
+
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P2_hot"  , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P2_warm" , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P2_cold" , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
@@ -2070,6 +2097,7 @@ namespace ProcessChannel {
 			hAnaCutFlow -> Fill(currentcut++);
 
 	        if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow->Fill(currentcut++);
+			if ( el_trkSign >=0 ) 											continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( nHighEnergyClusters_ != 2)                              	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
@@ -2152,8 +2180,11 @@ namespace ProcessChannel {
  
  		    if (run < 3396) {
 
-				histo_collection -> Find( TString::Format("%s_h_energy_score_fun_P1"  , d->GetName()) ) -> Fill( score_function);
-
+				histo_collection -> Find( TString::Format("%s_h_energy_score_fun_P1" , d->GetName()) ) -> Fill(score_function);
+				histo_collection -> Find( TString::Format("%s_h_tot_energy_P1"       , d->GetName()) ) -> Fill(total_energy);
+				histo_collection -> Find( TString::Format("%s_h_glow_energy_P1"      , d->GetName()) ) -> Fill(gmc_energy_[low_id]);
+				histo_collection -> Find( TString::Format("%s_h_ghigh_energy_P1"     , d->GetName()) ) -> Fill(gmc_energy_[high_id]);				
+								
 				//if( IsHotSpot(el_vtx_z_, vertexSector) )
 				//	histo_collection->Find(TString::Format("%s_h_energy_score_fun_P1_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
 				if( IsWarmSpot(el_vtx_z_, vertexSector) )
@@ -2165,6 +2196,9 @@ namespace ProcessChannel {
 			} else {
 
 				histo_collection -> Find( TString::Format("%s_h_energy_score_fun_P2"  , d->GetName()) ) -> Fill( score_function);
+				histo_collection -> Find( TString::Format("%s_h_tot_energy_P2"       , d->GetName()) ) -> Fill(total_energy);
+				histo_collection -> Find( TString::Format("%s_h_glow_energy_P2"      , d->GetName()) ) -> Fill(gmc_energy_[low_id]);
+				histo_collection -> Find( TString::Format("%s_h_ghigh_energy_P2"     , d->GetName()) ) -> Fill(gmc_energy_[high_id]);				
 
 				//if( IsHotSpot(el_vtx_z_, vertexSector) )
 				//	histo_collection->Find(TString::Format("%s_h_energy_score_fun_P2_hot" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
@@ -2225,6 +2259,7 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 	    cutNames->push_back("Cd-116 sector (18) ");
+	    cutNames->push_back("Negative electron track sign");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
 	    cutNames->push_back("Length of alpha track < $40\\,\\rm{cm}$ ");
 	    cutNames->push_back("At least 2 delayed hits in the Alpha cluster");
@@ -2395,11 +2430,12 @@ namespace ProcessChannel {
 			unsigned int currentcut = 0;
 			hAnaCutFlow -> Fill(currentcut++);
 			
-	        if(sectorId != 18 || IsExcludedSpot(eVertex->z(), vertexSector))   continue; hAnaCutFlow->Fill(currentcut++);
-	        if(el_energy   < 0.3)                       					continue; hAnaCutFlow->Fill(currentcut++);
-	        if(alphaLength > 40)                        					continue; hAnaCutFlow->Fill(currentcut++);
-	        if(alphaNHits  < 2)                         					continue; hAnaCutFlow->Fill(currentcut++);
-			if( IsHotSpot(eVertex->z(), vertexSector) ) 					continue; hAnaCutFlow->Fill(currentcut++);
+	        if(sectorId != 18 || IsExcludedSpot(eVertex->z(), vertexSector)) continue; hAnaCutFlow->Fill(currentcut++);
+	        if(el_trkSign >= 0 ) 											 continue; hAnaCutFlow->Fill(currentcut++);
+			if(el_energy   < 0.3)                       					 continue; hAnaCutFlow->Fill(currentcut++);
+	        if(alphaLength > 40)                        					 continue; hAnaCutFlow->Fill(currentcut++);
+	        if(alphaNHits  < 2)                         					 continue; hAnaCutFlow->Fill(currentcut++);
+			if( IsHotSpot(eVertex->z(), vertexSector) ) 					 continue; hAnaCutFlow->Fill(currentcut++);
 	
 			// Apply radon map
 		    double weight = 1;
