@@ -1922,7 +1922,8 @@ namespace ProcessChannel {
 	    cutNames->push_back("All events ");
 	    cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign ");
-	    cutNames->push_back("Two gamma cluster with energy > 200 keV ");
+	    cutNames->push_back("Two gamma cluster ");
+	    cutNames->push_back("Energy of the gamma > 200 keV ");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
 	    cutNames->push_back("Internal Probability > 0.04");
 	    cutNames->push_back("External Probability < 0.01");
@@ -2096,12 +2097,13 @@ namespace ProcessChannel {
 			unsigned int currentcut = 0;
 			hAnaCutFlow -> Fill(currentcut++);
 
-	        if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector))                        continue; hAnaCutFlow->Fill(currentcut++);
-			if ( el_trkSign >=0 ) 											                       continue; hAnaCutFlow->Fill(currentcut++);
-	        if ( nHighEnergyClusters_ != 2 || gmc_energy_[0] < 200 || gmc_energy_[1] < 200  )      continue; hAnaCutFlow->Fill(currentcut++);
-	        if ( isInHotSpot)                                            	                       continue; hAnaCutFlow->Fill(currentcut++);
-	        if ( el_energy_   < 0.3)                                     	                       continue; hAnaCutFlow->Fill(currentcut++);
-	        if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) 	                       continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow->Fill(currentcut++);
+			if ( el_trkSign >=0 ) 											continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( nHighEnergyClusters_ != 2  )                               continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( gmc_energy_[0] < 0.2 || gmc_energy_[1] < 0.2  )            continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) 	continue; hAnaCutFlow->Fill(currentcut++);
 	        if (
 	          !((gmc_ext_prob_g_to_e_[0] < 0.01 and gmc_ext_prob_e_to_g_[0] < 0.01) and 
 	            (gmc_ext_prob_g_to_e_[1] < 0.01 and gmc_ext_prob_e_to_g_[1] < 0.01)
