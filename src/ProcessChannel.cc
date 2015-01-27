@@ -2098,7 +2098,7 @@ namespace ProcessChannel {
 
 	        if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector))                        continue; hAnaCutFlow->Fill(currentcut++);
 			if ( el_trkSign >=0 ) 											                       continue; hAnaCutFlow->Fill(currentcut++);
-	        if ( !(nHighEnergyClusters_ == 2 && gmc_energy_[0] >= 200 && gmc_energy_[1] >= 200 ) ) continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( nHighEnergyClusters_ != 2 || gmc_energy_[0] < 200 || gmc_energy_[1] < 200  )      continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	                       continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	                       continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) 	                       continue; hAnaCutFlow->Fill(currentcut++);
