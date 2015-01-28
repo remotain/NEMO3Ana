@@ -65,10 +65,13 @@ void Observable::Draw(Option_t* option){
 		stack->Add(tmp);
 		hsum->Add(tmp);
 		
-		double err = 0.;		
-		tot_evt_mc += GetComponentNumEvent(comp,err);
-		tot_evt_mc_err += err*err;
+		double err = 0.;
 		
+		if ( GetComponentNumEvent(comp,err) != 0 ){	
+			tot_evt_mc += GetComponentNumEvent(comp,err);
+			tot_evt_mc_err += err*err;
+		}
+				
 		leg->AddEntry(h_comp, TString::Format("%s (%.1f #pm %.1f evt.)", comp->GetTitle(), GetComponentNumEvent(comp,err), err ), "F");
 	
 	}
