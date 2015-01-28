@@ -1923,7 +1923,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign ");
 	    cutNames->push_back("Two gamma cluster ");
-	    cutNames->push_back("Energy of the gamma > 200 keV ");
+	    //cutNames->push_back("Energy of the gamma > 200 keV ");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
 	    cutNames->push_back("Internal Probability > 0.04");
 	    cutNames->push_back("External Probability < 0.01");
@@ -2100,7 +2100,7 @@ namespace ProcessChannel {
 	        if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow->Fill(currentcut++);
 			if ( el_trkSign >=0 ) 											continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( nHighEnergyClusters_ != 2  )                               continue; hAnaCutFlow->Fill(currentcut++);
-	        if ( gmc_energy_[0] < 0.2 || gmc_energy_[1] < 0.2  )            continue; hAnaCutFlow->Fill(currentcut++);
+	        //if ( gmc_energy_[0] < 0.2 || gmc_energy_[1] < 0.2  )            continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) 	continue; hAnaCutFlow->Fill(currentcut++);
