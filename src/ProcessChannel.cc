@@ -151,13 +151,14 @@ namespace ProcessChannel {
 
 			// Process the required channel
 			switch(_ChannelToProcess) { 
-				case kOneElectron                 : status = ProcessOneElectron(d)                 ; break;
-				case kTwoElectronInternal         : status = ProcessTwoElectronInternal(d)         ; break;
-				case kTwoElectronExternal         : status = ProcessTwoElectronExternal(d)         ; break;
-				case kOneElectronOneGammaInternal : status = ProcessOneElectronOneGammaInternal(d) ; break;
-				case kOneElectronOneGammaExternal : status = ProcessOneElectronOneGammaExternal(d) ; break;
-				case kOneElectronTwoGammaInternal : status = ProcessOneElectronTwoGammaInternal(d) ; break;
-				case kOneElectronOneAlpha         : status = ProcessOneElectronOneAlpha(d)         ; break;			
+				case kOneElectron                   : status = ProcessOneElectron(d)                   ; break;
+				case kTwoElectronInternal           : status = ProcessTwoElectronInternal(d)           ; break;
+				case kTwoElectronExternal           : status = ProcessTwoElectronExternal(d)           ; break;
+				case kOneElectronOneGammaInternal   : status = ProcessOneElectronOneGammaInternal(d)   ; break;
+				case kOneElectronOneGammaExternal   : status = ProcessOneElectronOneGammaExternal(d)   ; break;
+				case kOneElectronTwoGammaInternal   : status = ProcessOneElectronTwoGammaInternal(d)   ; break;
+				case kOneElectronThreeGammaInternal : status = ProcessOneElectronThreeGammaInternal(d) ; break;
+				case kOneElectronOneAlpha           : status = ProcessOneElectronOneAlpha(d)           ; break;			
 			
 				default : status = kFALSE; break;
 			}
