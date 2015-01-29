@@ -21,12 +21,13 @@ namespace ProcessChannel {
 	TString GetOutputFileName ();
 	
 	enum ChannelType_t {
-		kOneElectron                 , 
-		kTwoElectronInternal         ,
-		kTwoElectronExternal         ,
-		kOneElectronOneGammaInternal ,
-		kOneElectronOneGammaExternal ,
-		kOneElectronTwoGammaInternal ,
+		kOneElectron                   , 
+		kTwoElectronInternal           ,
+		kTwoElectronExternal           ,
+		kOneElectronOneGammaInternal   ,
+		kOneElectronOneGammaExternal   ,
+		kOneElectronTwoGammaInternal   ,
+		kOneElectronThreeGammaInternal ,
 		kOneElectronOneAlpha
 	};
 	
@@ -42,12 +43,13 @@ namespace ProcessChannel {
 	bool Run( Long64_t n_max = -1 );
 	
 	// Process channel
-	bool ProcessOneElectron                 ( DataSet *d );
-	bool ProcessTwoElectronInternal         ( DataSet *d );
-	bool ProcessTwoElectronExternal         ( DataSet *d );
-	bool ProcessOneElectronOneGammaInternal ( DataSet *d );		
-	bool ProcessOneElectronOneGammaExternal ( DataSet *d );		
-	bool ProcessOneElectronTwoGammaInternal ( DataSet *d );		
-	bool ProcessOneElectronOneAlpha         ( DataSet *d );
+	bool ProcessOneElectron                   ( DataSet *d );
+	bool ProcessTwoElectronInternal           ( DataSet *d );
+	bool ProcessTwoElectronExternal           ( DataSet *d );
+	bool ProcessOneElectronOneGammaInternal   ( DataSet *d );		
+	bool ProcessOneElectronOneGammaExternal   ( DataSet *d );		
+	bool ProcessOneElectronTwoGammaInternal   ( DataSet *d );
+	bool ProcessOneElectronThreeGammaInternal ( DataSet *d );				
+	bool ProcessOneElectronOneAlpha           ( DataSet *d );
 	
 }
