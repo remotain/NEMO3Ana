@@ -2301,8 +2301,6 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_maxE_probInt"          , d->GetName()) , "; Int. Prob. e - #gamma_{max}; No.Events",  12, 0, 1                      ) );
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_maxE_probExt"          , d->GetName()) , "; Ext. Prob. e - #gamma_{max}; No.Events",  12, 0, 1                      ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_energy_corr"           , d->GetName()) , "; Min E_#gamma + Max E_#gamma / MeV - E_e / Mev",  40, 0, 4, 20, 0, 2     ) );
-	    histo_collection -> Add( new TH1D( TString::Format("%s_h_energy_score_fun"      , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
-	    histo_collection -> Add( new TH2D( TString::Format("%s_h_energy_score_vs_tot"   , d->GetName()) , "; Score function; No. Events",  50, 0, 5, 50, -5, 5                       ) );
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_energy_before"         , d->GetName()) , "Before Cut on Correlation; Tot Energy / MeV; No.Events / 0.1",  50, 0, 50 ) );
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_energy_after"          , d->GetName()) , "After Cut on Correlation; Tot Energy / MeV; No.Events / 0.1",  50, 0, 5   ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_layer_vs_side"         , d->GetName()) , "Layer vs Side; Side; Layer", 4, -1.5, 2.5, 10, -0.5, 9.5				     ) );
@@ -2312,11 +2310,8 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_warm"    , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130            ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_cold"    , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130            ) );
 		
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1"       , d->GetName()) , "; E_{#gamma,Low} + E_{#gamma,High}+ E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P1"         , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"           ,  120, 0, 6  ) );
-
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2"       , d->GetName()) , "; E_{#gamma,Low} + E_{#gamma,High}+ E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P2"         , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"           ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy"          , d->GetName()) , "; E_{#gamma,Low} + E_{#gamma,High}+ E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy"            , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"           ,  120, 0, 6  ) );
 
 		// Get TTree
 		TDirectoryFile * f1 = (TDirectoryFile*) _InputFile->Get(_InputDirName);	
@@ -2514,8 +2509,8 @@ namespace ProcessChannel {
 				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_cold" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
  		   
 			// P1 & P2 together
-			histo_collection -> Find( TString::Format("%s_h_tot_energy_P1"       , d->GetName()) ) -> Fill(total_energy);
-			histo_collection -> Find( TString::Format("%s_h_e_energy_P1"         , d->GetName()) ) -> Fill(el_energy_);
+			histo_collection -> Find( TString::Format("%s_h_tot_energy"       , d->GetName()) ) -> Fill(total_energy);
+			histo_collection -> Find( TString::Format("%s_h_e_energy"         , d->GetName()) ) -> Fill(el_energy_);
 			
 		}
 
