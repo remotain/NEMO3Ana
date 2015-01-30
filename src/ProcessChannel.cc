@@ -2312,6 +2312,11 @@ namespace ProcessChannel {
 		
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy"          , d->GetName()) , "; E_{#gamma,Low} + E_{#gamma,High}+ E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy"            , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"           ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1"       , d->GetName()) , "; E_{#gamma,Low} + E_{#gamma,High}+ E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P1"         , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"           ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2"       , d->GetName()) , "; E_{#gamma,Low} + E_{#gamma,High}+ E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P2"         , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"           ,  120, 0, 6  ) );
+
 
 		// Get TTree
 		TDirectoryFile * f1 = (TDirectoryFile*) _InputFile->Get(_InputDirName);	
@@ -2511,6 +2516,15 @@ namespace ProcessChannel {
 			// P1 & P2 together
 			histo_collection -> Find( TString::Format("%s_h_tot_energy"       , d->GetName()) ) -> Fill(total_energy);
 			histo_collection -> Find( TString::Format("%s_h_e_energy"         , d->GetName()) ) -> Fill(el_energy_);
+			
+			 if (run < 3396) {
+	 			histo_collection -> Find( TString::Format("%s_h_tot_energy_P1"       , d->GetName()) ) -> Fill(total_energy);
+	 			histo_collection -> Find( TString::Format("%s_h_e_energy_P1"         , d->GetName()) ) -> Fill(el_energy_); 
+			 } else {
+	 			histo_collection -> Find( TString::Format("%s_h_tot_energy_P2"       , d->GetName()) ) -> Fill(total_energy);
+	 			histo_collection -> Find( TString::Format("%s_h_e_energy_P2"         , d->GetName()) ) -> Fill(el_energy_);
+			 	
+			 }
 			
 		}
 
