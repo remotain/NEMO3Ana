@@ -373,7 +373,8 @@ namespace ProcessChannel {
 					histo_collection->Find(TString::Format("%s_h_e_energy_P1", d->GetName())) -> Fill(el_energy , weight);			 
 				else if( IsHotSpot(el_vtx_z_, vertexSector) )
 					histo_collection->Find(TString::Format("%s_h_e_energy_P1_hot"  , d->GetName())) -> Fill(el_energy , weight);
-				else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+				
+				if( IsWarmSpot(el_vtx_z_, vertexSector) )
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P1_warm" , d->GetName())) -> Fill(el_energy , weight);
 				else if( IsColdSpot(el_vtx_z_, vertexSector) )
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P1_cold" , d->GetName())) -> Fill(el_energy , weight);
@@ -384,7 +385,8 @@ namespace ProcessChannel {
 					histo_collection->Find(TString::Format("%s_h_e_energy_P2", d->GetName())) -> Fill(el_energy , weight);
 				else if( IsHotSpot(el_vtx_z_, vertexSector) )
 					histo_collection->Find(TString::Format("%s_h_e_energy_P2_hot"  , d->GetName())) -> Fill(el_energy , weight);
-				else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+				
+				if( IsWarmSpot(el_vtx_z_, vertexSector) )
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P2_warm" , d->GetName())) -> Fill(el_energy , weight);
 				else if( IsColdSpot(el_vtx_z_, vertexSector) )
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P2_cold" , d->GetName())) -> Fill(el_energy , weight);
