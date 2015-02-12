@@ -9,7 +9,7 @@
 	// Load OneElectronHistos in HistoCollection
 	HistoCollection * hcoll = new HistoCollection("OneElectronOneAlphaHistos", "OneElectronOneAlphaHistos");
 
-	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20141218/OneElectronOneAlphaHistos_2hits.root");
+	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20150127/OneElectronOneAlphaHistos.root");
 	TDirectory * fdir = 0;
 
 	fdir = (TDirectory *) f->Get("Data"); fdir->cd();
@@ -23,7 +23,7 @@
 	RooRealVar Bkg      ( "Bkg"      , "B"          , 0. , 0. , 10 ) ; 
 	Bkg.setConstant(kTRUE);
 	
-	RooRealVar Activity ( "Activity" , "A"          , 5 , 0. , 10 ) ; 
+	RooRealVar Activity ( "Activity" , "A"          , 1.60 , 0. , 2 ) ; 
 	RooRealVar Thalf    ( "Thalf"    , "T_{1/2}"    , 164.3 , 0. , 200. ) ;
 	//Thalf.setConstant(kTRUE);
 	

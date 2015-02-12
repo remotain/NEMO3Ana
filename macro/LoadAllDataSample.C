@@ -19,9 +19,10 @@
 	double Phase2Fraction = Data_AccptRunTimeP2/DataManagement::GetTotalAcceptedRunTime();
 	
 	// Isotope mass and normalisation
-	DataManagement::SetIsotopeMass(410.4 /* g */, 1.0 /* g */ );
+	DataManagement::SetFoilMass(0.440 /* Kg */, 0.001 /* Kg */ );
+	DataManagement::SetIsotopeMass(0.4104 /* Kg */, 0.001 /* Kg */ );
 	DataManagement::SetIsotopeAtomicWeight(115.904756 /* g/mol */ );
-	
+		
 	// Add Data Set to be process
 	DataManagement::AddDataSet ( new DataSet ( "Data" , 0, 0, 0 ) );
 	DataManagement::AddDataSet ( new DataSet ( "Air_Bi214"         ,  70999881900     ,   42850760*Phase1Fraction ,   42850760*Phase2Fraction ) );

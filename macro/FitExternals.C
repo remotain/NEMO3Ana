@@ -9,7 +9,7 @@
 	// Load OneElectronHistos in HistoCollection
 	HistoCollection * hcoll_2eExt = new HistoCollection("TwoElectronExtHistos", "TwoElectronExtHistos");
 
-	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20141213/TwoElectronExtHistos.root");
+	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20150127/TwoElectronExtHistos.root");
 	TDirectory * fdir = 0;
 	TIter next(DataManagement::GetDataSetCollection()); DataSet * ds;	
 	while( ds = (DataSet*) next() ){
@@ -20,7 +20,7 @@
 	// Load OneElectronHistos in HistoCollection
 	HistoCollection * hcoll_1e1gExt = new HistoCollection("OneElectronOneGammaExt", "OneElectronOneGammaExt");
 
-	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20141218/OneElectronOneGammaExt.root");
+	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20150107/OneElectronOneGammaExt.root");
 	TDirectory * fdir = 0;
 	TIter next(DataManagement::GetDataSetCollection()); DataSet * ds;	
 	while( ds = (DataSet*) next() ){
@@ -34,23 +34,23 @@
 	// Fit parameters
 	//
 	//////////////////////////////////////////////////////////////////////////////	
-	DataManagement::AddParameter( new Parameter( "PMT_K40"        , "PMT_K40"        ,  0 , 1125.42 , 0.001 ) ); DataManagement::FindParameter( "PMT_K40"       );
-	DataManagement::AddParameter( new Parameter( "Scint_K40"      , "Scint_K40"      ,  1 ,   14.55 , 0.001 ) ); DataManagement::FindParameter( "Scint_K40"     );
-	DataManagement::AddParameter( new Parameter( "PMT_Bi214"      , "PMT_Bi214"      ,  2 ,  376.38 , 0.001 ) ); DataManagement::FindParameter( "PMT_Bi214"     );
-	DataManagement::AddParameter( new Parameter( "Air_Bi214_P1"   , "Air_Bi214_P1"   ,  3 ,  624.95 , 0.001 ) ); DataManagement::FindParameter( "Air_Bi214_P1"  );
-	DataManagement::AddParameter( new Parameter( "PMT_Tl208"      , "PMT_Tl208"      ,  4 ,   37.46 , 0.001 ) ); DataManagement::FindParameter( "PMT_Tl208"     );
-	DataManagement::AddParameter( new Parameter( "Air_Tl208_P1"   , "Air_Tl208_P1"   ,  5 ,   12.37 , 0.001 ) ); DataManagement::FindParameter( "Air_Tl208_P1"  ); 
-	DataManagement::AddParameter( new Parameter( "SScin_Bi210"    , "SScin_Bi210"    ,  6 ,   21.29 , 0.001 ) ); DataManagement::FindParameter( "SScin_Bi210"   ); 
-	DataManagement::AddParameter( new Parameter( "CuTower_Co60"   , "CuTower_Co60"   ,  7 ,   63.97 , 0.001 ) ); DataManagement::FindParameter( "CuTower_Co60"  ); 
+	DataManagement::AddParameter( new Parameter( "PMT_K40"        , "PMT_K40"        ,  0 , 1016.90 , 0.001 ) ); DataManagement::FindParameter( "PMT_K40"       );
+	DataManagement::AddParameter( new Parameter( "Scint_K40"      , "Scint_K40"      ,  1 ,    8.40 , 0.001 ) ); DataManagement::FindParameter( "Scint_K40"     );
+	DataManagement::AddParameter( new Parameter( "PMT_Bi214"      , "PMT_Bi214"      ,  2 ,  373.02 , 0.001 ) ); DataManagement::FindParameter( "PMT_Bi214"     );
+	DataManagement::AddParameter( new Parameter( "Air_Bi214_P1"   , "Air_Bi214_P1"   ,  3 ,  577.27 , 0.001 ) ); DataManagement::FindParameter( "Air_Bi214_P1"  );
+	DataManagement::AddParameter( new Parameter( "PMT_Tl208"      , "PMT_Tl208"      ,  4 ,   37.35 , 0.001 ) ); DataManagement::FindParameter( "PMT_Tl208"     );
+	DataManagement::AddParameter( new Parameter( "Air_Tl208_P1"   , "Air_Tl208_P1"   ,  5 ,   13.87 , 0.001 ) ); DataManagement::FindParameter( "Air_Tl208_P1"  ); 
+	DataManagement::AddParameter( new Parameter( "SScin_Bi210"    , "SScin_Bi210"    ,  6 ,   21.41 , 0.001 ) ); DataManagement::FindParameter( "SScin_Bi210"   ); 
+	DataManagement::AddParameter( new Parameter( "CuTower_Co60"   , "CuTower_Co60"   ,  7 ,   89.70 , 0.001 ) ); DataManagement::FindParameter( "CuTower_Co60"  ); 
 	//////////////////////////////////////////////////////////////////////////////
 	//	
 	// Define the components fixed by the 1e1a channel
 	//
 	//////////////////////////////////////////////////////////////////////////////	
-	DataManagement::AddComponent( new Component( "SWire_Bi214_P1_IN"  , "^{214}Bi SWire P1 In " , DataManagement::FindDataSet( "SWire_Bi214" ) , 6.60911e-01 , 4.98429e-02 )); DataManagement::FindComponent( "SWire_Bi214_P1_IN"          )->SetFillColor( kCyan +  0 );
-	DataManagement::AddComponent( new Component( "SWire_Bi214_P1_OUT" , "^{214}Bi SWire P1 Out" , DataManagement::FindDataSet( "SWire_Bi214" ) , 6.70849e-01 , 4.94088e-02 )); DataManagement::FindComponent( "SWire_Bi214_P1_OUT"         )->SetFillColor( kCyan +  1 );
-	DataManagement::AddComponent( new Component( "SWire_Bi214_P2_IN"  , "^{214}Bi SWire P2 In " , DataManagement::FindDataSet( "SWire_Bi214" ) , 8.67658e-02 , 5.90468e-03 )); DataManagement::FindComponent( "SWire_Bi214_P2_IN"          )->SetFillColor( kCyan +  0 );
-	DataManagement::AddComponent( new Component( "SWire_Bi214_P2_OUT" , "^{214}Bi SWire P2 Out" , DataManagement::FindDataSet( "SWire_Bi214" ) , 1.05511e-01 , 6.02982e-03 )); DataManagement::FindComponent( "SWire_Bi214_P2_OUT"         )->SetFillColor( kCyan +  1 );
+	DataManagement::AddComponent( new Component( "SWire_Bi214_P1_IN"  , "^{214}Bi SWire P1 In " , DataManagement::FindDataSet( "SWire_Bi214" ) , 6.62169e-01 , 5.29137e-02)); DataManagement::FindComponent( "SWire_Bi214_P1_IN"          )->SetFillColor( kCyan +  0 );
+	DataManagement::AddComponent( new Component( "SWire_Bi214_P1_OUT" , "^{214}Bi SWire P1 Out" , DataManagement::FindDataSet( "SWire_Bi214" ) , 6.53893e-01 , 5.15176e-02 )); DataManagement::FindComponent( "SWire_Bi214_P1_OUT"         )->SetFillColor( kCyan +  1 );
+	DataManagement::AddComponent( new Component( "SWire_Bi214_P2_IN"  , "^{214}Bi SWire P2 In " , DataManagement::FindDataSet( "SWire_Bi214" ) , 8.53192e-02 , 6.19447e-03)); DataManagement::FindComponent( "SWire_Bi214_P2_IN"          )->SetFillColor( kCyan +  0 );
+	DataManagement::AddComponent( new Component( "SWire_Bi214_P2_OUT" , "^{214}Bi SWire P2 Out" , DataManagement::FindDataSet( "SWire_Bi214" ) , 1.00534e-01 , 6.20848e-03 )); DataManagement::FindComponent( "SWire_Bi214_P2_OUT"         )->SetFillColor( kCyan +  1 );
 
 	DataManagement::AddComponent( new Component( "FeShield_Bi214" , "FeShield  ^{214}Bi " , DataManagement::FindDataSet( "FeShield_Bi214" ) , 7360.00 , 200.00 )); DataManagement::FindComponent( "FeShield_Bi214" )->SetFillColor( kGreen  +  2 );
 	DataManagement::AddComponent( new Component( "FeShield_Tl208" , "FeShield ^{208}Tl  " , DataManagement::FindDataSet( "FeShield_Tl208" ) ,  484.00 ,  24.00 )); DataManagement::FindComponent( "FeShield_Tl208" )->SetFillColor( kAzure +  4 );
@@ -172,7 +172,12 @@
 	tot_e_g_energy_P1 -> Draw(); (TPad*)gROOT->GetSelectedPad()->Print(0,".eps");
 	tot_e_energy_P2   -> Draw(); (TPad*)gROOT->GetSelectedPad()->Print(0,".eps");
 	tot_e_g_energy_P2 -> Draw(); (TPad*)gROOT->GetSelectedPad()->Print(0,".eps");
-                                
-                                
+                            
+    
+	tot_e_energy_P1   -> SetLogScale(kTRUE); tot_e_energy_P1   -> Draw(); (TPad*)gROOT->GetSelectedPad()->Print(0,"_log.eps");
+	tot_e_energy_P2   -> SetLogScale(kTRUE); tot_e_g_energy_P1 -> Draw(); (TPad*)gROOT->GetSelectedPad()->Print(0,"_log.eps");
+	tot_e_g_energy_P1 -> SetLogScale(kTRUE); tot_e_energy_P2   -> Draw(); (TPad*)gROOT->GetSelectedPad()->Print(0,"_log.eps");
+	tot_e_g_energy_P2 -> SetLogScale(kTRUE); tot_e_g_energy_P2 -> Draw(); (TPad*)gROOT->GetSelectedPad()->Print(0,"_log.eps");
+	                            
 }                               
                                 
