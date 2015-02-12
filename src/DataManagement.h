@@ -19,13 +19,16 @@ namespace DataManagement {
 	double GetLiveTime(PhaseType_t);
 	double GetTotalLiveTime();
 		
+	void SetFoilMass       (double val, double valerr); 	
 	void SetIsotopeMass    (double val, double valerr); 
 	void SetIsotopeAtomicWeight (double val);
-		
+	
+	double GetFoilMass();	
 	double GetIsotopeMass();
 	double GetIsotopeMassError();
 	double GetIsotopeAtomicWeight();	
-		
+	double GetNormBB();
+			
 	void AddDataSet( DataSet * tmp);
 	DataSet * FindDataSet(const char * name);
 	THashList * GetDataSetCollection();

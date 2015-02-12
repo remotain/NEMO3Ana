@@ -78,7 +78,7 @@ void Observable::Draw(Option_t* option){
 	
 	tot_evt_mc_err = TMath::Sqrt(tot_evt_mc_err);
 	
-	_Data->Chi2TestX(hsum, _chi2, _ndf, _igood, "UW,P,CHI2/NDF") ;
+	_Data->Chi2TestX(hsum, _chi2, _ndf, _igood, "UW") ;
 
 	leg->AddEntry((TObject*) 0, TString::Format("Total MC (%0.f #pm %0.f evt.)", tot_evt_mc, tot_evt_mc_err), "");
 	leg->AddEntry((TObject*) 0, TString::Format("#chi^2/dof (%.1f/%d)", _chi2, _ndf), "");

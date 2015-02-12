@@ -50,6 +50,13 @@ namespace Fit{
 				}
 				// Add histogram to the sum
 				h_mc->Add(h_comp, norm);
+				
+				// Set gauss constraint
+				if( comp->IsGausConstraint() ){
+					
+					l_likelihood += TMath::Gaus(x[comp->GetParameter()->GetOrder()]*comp->GetAdjustment(), comp->GetAdjustment(), comp->GetNSigma()*comp->GetAdjustmentErr(), true);
+					
+				}
 
 			}
 					

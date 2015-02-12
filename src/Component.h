@@ -25,7 +25,9 @@ public:
 		DataSet * data_set,
 		Parameter * param,
 		double adj    = 1.,
-		double adjerr = 0.					
+		double adjerr = 0.,
+		bool constraint = false,
+		int nSigma = 1
 		) : TNamed(name, title) {
 			
 			_DataSet       = data_set;
@@ -34,6 +36,8 @@ public:
 			_AdjustmentErr = adjerr;
 			_FillColor     = kWhite;
 			_LineColor     = kBlack;
+			_IsGausConstraint = constraint;
+			_nSigma        = nSigma;
 				
 			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSet->GetName(), _Parameter->GetName(), _Adjustment);
 				
@@ -74,7 +78,11 @@ public:
 	double GetAdjustmentErr (){ return _AdjustmentErr; };
 	
 	double GetNorm();
-	double GetNormErr();	
+	double GetNormErr();
+	
+	void SetGausConstraint( bool is) {_IsGausConstraint = is; }; 
+	bool IsGausConstraint() {return _IsGausConstraint; }; 
+	int  GetNSigma(){ return _nSigma; };
 	
 private:
 
@@ -85,7 +93,9 @@ private:
 	double      _AdjustmentErr;
 	Color_t     _FillColor;
 	Color_t     _LineColor;
-
+	bool		_IsGausConstraint;
+	int         _nSigma;
+	
 ClassDef(Component, 1);
 
 };

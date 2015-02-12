@@ -45,16 +45,23 @@ namespace DataManagement{
 		return _TotalAcceptedRunTime - _TotalAcceptedDeadTime;
 	}
 
-	double _IsotopeMass         = 0.; 
-	double _IsotopeMassError    = 0.;
-	double _IsotopeAtomicWeight = 0.;
-
+	double _FoilMass            = 0.0;
+	double _FoilMassError       = 0.0;
+	double _IsotopeEnrichement  = 0.0;
+	double _IsotopeMass         = 0.0;
+	double _IsotopeMassError    = 0.0;
+	double _IsotopeAtomicWeight = 0.0;
+	double _AvogadroNumber      = 6.0221413e+23;
+	
+	void SetFoilMass (double val, double valerr) { _FoilMass = val; _FoilMassError = valerr; }; 
 	void SetIsotopeMass (double val, double valerr) { _IsotopeMass = val; _IsotopeMassError = valerr; }; 
 	void SetIsotopeAtomicWeight (double val) { _IsotopeAtomicWeight = val; };
-		
+	
+	double GetFoilMass            () { return _FoilMass            ; };	
 	double GetIsotopeMass         () { return _IsotopeMass         ; };
 	double GetIsotopeMassError    () { return _IsotopeMassError    ; };
 	double GetIsotopeAtomicWeight () { return _IsotopeAtomicWeight ; };	
+	double GetNormBB              () { return (_AvogadroNumber*_IsotopeMass*TMath::Log(2)*1000)/(3.15569e7*_IsotopeAtomicWeight); };
 
 	// Data Set collection
 	THashList * _DataSetCollection = new THashList();
