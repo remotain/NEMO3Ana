@@ -104,12 +104,12 @@ namespace ProcessChannel {
 	//////////////////////////////////////////////////////////////////////////////
 	bool IsWarmSpot (double z, double s){
 		
-		if ( IsExcludedSpot(z,s) or IsHotSpot(z,s) )                    return false;
+		if ( IsExcludedSpot(z,s) or IsHotSpot(z,s) )      return false;
 			
-		if ( z > -120. and z < +120. and s < 18.48 )                    return true;
-		else if ( z >  +34. and z < +120. and s > 18.60 and s < 18.75 ) return true;
-		else if ( z > -120. and z < +120. and s > 18.75 and s < 18.88 ) return true;
-		else if ( z >  +50. and z < +120. and s > 18.88 and s < 19.00 ) return true;
+		else if ( s < 18.48 )                             return true;
+		else if ( z >  +34. and s > 18.60 and s < 18.75 ) return true;
+		else if ( s > 18.75 and s < 18.88 )               return true;
+		else if ( z >  +50. and s > 18.88 )               return true;
 		
 		return false;
 		
@@ -205,6 +205,7 @@ namespace ProcessChannel {
 		cutNames->push_back("Cd-116 sector (18) ");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
 	    cutNames->push_back("Negative track sign");
+		cutNames->push_back("Not an hot spot");
 
 	    unsigned int nCuts = cutNames->size();
 	    TH1D* hAnaCutFlow  = new TH1D( TString::Format("%s_h_AnaCutFlow", d->GetName() ),"Analysis cut flow", nCuts+1, -0.5, nCuts+0.5);
@@ -321,6 +322,7 @@ namespace ProcessChannel {
 			if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++); // Cd foil only
 			if ( el_trkSign > 0)  						  continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
 			if ( el_energy < 0.3) 						  continue; hAnaCutFlow -> Fill(currentcut++); // E > 300 keV only
+			if ( IsHotSpot(eVertex->z(), vertexSector) )  continue; hAnaCutFlow -> Fill(currentcut++);
 			// 3. no hotspot
 		
 			// Apply radon map
@@ -357,11 +359,14 @@ namespace ProcessChannel {
 			histo_collection->Find( TString::Format("%s_h_nGammas"          , d->GetName()) ) -> Fill(nClusters_            , weight);
 			histo_collection->Find( TString::Format("%s_h_totGammaEnergy"   , d->GetName()) ) -> Fill(totUnderlyingEnergy_  , weight);
 		  
-			if( !IsHotSpot(el_vtx_z_, vertexSector) )
-				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect"    , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
-			else if( IsHotSpot(el_vtx_z_, vertexSector) )
-				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
-			else if( IsWarmSpot(el_vtx_z_, vertexSector) )
+			histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect"    , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
+		  
+			//if( !IsHotSpot(el_vtx_z_, vertexSector) )
+			//	histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect"    , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
+			//else if( IsHotSpot(el_vtx_z_, vertexSector) )
+			//	histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
+			
+			if( IsWarmSpot(el_vtx_z_, vertexSector) )
 				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_warm" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 			else if( IsColdSpot(el_vtx_z_, vertexSector) )
 				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_cold" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
@@ -369,10 +374,12 @@ namespace ProcessChannel {
 			// Phase 1 & 2
 		    if (run < 3396) {
 				
-				if( !IsHotSpot(el_vtx_z_, vertexSector) )
-					histo_collection->Find(TString::Format("%s_h_e_energy_P1", d->GetName())) -> Fill(el_energy , weight);			 
-				else if( IsHotSpot(el_vtx_z_, vertexSector) )
-					histo_collection->Find(TString::Format("%s_h_e_energy_P1_hot"  , d->GetName())) -> Fill(el_energy , weight);
+				histo_collection->Find(TString::Format("%s_h_e_energy_P1", d->GetName())) -> Fill(el_energy , weight);			 
+				
+				//if( !IsHotSpot(el_vtx_z_, vertexSector) )
+				//	histo_collection->Find(TString::Format("%s_h_e_energy_P1", d->GetName())) -> Fill(el_energy , weight);			 
+				//else if( IsHotSpot(el_vtx_z_, vertexSector) )
+				//	histo_collection->Find(TString::Format("%s_h_e_energy_P1_hot"  , d->GetName())) -> Fill(el_energy , weight);
 				
 				if( IsWarmSpot(el_vtx_z_, vertexSector) )
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P1_warm" , d->GetName())) -> Fill(el_energy , weight);
@@ -381,10 +388,12 @@ namespace ProcessChannel {
 		
 			} else {
 			
-				if( !IsHotSpot(el_vtx_z_, vertexSector) )
-					histo_collection->Find(TString::Format("%s_h_e_energy_P2", d->GetName())) -> Fill(el_energy , weight);
-				else if( IsHotSpot(el_vtx_z_, vertexSector) )
-					histo_collection->Find(TString::Format("%s_h_e_energy_P2_hot"  , d->GetName())) -> Fill(el_energy , weight);
+				histo_collection->Find(TString::Format("%s_h_e_energy_P2", d->GetName())) -> Fill(el_energy , weight);
+			
+				//if( !IsHotSpot(el_vtx_z_, vertexSector) )
+				//	histo_collection->Find(TString::Format("%s_h_e_energy_P2", d->GetName())) -> Fill(el_energy , weight);
+				//else if( IsHotSpot(el_vtx_z_, vertexSector) )
+				//	histo_collection->Find(TString::Format("%s_h_e_energy_P2_hot"  , d->GetName())) -> Fill(el_energy , weight);
 				
 				if( IsWarmSpot(el_vtx_z_, vertexSector) )
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P2_warm" , d->GetName())) -> Fill(el_energy , weight);
