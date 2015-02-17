@@ -236,15 +236,15 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_warm"    , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );		
 		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_cold"    , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );		
 		
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P1"           , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 350, 0, 3.5                  ) );		
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P1_hot"       , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 350, 0, 3.5                  ) );
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P1_warm"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 350, 0, 3.5                  ) );
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P1_cold"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 350, 0, 3.5                  ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P1"           , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );		
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P1_hot"       , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P1_warm"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P1_cold"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
 
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2"           , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 350, 0, 3.5                  ) );		
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2_hot"       , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 350, 0, 3.5                  ) );
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2_warm"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 350, 0, 3.5                  ) );
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2_cold"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 350, 0, 3.5                  ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2"           , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );		
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2_hot"       , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2_warm"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2_cold"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
 
 		// Get TTree
 		TDirectoryFile * f1 = (TDirectoryFile*) _InputFile->Get(_InputDirName);	
@@ -1301,23 +1301,23 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_warm" , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130      ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_cold" , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130      ) );
 						
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1"      , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6           ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P1"       , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"             ,  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_g_energy_P1"       , d->GetName()) , "; E_{#gamma}; No. Events / 0.05 MeV"        ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1"      , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.1 MeV", 60, 0, 6           ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P1"       , d->GetName()) , "; E_{e}; No. Events / 0.1 MeV"              ,  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_g_energy_P1"       , d->GetName()) , "; E_{#gamma}; No. Events / 0.1 MeV"         ,  60, 0, 6  ) );
 
 
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_hot"  , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6           ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_warm" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6           ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_cold" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6           ) );	
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_hot"  , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.1 MeV",  60, 0, 6           ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_warm" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.1 MeV",  60, 0, 6           ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1_cold" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.1 MeV",  60, 0, 6           ) );	
 
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2"      , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6           ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P2"       , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"             ,  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_g_energy_P2"       , d->GetName()) , "; E_{#gamma}; No. Events / 0.05 MeV"        ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2"      , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.1 MeV", 60, 0, 6           ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P2"       , d->GetName()) , "; E_{e}; No. Events / 0.1 MeV"             ,  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_g_energy_P2"       , d->GetName()) , "; E_{#gamma}; No. Events / 0.1 MeV"        ,  60, 0, 6  ) );
 		
 		
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2_hot"  , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6           ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2_warm" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6           ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2_cold" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6           ) );	
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2_hot"  , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.1 MeV",  60, 0, 6           ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2_warm" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.1 MeV",  60, 0, 6           ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2_cold" , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.1 MeV",  60, 0, 6           ) );	
 
 		// Get TTree
 		TDirectoryFile * f1 = (TDirectoryFile*) _InputFile->Get(_InputDirName);	
@@ -1994,20 +1994,20 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_cold"    , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130            ) );
 		
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P1" , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1"       , d->GetName()) , "; E_{#gamma,Low} + E_{#gamma,High}+ E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P1"         , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"           ,  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_glow_energy_P1"      , d->GetName()) , "; E_{#gamma,Low}; No. Events / 0.05 MeV"  ,  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_ghigh_energy_P1"     , d->GetName()) , "; E_{#gamma,High}; No. Events / 0.05 MeV" ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1"       , d->GetName()) , "; E_{#gamma,Low} + E_{#gamma,High}+ E_{e}; No. Events / 0.1 MeV",  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P1"         , d->GetName()) , "; E_{e}; No. Events / 0.1 MeV"           ,  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_glow_energy_P1"      , d->GetName()) , "; E_{#gamma,Low}; No. Events / 0.1 MeV"  ,  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_ghigh_energy_P1"     , d->GetName()) , "; E_{#gamma,High}; No. Events / 0.1 MeV" ,  60, 0, 6  ) );
 
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P1_hot"  , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P1_warm" , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P1_cold" , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
 
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P2" , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2"       , d->GetName()) , "; E_{#gamma,Low} + E_{#gamma,High}+ E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P2"         , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"           ,  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_glow_energy_P2"      , d->GetName()) , "; E_{#gamma,Low}; No. Events / 0.05 MeV"  ,  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_ghigh_energy_P2"     , d->GetName()) , "; E_{#gamma,High}; No. Events / 0.05 MeV" ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2"       , d->GetName()) , "; E_{#gamma,Low} + E_{#gamma,High}+ E_{e}; No. Events / 0.1 MeV",  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P2"         , d->GetName()) , "; E_{e}; No. Events / 0.1 MeV"           ,  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_glow_energy_P2"      , d->GetName()) , "; E_{#gamma,Low}; No. Events / 0.1 MeV"  ,  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_ghigh_energy_P2"     , d->GetName()) , "; E_{#gamma,High}; No. Events / 0.1 MeV" ,  60, 0, 6  ) );
 
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P2_hot"  , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_energy_score_fun_P2_warm" , d->GetName()) , "; Score function; No. Events",  50, -5, 5                                 ) );
@@ -2333,12 +2333,12 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_warm"    , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130            ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_cold"    , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130            ) );
 		
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy"          , d->GetName()) , "; E_{#gamma,1} + E_{#gamma,2} + E_{#gamma,3} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy"            , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"           ,  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1"       , d->GetName()) , "; E_{#gamma,1} + E_{#gamma,2} + E_{#gamma,3} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P1"         , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"           ,  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2"       , d->GetName()) , "; E_{#gamma,1} + E_{#gamma,2} + E_{#gamma,3} + E_{e}; No. Events / 0.05 MeV",  120, 0, 6  ) );
-		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P2"         , d->GetName()) , "; E_{e}; No. Events / 0.05 MeV"           ,  120, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy"          , d->GetName()) , "; E_{#gamma,1} + E_{#gamma,2} + E_{#gamma,3} + E_{e}; No. Events / 0.1 MeV",  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy"            , d->GetName()) , "; E_{e}; No. Events / 0.1 MeV"           ,  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1"       , d->GetName()) , "; E_{#gamma,1} + E_{#gamma,2} + E_{#gamma,3} + E_{e}; No. Events / 0.1 MeV",  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P1"         , d->GetName()) , "; E_{e}; No. Events / 0.1 MeV"           ,  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P2"       , d->GetName()) , "; E_{#gamma,1} + E_{#gamma,2} + E_{#gamma,3} + E_{e}; No. Events / 0.1 MeV",  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P2"         , d->GetName()) , "; E_{e}; No. Events / 0.1 MeV"           ,  60, 0, 6  ) );
 
 
 		// Get TTree
