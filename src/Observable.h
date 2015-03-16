@@ -76,6 +76,8 @@ public:
 	
 	virtual void Draw(Option_t* option = "");
 	
+	virtual void Chi2Test(TH1 * hData, TH1 * hModel, double & chi2, int & ndf);
+	
 private:
 
 	TH1 * _Data;

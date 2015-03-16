@@ -78,10 +78,17 @@ void Observable::Draw(Option_t* option){
 	
 	tot_evt_mc_err = TMath::Sqrt(tot_evt_mc_err);
 	
-	_Data->Chi2TestX(hsum, _chi2, _ndf, _igood, "UW") ;
 
 	leg->AddEntry((TObject*) 0, TString::Format("Total MC (%0.f #pm %0.f evt.)", tot_evt_mc, tot_evt_mc_err), "");
+
+	// Original ROOT chi2 calculation
+	_chi2 = 0; _ndf = 0;
+	_Data->Chi2TestX(hsum, _chi2, _ndf, _igood, "UU") ;
 	leg->AddEntry((TObject*) 0, TString::Format("#chi^2/dof (%.1f/%d)", _chi2, _ndf), "");
+
+	// My own chi2 calculation
+	//Chi2Test(_Data, hsum, _chi2, _ndf);
+	//leg->AddEntry((TObject*) 0, TString::Format("#chi^2/dof (%.1f/%d)", _chi2, _ndf), "");
 
 	TCanvas * canvas = new TCanvas(GetName(), GetTitle(), 500, 500);
 
@@ -130,5 +137,38 @@ void Observable::Draw(Option_t* option){
 	hratio->GetYaxis()->CenterTitle(kTRUE);
 	hratio->GetYaxis()->SetRangeUser(0.0,2.5);
 	hratio->Draw();
+	
+};
+
+void Observable::Chi2Test(TH1 * hData, TH1 * hModel, double & chi2, int & ndf){
+	
+	chi2 = 0;
+	ndf = 0;
+	
+	// Loop over the data histogram bin
+	for (unsigned int i = 1; i <= hData->GetNbinsX(); i++){
+		
+		// Exclude bin with low number of entries from the chi2 calculation
+		if( hData->GetBinContent(i) == 0 && hModel->GetBinContent(i) == 0 ) {
+			continue;
+		}  else if ( hData->GetBinContent(i) > 0 && hModel->GetBinContent(i) > 0 ) {
+
+			chi2 += TMath::Power( (hModel->GetBinContent(i) - hData->GetBinContent(i)) , 2 ) / (hData->GetBinError(i)*hData->GetBinError(i) + hModel->GetBinError(i)*hModel->GetBinError(i));
+			
+		} else if ( hData->GetBinContent(i) == 0 && hModel->GetBinContent(i) > 0 ) {
+
+			chi2 += TMath::Power( (hModel->GetBinContent(i) - hData->GetBinContent(i)) , 2 ) / (hModel->GetBinError(i)*hModel->GetBinError(i));			
+			
+		} else if ( hData->GetBinContent(i) > 0 && hModel->GetBinContent(i) == 0) {
+
+			chi2 += TMath::Power( (hModel->GetBinContent(i) - hData->GetBinContent(i)) , 2 ) / (hData->GetBinError(i)*hData->GetBinError(i));			
+			
+		}
+
+		ndf++;
+		
+	}
+	
+	ndf = ndf - 1;
 	
 };

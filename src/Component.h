@@ -51,13 +51,15 @@ public:
 		double adjerr = 0.
 		) : TNamed(name, title) {
 	
-			_DataSet       = data_set;
-			_Parameter     = 0;
-			_Adjustment    = adj;
-			_AdjustmentErr = adjerr;
-			_FillColor     = kWhite;
-			_LineColor     = kBlack;
-	
+			_DataSet          = data_set;
+			_Parameter        = 0;
+			_Adjustment       = adj;
+			_AdjustmentErr    = adjerr;
+			_FillColor        = kWhite;
+			_LineColor        = kBlack;
+			_IsGausConstraint = false;
+			_nSigma           = 0; 
+				
 			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSet->GetName(), "Null", _Adjustment);
 	
 				};
