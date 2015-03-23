@@ -22,7 +22,7 @@ namespace Fit{
 	//////////////////////////////////////////////////////////////////////////////
 	double Fcn(const double *x){
 		
-		double l_likelihood = 0.;
+		long double l_likelihood = 0.;
 		
 		TIter next( DataManagement::GetObservableCollection() );
 		while ( Observable * obs = (Observable *) next() ){
@@ -73,7 +73,7 @@ namespace Fit{
 					l_likelihood += h_data->GetBinContent(i) * TMath::Log(h_mc->GetBinContent(i)) - h_mc->GetBinContent(i);
 
 				}
-				
+							
 			}
 			
 			h_mc->Delete();
@@ -81,7 +81,7 @@ namespace Fit{
 		}
 		
 		// Return -log(L)
-		return -l_likelihood;
+		return -2*l_likelihood;
 		
 	}
 	

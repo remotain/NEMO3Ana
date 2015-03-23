@@ -1,5 +1,7 @@
 #include "Observable.h"
 
+#include <iostream>
+
 #include "THStack.h"
 #include "TMath.h"
 #include "TString.h"
@@ -55,16 +57,21 @@ void Observable::Draw(Option_t* option){
 		h_comp->SetLineWidth(1);
 		TH1D * tmp = (TH1D*) h_comp->Clone( TString::Format("tmp_%s", h_comp->GetName() ) );
 		tmp->Scale( comp->GetNorm() );
-		
+
+		//std::cout << comp->GetName() << " " << comp->GetNorm() << " " << comp->GetNormErr() << std::endl;
+			
 		// Renormalise the errors
-		//for (unsigned int i = 1; i <= tmp->GetNbinsX(); i++){
-		//	double tmp_err = tmp->GetBinContent(i)*TMath::Sqrt(tmp->GetBinError(i)*tmp->GetBinError(i) + comp->GetNormErr()*comp->GetNormErr());
-		//	tmp->SetBinError(i, tmp_err); 
-		//}
+		for (unsigned int i = 1; i <= tmp->GetNbinsX(); i++){
+			if(h_comp->GetBinContent(i) != 0 and comp->GetNorm() != 0){
+				double tmp_err = tmp->GetBinContent(i)*TMath::Sqrt( TMath::Power(h_comp->GetBinError(i)/h_comp->GetBinContent(i),2) + TMath::Power(comp->GetNormErr()/comp->GetNorm(),2) );
+				tmp->SetBinError(i, tmp_err);
+				//std::cout << i << " " << tmp->GetBinContent(i) << " " << tmp->GetBinError(i) << std::endl; 
+			} 
+		}
 			
 		stack->Add(tmp);
 		hsum->Add(tmp);
-		
+				
 		double err = 0.;
 		
 		if ( GetComponentNumEvent(comp,err) != 0 ){	
@@ -132,11 +139,102 @@ void Observable::Draw(Option_t* option){
 	TH1D * hratio = (TH1D*) _Data->Clone( TString::Format("ratio_%s", _Data->GetName()) );
 	hratio->SetTitle("");
 	hratio->Divide(hsum);
-	
+		
 	hratio->GetYaxis()->SetTitle("Data/MC") ; 
 	hratio->GetYaxis()->CenterTitle(kTRUE);
 	hratio->GetYaxis()->SetRangeUser(0.0,2.5);
 	hratio->Draw();
+	
+};
+
+void Observable::DrawDetails(Option_t* option){
+	
+	TH1D * hnorm = new TH1D("hnorm", "; ;Adjustement", _ComponentList->GetEntries(), 0, _ComponentList->GetEntries() );
+	TH1D * heff  = new TH1D("heff" , "; ;Efficiency", _ComponentList->GetEntries(), 0, _ComponentList->GetEntries() );
+	TH1D * hevt  = new TH1D("hevt" , "; ;Num. of evts", _ComponentList->GetEntries(), 0, _ComponentList->GetEntries() );
+	
+	hnorm -> SetMarkerStyle(20); hnorm -> SetMarkerSize(0.8);
+	heff  -> SetMarkerStyle(20); heff  -> SetMarkerSize(0.8);
+	hevt  -> SetMarkerStyle(20); hevt  -> SetMarkerSize(0.8);
+	
+	hnorm -> SetStats(kFALSE);
+	heff  -> SetStats(kFALSE);
+	hevt  -> SetStats(kFALSE);
+			
+	// Loop Over Component collection
+	int counter = 0;
+	//TMapIter next( _ComponentMap,  kIterForward);
+	TIter next( _ComponentList,  kIterForward);
+	while ( Component * comp = (Component *) next() ){ 
+		
+		TH1D * h_comp = (TH1D*) _ComponentMap->GetValue(comp);
+		double err = 0; double numevt = GetComponentNumEvent(comp,err);
+		double eff = h_comp->GetEntries() / comp->GetDataSet()->GetGeneratedEvents();
+		double eff_e = sqrt(eff*(1-eff)/comp->GetDataSet()->GetGeneratedEvents());
+		
+		hnorm ->GetXaxis()->SetBinLabel(counter+1, comp->GetName());
+		heff  ->GetXaxis()->SetBinLabel(counter+1, comp->GetName());
+		hevt  ->GetXaxis()->SetBinLabel(counter+1, comp->GetName());	
+		
+		hevt -> GetXaxis() -> LabelsOption("v");
+		
+		hnorm -> SetBinContent(counter+1, comp->GetNorm());
+		heff  -> SetBinContent(counter+1, eff);
+		hevt  -> SetBinContent(counter+1, numevt);
+			
+		hnorm -> SetBinError(counter+1,	comp->GetNormErr());
+		heff  -> SetBinError(counter+1,	eff_e);
+		hevt  -> SetBinError(counter+1,	err);
+		
+		// Print info	
+		//std::cout << comp->GetName() 
+		//		<< " " << comp->GetNorm() << " +/- " << comp->GetNormErr() 
+		//		<< " " << h_comp->GetEntries() / comp->GetDataSet()->GetGeneratedEvents() 
+		//		<< " " << numevt << " +/- " << err << std::endl;
+	
+		counter++;
+				
+	}
+	
+	TCanvas * canvas = new TCanvas(TString::Format("%s_fit_details", GetName()), TString::Format("%s Fit Details", GetTitle()), 500, 500);
+
+	// Upper plot will be in pad1                                               
+	canvas->cd();	
+    TPad *pad1 = new TPad("pad1", "pad1", 0, 0.75, 1, 0.999);
+	pad1->SetLogy(kTRUE);
+	pad1->SetTickx();
+	pad1->SetTicky();
+	pad1->SetTopMargin(0.1) ;
+	pad1->SetBottomMargin(0.01) ;
+	pad1->SetRightMargin(0.05) ;
+	pad1->Draw();
+	pad1->cd();
+	heff->Draw();
+	
+	canvas->cd();
+	TPad *pad2 = new TPad("pad2", "pad2", 0, 0.5, 1, 0.75);
+	pad2->SetLogy(kTRUE);
+    pad2->SetTopMargin(0.01);
+    pad2->SetBottomMargin(0.01);
+	pad2->SetRightMargin(0.05) ;
+	pad2->SetTickx();
+	pad2->SetTicky();
+	pad2->Draw();
+	pad2->cd();
+	hnorm->Draw();
+		
+	canvas->cd();
+	TPad *pad3 = new TPad("pad3", "pad3", 0, 0.05, 1, 0.5);
+	pad3->SetLogy(kTRUE);
+    pad3->SetTopMargin(0.01);
+    pad3->SetBottomMargin(0.50);
+	pad3->SetRightMargin(0.05) ;
+	pad3->SetTickx();
+	pad3->SetTicky();
+    pad3->Draw();
+	pad3->cd();
+	hevt->Draw();
+
 	
 };
 

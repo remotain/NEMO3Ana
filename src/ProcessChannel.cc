@@ -1266,6 +1266,7 @@ namespace ProcessChannel {
 		cutNames->push_back("Negative track sign ");
 	    cutNames->push_back("One gamma cluster with energy > 150 keV ");
 	    cutNames->push_back("Energy one electron > 300 keV ");
+		cutNames->push_back("No non-associated gg hits < 15 cm from the gamma cluster");
 		cutNames->push_back("Internal probability > 0.04");
 		cutNames->push_back("Max External probability (e->g ; g->e) < 0.01");
 		cutNames->push_back("Not an hot spot");
@@ -1392,6 +1393,9 @@ namespace ProcessChannel {
 	    Bool_t          gmc_hasLDCorrErrs_[37]   ; tree->SetBranchAddress("gmc_hasLDCorrErrs_"    , gmc_hasLDCorrErrs_     );
 	    Bool_t          gmc_goodHSFlags_[37]     ; tree->SetBranchAddress("gmc_goodHSFlags_"      , gmc_goodHSFlags_       );
 	    Int_t           gmc_numNeighbours_[37]   ; tree->SetBranchAddress("gmc_numNeighbours_"    , gmc_numNeighbours_     );
+		Int_t           gmc_nNAPromptHits_[37]   ; tree->SetBranchAddress("gmc_nNAPromptHits_"    , gmc_nNAPromptHits_     );
+		Int_t           gmc_nNADelayedHits_[37]  ; tree->SetBranchAddress("gmc_nNADelayedHits_"   , gmc_nNADelayedHits_    );
+		Int_t           gmc_nNANoiseHits_[37]    ; tree->SetBranchAddress("gmc_nNANoiseHits_"     , gmc_nNANoiseHits_      );
 	    Double_t        gmc_first_g_time_[37]    ; tree->SetBranchAddress("gmc_first_g_time_"     , gmc_first_g_time_      );
 	    Double_t        gmc_first_g_d_time_[37]  ; tree->SetBranchAddress("gmc_first_g_d_time_"   , gmc_first_g_d_time_    );
 	    Double_t        gmc_first_g_x_[37]       ; tree->SetBranchAddress("gmc_first_g_x_"        , gmc_first_g_x_         );
@@ -1437,6 +1441,7 @@ namespace ProcessChannel {
 			if ( el_trkSign >= 0 )											continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( nHighEnergyClusters_ != 1 )          						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( el_energy_ < 0.3 )                   						continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( gmc_nNAPromptHits_[0] != 0 )								continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( gmc_int_prob_[0] < 0.04 )            						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( ext_prob > 0.01 ) 			          						continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( IsHotSpot(el_vtx_z_, vertexSector) ) 						continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1950,6 +1955,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("Two gamma cluster ");
 	    //cutNames->push_back("Energy of the gamma > 200 keV ");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
+		cutNames->push_back("No non-associated gg hits < 15 cm from the gamma cluster");
 	    cutNames->push_back("Internal Probability > 0.04");
 	    cutNames->push_back("External Probability < 0.01");
 	    //cutNames->push_back("E_e > 4.0 MeV - 1.5 * Sum E_gamma");
@@ -2086,7 +2092,10 @@ namespace ProcessChannel {
 	    Bool_t          gmc_hasLDCorrErrs_[37]   ; tree->SetBranchAddress("gmc_hasLDCorrErrs_"    , gmc_hasLDCorrErrs_     );
 	    Bool_t          gmc_goodHSFlags_[37]     ; tree->SetBranchAddress("gmc_goodHSFlags_"      , gmc_goodHSFlags_       );
 	    Int_t           gmc_numNeighbours_[37]   ; tree->SetBranchAddress("gmc_numNeighbours_"    , gmc_numNeighbours_     );
-	    Double_t        gmc_first_g_time_[37]    ; tree->SetBranchAddress("gmc_first_g_time_"     , gmc_first_g_time_      );
+		Int_t           gmc_nNAPromptHits_[37]   ; tree->SetBranchAddress("gmc_nNAPromptHits_"    , gmc_nNAPromptHits_     );
+		Int_t           gmc_nNADelayedHits_[37]  ; tree->SetBranchAddress("gmc_nNADelayedHits_"   , gmc_nNADelayedHits_    );
+		Int_t           gmc_nNANoiseHits_[37]    ; tree->SetBranchAddress("gmc_nNANoiseHits_"     , gmc_nNANoiseHits_      );
+		Double_t        gmc_first_g_time_[37]    ; tree->SetBranchAddress("gmc_first_g_time_"     , gmc_first_g_time_      );
 	    Double_t        gmc_first_g_d_time_[37]  ; tree->SetBranchAddress("gmc_first_g_d_time_"   , gmc_first_g_d_time_    );
 	    Double_t        gmc_first_g_x_[37]       ; tree->SetBranchAddress("gmc_first_g_x_"        , gmc_first_g_x_         );
 	    Double_t        gmc_first_g_y_[37]       ; tree->SetBranchAddress("gmc_first_g_y_"        , gmc_first_g_y_         );
@@ -2128,6 +2137,7 @@ namespace ProcessChannel {
 	        //if ( gmc_energy_[0] < 0.2 || gmc_energy_[1] < 0.2  )            continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
+			if ( gmc_nNAPromptHits_[0] != 0 or gmc_nNAPromptHits_[1] !=0)	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) 	continue; hAnaCutFlow->Fill(currentcut++);
 	        if (
 	          !((gmc_ext_prob_g_to_e_[0] < 0.01 and gmc_ext_prob_e_to_g_[0] < 0.01) and 
@@ -2292,6 +2302,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("Three gamma cluster ");
 	    //cutNames->push_back("Energy of the gamma > 200 keV ");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
+		cutNames->push_back("No non-associated gg hits < 15 cm from the gamma cluster");
 	    cutNames->push_back("Internal Probability > 0.04");
 	    cutNames->push_back("External Probability < 0.01");
 	    //cutNames->push_back("E_e > 4.0 MeV - 1.5 * Sum E_gamma");
@@ -2414,7 +2425,10 @@ namespace ProcessChannel {
 	    Bool_t          gmc_hasLDCorrErrs_[37]   ; tree->SetBranchAddress("gmc_hasLDCorrErrs_"    , gmc_hasLDCorrErrs_     );
 	    Bool_t          gmc_goodHSFlags_[37]     ; tree->SetBranchAddress("gmc_goodHSFlags_"      , gmc_goodHSFlags_       );
 	    Int_t           gmc_numNeighbours_[37]   ; tree->SetBranchAddress("gmc_numNeighbours_"    , gmc_numNeighbours_     );
-	    Double_t        gmc_first_g_time_[37]    ; tree->SetBranchAddress("gmc_first_g_time_"     , gmc_first_g_time_      );
+		Int_t           gmc_nNAPromptHits_[37]   ; tree->SetBranchAddress("gmc_nNAPromptHits_"    , gmc_nNAPromptHits_     );
+		Int_t           gmc_nNADelayedHits_[37]  ; tree->SetBranchAddress("gmc_nNADelayedHits_"   , gmc_nNADelayedHits_    );
+		Int_t           gmc_nNANoiseHits_[37]    ; tree->SetBranchAddress("gmc_nNANoiseHits_"     , gmc_nNANoiseHits_      );
+		Double_t        gmc_first_g_time_[37]    ; tree->SetBranchAddress("gmc_first_g_time_"     , gmc_first_g_time_      );
 	    Double_t        gmc_first_g_d_time_[37]  ; tree->SetBranchAddress("gmc_first_g_d_time_"   , gmc_first_g_d_time_    );
 	    Double_t        gmc_first_g_x_[37]       ; tree->SetBranchAddress("gmc_first_g_x_"        , gmc_first_g_x_         );
 	    Double_t        gmc_first_g_y_[37]       ; tree->SetBranchAddress("gmc_first_g_y_"        , gmc_first_g_y_         );
@@ -2456,6 +2470,8 @@ namespace ProcessChannel {
 	        //if ( gmc_energy_[0] < 0.2 || gmc_energy_[1] < 0.2  )            continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
+			if ( gmc_nNAPromptHits_[0] != 0 or gmc_nNAPromptHits_[1] !=0  
+				or gmc_nNAPromptHits_[2] !=0)								continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) 	continue; hAnaCutFlow->Fill(currentcut++);
 	        if (
 	          !((gmc_ext_prob_g_to_e_[0] < 0.01 and gmc_ext_prob_e_to_g_[0] < 0.01) and 
