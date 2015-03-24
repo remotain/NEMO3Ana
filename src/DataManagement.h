@@ -43,6 +43,6 @@ namespace DataManagement {
 	
 	void AddComponent( Component * tmp);
 	Component * FindComponent(const char * name);
-	THashList * GetParameterCollection();
+	THashList * GetComponentCollection();
 
 };

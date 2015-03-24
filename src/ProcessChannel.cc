@@ -1266,7 +1266,7 @@ namespace ProcessChannel {
 		cutNames->push_back("Negative track sign ");
 	    cutNames->push_back("One gamma cluster with energy > 150 keV ");
 	    cutNames->push_back("Energy one electron > 300 keV ");
-		cutNames->push_back("No non-associated gg hits < 15 cm from the gamma cluster");
+		cutNames->push_back("Non-associated gg hits = 0");
 		cutNames->push_back("Internal probability > 0.04");
 		cutNames->push_back("Max External probability (e->g ; g->e) < 0.01");
 		cutNames->push_back("Not an hot spot");
@@ -1370,6 +1370,9 @@ namespace ProcessChannel {
 	    Double_t        trueSourceId             ; tree->SetBranchAddress("trueSourceId"          , &trueSourceId          );
 	    Int_t           nLowEnergyClusters       ; tree->SetBranchAddress("nLowEnergyClusters"    , &nLowEnergyClusters    );
 	    Double_t        totELowEnergyClusters    ; tree->SetBranchAddress("totELowEnergyClusters" , &totELowEnergyClusters );
+		Int_t           nNAPromptHits_           ; tree->SetBranchAddress("nNAPromptHits_"        , &nNAPromptHits_        );
+		Int_t           nNADelayedHits_          ; tree->SetBranchAddress("nNADelayedHits_"       , &nNADelayedHits_       );
+		Int_t           nNANoiseHits_            ; tree->SetBranchAddress("nNANoiseHits_"         , &nNANoiseHits_         );				
 	    Int_t           nClusters_               ; tree->SetBranchAddress("nClusters_"            , &nClusters_            );
 	    Int_t           nHighEnergyClusters_     ; tree->SetBranchAddress("nHighEnergyClusters_"  , &nHighEnergyClusters_  );
 	    Int_t           gmc_nGammas_[37]         ; tree->SetBranchAddress("gmc_nGammas_"          , gmc_nGammas_           );
@@ -1441,7 +1444,7 @@ namespace ProcessChannel {
 			if ( el_trkSign >= 0 )											continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( nHighEnergyClusters_ != 1 )          						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( el_energy_ < 0.3 )                   						continue; hAnaCutFlow -> Fill(currentcut++);
-			if ( gmc_nNAPromptHits_[0] != 0 )								continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( nNAPromptHits_ != 0 )        								continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( gmc_int_prob_[0] < 0.04 )            						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( ext_prob > 0.01 ) 			          						continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( IsHotSpot(el_vtx_z_, vertexSector) ) 						continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1955,7 +1958,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("Two gamma cluster ");
 	    //cutNames->push_back("Energy of the gamma > 200 keV ");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
-		cutNames->push_back("No non-associated gg hits < 15 cm from the gamma cluster");
+		cutNames->push_back("Non-associated gg hits = 0");
 	    cutNames->push_back("Internal Probability > 0.04");
 	    cutNames->push_back("External Probability < 0.01");
 	    //cutNames->push_back("E_e > 4.0 MeV - 1.5 * Sum E_gamma");
@@ -2069,7 +2072,10 @@ namespace ProcessChannel {
 	    Double_t        trueSourceId             ; tree->SetBranchAddress("trueSourceId"          , &trueSourceId          );
 	    Int_t           nLowEnergyClusters       ; tree->SetBranchAddress("nLowEnergyClusters"    , &nLowEnergyClusters    );
 	    Double_t        totELowEnergyClusters    ; tree->SetBranchAddress("totELowEnergyClusters" , &totELowEnergyClusters );
-	    Int_t           nClusters_               ; tree->SetBranchAddress("nClusters_"            , &nClusters_            );
+		Int_t           nNAPromptHits_           ; tree->SetBranchAddress("nNAPromptHits_"        , &nNAPromptHits_        );
+		Int_t           nNADelayedHits_          ; tree->SetBranchAddress("nNADelayedHits_"       , &nNADelayedHits_       );
+		Int_t           nNANoiseHits_            ; tree->SetBranchAddress("nNANoiseHits_"         , &nNANoiseHits_         );
+		Int_t           nClusters_               ; tree->SetBranchAddress("nClusters_"            , &nClusters_            );
 	    Int_t           nHighEnergyClusters_     ; tree->SetBranchAddress("nHighEnergyClusters_"  , &nHighEnergyClusters_  );
 	    Int_t           gmc_nGammas_[37]         ; tree->SetBranchAddress("gmc_nGammas_"          , gmc_nGammas_           );
 	    Double_t        gmc_energy_[37]          ; tree->SetBranchAddress("gmc_energy_"           , gmc_energy_            );
@@ -2137,7 +2143,7 @@ namespace ProcessChannel {
 	        //if ( gmc_energy_[0] < 0.2 || gmc_energy_[1] < 0.2  )            continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
-			if ( gmc_nNAPromptHits_[0] != 0 or gmc_nNAPromptHits_[1] !=0)	continue; hAnaCutFlow->Fill(currentcut++);
+			if ( nNAPromptHits_ !=0)	                                    continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) 	continue; hAnaCutFlow->Fill(currentcut++);
 	        if (
 	          !((gmc_ext_prob_g_to_e_[0] < 0.01 and gmc_ext_prob_e_to_g_[0] < 0.01) and 
@@ -2302,7 +2308,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("Three gamma cluster ");
 	    //cutNames->push_back("Energy of the gamma > 200 keV ");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
-		cutNames->push_back("No non-associated gg hits < 15 cm from the gamma cluster");
+		cutNames->push_back("Non-associated gg hits = 0");
 	    cutNames->push_back("Internal Probability > 0.04");
 	    cutNames->push_back("External Probability < 0.01");
 	    //cutNames->push_back("E_e > 4.0 MeV - 1.5 * Sum E_gamma");
@@ -2402,7 +2408,10 @@ namespace ProcessChannel {
 	    Double_t        trueSourceId             ; tree->SetBranchAddress("trueSourceId"          , &trueSourceId          );
 	    Int_t           nLowEnergyClusters       ; tree->SetBranchAddress("nLowEnergyClusters"    , &nLowEnergyClusters    );
 	    Double_t        totELowEnergyClusters    ; tree->SetBranchAddress("totELowEnergyClusters" , &totELowEnergyClusters );
-	    Int_t           nClusters_               ; tree->SetBranchAddress("nClusters_"            , &nClusters_            );
+		Int_t           nNAPromptHits_           ; tree->SetBranchAddress("nNAPromptHits_"        , &nNAPromptHits_        );
+		Int_t           nNADelayedHits_          ; tree->SetBranchAddress("nNADelayedHits_"       , &nNADelayedHits_       );
+		Int_t           nNANoiseHits_            ; tree->SetBranchAddress("nNANoiseHits_"         , &nNANoiseHits_         );
+		Int_t           nClusters_               ; tree->SetBranchAddress("nClusters_"            , &nClusters_            );
 	    Int_t           nHighEnergyClusters_     ; tree->SetBranchAddress("nHighEnergyClusters_"  , &nHighEnergyClusters_  );
 	    Int_t           gmc_nGammas_[37]         ; tree->SetBranchAddress("gmc_nGammas_"          , gmc_nGammas_           );
 	    Double_t        gmc_energy_[37]          ; tree->SetBranchAddress("gmc_energy_"           , gmc_energy_            );
@@ -2470,8 +2479,7 @@ namespace ProcessChannel {
 	        //if ( gmc_energy_[0] < 0.2 || gmc_energy_[1] < 0.2  )            continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
-			if ( gmc_nNAPromptHits_[0] != 0 or gmc_nNAPromptHits_[1] !=0  
-				or gmc_nNAPromptHits_[2] !=0)								continue; hAnaCutFlow->Fill(currentcut++);
+			if ( nNAPromptHits_ !=0)        								continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) 	continue; hAnaCutFlow->Fill(currentcut++);
 	        if (
 	          !((gmc_ext_prob_g_to_e_[0] < 0.01 and gmc_ext_prob_e_to_g_[0] < 0.01) and 

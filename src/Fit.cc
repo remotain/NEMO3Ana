@@ -6,6 +6,9 @@
 #include "Observable.h"
 #include "Component.h"
 
+#include "TGraph.h"
+#include "TCanvas.h"
+#include "TString.h"
 #include "TMath.h"
 #include "Math/Minimizer.h"
 #include "Math/Factory.h"
@@ -24,19 +27,19 @@ namespace Fit{
 		
 		long double l_likelihood = 0.;
 		
-		TIter next( DataManagement::GetObservableCollection() );
-		while ( Observable * obs = (Observable *) next() ){
+		TIter next1( DataManagement::GetObservableCollection() );
+		while ( Observable * obs = (Observable *) next1() ){
 		
 			// Get the data histogram
 			TH1D * h_data = (TH1D*) obs->GetData();
-			
+
 			// Define sum of all mc components
 			TH1D * h_mc = (TH1D*) h_data->Clone("h_mc");
 			h_mc->Reset();
 			
 			// Loop Over Component collection
-			TMapIter next( obs->GetComponentMap() );
-			while ( Component * comp = (Component *) next() ){
+			TMapIter next2( obs->GetComponentMap() );
+			while ( Component * comp = (Component *) next2() ){
 				
 				// Get the histogram
 				TH1D * h_comp = (TH1D*) obs->GetComponentMap()->GetValue(comp);
@@ -50,13 +53,6 @@ namespace Fit{
 				}
 				// Add histogram to the sum
 				h_mc->Add(h_comp, norm);
-				
-				// Set gauss constraint
-				if( comp->IsGausConstraint() ){
-					
-					l_likelihood += TMath::Gaus(x[comp->GetParameter()->GetOrder()]*comp->GetAdjustment(), comp->GetAdjustment(), comp->GetNSigma()*comp->GetAdjustmentErr(), true);
-					
-				}
 
 			}
 					
@@ -64,24 +60,33 @@ namespace Fit{
 			for (unsigned int i = 1; i <= h_data->GetNbinsX(); i++){
 				
 				// Compute the likelihood
-				if( h_mc->GetBinContent(i) == 0 ) {
+				if( h_mc->GetBinContent(i) > 0 ) {
+
+					l_likelihood += h_data->GetBinContent(i) * TMath::Log(h_mc->GetBinContent(i)) - h_mc->GetBinContent(i) - TMath::LnGamma(h_data->GetBinContent(i)+1);
 					
-					l_likelihood += - h_mc->GetBinContent(i);
-
 				} else {
-
-					l_likelihood += h_data->GetBinContent(i) * TMath::Log(h_mc->GetBinContent(i)) - h_mc->GetBinContent(i);
-
+					
+					l_likelihood += - 1;
+					
 				}
 							
 			}
 			
+			// Add gaussian contraints
+			TIter next3( DataManagement::GetComponentCollection() );
+			while ( Component * comp = (Component *) next3() ){
+				
+				if( comp->IsGausConstraint() ){
+						l_likelihood += TMath::Log( TMath::Gaus(x[comp->GetParameter()->GetOrder()]*comp->GetAdjustment(), comp->GetAdjustment(), comp->GetNSigma()*comp->GetAdjustmentErr(), true) );
+					}
+				}
+				
 			h_mc->Delete();
 		
 		}
 		
 		// Return -log(L)
-		return -2*l_likelihood;
+		return -l_likelihood;
 		
 	}
 	
@@ -89,10 +94,15 @@ namespace Fit{
 	//
 	// Run the fitter
 	//		
-	//////////////////////////////////////////////////////////////////////////////	
+	//////////////////////////////////////////////////////////////////////////////
+	bool _DoDrawContour = false; unsigned int _nStepContour = 100;
+	void DoDrawContour( unsigned int nstep) {_DoDrawContour = true; _nStepContour = nstep; };
+	bool _DoDrawScan = false; unsigned int _nStepScan = 1000;
+	void DoDrawScan( unsigned int nstep ) {_DoDrawScan = true; _nStepScan = nstep; };
+		
 	void Run(const char * minimizerType, const char * algoType){
 		
-		ROOT::Math::Minimizer* min = ROOT::Math::Factory::CreateMinimizer(minimizerType, algoType);
+		ROOT::Math::Minimizer * min = ROOT::Math::Factory::CreateMinimizer(minimizerType, algoType);
 		
 		// set tolerance , etc...
 		min->SetMaxFunctionCalls(1000000);
@@ -105,8 +115,8 @@ namespace Fit{
 		min->SetFunction(f);
  
 		// Set the free variables to be minimized!
-		TIter next2( DataManagement::GetParameterCollection() );
-		while ( Parameter * param = (Parameter *) next2() ){
+		TIter next1( DataManagement::GetParameterCollection() );
+		while ( Parameter * param = (Parameter *) next1() ){
 			
 			if( param->IsLimited() ) {
 			
@@ -147,12 +157,87 @@ namespace Fit{
 		const double *es = min->Errors();
 		
 		// Get the  variables after the fit!
-		TIter next( DataManagement::GetParameterCollection() );
-		while ( Parameter * param = (Parameter *) next() ){
+		TIter next2( DataManagement::GetParameterCollection() );
+		while ( Parameter * param = (Parameter *) next2() ){
 			
 			param->SetValInit(xs[param->GetOrder()]);
 			param->SetValError(es[param->GetOrder()]);
 		}
+				
+		// Likelihood Scan
+		if( _DoDrawScan ) {
+		
+			TCanvas * c0 = new TCanvas("likelihood_scan", "Likelihood Scan");
+			c0->Divide(2, min->NFree()/2 + min->NFree()%2 );
+			TIter next4( DataManagement::GetParameterCollection() );
+			while ( Parameter * param = (Parameter *) next4() ){
+				
+				if(param->IsFixed()) continue;
+				
+				double x[_nStepScan], y[_nStepScan];
+				min->Scan(param->GetOrder(), _nStepScan, x, y, param->GetValInit()-10*param->GetValError(), param->GetValInit()+10*param->GetValError());
+				
+				c0->cd(param->GetOrder()+1);
+				TGraph * g = new TGraph(_nStepScan-1, x, y);
+				g->SetName(TString::Format("likelihood_scan_%s", param->GetName()));
+				g->SetTitle(TString::Format(";%s;-2*Log(L);", param->GetName()));
+				g->GetXaxis()->SetTitleOffset(3.);
+				g->Draw("ACP");
+				g->SetLineColor(kBlue);
+				g->SetLineWidth(2);
+				
+			}
+			
+		}
+		
+		// Likelihood Contour
+		if( _DoDrawContour ){ 
+			
+			TCanvas * c1 = new TCanvas("likelihood_contour", "Likelihood Contour");
+			int ncontour = ceil(TMath::Factorial(min->NFree())/(TMath::Factorial(min->NFree()-2)*TMath::Factorial(2))/2);
+			c1->Divide(2, ncontour);
+			TIter next5( DataManagement::GetParameterCollection() );
+			int counter=0;
+			while ( Parameter * param1 = (Parameter *) next5() ){
+				
+				if(param1->IsFixed()) continue;
+				
+				TIter next6( DataManagement::GetParameterCollection() );
+				while ( Parameter * param2 = (Parameter *) next6() ){
+				
+					if( param1->GetOrder() <= param2->GetOrder() )continue;
+					
+					double x[_nStepContour], y[_nStepContour];
+					min->Contour(param1->GetOrder(), param2->GetOrder(), _nStepContour, x, y);
+								
+					c1->cd(counter + 1);
+					TGraph * g = new TGraph(_nStepContour-1, x, y);
+					g->SetName(TString::Format("likelihood_contour_%s_%s", param1->GetName(), param2->GetName()));
+					g->SetTitle(TString::Format(";%s;%s;", param1->GetName(), param2->GetName()));
+					g->GetXaxis()->SetTitleOffset(3.);
+					g->Draw("ACP");
+					g->SetLineColor(kBlue);
+					g->SetLineWidth(2);
+					
+					TGraph * g_min = new TGraph(1);
+					g_min->SetPoint(1, param1->GetValInit(), param2->GetValInit());
+					g_min->Draw("Psame");
+					g_min->SetMarkerColor(kRed);
+					g_min->SetMarkerStyle(34);
+					
+					counter++;	
+				
+				}
+			}	
+		}
+		
+		// Compute the chi2
+		double dof = 0;
+		TIter next3( DataManagement::GetObservableCollection() );
+		while ( Observable * obs = (Observable *) next3() ){
+			dof += obs->GetData()->GetNbinsX();
+		} dof -= min->NFree();
+		std::cout << "CHI^2/dof = " << 2*min->MinValue() << "/" << dof << " = " << 2*min->MinValue()/dof << std::endl;	
 		
 		
 	}
