@@ -1444,7 +1444,9 @@ namespace ProcessChannel {
 			if ( el_trkSign >= 0 )											continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( nHighEnergyClusters_ != 1 )          						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( el_energy_ < 0.3 )                   						continue; hAnaCutFlow -> Fill(currentcut++);
-			if ( nNAPromptHits_ != 0 )        								continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( gmc_nNAPromptHits_[0] != 0 or 
+				 gmc_nNADelayedHits_[0] != 0 or
+				 gmc_nNANoiseHits_[0] != 0 )   								continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( gmc_int_prob_[0] < 0.04 )            						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( ext_prob > 0.01 ) 			          						continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( IsHotSpot(el_vtx_z_, vertexSector) ) 						continue; hAnaCutFlow -> Fill(currentcut++);
@@ -2143,8 +2145,10 @@ namespace ProcessChannel {
 	        //if ( gmc_energy_[0] < 0.2 || gmc_energy_[1] < 0.2  )            continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
-			if ( nNAPromptHits_ !=0)	                                    continue; hAnaCutFlow->Fill(currentcut++);
-	        if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) 	continue; hAnaCutFlow->Fill(currentcut++);
+			if ( gmc_nNAPromptHits_[0] != 0 or gmc_nNADelayedHits_[0] != 0 or
+				 gmc_nNANoiseHits_[0]  != 0 or gmc_nNAPromptHits_[1]  != 0 or
+				 gmc_nNADelayedHits_[1]!= 0 or	gmc_nNANoiseHits_[1]  != 0 ) continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) 	continue; hAnaCutFlow->Fill(currentcut++);
 	        if (
 	          !((gmc_ext_prob_g_to_e_[0] < 0.01 and gmc_ext_prob_e_to_g_[0] < 0.01) and 
 	            (gmc_ext_prob_g_to_e_[1] < 0.01 and gmc_ext_prob_e_to_g_[1] < 0.01)
@@ -2479,7 +2483,11 @@ namespace ProcessChannel {
 	        //if ( gmc_energy_[0] < 0.2 || gmc_energy_[1] < 0.2  )            continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
-			if ( nNAPromptHits_ !=0)        								continue; hAnaCutFlow->Fill(currentcut++);
+			if ( gmc_nNAPromptHits_[0]  != 0 or gmc_nNADelayedHits_[0] != 0 or
+				 gmc_nNANoiseHits_[0]   != 0 or gmc_nNAPromptHits_[1]  != 0 or
+				 gmc_nNADelayedHits_[1] != 0 or	gmc_nNANoiseHits_[1]   != 0 or 
+				 gmc_nNAPromptHits_[2]  != 0 or gmc_nNADelayedHits_[2] != 0 or 
+				gmc_nNANoiseHits_[2]    != 0)                               continue; hAnaCutFlow -> Fill(currentcut++);
 	        if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) 	continue; hAnaCutFlow->Fill(currentcut++);
 	        if (
 	          !((gmc_ext_prob_g_to_e_[0] < 0.01 and gmc_ext_prob_e_to_g_[0] < 0.01) and 
