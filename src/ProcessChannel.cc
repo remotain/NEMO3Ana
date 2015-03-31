@@ -1264,9 +1264,9 @@ namespace ProcessChannel {
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign ");
-	    cutNames->push_back("One gamma cluster with energy > 150 keV ");
+	    cutNames->push_back("One gamma cluster with energy > 200 keV ");
 	    cutNames->push_back("Energy one electron > 300 keV ");
-		cutNames->push_back("Non-associated gg hits = 0");
+		cutNames->push_back("Isolation cut");
 		cutNames->push_back("Internal probability > 0.04");
 		cutNames->push_back("Max External probability (e->g ; g->e) < 0.01");
 		cutNames->push_back("Not an hot spot");
@@ -1373,6 +1373,9 @@ namespace ProcessChannel {
 		Int_t           nNAPromptHits_           ; tree->SetBranchAddress("nNAPromptHits_"        , &nNAPromptHits_        );
 		Int_t           nNADelayedHits_          ; tree->SetBranchAddress("nNADelayedHits_"       , &nNADelayedHits_       );
 		Int_t           nNANoiseHits_            ; tree->SetBranchAddress("nNANoiseHits_"         , &nNANoiseHits_         );				
+		Int_t           nNAPromptHits_near_      ; tree->SetBranchAddress("nNAPromptHits_near_"   , &nNAPromptHits_near_   );
+		Int_t           nNADelayedHits_near_     ; tree->SetBranchAddress("nNADelayedHits_near_"  , &nNADelayedHits_near_  );
+		Int_t           nNANoiseHits_near_       ; tree->SetBranchAddress("nNANoiseHits_near_"    , &nNANoiseHits_near_    );				
 	    Int_t           nClusters_               ; tree->SetBranchAddress("nClusters_"            , &nClusters_            );
 	    Int_t           nHighEnergyClusters_     ; tree->SetBranchAddress("nHighEnergyClusters_"  , &nHighEnergyClusters_  );
 	    Int_t           gmc_nGammas_[37]         ; tree->SetBranchAddress("gmc_nGammas_"          , gmc_nGammas_           );
@@ -1440,13 +1443,13 @@ namespace ProcessChannel {
 	          gmc_ext_prob_g_to_e_[0] : gmc_ext_prob_e_to_g_[0];
 
 			// Implement selection
-		    if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
+		    if ( sectorId != 18 or IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( el_trkSign >= 0 )											continue; hAnaCutFlow -> Fill(currentcut++);
-			if ( nHighEnergyClusters_ != 1 )          						continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( nHighEnergyClusters_ != 1 or gmc_energy_[0] < 0.2)			continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( el_energy_ < 0.3 )                   						continue; hAnaCutFlow -> Fill(currentcut++);
-			if ( gmc_nNAPromptHits_[0] != 0 or 
-				 gmc_nNADelayedHits_[0] != 0 or
-				 gmc_nNANoiseHits_[0] != 0 )   								continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( !(nNAPromptHits_ <=2 and nNADelayedHits_ <=2 and
+				 nNAPromptHits_near_ == 0 and nNADelayedHits_near_ == 0 and
+				 gmc_nNAPromptHits_[0] == 0 and gmc_nNADelayedHits_[0] == 0) ) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( gmc_int_prob_[0] < 0.04 )            						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( ext_prob > 0.01 ) 			          						continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( IsHotSpot(el_vtx_z_, vertexSector) ) 						continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1957,10 +1960,10 @@ namespace ProcessChannel {
 	    cutNames->push_back("All events ");
 	    cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign ");
-	    cutNames->push_back("Two gamma cluster ");
+	    cutNames->push_back("Two gamma cluster with energy > 200 keV ");
 	    //cutNames->push_back("Energy of the gamma > 200 keV ");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
-		cutNames->push_back("Non-associated gg hits = 0");
+		cutNames->push_back("Isolation cut");
 	    cutNames->push_back("Internal Probability > 0.04");
 	    cutNames->push_back("External Probability < 0.01");
 	    //cutNames->push_back("E_e > 4.0 MeV - 1.5 * Sum E_gamma");
@@ -2077,6 +2080,9 @@ namespace ProcessChannel {
 		Int_t           nNAPromptHits_           ; tree->SetBranchAddress("nNAPromptHits_"        , &nNAPromptHits_        );
 		Int_t           nNADelayedHits_          ; tree->SetBranchAddress("nNADelayedHits_"       , &nNADelayedHits_       );
 		Int_t           nNANoiseHits_            ; tree->SetBranchAddress("nNANoiseHits_"         , &nNANoiseHits_         );
+		Int_t           nNAPromptHits_near_      ; tree->SetBranchAddress("nNAPromptHits_near_"   , &nNAPromptHits_near_   );
+		Int_t           nNADelayedHits_near_     ; tree->SetBranchAddress("nNADelayedHits_near_"  , &nNADelayedHits_near_  );
+		Int_t           nNANoiseHits_near_       ; tree->SetBranchAddress("nNANoiseHits_near_"    , &nNANoiseHits_near_    );
 		Int_t           nClusters_               ; tree->SetBranchAddress("nClusters_"            , &nClusters_            );
 	    Int_t           nHighEnergyClusters_     ; tree->SetBranchAddress("nHighEnergyClusters_"  , &nHighEnergyClusters_  );
 	    Int_t           gmc_nGammas_[37]         ; tree->SetBranchAddress("gmc_nGammas_"          , gmc_nGammas_           );
@@ -2139,15 +2145,16 @@ namespace ProcessChannel {
 			unsigned int currentcut = 0;
 			hAnaCutFlow -> Fill(currentcut++);
 
-	        if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( sectorId != 18 or IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow->Fill(currentcut++);
 			if ( el_trkSign >=0 ) 											continue; hAnaCutFlow->Fill(currentcut++);
-	        if ( nHighEnergyClusters_ != 2  )                               continue; hAnaCutFlow->Fill(currentcut++);
-	        //if ( gmc_energy_[0] < 0.2 || gmc_energy_[1] < 0.2  )            continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( nHighEnergyClusters_ != 2 or
+				 gmc_energy_[0] < 0.2 or gmc_energy_[1] < 0.2 )             continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
-			if ( gmc_nNAPromptHits_[0] != 0 or gmc_nNADelayedHits_[0] != 0 or
-				 gmc_nNANoiseHits_[0]  != 0 or gmc_nNAPromptHits_[1]  != 0 or
-				 gmc_nNADelayedHits_[1]!= 0 or	gmc_nNANoiseHits_[1]  != 0 ) continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( !(nNAPromptHits_ <=2 and nNADelayedHits_ <=2 and
+				 nNAPromptHits_near_ == 0 and nNADelayedHits_near_ == 0 and
+				 gmc_nNAPromptHits_[0] == 0 and gmc_nNADelayedHits_[0] == 0 and
+			     gmc_nNAPromptHits_[1] == 0 and gmc_nNADelayedHits_[1] == 0)) continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) 	continue; hAnaCutFlow->Fill(currentcut++);
 	        if (
 	          !((gmc_ext_prob_g_to_e_[0] < 0.01 and gmc_ext_prob_e_to_g_[0] < 0.01) and 
@@ -2309,10 +2316,10 @@ namespace ProcessChannel {
 	    cutNames->push_back("All events ");
 	    cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign ");
-	    cutNames->push_back("Three gamma cluster ");
+	    cutNames->push_back("Three gamma cluster with energy > 200 keV");
 	    //cutNames->push_back("Energy of the gamma > 200 keV ");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
-		cutNames->push_back("Non-associated gg hits = 0");
+		cutNames->push_back("Isolation cut");
 	    cutNames->push_back("Internal Probability > 0.04");
 	    cutNames->push_back("External Probability < 0.01");
 	    //cutNames->push_back("E_e > 4.0 MeV - 1.5 * Sum E_gamma");
@@ -2415,6 +2422,9 @@ namespace ProcessChannel {
 		Int_t           nNAPromptHits_           ; tree->SetBranchAddress("nNAPromptHits_"        , &nNAPromptHits_        );
 		Int_t           nNADelayedHits_          ; tree->SetBranchAddress("nNADelayedHits_"       , &nNADelayedHits_       );
 		Int_t           nNANoiseHits_            ; tree->SetBranchAddress("nNANoiseHits_"         , &nNANoiseHits_         );
+		Int_t           nNAPromptHits_near_      ; tree->SetBranchAddress("nNAPromptHits_near_"   , &nNAPromptHits_near_   );
+		Int_t           nNADelayedHits_near_     ; tree->SetBranchAddress("nNADelayedHits_near_"  , &nNADelayedHits_near_  );
+		Int_t           nNANoiseHits_near_       ; tree->SetBranchAddress("nNANoiseHits_near_"    , &nNANoiseHits_near_    );
 		Int_t           nClusters_               ; tree->SetBranchAddress("nClusters_"            , &nClusters_            );
 	    Int_t           nHighEnergyClusters_     ; tree->SetBranchAddress("nHighEnergyClusters_"  , &nHighEnergyClusters_  );
 	    Int_t           gmc_nGammas_[37]         ; tree->SetBranchAddress("gmc_nGammas_"          , gmc_nGammas_           );
@@ -2479,15 +2489,15 @@ namespace ProcessChannel {
 
 	        if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow->Fill(currentcut++);
 			if ( el_trkSign >=0 ) 											continue; hAnaCutFlow->Fill(currentcut++);
-	        if ( nHighEnergyClusters_ != 3  )                               continue; hAnaCutFlow->Fill(currentcut++);
-	        //if ( gmc_energy_[0] < 0.2 || gmc_energy_[1] < 0.2  )            continue; hAnaCutFlow->Fill(currentcut++);
+	        if ( nHighEnergyClusters_ != 3  or gmc_energy_[0] < 0.2 or 
+				gmc_energy_[1] < 0.2  or gmc_energy_[2] < 0.2)              continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
-			if ( gmc_nNAPromptHits_[0]  != 0 or gmc_nNADelayedHits_[0] != 0 or
-				 gmc_nNANoiseHits_[0]   != 0 or gmc_nNAPromptHits_[1]  != 0 or
-				 gmc_nNADelayedHits_[1] != 0 or	gmc_nNANoiseHits_[1]   != 0 or 
-				 gmc_nNAPromptHits_[2]  != 0 or gmc_nNADelayedHits_[2] != 0 or 
-				gmc_nNANoiseHits_[2]    != 0)                               continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( !(nNAPromptHits_ <=2 and nNADelayedHits_ <=2 and
+				 nNAPromptHits_near_ == 0 and nNADelayedHits_near_ == 0 and
+				 gmc_nNAPromptHits_[0] == 0 and gmc_nNADelayedHits_[0] == 0 and
+			     gmc_nNAPromptHits_[1] == 0 and gmc_nNADelayedHits_[1] == 0 and
+				 gmc_nNAPromptHits_[2] == 0 and gmc_nNADelayedHits_[2] == 0) ) continue; hAnaCutFlow -> Fill(currentcut++);
 	        if ( !(gmc_int_prob_[0] > 0.04 and gmc_int_prob_[1] > 0.04)) 	continue; hAnaCutFlow->Fill(currentcut++);
 	        if (
 	          !((gmc_ext_prob_g_to_e_[0] < 0.01 and gmc_ext_prob_e_to_g_[0] < 0.01) and 
