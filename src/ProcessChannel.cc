@@ -537,7 +537,14 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nCloseDelayedHits"      , d->GetName()) , "; N. close delayed hits; No.Events", 21, -0.5, 20.5                 ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nFarDelayedClusters"    , d->GetName()) , "; N. far delayed clusters; No.Events", 21, -0.5, 20.5               ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nCloseDelayedCslusters" , d->GetName()) , "; N. close delayed clusters; No.Events", 21, -0.5, 20.5             ) );
+
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1"        , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1"        , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1"            , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2"        , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2"        , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2"            , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_SS_In"  , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_SS_In"  , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
@@ -797,8 +804,12 @@ namespace ProcessChannel {
 		    double tot_e = el_energy_[0] + el_energy_[1];
 			
 		    if (run < 3396) {
+
 		      	
-		        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1", d->GetName()) ) -> Fill(tot_e , weight);
+				histo_collection->Find(TString::Format("%s_h_min_e_energy_P1" , d->GetName()) ) -> Fill(el_energy_min , weight);
+				histo_collection->Find(TString::Format("%s_h_max_e_energy_P1" , d->GetName()) ) -> Fill(el_energy_max , weight);
+				histo_collection->Find(TString::Format("%s_h_cosTheta_P1"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+		        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1" , d->GetName()) ) -> Fill(tot_e         , weight);
 
 		        if (el_side_[0] == el_side_[1]) {
 					if (el_side_[0] == 0) {
@@ -812,7 +823,10 @@ namespace ProcessChannel {
 
 		    } else {
 				
-				histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2", d->GetName()) ) -> Fill(tot_e , weight);
+				histo_collection->Find(TString::Format("%s_h_min_e_energy_P2" , d->GetName()) ) -> Fill(el_energy_min , weight);
+				histo_collection->Find(TString::Format("%s_h_max_e_energy_P2" , d->GetName()) ) -> Fill(el_energy_max , weight);
+				histo_collection->Find(TString::Format("%s_h_cosTheta_P2"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+		        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2" , d->GetName()) ) -> Fill(tot_e         , weight);
 
 		        if (el_side_[0] == el_side_[1]) {
 		          if (el_side_[0] == 0) {

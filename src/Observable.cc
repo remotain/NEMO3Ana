@@ -43,8 +43,7 @@ void Observable::Draw(Option_t* option){
 	else 
 		leg->SetNColumns(3);
 	
-	double tot_evt_mc ,tot_evt_mc_err = 0.;
-	leg->AddEntry(_Data, TString::Format("%s (%0.f evt.)", "Data", _Data->Integral() ), "PL");
+	double tot_evt_mc =0.; double tot_evt_mc_err = 0.;
 	
 	// Loop Over Component collection
 	//TMapIter next( _ComponentMap,  kIterForward);
@@ -78,20 +77,21 @@ void Observable::Draw(Option_t* option){
 			tot_evt_mc += GetComponentNumEvent(comp,err);
 			tot_evt_mc_err += err*err;
 		}
-				
-		leg->AddEntry(h_comp, TString::Format("%s (%.1f #pm %.1f evt.)", comp->GetTitle(), GetComponentNumEvent(comp,err), err ), "F");
-	
+		
+		if( GetComponentNumEvent(comp,err) != 0. ) {		
+			leg->AddEntry(h_comp, TString::Format("%s (%.1f #pm %.1f evt.)", comp->GetTitle(), GetComponentNumEvent(comp,err), err ), "F");
+		}
 	}
 	
 	tot_evt_mc_err = TMath::Sqrt(tot_evt_mc_err);
 	
-
+	leg->AddEntry(_Data, TString::Format("%s (%0.f evt.)", "Data", _Data->Integral() ), "PL");
 	leg->AddEntry((TObject*) 0, TString::Format("Total MC (%0.f #pm %0.f evt.)", tot_evt_mc, tot_evt_mc_err), "");
 
 	// Original ROOT chi2 calculation
-	_chi2 = 0; _ndf = 0;
-	_Data->Chi2TestX(hsum, _chi2, _ndf, _igood, "UU") ;
-	leg->AddEntry((TObject*) 0, TString::Format("#chi^2/dof (%.1f/%d)", _chi2, _ndf), "");
+	//_chi2 = 0; _ndf = 0;
+	//_Data->Chi2TestX(hsum, _chi2, _ndf, _igood, "UU") ;
+	//leg->AddEntry((TObject*) 0, TString::Format("#chi^2/dof (%.1f/%d)", _chi2, _ndf), "");
 
 	// My own chi2 calculation
 	//Chi2Test(_Data, hsum, _chi2, _ndf);
