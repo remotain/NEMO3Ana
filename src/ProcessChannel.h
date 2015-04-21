@@ -12,7 +12,7 @@ namespace ProcessChannel {
 	void SetInputTreeName  (TString & s);
 	void SetOutputFilePath (TString & s);
 	void SetOutputFileName (TString & s);
-	
+		
 	TString GetInputFilePath  ();
 	TString GetInputFileName  ();
 	TString GetInputDirName   ();
@@ -20,6 +20,10 @@ namespace ProcessChannel {
 	TString GetOutputFilePath ();
 	TString GetOutputFileName ();
 	
+	void SetFirstRunNumber ( int run );
+	void SetLastRunNumber  ( int run );
+	bool CheckRunNumber    ( int run );
+		
 	enum ChannelType_t {
 		kOneElectron                   , 
 		kTwoElectronInternal           ,
