@@ -647,6 +647,7 @@ namespace ProcessChannel {
 	    Double_t  el_ip_x_[2]                 ; tree->SetBranchAddress("el_ip_x_"                    , el_ip_x_                     );
 	    Double_t  el_ip_y_[2]                 ; tree->SetBranchAddress("el_ip_y_"                    , el_ip_y_                     );
 	    Double_t  el_ip_z_[2]                 ; tree->SetBranchAddress("el_ip_z_"                    , el_ip_z_                     );
+	    Int_t     el_n_neighbours_[2]         ; tree->SetBranchAddress("el_n_neighbours_"            , el_n_neighbours_             );
 	    Int_t     nGammas                     ; tree->SetBranchAddress("nGammas"                     , &nGammas                     );
 	    Int_t     nLowEnergyGammas            ; tree->SetBranchAddress("nLowEnergyGammas"            , &nLowEnergyGammas            );
 	    Int_t     nHighEnergyGammas           ; tree->SetBranchAddress("nHighEnergyGammas"           , &nHighEnergyGammas           );
@@ -1302,7 +1303,7 @@ namespace ProcessChannel {
 		cutNames->push_back("Negative track sign ");
 	    cutNames->push_back("One gamma cluster with energy > 200 keV ");
 	    cutNames->push_back("Energy one electron > 300 keV ");
-		//cutNames->push_back("Isolation cut");
+		cutNames->push_back("Electrons hit isolated block");
 		cutNames->push_back("Internal probability > 0.04");
 		cutNames->push_back("Max External probability (e->g ; g->e) < 0.01");
 		cutNames->push_back("Not an hot spot");
@@ -1400,6 +1401,11 @@ namespace ProcessChannel {
 	    Double_t        el_ip_x_                 ; tree->SetBranchAddress("el_ip_x_"              , &el_ip_x_              );
 	    Double_t        el_ip_y_                 ; tree->SetBranchAddress("el_ip_y_"              , &el_ip_y_              );
 	    Double_t        el_ip_z_                 ; tree->SetBranchAddress("el_ip_z_"              , &el_ip_z_              );
+	    Int_t           el_first_hit_layer       ; tree->SetBranchAddress(" el_first_hit_layer   ", &el_first_hit_layer    );
+	    Int_t           el_secnd_hit_layer       ; tree->SetBranchAddress(" el_secnd_hit_layer   ", &el_secnd_hit_layer    );
+	    Int_t           el_last_hit_layer        ; tree->SetBranchAddress(" el_last_hit_layer    ", &el_last_hit_layer     );
+	    Int_t           el_nxt_last_hit_layer    ; tree->SetBranchAddress(" el_nxt_last_hit_layer", &el_nxt_last_hit_layer );
+	    Int_t           el_n_neighbours_         ; tree->SetBranchAddress(" el_n_neighbours_     ", &el_n_neighbours_      );
 	    Double_t        trueVertexSector         ; tree->SetBranchAddress("trueVertexSector"      , &trueVertexSector      );
 	    Int_t           trueVertexLayer          ; tree->SetBranchAddress("trueVertexLayer"       , &trueVertexLayer       );
 	    Double_t        trueSectorId             ; tree->SetBranchAddress("trueSectorId"          , &trueSectorId          );
@@ -1484,6 +1490,7 @@ namespace ProcessChannel {
 			if ( el_trkSign >= 0 )											continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( nHighEnergyClusters_ != 1 or gmc_energy_[0] < 0.2)			continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( el_energy_ < 0.3 )                   						continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( el_n_neighbours_ != 0 ) 									continue; hAnaCutFlow -> Fill(currentcut++);
 			//if ( !(nNAPromptHits_ <=2 and nNADelayedHits_ <=2 and
 			//	 nNAPromptHits_near_ == 0 and nNADelayedHits_near_ == 0 and
 			//	 gmc_nNAPromptHits_[0] == 0 and gmc_nNADelayedHits_[0] == 0) ) continue; hAnaCutFlow -> Fill(currentcut++);
@@ -2000,7 +2007,7 @@ namespace ProcessChannel {
 		cutNames->push_back("Negative track sign ");
 	    cutNames->push_back("Two gamma cluster with energy > 200 keV ");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
-		//cutNames->push_back("Isolation cut");
+		cutNames->push_back("The electron hit isolated block");
 	    cutNames->push_back("Internal Probability > 0.04");
 	    cutNames->push_back("External Probability < 0.01");
 	    //cutNames->push_back("E_e > 4.0 MeV - 1.5 * Sum E_gamma");
@@ -2108,6 +2115,11 @@ namespace ProcessChannel {
 	    Double_t        el_ip_x_                 ; tree->SetBranchAddress("el_ip_x_"              , &el_ip_x_              );
 	    Double_t        el_ip_y_                 ; tree->SetBranchAddress("el_ip_y_"              , &el_ip_y_              );
 	    Double_t        el_ip_z_                 ; tree->SetBranchAddress("el_ip_z_"              , &el_ip_z_              );
+	    Int_t           el_first_hit_layer       ; tree->SetBranchAddress(" el_first_hit_layer   ", &el_first_hit_layer    );
+	    Int_t           el_secnd_hit_layer       ; tree->SetBranchAddress(" el_secnd_hit_layer   ", &el_secnd_hit_layer    );
+	    Int_t           el_last_hit_layer        ; tree->SetBranchAddress(" el_last_hit_layer    ", &el_last_hit_layer     );
+	    Int_t           el_nxt_last_hit_layer    ; tree->SetBranchAddress(" el_nxt_last_hit_layer", &el_nxt_last_hit_layer );
+	    Int_t           el_n_neighbours_         ; tree->SetBranchAddress(" el_n_neighbours_     ", &el_n_neighbours_      );
 	    Double_t        trueVertexSector         ; tree->SetBranchAddress("trueVertexSector"      , &trueVertexSector      );
 	    Int_t           trueVertexLayer          ; tree->SetBranchAddress("trueVertexLayer"       , &trueVertexLayer       );
 	    Double_t        trueSectorId             ; tree->SetBranchAddress("trueSectorId"          , &trueSectorId          );
@@ -2116,11 +2128,11 @@ namespace ProcessChannel {
 	    Double_t        totELowEnergyClusters    ; tree->SetBranchAddress("totELowEnergyClusters" , &totELowEnergyClusters );
 		Int_t           nNAPromptHits_           ; tree->SetBranchAddress("nNAPromptHits_"        , &nNAPromptHits_        );
 		Int_t           nNADelayedHits_          ; tree->SetBranchAddress("nNADelayedHits_"       , &nNADelayedHits_       );
-		Int_t           nNANoiseHits_            ; tree->SetBranchAddress("nNANoiseHits_"         , &nNANoiseHits_         );
+		Int_t           nNANoiseHits_            ; tree->SetBranchAddress("nNANoiseHits_"         , &nNANoiseHits_         );				
 		Int_t           nNAPromptHits_near_      ; tree->SetBranchAddress("nNAPromptHits_near_"   , &nNAPromptHits_near_   );
 		Int_t           nNADelayedHits_near_     ; tree->SetBranchAddress("nNADelayedHits_near_"  , &nNADelayedHits_near_  );
-		Int_t           nNANoiseHits_near_       ; tree->SetBranchAddress("nNANoiseHits_near_"    , &nNANoiseHits_near_    );
-		Int_t           nClusters_               ; tree->SetBranchAddress("nClusters_"            , &nClusters_            );
+		Int_t           nNANoiseHits_near_       ; tree->SetBranchAddress("nNANoiseHits_near_"    , &nNANoiseHits_near_    );				
+	    Int_t           nClusters_               ; tree->SetBranchAddress("nClusters_"            , &nClusters_            );
 	    Int_t           nHighEnergyClusters_     ; tree->SetBranchAddress("nHighEnergyClusters_"  , &nHighEnergyClusters_  );
 	    Int_t           gmc_nGammas_[37]         ; tree->SetBranchAddress("gmc_nGammas_"          , gmc_nGammas_           );
 	    Double_t        gmc_energy_[37]          ; tree->SetBranchAddress("gmc_energy_"           , gmc_energy_            );
@@ -2146,7 +2158,7 @@ namespace ProcessChannel {
 		Int_t           gmc_nNAPromptHits_[37]   ; tree->SetBranchAddress("gmc_nNAPromptHits_"    , gmc_nNAPromptHits_     );
 		Int_t           gmc_nNADelayedHits_[37]  ; tree->SetBranchAddress("gmc_nNADelayedHits_"   , gmc_nNADelayedHits_    );
 		Int_t           gmc_nNANoiseHits_[37]    ; tree->SetBranchAddress("gmc_nNANoiseHits_"     , gmc_nNANoiseHits_      );
-		Double_t        gmc_first_g_time_[37]    ; tree->SetBranchAddress("gmc_first_g_time_"     , gmc_first_g_time_      );
+	    Double_t        gmc_first_g_time_[37]    ; tree->SetBranchAddress("gmc_first_g_time_"     , gmc_first_g_time_      );
 	    Double_t        gmc_first_g_d_time_[37]  ; tree->SetBranchAddress("gmc_first_g_d_time_"   , gmc_first_g_d_time_    );
 	    Double_t        gmc_first_g_x_[37]       ; tree->SetBranchAddress("gmc_first_g_x_"        , gmc_first_g_x_         );
 	    Double_t        gmc_first_g_y_[37]       ; tree->SetBranchAddress("gmc_first_g_y_"        , gmc_first_g_y_         );
@@ -2160,7 +2172,7 @@ namespace ProcessChannel {
 	    Double_t        gmc_ext_c_sq_e_to_g_[37] ; tree->SetBranchAddress("gmc_ext_c_sq_e_to_g_"  , gmc_ext_c_sq_e_to_g_   );
 	    Double_t        gmc_ext_prob_e_to_g_[37] ; tree->SetBranchAddress("gmc_ext_prob_e_to_g_"  , gmc_ext_prob_e_to_g_   );
 	    Double_t        cosTheta_[37]            ; tree->SetBranchAddress("cosTheta_"             , cosTheta_              );
-
+		
 	    TVector3* eVertex    = new TVector3(0,0,0) ; tree->SetBranchAddress("eVertex", &eVertex);
 	    TVector3* trueVertex = new TVector3(0,0,0) ; tree->SetBranchAddress("trueVertex", &trueVertex);
 		
@@ -2188,6 +2200,7 @@ namespace ProcessChannel {
 				 gmc_energy_[0] < 0.2 or gmc_energy_[1] < 0.2 )             continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
+			if ( el_n_neighbours_ != 0 ) 									continue; hAnaCutFlow->Fill(currentcut++);
 			//if ( !(nNAPromptHits_ <=2 and nNADelayedHits_ <=2 and
 			//	 nNAPromptHits_near_ == 0 and nNADelayedHits_near_ == 0 and
 			//	 gmc_nNAPromptHits_[0] == 0 and gmc_nNADelayedHits_[0] == 0 and
@@ -2356,7 +2369,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("Three gamma cluster with energy > 200 keV");
 	    //cutNames->push_back("Energy of the gamma > 200 keV ");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
-		//cutNames->push_back("Isolation cut");
+		cutNames->push_back("The electron hit isolated block");
 	    cutNames->push_back("Internal Probability > 0.04");
 	    cutNames->push_back("External Probability < 0.01");
 	    //cutNames->push_back("E_e > 4.0 MeV - 1.5 * Sum E_gamma");
@@ -2450,6 +2463,11 @@ namespace ProcessChannel {
 	    Double_t        el_ip_x_                 ; tree->SetBranchAddress("el_ip_x_"              , &el_ip_x_              );
 	    Double_t        el_ip_y_                 ; tree->SetBranchAddress("el_ip_y_"              , &el_ip_y_              );
 	    Double_t        el_ip_z_                 ; tree->SetBranchAddress("el_ip_z_"              , &el_ip_z_              );
+	    Int_t           el_first_hit_layer       ; tree->SetBranchAddress(" el_first_hit_layer   ", &el_first_hit_layer    );
+	    Int_t           el_secnd_hit_layer       ; tree->SetBranchAddress(" el_secnd_hit_layer   ", &el_secnd_hit_layer    );
+	    Int_t           el_last_hit_layer        ; tree->SetBranchAddress(" el_last_hit_layer    ", &el_last_hit_layer     );
+	    Int_t           el_nxt_last_hit_layer    ; tree->SetBranchAddress(" el_nxt_last_hit_layer", &el_nxt_last_hit_layer );
+	    Int_t           el_n_neighbours_         ; tree->SetBranchAddress(" el_n_neighbours_     ", &el_n_neighbours_      );
 	    Double_t        trueVertexSector         ; tree->SetBranchAddress("trueVertexSector"      , &trueVertexSector      );
 	    Int_t           trueVertexLayer          ; tree->SetBranchAddress("trueVertexLayer"       , &trueVertexLayer       );
 	    Double_t        trueSectorId             ; tree->SetBranchAddress("trueSectorId"          , &trueSectorId          );
@@ -2458,11 +2476,11 @@ namespace ProcessChannel {
 	    Double_t        totELowEnergyClusters    ; tree->SetBranchAddress("totELowEnergyClusters" , &totELowEnergyClusters );
 		Int_t           nNAPromptHits_           ; tree->SetBranchAddress("nNAPromptHits_"        , &nNAPromptHits_        );
 		Int_t           nNADelayedHits_          ; tree->SetBranchAddress("nNADelayedHits_"       , &nNADelayedHits_       );
-		Int_t           nNANoiseHits_            ; tree->SetBranchAddress("nNANoiseHits_"         , &nNANoiseHits_         );
+		Int_t           nNANoiseHits_            ; tree->SetBranchAddress("nNANoiseHits_"         , &nNANoiseHits_         );				
 		Int_t           nNAPromptHits_near_      ; tree->SetBranchAddress("nNAPromptHits_near_"   , &nNAPromptHits_near_   );
 		Int_t           nNADelayedHits_near_     ; tree->SetBranchAddress("nNADelayedHits_near_"  , &nNADelayedHits_near_  );
-		Int_t           nNANoiseHits_near_       ; tree->SetBranchAddress("nNANoiseHits_near_"    , &nNANoiseHits_near_    );
-		Int_t           nClusters_               ; tree->SetBranchAddress("nClusters_"            , &nClusters_            );
+		Int_t           nNANoiseHits_near_       ; tree->SetBranchAddress("nNANoiseHits_near_"    , &nNANoiseHits_near_    );				
+	    Int_t           nClusters_               ; tree->SetBranchAddress("nClusters_"            , &nClusters_            );
 	    Int_t           nHighEnergyClusters_     ; tree->SetBranchAddress("nHighEnergyClusters_"  , &nHighEnergyClusters_  );
 	    Int_t           gmc_nGammas_[37]         ; tree->SetBranchAddress("gmc_nGammas_"          , gmc_nGammas_           );
 	    Double_t        gmc_energy_[37]          ; tree->SetBranchAddress("gmc_energy_"           , gmc_energy_            );
@@ -2488,7 +2506,7 @@ namespace ProcessChannel {
 		Int_t           gmc_nNAPromptHits_[37]   ; tree->SetBranchAddress("gmc_nNAPromptHits_"    , gmc_nNAPromptHits_     );
 		Int_t           gmc_nNADelayedHits_[37]  ; tree->SetBranchAddress("gmc_nNADelayedHits_"   , gmc_nNADelayedHits_    );
 		Int_t           gmc_nNANoiseHits_[37]    ; tree->SetBranchAddress("gmc_nNANoiseHits_"     , gmc_nNANoiseHits_      );
-		Double_t        gmc_first_g_time_[37]    ; tree->SetBranchAddress("gmc_first_g_time_"     , gmc_first_g_time_      );
+	    Double_t        gmc_first_g_time_[37]    ; tree->SetBranchAddress("gmc_first_g_time_"     , gmc_first_g_time_      );
 	    Double_t        gmc_first_g_d_time_[37]  ; tree->SetBranchAddress("gmc_first_g_d_time_"   , gmc_first_g_d_time_    );
 	    Double_t        gmc_first_g_x_[37]       ; tree->SetBranchAddress("gmc_first_g_x_"        , gmc_first_g_x_         );
 	    Double_t        gmc_first_g_y_[37]       ; tree->SetBranchAddress("gmc_first_g_y_"        , gmc_first_g_y_         );
@@ -2502,7 +2520,7 @@ namespace ProcessChannel {
 	    Double_t        gmc_ext_c_sq_e_to_g_[37] ; tree->SetBranchAddress("gmc_ext_c_sq_e_to_g_"  , gmc_ext_c_sq_e_to_g_   );
 	    Double_t        gmc_ext_prob_e_to_g_[37] ; tree->SetBranchAddress("gmc_ext_prob_e_to_g_"  , gmc_ext_prob_e_to_g_   );
 	    Double_t        cosTheta_[37]            ; tree->SetBranchAddress("cosTheta_"             , cosTheta_              );
-
+		
 	    TVector3* eVertex    = new TVector3(0,0,0) ; tree->SetBranchAddress("eVertex", &eVertex);
 	    TVector3* trueVertex = new TVector3(0,0,0) ; tree->SetBranchAddress("trueVertex", &trueVertex);
 		
@@ -2530,6 +2548,7 @@ namespace ProcessChannel {
 				gmc_energy_[1] < 0.2  or gmc_energy_[2] < 0.2)              continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( isInHotSpot)                                            	continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( el_energy_   < 0.3)                                     	continue; hAnaCutFlow->Fill(currentcut++);
+			if ( el_n_neighbours_ != 0 ) 									continue; hAnaCutFlow -> Fill(currentcut++);
 			//if ( !(nNAPromptHits_ <=2 and nNADelayedHits_ <=2 and
 			//	 nNAPromptHits_near_ == 0 and nNADelayedHits_near_ == 0 and
 			//	 gmc_nNAPromptHits_[0] == 0 and gmc_nNADelayedHits_[0] == 0 and

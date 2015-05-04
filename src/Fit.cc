@@ -46,10 +46,10 @@ namespace Fit{
 				
 				// Compute normalisation
 				double norm = 0.0;
-				if( comp->GetParameter() == 0 ){
-					norm = comp->GetAdjustment() * DataManagement::GetTotalLiveTime( ) / comp->GetDataSet()->GetGeneratedEvents();	
-				} else { 
+				if( comp->GetParameter() ){
 					 norm = comp->GetAdjustment() * x[comp->GetParameter()->GetOrder()] * DataManagement::GetTotalLiveTime( ) / comp->GetDataSet()->GetGeneratedEvents();
+				} else { 
+					norm = comp->GetAdjustment() * DataManagement::GetTotalLiveTime( ) / comp->GetDataSet()->GetGeneratedEvents();	
 				}
 				// Add histogram to the sum
 				h_mc->Add(h_comp, norm);

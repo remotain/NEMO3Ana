@@ -87,4 +87,11 @@ namespace DataManagement{
 	Parameter * FindParameter(const char * name) { return (Parameter *) _ParameterCollection->FindObject(name); };
     THashList * GetParameterCollection() { return _ParameterCollection; };
 
+	// Component collection
+	THashList * _GroupCollection = new THashList();
+	void AddGroup( Group * tmp){ _GroupCollection->Add(tmp); };
+	Group * FindGroup(const char * name) { return (Group *) _GroupCollection->FindObject(name); };
+    THashList * GetGroupCollection() { return _GroupCollection; };
+
+
 }

@@ -29,58 +29,129 @@ double Observable::GetComponentNumEvent(Component * c, double &err) {
 
 };
 
-
 void Observable::Draw(Option_t* option){
 	
 	THStack * stack = new THStack( TString::Format("stack_%s",GetName()), GetTitle() );
 	TH1D * hsum = (TH1D*) _Data->Clone(TString::Format("hadd_%s",_Data->GetName())); 
 	hsum->Reset();
 	
-	TLegend * leg = new TLegend(0.05, 0.6, 0.95, .90);
-	
-	if(_ComponentList->GetEntries() < 8 )
-		leg->SetNColumns(2);
-	else 
-		leg->SetNColumns(3);
+	TLegend * leg = new TLegend(0.05, 0.6, 0.95, .90);	
 	
 	double tot_evt_mc =0.; double tot_evt_mc_err = 0.;
-	
-	// Loop Over Component collection
-	//TMapIter next( _ComponentMap,  kIterForward);
-	TIter next( _ComponentList,  kIterForward);
-	while ( Component * comp = (Component *) next() ){ 
-	
-		TH1D * h_comp = (TH1D*) _ComponentMap->GetValue(comp);
-		h_comp->SetFillColor( comp->GetFillColor() );
-		h_comp->SetLineColor( comp->GetLineColor() );
-		h_comp->SetLineWidth(1);
-		TH1D * tmp = (TH1D*) h_comp->Clone( TString::Format("tmp_%s", h_comp->GetName() ) );
-		tmp->Scale( comp->GetNorm() );
 
-		//std::cout << comp->GetName() << " " << comp->GetNorm() << " " << comp->GetNormErr() << std::endl;
+	int num_comp = 0;
+
+	if( _GroupList && _DrawGroup){
+		
+		if(_GroupList->GetEntries() < 8 ) leg->SetNColumns(2);
+		else leg->SetNColumns(3);
+		
+		
+		TIter next1( _GroupList,  kIterForward);
+		while ( Group * group = (Group *) next1() ){ 
+		
+			//Info("Draw()", "Draw group %s", group->GetName() ); 
+		
+			double g_tot_evt = 0.;
+			double g_tot_err = 0.;
 			
-		// Renormalise the errors
-		for (unsigned int i = 1; i <= tmp->GetNbinsX(); i++){
-			if(h_comp->GetBinContent(i) != 0 and comp->GetNorm() != 0){
-				double tmp_err = tmp->GetBinContent(i)*TMath::Sqrt( TMath::Power(h_comp->GetBinError(i)/h_comp->GetBinContent(i),2) + TMath::Power(comp->GetNormErr()/comp->GetNorm(),2) );
-				tmp->SetBinError(i, tmp_err);
-				//std::cout << i << " " << tmp->GetBinContent(i) << " " << tmp->GetBinError(i) << std::endl; 
-			} 
-		}
-			
-		stack->Add(tmp);
-		hsum->Add(tmp);
+			TH1D * gsum = (TH1D*) _Data->Clone(TString::Format("hadd_%s", group->GetName())); 
+			gsum->Reset();
+			gsum->SetFillColor( group->GetFillColor() );
+			gsum->SetLineColor( group->GetLineColor() );
+			gsum->SetLineWidth(1);			
+					
+			TIter next2( group->GetComponentList(),  kIterForward);
+			while ( Component * comp = (Component *) next2() ){ 
+								
+				TH1D * h_comp = (TH1D*) _ComponentMap->GetValue(comp->GetName());
+    			
+				//Info("Draw()", "Draw component %s", comp->GetName() ); 
 				
-		double err = 0.;
-		
-		if ( GetComponentNumEvent(comp,err) != 0 ){	
-			tot_evt_mc += GetComponentNumEvent(comp,err);
-			tot_evt_mc_err += err*err;
+				if ( !h_comp ) {
+					Warning("Draw()", "Don't find component histogram for %s", comp->GetName() ); 
+					continue;
+    			}	
+							
+				TH1D * tmp = (TH1D*) h_comp->Clone( TString::Format("tmp_%s", h_comp->GetName() ) );
+				tmp->Scale( comp->GetNorm() );
+				//std::cout << comp->GetName() << " " << comp->GetNorm() << " " << comp->GetNormErr() << std::endl;
+				
+				// Renormalise the errors
+				for (unsigned int i = 1; i <= tmp->GetNbinsX(); i++){
+					if(h_comp->GetBinContent(i) != 0 and comp->GetNorm() != 0){
+						double tmp_err = tmp->GetBinContent(i)*TMath::Sqrt( TMath::Power(h_comp->GetBinError(i)/h_comp->GetBinContent(i),2) + TMath::Power(comp->GetNormErr()/comp->GetNorm(),2) );
+						tmp->SetBinError(i, tmp_err);
+						//std::cout << i << " " << tmp->GetBinContent(i) << " " << tmp->GetBinError(i) << std::endl; 
+					} 
+				}
+						
+				gsum->Add(tmp);
+				
+				double err = 0.;
+				
+				if ( GetComponentNumEvent(comp,err) != 0 ){	
+					tot_evt_mc += GetComponentNumEvent(comp,err);
+					tot_evt_mc_err += err*err;
+					
+					g_tot_evt += GetComponentNumEvent(comp,err);
+					g_tot_err += err*err;
+					
+				}
+			}			
+				
+			stack->Add(gsum);
+			hsum->Add(gsum,1);
+				
+			g_tot_err = TMath::Sqrt(g_tot_err);	
+							
+			leg->AddEntry(gsum, TString::Format("%s (%.1f #pm %.1f evt.)", group->GetTitle(), g_tot_evt, g_tot_err ), "F");
+			
 		}
+					
+	} else {
+	
+		if(_ComponentList->GetEntries() < 8 ) leg->SetNColumns(2);
+		else leg->SetNColumns(3);
+	
+		// Loop Over Component collection
+		//TMapIter next( _ComponentMap,  kIterForward);
+		TIter next( _ComponentList,  kIterForward);
+		while ( Component * comp = (Component *) next() ){ 
 		
-		if( GetComponentNumEvent(comp,err) != 0. ) {		
-			leg->AddEntry(h_comp, TString::Format("%s (%.1f #pm %.1f evt.)", comp->GetTitle(), GetComponentNumEvent(comp,err), err ), "F");
+			TH1D * h_comp = (TH1D*) _ComponentMap->GetValue(comp);
+			h_comp->SetFillColor( comp->GetFillColor() );
+			h_comp->SetLineColor( comp->GetLineColor() );
+			h_comp->SetLineWidth(1);
+			TH1D * tmp = (TH1D*) h_comp->Clone( TString::Format("tmp_%s", h_comp->GetName() ) );
+			tmp->Scale( comp->GetNorm() );
+			//std::cout << comp->GetName() << " " << comp->GetNorm() << " " << comp->GetNormErr() << std::endl;
+				
+			// Renormalise the errors
+			for (unsigned int i = 1; i <= tmp->GetNbinsX(); i++){
+				if(h_comp->GetBinContent(i) != 0 and comp->GetNorm() != 0){
+					double tmp_err = tmp->GetBinContent(i)*TMath::Sqrt( TMath::Power(h_comp->GetBinError(i)/h_comp->GetBinContent(i),2) + TMath::Power(comp->GetNormErr()/comp->GetNorm(),2) );
+					tmp->SetBinError(i, tmp_err);
+					//std::cout << i << " " << tmp->GetBinContent(i) << " " << tmp->GetBinError(i) << std::endl; 
+				} 
+			}
+				
+			stack->Add(tmp);
+			hsum->Add(tmp);
+			
+			double err = 0.;
+		
+			if ( GetComponentNumEvent(comp,err) != 0 ){	
+				tot_evt_mc += GetComponentNumEvent(comp,err);
+				tot_evt_mc_err += err*err;
+			}
+			
+			if( GetComponentNumEvent(comp,err) != 0. ) {		
+				leg->AddEntry(h_comp, TString::Format("%s (%.1f #pm %.1f evt.)", comp->GetTitle(), GetComponentNumEvent(comp,err), err ), "F");
+			}		
+			
 		}
+	
 	}
 	
 	tot_evt_mc_err = TMath::Sqrt(tot_evt_mc_err);

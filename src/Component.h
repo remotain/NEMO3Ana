@@ -21,6 +21,22 @@ public:
 
 	Component(
 		const TString &name,
+		const TString &title 
+		) : TNamed(name, title) {
+			
+			_DataSet          = 0;
+			_Parameter        = 0;
+			_Adjustment       = 1.;
+			_AdjustmentErr    = 0.;
+			_FillColor        = kWhite;
+			_LineColor        = kBlack;
+			_IsGausConstraint = false;
+			_nSigma           = 0; 
+			
+		};
+
+	Component(
+		const TString &name,
 		const TString &title,
 		DataSet * data_set,
 		Parameter * param,
@@ -79,8 +95,8 @@ public:
 	double GetAdjustment    (){ return _Adjustment; };
 	double GetAdjustmentErr (){ return _AdjustmentErr; };
 	
-	double GetNorm();
-	double GetNormErr();
+	virtual double GetNorm();
+	virtual double GetNormErr();
 	
 	void SetGausConstraint( bool is) {_IsGausConstraint = is; }; 
 	bool IsGausConstraint() {return _IsGausConstraint; }; 

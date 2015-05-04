@@ -13,6 +13,7 @@
 #include "TH1.h"
 
 #include "Component.h"
+#include "Group.h"
 
 enum PhaseType_t {
 	kAll,
@@ -33,12 +34,14 @@ public:
 			
 			_Data = data;
 			_PhaseType = phase;
-			_ComponentMap = new TMap(50);
+			_ComponentMap  = new TMap(50);
 			_ComponentList = new TList();
+			_GroupList     = 0;			
 			
 			_MarkerStyle = 20;
 			_MarkerColor = kBlack;
 			_MarkerSize  = 0.5;
+			_DrawGroup   = kFALSE;
 			_LogScale    = kFALSE;
 
 			_chi2  =  0.0 ;
@@ -51,14 +54,16 @@ public:
 
 	~Observable() { };
 	
-	void SetMarkerStyle( Style_t style) {  _MarkerStyle = style; };
-	void SetMarkerColor( Color_t color) { _MarkerColor  = color; };
-	void SetMarkerSize( Size_t size)    { _MarkerSize   = size;  };
-	void SetLogScale( Bool_t islog )    { _LogScale     = islog; };
+	void SetMarkerStyle( Style_t style)   {  _MarkerStyle = style; };
+	void SetMarkerColor( Color_t color)   { _MarkerColor  = color; };
+	void SetMarkerSize( Size_t size)      { _MarkerSize   = size;  };
+	void SetDrawGroup( Bool_t drawgroup ) { _DrawGroup     = drawgroup; };
+	void SetLogScale( Bool_t islog )      { _LogScale     = islog; };
 	
 	Style_t GetMarkerStyle() { return _MarkerStyle; };
 	Color_t GetMarkerColor() { return _MarkerColor; };
 	Size_t  GetMarkerSize()  { return _MarkerSize;  };
+	Bool_t  GetDrawGroup()   { return _DrawGroup;   };
 	Bool_t  GetLogScale()    { return _LogScale;    };
 	
 	PhaseType_t GetPhase(){ return _PhaseType; };
@@ -73,7 +78,19 @@ public:
 		_ComponentMap->Add(c, h);
 		_ComponentList->Add(c);
 	};
-	
+
+	void AddGroup ( Group * g) { 
+		Info("AddGroup()", "%s", g->GetName());
+		
+		if ( !_GroupList ) _GroupList = new TList();
+		
+		_GroupList->Add(g);
+	};
+
+	void AddGroupAll ( TList * l) { 
+		_GroupList = l;
+	};
+
 	virtual void Draw(Option_t* option = "");
 	virtual void DrawDetails(Option_t* option = "");
 	virtual void Chi2Test(TH1 * hData, TH1 * hModel, double & chi2, int & ndf);
@@ -84,18 +101,18 @@ private:
 	PhaseType_t _PhaseType;
 	TMap  * _ComponentMap;
 	TList * _ComponentList;
+	TList * _GroupList;
 
 	Style_t _MarkerStyle;
 	Color_t _MarkerColor;
 	Size_t  _MarkerSize;
 	Bool_t  _LogScale;
-	
+	Bool_t  _DrawGroup;
+		
 	// for chi2
 	Double_t _chi2;
 	Int_t    _ndf;
 	Int_t    _igood;
-	
-	
 	
 ClassDef(Observable, 1);
 

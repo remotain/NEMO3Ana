@@ -3,6 +3,7 @@
 #include "DataSet.h"
 #include "Observable.h"
 #include "Component.h"
+#include "Group.h"
 #include "Parameter.h"
 
 namespace DataManagement {
@@ -44,5 +45,10 @@ namespace DataManagement {
 	void AddComponent( Component * tmp);
 	Component * FindComponent(const char * name);
 	THashList * GetComponentCollection();
+
+	void AddGroup (Group * tmp);
+	Group * FindGroup(const char * name);
+	THashList * GetGroupCollection();
+
 
 };

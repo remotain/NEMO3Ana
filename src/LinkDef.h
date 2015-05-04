@@ -11,6 +11,7 @@
 
 #pragma link C++ class Observable++;
 #pragma link C++ class Component++;
+#pragma link C++ class Group++;
 #pragma link C++ class Parameter++;
 #pragma link C++ class DataSet++;
 #pragma link C++ class HistoCollection++;
