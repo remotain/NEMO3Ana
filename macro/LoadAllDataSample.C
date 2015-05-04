@@ -55,7 +55,7 @@
 	DataManagement::AddDataSet ( new DataSet ( "Cd116_Tl207"       ,      5000000     ,    2435171*Phase1Fraction ,    2435171*Phase2Fraction ) );               
 	DataManagement::AddDataSet ( new DataSet ( "Cd116_Tl208"       ,     49988700     ,   34996966*Phase1Fraction ,   34996966*Phase2Fraction ) );               
 	DataManagement::AddDataSet ( new DataSet ( "Cd116_Y90"         ,     20000000     ,   13955404*Phase1Fraction ,   13955404*Phase2Fraction ) );               
-	DataManagement::AddDataSet ( new DataSet ( "Cd116_pb214_VT"    ,     20000000     ,    4300821*Phase1Fraction ,    4300821*Phase2Fraction ) );               
+	DataManagement::AddDataSet ( new DataSet ( "Cd116_Pb214_VT"    ,     20000000     ,    4300821*Phase1Fraction ,    4300821*Phase2Fraction ) );               
 	DataManagement::AddDataSet ( new DataSet ( "CuPetals_Co60"     ,   3199953200     ,    2734718*Phase1Fraction ,    2734718*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "CuTower_Co60"      ,   7999983400     ,    9585817*Phase1Fraction ,    9585817*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "FeShield_Ac228"    , 259991150700     ,    3820592*Phase1Fraction ,    3820592*Phase2Fraction ) );
