@@ -705,13 +705,16 @@ namespace ProcessChannel {
 		    }
 		
 	       	nb = tree->GetEntry(iEvt); nbytes += nb;
+			
+			
+			double el_vtx_z_mean_ = (el_vtx_z_[0]+el_vtx_z_[1])/2;
 				
 			unsigned int currentcut = 0;
 			hAnaCutFlow -> Fill(currentcut++);
 
 			// Implement selection
 		    if ( !CheckRunNumber(run) ) continue;
-			if (sectorId != 18 || IsExcludedSpot(eVertex->z(), vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
+			if (sectorId != 18 || IsExcludedSpot(el_vtx_z_mean_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					  continue; hAnaCutFlow -> Fill(currentcut++);
 			if (el_energy_[0] < 0.5 or el_energy_[1] < 0.5)        			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_pathLength_[0] + el_pathLength_[1] < 80)        			  continue; hAnaCutFlow -> Fill(currentcut++);
@@ -866,17 +869,17 @@ namespace ProcessChannel {
 				histo_collection->Find(TString::Format("%s_h_cosTheta_P1"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 		        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1" , d->GetName()) ) -> Fill(tot_e         , weight);
 
-				if( IsHotSpot(el_vtx_z_[0], vertexSector) || IsHotSpot(el_vtx_z_[1], vertexSector) ) {
+				if( IsHotSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_hot" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_hot" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_hot"    , d->GetName()) ) -> Fill(cosTheta      , weight);
 			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_hot" , d->GetName()) ) -> Fill(tot_e         , weight);
-				} else if( IsWarmSpot(el_vtx_z_[0], vertexSector) || IsWarmSpot(el_vtx_z_[1], vertexSector) ) {
+				} else if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_warm" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_warm"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_warm" , d->GetName()) ) -> Fill(tot_e         , weight);
-				} else if( IsColdSpot(el_vtx_z_[0], vertexSector) && IsColdSpot(el_vtx_z_[1], vertexSector) ) {
+				} else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_cold" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_cold" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_cold"     , d->GetName()) ) -> Fill(cosTheta      , weight);
@@ -900,17 +903,17 @@ namespace ProcessChannel {
 				histo_collection->Find(TString::Format("%s_h_cosTheta_P2"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 		        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2" , d->GetName()) ) -> Fill(tot_e         , weight);
 
-				if( IsHotSpot(el_vtx_z_[0], vertexSector) || IsHotSpot(el_vtx_z_[1], vertexSector) ) {
+				if( IsHotSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_hot" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_hot" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P2_hot"    , d->GetName()) ) -> Fill(cosTheta      , weight);
 			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_hot" , d->GetName()) ) -> Fill(tot_e         , weight);
-				} else if( IsWarmSpot(el_vtx_z_[0], vertexSector) || IsWarmSpot(el_vtx_z_[1], vertexSector) ) {
+				} else if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_warm" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P2_warm"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_warm" , d->GetName()) ) -> Fill(tot_e         , weight);
-				} else if( IsColdSpot(el_vtx_z_[0], vertexSector) && IsColdSpot(el_vtx_z_[1], vertexSector) ) {
+				} else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_cold" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_cold" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P2_cold"     , d->GetName()) ) -> Fill(cosTheta      , weight);
