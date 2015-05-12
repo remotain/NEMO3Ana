@@ -222,7 +222,7 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
-	    cutNames->push_back("Energy of the electron > 500 keV ");
+	    cutNames->push_back("Energy of the electron > 200 keV ");
 	    cutNames->push_back("Negative track sign");
 		cutNames->push_back("Not an hot spot");
 
@@ -344,7 +344,7 @@ namespace ProcessChannel {
 		    if ( !CheckRunNumber(run) ) continue;
 			if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++); // Cd foil only
 			if ( el_trkSign > 0)  						  continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
-			if ( el_energy < 0.5) 						  continue; hAnaCutFlow -> Fill(currentcut++); // E > 300 keV only
+			if ( el_energy < 0.2) 						  continue; hAnaCutFlow -> Fill(currentcut++); // E > 300 keV only
 			if ( IsHotSpot(eVertex->z(), vertexSector) )  continue; hAnaCutFlow -> Fill(currentcut++);
 			// 3. no hotspot
 		
