@@ -239,8 +239,6 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_trackLength"           , d->GetName()) , "; Track Length / cm; No.Events / cm", 200, 0, 200                  ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_trackSign"             , d->GetName()) , "; Sign of Track Curvature; No.Events", 10, -2, 2                   ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_electronIobt"          , d->GetName()) , "; IOBT; No.Events", 5, -0.5, 4.5                                   ) );
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ"               , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector"          , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_trueVertexZ"           , d->GetName()) , "; True - Z_{vertex} / cm ; No.Events / cm", 260, -130, 130         ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_trueVertexSector"      , d->GetName()) , "; True - Sector Number; No.Events", 200, 0, 20                     ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_sectorId"              , d->GetName()) , "; Sector; No.Events",  21, -0.5, 20.5                              ) );
@@ -251,17 +249,22 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_totGammaEnergy"        , d->GetName()) , "; #Sigma E_{#gamma}^{high} / MeV; No.Events / 0.05 MeV", 50, 0, 2.5) );
 		
 		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect"         , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );
-		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_hot"     , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );
 		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_warm"    , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );		
 		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_cold"    , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );		
+
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ"               , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );		
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_warm"          , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_cold"          , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
+
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector"          , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector_warm"     , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector_cold"     , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 		
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P1"           , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );		
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P1_hot"       , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P1_warm"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P1_cold"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
 
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2"           , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );		
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2_hot"       , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2_warm"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2_cold"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
 
@@ -368,8 +371,6 @@ namespace ProcessChannel {
 			histo_collection->Find( TString::Format("%s_h_trackLength"      , d->GetName()) ) -> Fill(el_pathLength         , weight);
 			histo_collection->Find( TString::Format("%s_h_trackSign"        , d->GetName()) ) -> Fill(el_trkSign            , weight);
 			histo_collection->Find( TString::Format("%s_h_electronIobt"     , d->GetName()) ) -> Fill(el_caloiobt           , weight);
-			histo_collection->Find( TString::Format("%s_h_vertexZ"          , d->GetName()) ) -> Fill(el_vtx_z_             , weight);
-			histo_collection->Find( TString::Format("%s_h_vertexSector"     , d->GetName()) ) -> Fill(vertexSector          , weight);
 			histo_collection->Find( TString::Format("%s_h_trueVertexZ"      , d->GetName()) ) -> Fill(trueVertex->Z()       , weight);
 			histo_collection->Find( TString::Format("%s_h_trueVertexSector" , d->GetName()) ) -> Fill(trueVertexSector      , weight);
 			histo_collection->Find( TString::Format("%s_h_sectorId"         , d->GetName()) ) -> Fill(sectorId              , weight);
@@ -386,10 +387,19 @@ namespace ProcessChannel {
 			//else if( IsHotSpot(el_vtx_z_, vertexSector) )
 			//	histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 			
-			if( IsWarmSpot(el_vtx_z_, vertexSector) )
+			histo_collection->Find( TString::Format("%s_h_vertexZ"          , d->GetName()) ) -> Fill(el_vtx_z_             , weight);
+			histo_collection->Find( TString::Format("%s_h_vertexSector"     , d->GetName()) ) -> Fill(vertexSector          , weight);
+			
+			
+			if( IsWarmSpot(el_vtx_z_, vertexSector) ) {
 				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_warm" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
-			else if( IsColdSpot(el_vtx_z_, vertexSector) )
+				histo_collection->Find( TString::Format("%s_h_vertexZ_warm"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
+				histo_collection->Find( TString::Format("%s_h_vertexSector_warm"  , d->GetName()) ) -> Fill(vertexSector, weight);
+			} else if( IsColdSpot(el_vtx_z_, vertexSector) ) {
 				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_cold" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
+				histo_collection->Find( TString::Format("%s_h_vertexZ_cold"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
+				histo_collection->Find( TString::Format("%s_h_vertexSector_cold"  , d->GetName()) ) -> Fill(vertexSector, weight);
+		  	}
 		  
 			// Phase 1 & 2
 		    if (run < 3396) {
@@ -725,8 +735,6 @@ namespace ProcessChannel {
 		    if ((el_caloiobt[0] > 1 and (el_calofcll[0] == 1 or el_calofcll[0] == 2)) or 
 		        (el_caloiobt[1] > 1 and (el_calofcll[1] == 1 or el_calofcll[1] == 2))) continue; hAnaCutFlow->Fill(currentcut++);
 
-			if ( IsHotSpot(eVertex->z(), vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++);
-
 			// Set min and max variables
 		    double el_energy_min   , el_energy_max   ;
 		    double el_dEnergy_min  , el_dEnergy_max  ; 
@@ -763,6 +771,8 @@ namespace ProcessChannel {
 			// Last cut on vertex position on foil
 		    TVector3 delta_v = el_vtx_min - el_vtx_max;
 		    if (TMath::Abs(delta_v.z()) > 4 or delta_v.Perp() > 2) continue; hAnaCutFlow -> Fill(currentcut++);
+
+			if ( IsHotSpot(eVertex->z(), vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++);
 
 			// Apply radon map
 		    double weight = 1;    
