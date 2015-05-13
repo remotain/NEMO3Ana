@@ -364,7 +364,7 @@ namespace ProcessChannel {
 		    if ( !CheckRunNumber(run) ) continue;
 			if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++); // Cd foil only
 			if ( el_trkSign > 0)  						  continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
-			if ( el_energy < 0.2) 						  continue; hAnaCutFlow -> Fill(currentcut++); // E > 300 keV only
+			if ( el_energy < 0.3) 						  continue; hAnaCutFlow -> Fill(currentcut++); // E > 300 keV only
 			if ( IsHotSpot(eVertex->z(), vertexSector) )  continue; hAnaCutFlow -> Fill(currentcut++);
 			// 3. no hotspot
 		
