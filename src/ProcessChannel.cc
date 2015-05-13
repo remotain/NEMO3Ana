@@ -260,6 +260,10 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector_warm"     , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector_cold"     , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_P1"               , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );		
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_P1_warm"          , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_P1_cold"          , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
+
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_P2"               , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );		
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_P2_warm"          , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_P2_cold"          , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
