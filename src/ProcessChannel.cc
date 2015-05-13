@@ -421,19 +421,15 @@ namespace ProcessChannel {
 		    if (run < 3396) {
 				
 				histo_collection->Find(TString::Format("%s_h_e_energy_P1", d->GetName())) -> Fill(el_energy , weight);			 
-			
-				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_P1" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 				histo_collection->Find( TString::Format("%s_h_vertexZ_P1"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
 				histo_collection->Find( TString::Format("%s_h_vertexSector_P1"  , d->GetName()) ) -> Fill(vertexSector, weight);
 				
 				if( IsWarmSpot(el_vtx_z_, vertexSector) ) {
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P1_warm" , d->GetName())) -> Fill(el_energy , weight);
-					histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_P1_warm" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 					histo_collection->Find( TString::Format("%s_h_vertexZ_P1_warm"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
 					histo_collection->Find( TString::Format("%s_h_vertexSector_P1_warm"  , d->GetName()) ) -> Fill(vertexSector, weight);
 				} else if( IsColdSpot(el_vtx_z_, vertexSector) ) {
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P1_cold" , d->GetName())) -> Fill(el_energy , weight);
-					histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_P1_cold" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 					histo_collection->Find( TString::Format("%s_h_vertexZ_P1_cold"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
 					histo_collection->Find( TString::Format("%s_h_vertexSector_P1_cold"  , d->GetName()) ) -> Fill(vertexSector, weight);
 				}
@@ -441,19 +437,15 @@ namespace ProcessChannel {
 			} else {
 			
 				histo_collection->Find(TString::Format("%s_h_e_energy_P2", d->GetName())) -> Fill(el_energy , weight);
-
-				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_P2" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 				histo_collection->Find( TString::Format("%s_h_vertexZ_P2"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
 				histo_collection->Find( TString::Format("%s_h_vertexSector_P2"  , d->GetName()) ) -> Fill(vertexSector, weight);
 
 				if( IsWarmSpot(el_vtx_z_, vertexSector) ) {
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P2_warm" , d->GetName())) -> Fill(el_energy , weight);
-					histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_P2_warm" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 					histo_collection->Find( TString::Format("%s_h_vertexZ_P2_warm"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
 					histo_collection->Find( TString::Format("%s_h_vertexSector_P2_warm"  , d->GetName()) ) -> Fill(vertexSector, weight);
 				} else if( IsColdSpot(el_vtx_z_, vertexSector) ) {
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P2_cold" , d->GetName())) -> Fill(el_energy , weight);
-					histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_P2_cold" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 					histo_collection->Find( TString::Format("%s_h_vertexZ_P2_cold"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
 					histo_collection->Find( TString::Format("%s_h_vertexSector_P2_cold"  , d->GetName()) ) -> Fill(vertexSector, weight);
 				}
