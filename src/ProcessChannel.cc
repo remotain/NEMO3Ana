@@ -138,16 +138,12 @@ namespace ProcessChannel {
 	//////////////////////////////////////////////////////////////////////////////
 	bool IsWarmSpot (double z, double s){
 		
-		if ( IsExcludedSpot(z,s) or IsHotSpot(z,s) )      return false;
-		
 		// Benton's definition (Created on 18/05/2015)
-		else if ( z >= -120.00 and z <=  50.00 and s >= 18.87 and s <= 19.00 ) return true;
-		else if ( z >= -120.00 and z <=  15.00 and s >= 18.48 and s <= 18.72 ) return true;
-		else if ( z >=   15.00 and z <= 120.00 and s >= 18.48 and s <= 18.58 ) return true;
-		else if ( z >=   15.00 and z <=  68.00 and s >= 18.58 and s <= 18.60 ) return true;
-		else if ( z >=   73.74 and z <= 108.00 and s >= 18.58 and s <= 18.60 ) return true;
-
+		if( IsExcludedSpot(z,s) or IsHotSpot(z,s) or IsColdSpot(z,s) ) return false;
+		
 		// My original definition (Commented on 18/05/2015)                             	
+		//if ( IsExcludedSpot(z,s) or IsHotSpot(z,s) )      return false;
+		
 		//else if ( s < 18.48 )                             return true;
 		//else if ( z >  +34. and s > 18.60 and s < 18.75 ) return true;
 		//else if ( s > 18.75 and s < 18.88 )               return true;
@@ -164,7 +160,18 @@ namespace ProcessChannel {
 	//////////////////////////////////////////////////////////////////////////////
 	bool IsColdSpot (double z, double s){
 		
-		if( IsExcludedSpot(z,s) or IsHotSpot(z,s) or IsWarmSpot(z,s) ) return false;
+		// My original definition (Commented on 18/05/2015)                             	
+		//if( IsExcludedSpot(z,s) or IsHotSpot(z,s) or IsWarmSpot(z,s) ) return false;
+		
+		// Benton's definition (Created on 18/05/2015)
+		if ( IsExcludedSpot(z,s) or IsHotSpot(z,s) )      return false;
+		
+		else if ( z >= -120.00 and z <=  50.00 and s >= 18.87 and s <= 19.00 ) return true;
+		else if ( z >= -120.00 and z <=  15.00 and s >= 18.48 and s <= 18.72 ) return true;
+		else if ( z >=   15.00 and z <= 120.00 and s >= 18.48 and s <= 18.58 ) return true;
+		else if ( z >=   15.00 and z <=  68.00 and s >= 18.58 and s <= 18.60 ) return true;
+		else if ( z >=   73.74 and z <= 108.00 and s >= 18.58 and s <= 18.60 ) return true;
+		
 		
 		return true;
 		
