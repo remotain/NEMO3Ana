@@ -100,32 +100,32 @@ namespace ProcessChannel {
 		if( IsExcludedSpot(z,s) )  	                                    return false;
 		
 		// Benton's definition (Created on 18/05/2015)
-		else if( z>=  108.00 and z <=  120.00 and s >= 18.70 and s <= 18.35) return true;
-		else if( z>=  109.00 and z <=  120.00 and s >= 18.59 and s <= 18.75) return true;
-		else if( z>=  110.00 and z <=  120.00 and s >= 18.86 and s <= 19.00) return true;
-		else if( z>=   74.61 and z <=   93.30 and s >= 18.19 and s <= 18.35) return true;
-		else if( z>=   68.50 and z <=   73.75 and s >= 18.58 and s <= 18.61) return true;
-		else if( z>=    1.17 and z <=   36.80 and s >= 18.08 and s <= 18.21) return true;
-		else if( z>=   14.21 and z <=   35.90 and s >= 18.60 and s <= 18.76) return true;
-		else if( z>=  -37.01 and z <=   -0.56 and s >= 18.19 and s <= 18.35) return true;	
-		else if( z>=  -58.00 and z <=  -52.00 and s >= 18.12 and s <= 18.16) return true;	
-		else if( z>=  -94.42 and z <=  -64.00 and s >= 18.07 and s <= 18.21) return true;	
-		else if( z>= -120.00 and z <= -112.00 and s >= 18.07 and s <= 18.35) return true;	
-		else if( z>= -120.00 and z <= -107.00 and s >= 18.72 and s <= 18.88) return true;	
+		//else if( z>=  108.00 and z <=  120.00 and s >= 18.70 and s <= 18.35) return true;
+		//else if( z>=  109.00 and z <=  120.00 and s >= 18.59 and s <= 18.75) return true;
+		//else if( z>=  110.00 and z <=  120.00 and s >= 18.86 and s <= 19.00) return true;
+		//else if( z>=   74.61 and z <=   93.30 and s >= 18.19 and s <= 18.35) return true;
+		//else if( z>=   68.50 and z <=   73.75 and s >= 18.58 and s <= 18.61) return true;
+		//else if( z>=    1.17 and z <=   36.80 and s >= 18.08 and s <= 18.21) return true;
+		//else if( z>=   14.21 and z <=   35.90 and s >= 18.60 and s <= 18.76) return true;
+		//else if( z>=  -37.01 and z <=   -0.56 and s >= 18.19 and s <= 18.35) return true;	
+		//else if( z>=  -58.00 and z <=  -52.00 and s >= 18.12 and s <= 18.16) return true;	
+		//else if( z>=  -94.42 and z <=  -64.00 and s >= 18.07 and s <= 18.21) return true;	
+		//else if( z>= -120.00 and z <= -112.00 and s >= 18.07 and s <= 18.35) return true;	
+		//else if( z>= -120.00 and z <= -107.00 and s >= 18.72 and s <= 18.88) return true;	
 		
 		// My original definition (Commented on 18/05/2015)                                                                
-	    //else if ( z > +110.0 and s > 18.08 and s < 18.32 )               return true;
-		//else if ( z > +114.0 and s > 18.61 and s < 18.75 )               return true;
-	    //else if ( z > +112.0 and s > 18.86 and s < 19.00 )               return true;		
-		//else if ( z >  +76.0 and z < +92.0 and s > 18.21 and s < 18.35 ) return true;
-	    //else if ( z >  +70.0 and z < +73.0 and s > 18.59 and s < 18.61 ) return true;
-	    //else if ( z >    0.0 and z < +35.0 and s > 18.08 and s < 18.23 ) return true;
-	    //else if ( z >  +16.0 and z < +34.0 and s > 18.61 and s < 18.75 ) return true;
-	    //else if ( z <   -3.0 and z > -32.0 and s > 18.20 and s < 18.35 ) return true;
-	    //else if ( z <  -52.0 and z > -58.0 and s > 18.12 and s < 18.16 ) return true;
-	    //else if ( z <  -64.0 and z > -94.0 and s > 18.08 and s < 18.20 ) return true;    
-		//else if ( z < -112.0 and s > 18.14 and s < 18.35)                return true;
-	    //else if ( z < -110.0 and s > 18.74 and s < 18.88)                return true;
+	    else if ( z > +110.0 and s > 18.08 and s < 18.32 )               return true;
+		else if ( z > +114.0 and s > 18.61 and s < 18.75 )               return true;
+	    else if ( z > +112.0 and s > 18.86 and s < 19.00 )               return true;		
+		else if ( z >  +76.0 and z < +92.0 and s > 18.21 and s < 18.35 ) return true;
+	    else if ( z >  +70.0 and z < +73.0 and s > 18.59 and s < 18.61 ) return true;
+	    else if ( z >    0.0 and z < +35.0 and s > 18.08 and s < 18.23 ) return true;
+	    else if ( z >  +16.0 and z < +34.0 and s > 18.61 and s < 18.75 ) return true;
+	    else if ( z <   -3.0 and z > -32.0 and s > 18.20 and s < 18.35 ) return true;
+	    else if ( z <  -52.0 and z > -58.0 and s > 18.12 and s < 18.16 ) return true;
+	    else if ( z <  -64.0 and z > -94.0 and s > 18.08 and s < 18.20 ) return true;    
+		else if ( z < -112.0 and s > 18.14 and s < 18.35)                return true;
+	    else if ( z < -110.0 and s > 18.74 and s < 18.88)                return true;
 		
 		return false;
 		
@@ -139,15 +139,15 @@ namespace ProcessChannel {
 	bool IsWarmSpot (double z, double s){
 		
 		// Benton's definition (Created on 18/05/2015)
-		if( IsExcludedSpot(z,s) or IsHotSpot(z,s) or IsColdSpot(z,s) ) return false;
+		//if( IsExcludedSpot(z,s) or IsHotSpot(z,s) or IsColdSpot(z,s) ) return false;
 		
 		// My original definition (Commented on 18/05/2015)                             	
-		//if ( IsExcludedSpot(z,s) or IsHotSpot(z,s) )      return false;
+		if ( IsExcludedSpot(z,s) or IsHotSpot(z,s) )      return false;
 		
-		//else if ( s < 18.48 )                             return true;
-		//else if ( z >  +34. and s > 18.60 and s < 18.75 ) return true;
-		//else if ( s > 18.75 and s < 18.88 )               return true;
-		//else if ( z >  +50. and s > 18.88 )               return true;
+		else if ( s < 18.48 )                             return true;
+		else if ( z >  +34. and s > 18.60 and s < 18.75 ) return true;
+		else if ( s > 18.75 and s < 18.88 )               return true;
+		else if ( z >  +50. and s > 18.88 )               return true;
 		
 		return false;
 		
@@ -161,16 +161,16 @@ namespace ProcessChannel {
 	bool IsColdSpot (double z, double s){
 		
 		// My original definition (Commented on 18/05/2015)                             	
-		//if( IsExcludedSpot(z,s) or IsHotSpot(z,s) or IsWarmSpot(z,s) ) return false;
+		if( IsExcludedSpot(z,s) or IsHotSpot(z,s) or IsWarmSpot(z,s) ) return false;
 		
 		// Benton's definition (Created on 18/05/2015)
-		if ( IsExcludedSpot(z,s) or IsHotSpot(z,s) )      return false;
-		
-		else if ( z >= -120.00 and z <=  50.00 and s >= 18.87 and s <= 19.00 ) return true;
-		else if ( z >= -120.00 and z <=  15.00 and s >= 18.48 and s <= 18.72 ) return true;
-		else if ( z >=   15.00 and z <= 120.00 and s >= 18.48 and s <= 18.58 ) return true;
-		else if ( z >=   15.00 and z <=  68.00 and s >= 18.58 and s <= 18.60 ) return true;
-		else if ( z >=   73.74 and z <= 108.00 and s >= 18.58 and s <= 18.60 ) return true;
+		//if ( IsExcludedSpot(z,s) or IsHotSpot(z,s) )      return false;
+		//
+		//else if ( z >= -120.00 and z <=  50.00 and s >= 18.87 and s <= 19.00 ) return true;
+		//else if ( z >= -120.00 and z <=  15.00 and s >= 18.48 and s <= 18.72 ) return true;
+		//else if ( z >=   15.00 and z <= 120.00 and s >= 18.48 and s <= 18.58 ) return true;
+		//else if ( z >=   15.00 and z <=  68.00 and s >= 18.58 and s <= 18.60 ) return true;
+		//else if ( z >=   73.74 and z <= 108.00 and s >= 18.58 and s <= 18.60 ) return true;
 		
 		
 		return true;
