@@ -539,7 +539,7 @@ namespace ProcessChannel {
 		cutNames->push_back("Negative track sign");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
 		cutNames->push_back("Sum track length > 60 cm ");
-		cutNames->push_back("Internal probability > 0.04");
+		cutNames->push_back("Internal probability > 0.01");
 		cutNames->push_back("External probability < 0.01");
 		cutNames->push_back("No unassociated hits opposite to the electrons");
 	    cutNames->push_back("No electron hits petal near the foil");
@@ -782,7 +782,7 @@ namespace ProcessChannel {
 		    if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					  continue; hAnaCutFlow -> Fill(currentcut++);
 			if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3)        			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_pathLength_[0] + el_pathLength_[1] < 60)        			  continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (probInt < 0.04)                                    			  continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (probInt < 0.01)                                    			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probExt_0_to_1 > 0.01 or probExt_1_to_0 > 0.01)    			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (elOnSameSide and nCloseNAPromptHits_Opposite != 0) 			  continue; hAnaCutFlow -> Fill(currentcut++);
 			
