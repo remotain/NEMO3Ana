@@ -537,11 +537,11 @@ namespace ProcessChannel {
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign");
-	    cutNames->push_back("Energy of the electron > 200 keV ");
+	    cutNames->push_back("Energy of the electron > 300 keV ");
 		cutNames->push_back("Sum track length > 60 cm ");
 		cutNames->push_back("Internal probability > 0.01");
 		cutNames->push_back("External probability < 0.01");
-		cutNames->push_back("Hits not associated to the track <= 2");
+		//cutNames->push_back("Hits not associated to the track <= 2");
 		cutNames->push_back("No unassociated hits opposite to the electrons");
 	    cutNames->push_back("No electron hits petal near the foil");
 		cutNames->push_back("|dz_vtx| < 4 cm and radial distance < 2");
@@ -622,6 +622,11 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nCloseDelayedHits"      , d->GetName()) , "; N. close delayed hits; No.Events", 21, -0.5, 20.5                 ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nFarDelayedClusters"    , d->GetName()) , "; N. far delayed clusters; No.Events", 21, -0.5, 20.5               ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nCloseDelayedCslusters" , d->GetName()) , "; N. close delayed clusters; No.Events", 21, -0.5, 20.5             ) );
+
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy"        , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy"        , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta"            , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
 
 		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1"        , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1"        , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
@@ -781,11 +786,11 @@ namespace ProcessChannel {
 		    if ( !CheckRunNumber(run) ) continue;
 			if (sectorId != 18 || IsExcludedSpot(el_vtx_z_mean_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					  continue; hAnaCutFlow -> Fill(currentcut++);
-			if (el_energy_[0] < 0.2 or el_energy_[1] < 0.2)        			  continue; hAnaCutFlow -> Fill(currentcut++);
+			if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3)        			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_pathLength_[0] + el_pathLength_[1] < 60)        			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probInt < 0.01)                                    			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probExt_0_to_1 > 0.01 or probExt_1_to_0 > 0.01)    			  continue; hAnaCutFlow -> Fill(currentcut++);
-			if (nCloseNAPromptHits > 2 or nFarNAPromptHits > 2 ) 			  continue; hAnaCutFlow -> Fill(currentcut++);
+			//if (nCloseNAPromptHits > 2 or nFarNAPromptHits > 2 ) 			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (elOnSameSide and nCloseNAPromptHits_Opposite != 0) 			  continue; hAnaCutFlow -> Fill(currentcut++);
 			
 			// No electron hit the petals near the foils
@@ -927,6 +932,11 @@ namespace ProcessChannel {
 			histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect"    , d->GetName()) ) -> Fill(vertexSector, eVertex->z()); 
 			 
 		    double tot_e = el_energy_[0] + el_energy_[1];
+			
+			histo_collection->Find(TString::Format("%s_h_min_e_energy" , d->GetName()) ) -> Fill(el_energy_min , weight);
+			histo_collection->Find(TString::Format("%s_h_max_e_energy" , d->GetName()) ) -> Fill(el_energy_max , weight);
+			histo_collection->Find(TString::Format("%s_h_cosTheta"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+	        histo_collection->Find(TString::Format("%s_h_tot_e_energy" , d->GetName()) ) -> Fill(tot_e         , weight);
 			
 		    if (run < 3396) {
 
