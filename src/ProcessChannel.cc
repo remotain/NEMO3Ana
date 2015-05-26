@@ -898,7 +898,6 @@ namespace ProcessChannel {
 		    histo_collection->Find(TString::Format("%s_h_vertexZ"                , d->GetName()) ) -> Fill(eVertex->z()           , weight);
 		    histo_collection->Find(TString::Format("%s_h_vertexSector"           , d->GetName()) ) -> Fill(vertexSector           , weight);
 		    histo_collection->Find(TString::Format("%s_h_trueVertexZ"            , d->GetName()) ) -> Fill(trueVertex->z()        , weight);
-		    histo_collection->Find(TString::Format("%s_h_cosTheta"               , d->GetName()) ) -> Fill(cosTheta               , weight);
 		    histo_collection->Find(TString::Format("%s_h_probInt"                , d->GetName()) ) -> Fill(probInt                , weight);
 		    histo_collection->Find(TString::Format("%s_h_probExt_1_to_0"         , d->GetName()) ) -> Fill(probExt_1_to_0         , weight);
 		    histo_collection->Find(TString::Format("%s_h_probExt_0_to_1"         , d->GetName()) ) -> Fill(probExt_0_to_1         , weight);
