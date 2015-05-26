@@ -603,7 +603,6 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vertexSector"           , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_trueVertexZ"            , d->GetName()) , "; True - Z_{vertex} / cm ; No.Events / cm", 260, -130, 130          ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_trueVertexSector"       , d->GetName()) , "; True - Sector Number; No.Events", 200, 0, 20                      ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta"               , d->GetName()) , "; Cos(#Theta); No.Events", 100, -1, 1                               ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt"                , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1                           ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_probExt_1_to_0"         , d->GetName()) , "; Last to First - External Prob.; No.Events", 100, 0, 0.1           ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_probExt_0_to_1"         , d->GetName()) , "; First to Last - External Prob.; No.Events", 100, 0, 1.1           ) );
