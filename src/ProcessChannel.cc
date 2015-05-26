@@ -541,6 +541,7 @@ namespace ProcessChannel {
 		cutNames->push_back("Sum track length > 60 cm ");
 		cutNames->push_back("Internal probability > 0.01");
 		cutNames->push_back("External probability < 0.01");
+		cutNames->push_back("Hits not associated to the track <= 2");
 		cutNames->push_back("No unassociated hits opposite to the electrons");
 	    cutNames->push_back("No electron hits petal near the foil");
 		cutNames->push_back("|dz_vtx| < 4 cm and radial distance < 2");
@@ -784,6 +785,7 @@ namespace ProcessChannel {
 		    if (el_pathLength_[0] + el_pathLength_[1] < 60)        			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probInt < 0.01)                                    			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probExt_0_to_1 > 0.01 or probExt_1_to_0 > 0.01)    			  continue; hAnaCutFlow -> Fill(currentcut++);
+			if (nCloseNAPromptHits > 2 or nFarNAPromptHits > 2 ) 			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (elOnSameSide and nCloseNAPromptHits_Opposite != 0) 			  continue; hAnaCutFlow -> Fill(currentcut++);
 			
 			// No electron hit the petals near the foils
