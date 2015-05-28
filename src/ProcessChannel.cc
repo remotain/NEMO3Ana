@@ -539,6 +539,7 @@ namespace ProcessChannel {
 		cutNames->push_back("Negative track sign");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
 		cutNames->push_back("Sum track length > 60 cm ");
+		cutNames->push_back("Track fires gg hit in first two layers of cells (0 or 1)");
 		cutNames->push_back("Internal probability > 0.01");
 		cutNames->push_back("External probability < 0.01");
 		//cutNames->push_back("Hits not associated to the track <= 2");
@@ -749,7 +750,9 @@ namespace ProcessChannel {
 	    Double_t  el_ip_x_[2]                 ; tree->SetBranchAddress("el_ip_x_"                    , el_ip_x_                     );
 	    Double_t  el_ip_y_[2]                 ; tree->SetBranchAddress("el_ip_y_"                    , el_ip_y_                     );
 	    Double_t  el_ip_z_[2]                 ; tree->SetBranchAddress("el_ip_z_"                    , el_ip_z_                     );
-	    Int_t     el_n_neighbours_[2]         ; tree->SetBranchAddress("el_n_neighbours_"            , el_n_neighbours_             );
+	    Int_t     el_first_hit_layer_[2]      ; tree->SetBranchAddress("el_first_hit_layer_"         , el_first_hit_layer_          );
+		Int_t     el_secnd_hit_layer_[2]      ; tree->SetBranchAddress("el_secnd_hit_layer_"         , el_secnd_hit_layer_          );	
+		Int_t     el_n_neighbours_[2]         ; tree->SetBranchAddress("el_n_neighbours_"            , el_n_neighbours_             );
 	    Int_t     nGammas                     ; tree->SetBranchAddress("nGammas"                     , &nGammas                     );
 	    Int_t     nLowEnergyGammas            ; tree->SetBranchAddress("nLowEnergyGammas"            , &nLowEnergyGammas            );
 	    Int_t     nHighEnergyGammas           ; tree->SetBranchAddress("nHighEnergyGammas"           , &nHighEnergyGammas           );
@@ -787,7 +790,11 @@ namespace ProcessChannel {
 		    if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					  continue; hAnaCutFlow -> Fill(currentcut++);
 			if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3)        			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_pathLength_[0] + el_pathLength_[1] < 60)        			  continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (probInt < 0.01)                                    			  continue; hAnaCutFlow -> Fill(currentcut++);
+		    
+			if ( (el_first_hit_layer_[0] == false and el_secnd_hit_layer_[0] == false) or
+			     (el_first_hit_layer_[1] == false and el_secnd_hit_layer_[1] == false) ) continue; hAnaCutFlow -> Fill(currentcut++);
+
+			if (probInt < 0.01)                                    			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probExt_0_to_1 > 0.01 or probExt_1_to_0 > 0.01)    			  continue; hAnaCutFlow -> Fill(currentcut++);
 			//if (nCloseNAPromptHits > 2 or nFarNAPromptHits > 2 ) 			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (elOnSameSide and nCloseNAPromptHits_Opposite != 0) 			  continue; hAnaCutFlow -> Fill(currentcut++);
