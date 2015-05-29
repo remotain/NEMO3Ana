@@ -3062,10 +3062,9 @@ namespace ProcessChannel {
  
  		    if (run < 3396) {
 
-
+				histo_collection -> Find( TString::Format("%s_h_alphaLength_P1"    , d->GetName()) )->Fill(alphaLength    , weight);
 				histo_collection -> Find( TString::Format("%s_h_alphaTime_P1"      , d->GetName()) )->Fill(alphaTime/1000 , weight);
 				histo_collection -> Find( TString::Format("%s_h_electronEnergy_P1" , d->GetName()) )->Fill(el_energy      , weight);
-				histo_collection -> Find( TString::Format("%s_h_alphaLength_P1"    , d->GetName()) )->Fill(alphaLength    , weight);
 				
 				if ( el_side == 0 and alphaSide == 0) {
 					histo_collection -> Find( TString::Format("%s_h_alphaLength_P1_eIn_aIn"    , d->GetName()) )->Fill(alphaLength    , weight);
@@ -3091,29 +3090,29 @@ namespace ProcessChannel {
 				
 			} else {
 
+				histo_collection -> Find( TString::Format("%s_h_alphaLength_P2"    , d->GetName()) )->Fill(alphaLength , weight);
 				histo_collection -> Find( TString::Format("%s_h_alphaTime_P2"      , d->GetName()) )->Fill(alphaTime/1000 , weight);
 				histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2" , d->GetName()) )->Fill(el_energy , weight);
-				histo_collection -> Find( TString::Format("%s_h_alphaLength_P2"    , d->GetName()) )->Fill(alphaLength , weight);
 
 				if ( el_side == 0 and alphaSide == 0) {
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aIn"    , d->GetName()) )->Fill(alphaLength , weight);
-					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2_eIn_aIn" , d->GetName()) )->Fill(el_energy   , weight);
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aIn"    , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aIn"     , d->GetName()) )->Fill(alphaLength    , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaTime_P2_eIn_aIn"       , d->GetName()) )->Fill(alphaTime/1000 , weight);
+					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2_eIn_aIn"  , d->GetName()) )->Fill(el_energy      , weight);
 
 				} else if( el_side == 1 and alphaSide == 1) {                             
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aOut"    , d->GetName()) )->Fill(alphaLength , weight);
-					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2_eOut_aOut" , d->GetName()) )->Fill(el_energy   , weight);
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aOut"    , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aOut"    , d->GetName()) )->Fill(alphaLength    , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaTime_P2_eOut_aOut"      , d->GetName()) )->Fill(alphaTime/1000 , weight);
+					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2_eOut_aOut" , d->GetName()) )->Fill(el_energy      , weight);
 
 				} else if( el_side == 0 and alphaSide == 1) {                             
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aOut"    , d->GetName()) )->Fill(alphaLength , weight);
-					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2_eIn_aOut" , d->GetName()) )->Fill(el_energy   , weight);
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aOut"    , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eIn_aOut"    , d->GetName()) )->Fill(alphaLength    , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaTime_P2_eIn_aOut"      , d->GetName()) )->Fill(alphaTime/1000 , weight);
+					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2_eIn_aOut" , d->GetName()) )->Fill(el_energy      , weight);
 
 				} else if( el_side == 1 and alphaSide == 0) {                             
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aIn"    , d->GetName()) )->Fill(alphaLength , weight);
-					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2_eOut_aIn" , d->GetName()) )->Fill(el_energy   , weight);
-					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aIn"    , d->GetName()) )->Fill(alphaLength , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaLength_P2_eOut_aIn"     , d->GetName()) )->Fill(alphaLength    , weight);
+					histo_collection -> Find( TString::Format("%s_h_alphaTime_P2_eOut_aIn"       , d->GetName()) )->Fill(alphaTime/1000 , weight);
+					histo_collection -> Find( TString::Format("%s_h_electronEnergy_P2_eOut_aIn"  , d->GetName()) )->Fill(el_energy      , weight);
 
 				}
 
