@@ -69,6 +69,14 @@ namespace ProcessChannel {
 
 	bool CheckRunNumber( int run ) {
 		
+		// Check first the run is not an excluded one (neutrons run)
+		int n_excluded_run = 11;
+		int excluded_run[] = {2774,2775,5241,5242,5243,5244,5245,5246,5247,5253,5254}; 
+		for ( int i = 0; i < n_excluded_run; i++ ) {
+			if( run == excluded_run[i] ) return kFALSE;
+		}
+		
+		// Check run is within give run limits
 		if ( run >= _RunFirst && run <= _RunLast )     return kTRUE;
 		else if ( _RunFirst == -1 && run <= _RunLast ) return kTRUE;
 		else if ( _RunLast == -1 && run >= _RunFirst ) return kTRUE; 
@@ -114,18 +122,18 @@ namespace ProcessChannel {
 		//else if( z>= -120.00 and z <= -107.00 and s >= 18.72 and s <= 18.88) return true;	
 		
 		// My original definition (Commented on 18/05/2015)                                                                
-	    else if ( z > +110.0 and s > 18.08 and s < 18.32 )               return true;
-		else if ( z > +114.0 and s > 18.61 and s < 18.75 )               return true;
-	    else if ( z > +112.0 and s > 18.86 and s < 19.00 )               return true;		
-		else if ( z >  +76.0 and z < +92.0 and s > 18.21 and s < 18.35 ) return true;
-	    else if ( z >  +70.0 and z < +73.0 and s > 18.59 and s < 18.61 ) return true;
-	    else if ( z >    0.0 and z < +35.0 and s > 18.08 and s < 18.23 ) return true;
-	    else if ( z >  +16.0 and z < +34.0 and s > 18.61 and s < 18.75 ) return true;
-	    else if ( z <   -3.0 and z > -32.0 and s > 18.20 and s < 18.35 ) return true;
-	    else if ( z <  -52.0 and z > -58.0 and s > 18.12 and s < 18.16 ) return true;
-	    else if ( z <  -64.0 and z > -94.0 and s > 18.08 and s < 18.20 ) return true;    
-		else if ( z < -112.0 and s > 18.14 and s < 18.35)                return true;
-	    else if ( z < -110.0 and s > 18.74 and s < 18.88)                return true;
+	    else if ( z >=  110.0 and z <=  120.00 and s > 18.08 and s < 18.32 ) return true;
+		else if ( z >=  114.0 and z <=  120.00 and s > 18.61 and s < 18.75 ) return true;
+	    else if ( z >=  112.0 and z <=  120.00 and s > 18.86 and s < 19.00 ) return true;		
+		else if ( z >=   76.0 and z <=   92.00 and s > 18.21 and s < 18.35 ) return true;
+	    else if ( z >=   70.0 and z <=   73.00 and s > 18.59 and s < 18.61 ) return true;
+	    else if ( z >=    0.0 and z <=   35.00 and s > 18.08 and s < 18.23 ) return true;
+	    else if ( z >=   16.0 and z <=   34.00 and s > 18.61 and s < 18.75 ) return true;
+	    else if ( z <=   -3.0 and z >=  -32.00 and s > 18.20 and s < 18.35 ) return true;
+	    else if ( z <=  -52.0 and z >=  -58.00 and s > 18.12 and s < 18.16 ) return true;
+	    else if ( z <=  -64.0 and z >=  -94.00 and s > 18.08 and s < 18.20 ) return true;    
+		else if ( z>= -120.00 and z <= -112.0 and s >= 18.14 and s < 18.35 ) return true;
+	    else if ( z>= -120.00 and z <= -110.0 and s >= 18.74 and s < 18.88 ) return true;
 		
 		return false;
 		
@@ -252,7 +260,7 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
-	    cutNames->push_back("Energy of the electron > 300 keV ");
+	    cutNames->push_back("Energy of the electron > 500 keV ");
 	    cutNames->push_back("Negative track sign");
 		cutNames->push_back("Not an hot spot");
 
@@ -394,7 +402,7 @@ namespace ProcessChannel {
 		    if ( !CheckRunNumber(run) ) continue;
 			if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++); // Cd foil only
 			if ( el_trkSign > 0)  						  continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
-			if ( el_energy < 0.3) 						  continue; hAnaCutFlow -> Fill(currentcut++); // E > 300 keV only
+			if ( el_energy < 0.5) 						  continue; hAnaCutFlow -> Fill(currentcut++); // E > 300 keV only
 			if ( IsHotSpot(eVertex->z(), vertexSector) )  continue; hAnaCutFlow -> Fill(currentcut++);
 			// 3. no hotspot
 		

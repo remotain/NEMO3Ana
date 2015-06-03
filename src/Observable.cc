@@ -1,6 +1,7 @@
 #include "Observable.h"
 
 #include <iostream>
+#include <iomanip>
 
 #include "THStack.h"
 #include "TMath.h"
@@ -215,6 +216,63 @@ void Observable::Draw(Option_t* option){
 	hratio->GetYaxis()->CenterTitle(kTRUE);
 	hratio->GetYaxis()->SetRangeUser(0.0,2.5);
 	hratio->Draw();
+	
+};
+
+void Observable::PrintDetails(){
+	
+	// Loop Over Component collection
+	//TMapIter next( _ComponentMap,  kIterForward);
+	
+	std::cout << "--------------------------------------------------" << std::endl;
+	std::cout << "Number of entries for \"" << GetName() << "\""<< std::endl;
+	std::cout << "--------------------------------------------------" << std::endl;	
+
+	TIter next( _ComponentList,  kIterForward);
+	while ( Component * comp = (Component *) next() ){ 
+		
+		double err = 0.;
+		double n = 0.;
+		
+		if ( GetComponentNumEvent(comp,err) != 0 ) n = GetComponentNumEvent(comp,err);
+		else err = 0. ;
+			
+		std::cout << std::setw(20) << comp->GetName() << " = " << std::setw(10) << n << " +/- " << err << std::endl;
+		
+	}
+
+	std::cout << "--------------------------------------------------" << std::endl;
+
+	if( _GroupList && _DrawGroup){
+
+		std::cout << " "<< std::endl;
+		std::cout << "--------------------------------------------------" << std::endl;	
+				
+		TIter next1( _GroupList,  kIterForward);
+		while ( Group * group = (Group *) next1() ){ 
+
+			double tot_err = 0.;
+			double tot_n = 0.;
+				
+			TIter next2( group->GetComponentList(),  kIterForward);
+			while ( Component * comp = (Component *) next2() ){ 
+
+				double err = 0.;
+				
+				if ( GetComponentNumEvent(comp,err) != 0 ) tot_n += GetComponentNumEvent(comp,err);
+				else err = 0. ;
+				
+				tot_err += err*err;
+				
+			}
+	
+			std::cout << std::setw(20) << group->GetName() << " = " << std::setw(10) << tot_n << " +/- " << TMath::Sqrt(tot_err) << std::endl;
+	
+		}
+		
+		std::cout << "--------------------------------------------------" << std::endl;	
+		
+	}
 	
 };
 

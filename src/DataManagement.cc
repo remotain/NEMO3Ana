@@ -61,7 +61,7 @@ namespace DataManagement{
 	double GetIsotopeMass         () { return _IsotopeMass         ; };
 	double GetIsotopeMassError    () { return _IsotopeMassError    ; };
 	double GetIsotopeAtomicWeight () { return _IsotopeAtomicWeight ; };	
-	double GetNormBB              () { return (_AvogadroNumber*_IsotopeMass*TMath::Log(2)*1000)/(3.15569e7*_IsotopeAtomicWeight); };
+	double GetNormBB              () { return (TMath::Na()*_IsotopeMass*TMath::Log(2)*1000)/(3.15569e7*_IsotopeAtomicWeight); };
 
 	// Data Set collection
 	THashList * _DataSetCollection = new THashList();

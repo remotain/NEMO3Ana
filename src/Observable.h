@@ -38,6 +38,9 @@ public:
 			_ComponentList = new TList();
 			_GroupList     = 0;			
 			
+			_FitRangeLowBin = 1; // first bin
+			_FitRangeUpBin  = _Data->GetNbinsX(); //last bin 
+				
 			_MarkerStyle = 20;
 			_MarkerColor = kBlack;
 			_MarkerSize  = 0.5;
@@ -59,6 +62,12 @@ public:
 	void SetMarkerSize( Size_t size)      { _MarkerSize   = size;  };
 	void SetDrawGroup( Bool_t drawgroup ) { _DrawGroup     = drawgroup; };
 	void SetLogScale( Bool_t islog )      { _LogScale     = islog; };
+	
+	void SetFitRangeLowEdge( Double_t low ){ _FitRangeLowBin = _Data->FindBin(low); };
+	Double_t GetFitRangeLowBin() { return _FitRangeLowBin; };
+	
+	void SetFitRangeUpEdge( Double_t up ){ _FitRangeUpBin = _Data->FindBin(up); };
+	Double_t GetFitRangeUpBin()  { return _FitRangeUpBin; };
 	
 	Style_t GetMarkerStyle() { return _MarkerStyle; };
 	Color_t GetMarkerColor() { return _MarkerColor; };
@@ -93,6 +102,7 @@ public:
 
 	virtual void Draw(Option_t* option = "");
 	virtual void DrawDetails(Option_t* option = "");
+	virtual void PrintDetails();
 	virtual void Chi2Test(TH1 * hData, TH1 * hModel, double & chi2, int & ndf);
 	
 private:
@@ -102,6 +112,9 @@ private:
 	TMap  * _ComponentMap;
 	TList * _ComponentList;
 	TList * _GroupList;
+
+	Double_t _FitRangeLowBin;
+	Double_t _FitRangeUpBin;
 
 	Style_t _MarkerStyle;
 	Color_t _MarkerColor;

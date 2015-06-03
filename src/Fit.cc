@@ -57,7 +57,7 @@ namespace Fit{
 			}
 					
 			// Loop over the data histogram bin
-			for (unsigned int i = 1; i <= h_data->GetNbinsX(); i++){
+			for (unsigned int i = obs->GetFitRangeLowBin(); i <= obs->GetFitRangeUpBin(); i++){
 				
 				// Compute the likelihood
 				if( h_mc->GetBinContent(i) > 0 ) {
@@ -235,7 +235,7 @@ namespace Fit{
 		double dof = 0;
 		TIter next3( DataManagement::GetObservableCollection() );
 		while ( Observable * obs = (Observable *) next3() ){
-			dof += obs->GetData()->GetNbinsX();
+			dof += obs->GetFitRangeUpBin() - obs->GetFitRangeLowBin();
 		} dof -= min->NFree();
 		std::cout << "CHI^2/dof = " << 2*min->MinValue() << "/" << dof << " = " << 2*min->MinValue()/dof << std::endl;	
 		
