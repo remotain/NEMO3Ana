@@ -310,10 +310,6 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector_P1_warm"     , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector_P1_cold"     , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_P2"               , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );		
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_P2_warm"          , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_P2_cold"          , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
-
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector_P2"          , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector_P2_warm"     , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector_P2_cold"     , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
@@ -565,7 +561,7 @@ namespace ProcessChannel {
 		histo_collection->Add( hAnaCutFlow );
 
 		// Make all other histos
-		histo_collection->Add( new TH1D( TString::Format("%s_h_run"                    , d->GetName()) , "; Run; No.Events",    200, 1000, 9500                               ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_run"                    , d->GetName()) , "; Run; No.Events",    10000, 1000, 9500                             ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_sectorId"               , d->GetName()) , "; Sector; No.Events",  21, -0.5, 20.5                               ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_sourceId"               , d->GetName()) , "; Source; No.Events",   4, -1.5, 2.5                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_el_energy_min"          , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
@@ -630,59 +626,6 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nCloseDelayedHits"      , d->GetName()) , "; N. close delayed hits; No.Events", 21, -0.5, 20.5                 ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nFarDelayedClusters"    , d->GetName()) , "; N. far delayed clusters; No.Events", 21, -0.5, 20.5               ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nCloseDelayedCslusters" , d->GetName()) , "; N. close delayed clusters; No.Events", 21, -0.5, 20.5             ) );
-
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy"        , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy"        , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta"            , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1                                ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1"        , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1"        , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1"            , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1                                ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_cold"   , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_cold"   , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_cold"       , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1                                ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_cold"   , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_warm"   , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_warm"   , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_warm"       , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1                                ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_warm"   , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_hot"   , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_hot"   , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_hot"       , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1                                ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_hot"   , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-
-
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2"        , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2"        , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2"            , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1                                ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_cold"   , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_cold"   , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_cold"       , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1                                ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_cold"   , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_warm"   , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_warm"   , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_warm"       , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1                                ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_warm"   , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_hot"   , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_hot"   , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_hot"       , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1                                ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_hot"   , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_SS_In"  , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_SS_In"  , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_SS_Out" , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_SS_Out" , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_OS"     , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_OS"     , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
@@ -692,6 +635,135 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_el_1_x"             , d->GetName()) , "; cm; No.Events / 1mm", 300, -170, 170                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_el_1_y"             , d->GetName()) , "; cm; No.Events / 1mm", 300, -170, 170                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_el_1_z"             , d->GetName()) , "; cm; No.Events / 1mm", 300, -130, 130                              ) );
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//
+		// MINIMAL ELECTRON ENERGY
+		//
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy"                , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1"             , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_cold"        , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_warm"        , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );		
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_hot"         , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2"             , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_cold"        , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_warm"        , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_hot"         , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );				
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_SS_In"       , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_SS_In"       , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_SS_In_cold"  , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_SS_In_cold"  , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_SS_In_warm"  , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_SS_In_warm"  , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_SS_Out"      , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_SS_Out"      , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_SS_Out_cold" , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_SS_Out_cold" , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_SS_Out_warm" , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_SS_Out_warm" , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_OS"          , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_OS"          , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_OS_cold"     , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_OS_cold"     , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P1_OS_warm"     , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_energy_P2_OS_warm"     , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//
+		// MAXIMAL ELECTRON ENERGY
+		//
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy"                , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1"             , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_cold"        , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_warm"        , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_hot"         , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2"             , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_cold"        , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_warm"        , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_hot"         , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_SS_In"       , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_SS_In"       , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_SS_In_cold"  , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_SS_In_cold"  , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_SS_In_warm"  , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_SS_In_warm"  , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_SS_Out"      , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_SS_Out"      , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_SS_Out_cold" , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_SS_Out_cold" , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_SS_Out_warm" , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_SS_Out_warm" , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_OS"          , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_OS"          , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_OS_cold"     , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_OS_cold"     , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P1_OS_warm"     , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_energy_P2_OS_warm"     , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5 ) );
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//
+		// TOTAL ELECTRON ENERGY
+		//
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy"                , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1"             , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );		
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_cold"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_warm"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );		
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_hot"         , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2"             , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_cold"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_warm"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_hot"         , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_SS_In"       , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_SS_In"       , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_SS_In_cold"  , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_SS_In_cold"  , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_SS_In_warm"  , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_SS_In_warm"  , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_SS_Out"      , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_SS_Out"      , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_SS_Out_cold" , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_SS_Out_cold" , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_SS_Out_warm" , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_SS_Out_warm" , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_OS"          , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_OS"          , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_OS_cold"     , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_OS_cold"     , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1_OS_warm"     , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2_OS_warm"     , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6 ) );
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//
+		// COS THETA
+		//
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////								
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta"                , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1"             , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_cold"        , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_warm"        , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_hot"         , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2"             , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_cold"        , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_warm"        , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_hot"         , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_SS_In"       , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_SS_In"       , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_SS_In_cold"  , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_SS_In_cold"  , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_SS_In_warm"  , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_SS_In_warm"  , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_SS_Out"      , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_SS_Out"      , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_SS_Out_cold" , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_SS_Out_cold" , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_SS_Out_warm" , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_SS_Out_warm" , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_OS"          , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_OS"          , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_OS_cold"     , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_OS_cold"     , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P1_OS_warm"     , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_cosTheta_P2_OS_warm"     , d->GetName()) , "; Cos(#Theta); No.Events", 25, -1, 1 ) );
 
 		// Get TTree
 		TDirectoryFile * f1 = (TDirectoryFile*) _InputFile->Get(_InputDirName);	
@@ -948,6 +1020,7 @@ namespace ProcessChannel {
 			histo_collection->Find(TString::Format("%s_h_cosTheta"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 	        histo_collection->Find(TString::Format("%s_h_tot_e_energy" , d->GetName()) ) -> Fill(tot_e         , weight);
 			
+			// Start P1
 		    if (run < 3396) {
 
 		      	
@@ -956,10 +1029,11 @@ namespace ProcessChannel {
 				histo_collection->Find(TString::Format("%s_h_cosTheta_P1"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 		        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1" , d->GetName()) ) -> Fill(tot_e         , weight);
 
+				// P1 Hot/Cold/Warm
 				if( IsHotSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_hot" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_hot" , d->GetName()) ) -> Fill(el_energy_max , weight);
-					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_hot"    , d->GetName()) ) -> Fill(cosTheta      , weight);
+					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_hot"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_hot" , d->GetName()) ) -> Fill(tot_e         , weight);
 				} else if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
@@ -973,23 +1047,84 @@ namespace ProcessChannel {
 			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_cold" , d->GetName()) ) -> Fill(tot_e         , weight);
 				}
 
+				// Start SS/OS
 		        if (el_side_[0] == el_side_[1]) {
+					
+					// SS In/Out
 					if (el_side_[0] == 0) {
-						histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_SS_In", d->GetName()) ) -> Fill(tot_e , weight);
-		          	} else {
-						histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_SS_Out", d->GetName()) ) -> Fill(tot_e , weight);
-		          	}
-		        } else {
-					histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_OS", d->GetName()) ) -> Fill(tot_e , weight);
-		        }
+						 
+						 histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_SS_In" , d->GetName()) ) -> Fill(tot_e         , weight); 
+						 histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_SS_In" , d->GetName()) ) -> Fill(el_energy_min , weight);
+						 histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_SS_In" , d->GetName()) ) -> Fill(el_energy_max , weight);
+						 histo_collection->Find(TString::Format("%s_h_cosTheta_P1_SS_In"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+					
+						 // SS In Cold/Warm
+						 if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
+							 histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_SS_In_warm" , d->GetName()) ) -> Fill(tot_e         , weight);
+							 histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_SS_In_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
+							 histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_SS_In_warm" , d->GetName()) ) -> Fill(el_energy_max , weight);
+							 histo_collection->Find(TString::Format("%s_h_cosTheta_P1_SS_In_warm"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+						 } else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
+							 histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_SS_In_cold" , d->GetName()) ) -> Fill(tot_e         , weight);
+							 histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_SS_In_cold" , d->GetName()) ) -> Fill(el_energy_min , weight);
+							 histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_SS_In_cold" , d->GetName()) ) -> Fill(el_energy_max , weight);
+							 histo_collection->Find(TString::Format("%s_h_cosTheta_P1_SS_In_cold"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+						 }
+					
+		          	} else { 
+					  
+		            	histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_SS_Out" , d->GetName()) ) -> Fill(tot_e         , weight);
+						histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_SS_Out" , d->GetName()) ) -> Fill(el_energy_min , weight);
+						histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_SS_Out" , d->GetName()) ) -> Fill(el_energy_max , weight);
+						histo_collection->Find(TString::Format("%s_h_cosTheta_P1_SS_Out"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+					
+						// SS Out Cold/Warm
+						if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
+							histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_SS_Out_warm" , d->GetName()) ) -> Fill(tot_e         , weight);						
+							histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_SS_Out_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
+							histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_SS_Out_warm" , d->GetName()) ) -> Fill(el_energy_max , weight);
+							histo_collection->Find(TString::Format("%s_h_cosTheta_P1_SS_Out_warm"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+						} else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
+					    	histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_SS_Out_cold" , d->GetName()) ) -> Fill(tot_e         , weight);
+							histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_SS_Out_cold" , d->GetName()) ) -> Fill(el_energy_min , weight);
+							histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_SS_Out_cold" , d->GetName()) ) -> Fill(el_energy_max , weight);
+							histo_collection->Find(TString::Format("%s_h_cosTheta_P1_SS_Out_cold"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+						}
+					
+					}
+				
+				} else { // Start OS
+					
+					histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_OS" , d->GetName()) ) -> Fill(tot_e         , weight);
+					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_OS" , d->GetName()) ) -> Fill(el_energy_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_OS" , d->GetName()) ) -> Fill(el_energy_max , weight);
+					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_OS"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 
-		    } else {
+					// OS Cold/Warm
+					if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
+						histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_OS_warm" , d->GetName()) ) -> Fill(tot_e         , weight);
+						histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_OS_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
+						histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_OS_warm" , d->GetName()) ) -> Fill(el_energy_max , weight);
+						histo_collection->Find(TString::Format("%s_h_cosTheta_P1_OS_warm"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+					} else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
+					    histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_OS_cold" , d->GetName()) ) -> Fill(tot_e         , weight);						
+						histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_OS_cold" , d->GetName()) ) -> Fill(el_energy_min , weight);
+						histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_OS_cold" , d->GetName()) ) -> Fill(el_energy_max , weight);
+						histo_collection->Find(TString::Format("%s_h_cosTheta_P1_OS_cold"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+		            }
+		
+		        } // End OS
+
+			// End P1 Start P2
+
+		    } else { 
 				
 				histo_collection->Find(TString::Format("%s_h_min_e_energy_P2" , d->GetName()) ) -> Fill(el_energy_min , weight);
 				histo_collection->Find(TString::Format("%s_h_max_e_energy_P2" , d->GetName()) ) -> Fill(el_energy_max , weight);
 				histo_collection->Find(TString::Format("%s_h_cosTheta_P2"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 		        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2" , d->GetName()) ) -> Fill(tot_e         , weight);
 
+				// P2 Hot/Cold/Warm
 				if( IsHotSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_hot" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_hot" , d->GetName()) ) -> Fill(el_energy_max , weight);
@@ -1007,20 +1142,75 @@ namespace ProcessChannel {
 			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_cold" , d->GetName()) ) -> Fill(tot_e         , weight);
 				}
 				
-
+				// Start SS/OS
 		        if (el_side_[0] == el_side_[1]) {
-		          if (el_side_[0] == 0) {
-		            histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_SS_In", d->GetName()) ) -> Fill(tot_e , weight);
-		          } else {
-		            histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_SS_Out", d->GetName()) ) -> Fill(tot_e , weight);
-		          }
-		        } else {
-					histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_OS", d->GetName()) ) -> Fill(tot_e , weight);
-		        }
-		      
-		    }
+					
+					if (el_side_[0] == 0) {
+					  
+		            	histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_SS_In" , d->GetName()) ) -> Fill(tot_e         , weight);
+						histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_SS_In" , d->GetName()) ) -> Fill(el_energy_min , weight);
+						histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_SS_In" , d->GetName()) ) -> Fill(el_energy_max , weight);
+						histo_collection->Find(TString::Format("%s_h_cosTheta_P2_SS_In"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+					
+						// SS In Cold/Warm
+						if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
+							histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_SS_In_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
+							histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_SS_In_warm" , d->GetName()) ) -> Fill(el_energy_max , weight);
+							histo_collection->Find(TString::Format("%s_h_cosTheta_P2_SS_In_warm"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+							histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_SS_In_warm" , d->GetName()) ) -> Fill(tot_e         , weight);
+						} else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
+							histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_SS_In_cold" , d->GetName()) ) -> Fill(el_energy_min , weight);
+							histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_SS_In_cold" , d->GetName()) ) -> Fill(el_energy_max , weight);
+							histo_collection->Find(TString::Format("%s_h_cosTheta_P2_SS_In_cold"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+					    	histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_SS_In_cold" , d->GetName()) ) -> Fill(tot_e         , weight);
+						}
+					
+					} else {
+					  
+						histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_SS_Out" , d->GetName()) ) -> Fill(tot_e         , weight);
+						histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_SS_Out" , d->GetName()) ) -> Fill(el_energy_min , weight);
+						histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_SS_Out" , d->GetName()) ) -> Fill(el_energy_max , weight);
+						histo_collection->Find(TString::Format("%s_h_cosTheta_P2_SS_Out"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+					
+						// SS Out Cold/Warm
+						if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
+							histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_SS_Out_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
+							histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_SS_Out_warm" , d->GetName()) ) -> Fill(el_energy_max , weight);
+							histo_collection->Find(TString::Format("%s_h_cosTheta_P2_SS_Out_warm"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+							histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_SS_Out_warm" , d->GetName()) ) -> Fill(tot_e         , weight);
+						} else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
+							histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_SS_Out_cold" , d->GetName()) ) -> Fill(el_energy_min , weight);
+							histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_SS_Out_cold" , d->GetName()) ) -> Fill(el_energy_max , weight);
+							histo_collection->Find(TString::Format("%s_h_cosTheta_P2_SS_Out_cold"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+						    histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_SS_Out_cold" , d->GetName()) ) -> Fill(tot_e         , weight);
+			          	}
+				 	}
+				
+				} else { // Start OS
+				
+					histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_OS" , d->GetName()) ) -> Fill(tot_e         , weight);
+					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_OS" , d->GetName()) ) -> Fill(el_energy_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_OS" , d->GetName()) ) -> Fill(el_energy_max , weight);
+					histo_collection->Find(TString::Format("%s_h_cosTheta_P2_OS"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+	
+					// OS Cold/Warm
+					if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
+						histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_OS_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
+						histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_OS_warm" , d->GetName()) ) -> Fill(el_energy_max , weight);
+						histo_collection->Find(TString::Format("%s_h_cosTheta_P2_OS_warm"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+						histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_OS_warm" , d->GetName()) ) -> Fill(tot_e         , weight);
+					} else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
+						histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_OS_cold" , d->GetName()) ) -> Fill(el_energy_min , weight);
+						histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_OS_cold" , d->GetName()) ) -> Fill(el_energy_max , weight);
+						histo_collection->Find(TString::Format("%s_h_cosTheta_P2_OS_cold"     , d->GetName()) ) -> Fill(cosTheta      , weight);
+					    histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_OS_cold" , d->GetName()) ) -> Fill(tot_e         , weight);
+			        }
+			
+				} // End OS
 
-		}
+			} // End P2
+
+		} // End event loop
 
 		std::cout << "before output file" << std::endl;
 		TFile * _OutputFile = new TFile(_OutputFilePath + _OutputFileName, "UPDATE");
