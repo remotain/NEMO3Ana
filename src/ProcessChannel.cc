@@ -1271,7 +1271,7 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
-		cutNames->push_back("Total energy from gamma clusters < 150 keV");
+		//cutNames->push_back("Total energy from gamma clusters < 150 keV");
 	    cutNames->push_back("Track with opposite curvature");
 	    cutNames->push_back("Energy one electron > 300 keV");
 		cutNames->push_back("Internal probability < 0.01");
@@ -1281,7 +1281,7 @@ namespace ProcessChannel {
 		cutNames->push_back("Unassociated prompt Geiger hits 15 cm from the vertex on the foil == 0");
 		cutNames->push_back("Unassociated prompt Geiger hits anywhere in the detector <= 2");
 		cutNames->push_back("Not an hot spot");
-		cutNames->push_back("Tot energy > 3 MeV");
+		//cutNames->push_back("Tot energy > 3 MeV");
 		cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4");
 
 	    unsigned int nCuts = cutNames->size();
@@ -1466,7 +1466,7 @@ namespace ProcessChannel {
 
 			// Implement selection
 			if ( !CheckRunNumber(run) ) continue;
-			if ( totELowEnergyGammas > 0.150 or totEHighEnergyGammas > 0.150 ) continue; hAnaCutFlow -> Fill(currentcut++);
+			//if ( totELowEnergyGammas > 0.150 or totEHighEnergyGammas > 0.150 ) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (sectorId != 18 || IsExcludedSpot(eVertex->z(), vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_trkSign[0] == el_trkSign[1] )							  continue; hAnaCutFlow -> Fill(currentcut++);
 			if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3)     			  continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1477,7 +1477,7 @@ namespace ProcessChannel {
 			if ( nCloseNAPromptHits > 0 ) 			                          continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( nFarNAPromptHits > 2   ) 			                          continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( IsHotSpot(eVertex->z(), vertexSector) ) 	     			  continue; hAnaCutFlow -> Fill(currentcut++);
-			if (el_energy_[0] + el_energy_[1] < 3 )              			  continue; hAnaCutFlow -> Fill(currentcut++);
+			//if (el_energy_[0] + el_energy_[1] < 3 )              			  continue; hAnaCutFlow -> Fill(currentcut++);
 			
 			// Set min and max variables
 		    double el_energy_min   , el_energy_max   ;
