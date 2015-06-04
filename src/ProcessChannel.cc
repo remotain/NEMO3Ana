@@ -1275,6 +1275,7 @@ namespace ProcessChannel {
 		cutNames->push_back("External probability > 0.04");
 		cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4");
 		cutNames->push_back("Not an hot spot");
+		cutNames->push_back("Tot energy > 3 MeV");
 
 	    unsigned int nCuts = cutNames->size();
 	    TH1D* hAnaCutFlow  = new TH1D( TString::Format("%s_h_AnaCutFlow", d->GetName() ),"Analysis cut flow", nCuts+1, -0.5, nCuts+0.5);
@@ -1351,8 +1352,8 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nCloseDelayedHits"      , d->GetName()) , "; N. close delayed hits; No.Events", 21, -0.5, 20.5                 ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nFarDelayedClusters"    , d->GetName()) , "; N. far delayed clusters; No.Events", 21, -0.5, 20.5               ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nCloseDelayedCslusters" , d->GetName()) , "; N. close delayed clusters; No.Events", 21, -0.5, 20.5             ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 46, 0, 4.6              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P1"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 100, 0, 10              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_tot_e_energy_P2"        , d->GetName()) , "; #Sigma E_{e} / MeV; No.Events / 0.1 MeV", 100, 0, 10              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
@@ -1464,6 +1465,7 @@ namespace ProcessChannel {
 		    if (probInt > 0.01)                                  			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probExt_0_to_1 < 0.04 and probExt_1_to_0 < 0.04) 			  continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( IsHotSpot(eVertex->z(), vertexSector) ) 	     			  continue; hAnaCutFlow -> Fill(currentcut++);
+			if (el_energy_[0] + el_energy_[1] < 3 )              			  continue; hAnaCutFlow -> Fill(currentcut++);
 			
 			// Set min and max variables
 		    double el_energy_min   , el_energy_max   ;
