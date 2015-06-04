@@ -1271,6 +1271,7 @@ namespace ProcessChannel {
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Cd-116 sector (18) ");
+		cutNames->push_back("Total energy from gamma clusters < 150 keV");
 	    cutNames->push_back("Track with opposite curvature");
 	    cutNames->push_back("Energy one electron > 300 keV");
 		cutNames->push_back("Internal probability < 0.01");
@@ -1295,8 +1296,8 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_run"                    , d->GetName()) , "; Run; No.Events",    200, 1000, 9500                               ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_sectorId"               , d->GetName()) , "; Sector; No.Events",  21, -0.5, 20.5                               ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_sourceId"               , d->GetName()) , "; Source; No.Events",   4, -1.5, 2.5                                ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_el_energy_min"          , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_el_energy_max"          , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_el_energy_min"          , d->GetName()) , "; Min E_{e} / MeV; No.Events / 0.1 MeV", 100, 0, 10                 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_el_energy_max"          , d->GetName()) , "; Max E_{e} / MeV; No.Events / 0.1 MeV", 100, 0, 10                 ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_el_dEnergy_min"         , d->GetName()) , "; Min dE_{e} / MeV; No.Events / 0.01 MeV", 50, 0, 0.5               ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_el_dEnergy_max"         , d->GetName()) , "; Max dE_{e} / MeV; No.Events / 0.01 MeV", 50, 0, 0.5               ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_el_beta_min"            , d->GetName()) , "; Min - #beta_{e}; No.Events / 0.01", 100, 0.6, 1.6                 ) );
@@ -1465,6 +1466,7 @@ namespace ProcessChannel {
 
 			// Implement selection
 			if ( !CheckRunNumber(run) ) continue;
+			if ( totELowEnergyGammas > 0.150 or totEHighEnergyGammas > 0.150 ) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (sectorId != 18 || IsExcludedSpot(eVertex->z(), vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_trkSign[0] == el_trkSign[1] )							  continue; hAnaCutFlow -> Fill(currentcut++);
 			if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3)     			  continue; hAnaCutFlow -> Fill(currentcut++);
