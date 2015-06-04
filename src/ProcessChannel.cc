@@ -131,16 +131,16 @@ namespace ProcessChannel {
 		//else if( z>= -120.00 and z <= -107.00 and s >= 18.72 and s <= 18.88) return true;	
 		
 		// My original definition (Commented on 18/05/2015)                                                                
-	    else if ( z >=  110.0 and z <=  120.00 and s > 18.08 and s < 18.32 ) return true;
+	    else if ( z >=  110.0 and z <=  120.00 and s > 18.08 and s < 18.34 ) return true;
 		else if ( z >=  114.0 and z <=  120.00 and s > 18.61 and s < 18.75 ) return true;
 	    else if ( z >=  112.0 and z <=  120.00 and s > 18.86 and s < 19.00 ) return true;		
-		else if ( z >=   76.0 and z <=   92.00 and s > 18.21 and s < 18.35 ) return true;
+		else if ( z >=   76.0 and z <=   92.00 and s > 18.20 and s < 18.36 ) return true;
 	    else if ( z >=   70.0 and z <=   73.00 and s > 18.59 and s < 18.61 ) return true;
-	    else if ( z >=    0.0 and z <=   35.00 and s > 18.08 and s < 18.23 ) return true;
-	    else if ( z >=   16.0 and z <=   34.00 and s > 18.61 and s < 18.75 ) return true;
-	    else if ( z <=   -3.0 and z >=  -32.00 and s > 18.20 and s < 18.35 ) return true;
+	    else if ( z >=  -20.0 and z <=   35.00 and s > 18.08 and s < 18.23 ) return true;
+	    else if ( z >=   16.0 and z <=   34.00 and s > 18.60 and s < 18.77 ) return true;
+	    else if ( z <=   -3.0 and z >=  -32.00 and s > 18.20 and s < 18.36 ) return true;
 	    else if ( z <=  -52.0 and z >=  -58.00 and s > 18.12 and s < 18.16 ) return true;
-	    else if ( z <=  -64.0 and z >=  -94.00 and s > 18.08 and s < 18.20 ) return true;    
+	    else if ( z <=  -64.0 and z >=  -94.00 and s > 18.08 and s < 18.21 ) return true;    
 		else if ( z>= -120.00 and z <= -112.0 and s >= 18.14 and s < 18.35 ) return true;
 	    else if ( z>= -120.00 and z <= -110.0 and s >= 18.74 and s < 18.88 ) return true;
 		
