@@ -1273,10 +1273,10 @@ namespace ProcessChannel {
 	    cutNames->push_back("Energy one electron > 300 keV");
 		cutNames->push_back("Internal probability < 0.01");
 		cutNames->push_back("External probability > 0.04");
-		//cutNames->push_back("Electron track length > 30 cm ");
+		cutNames->push_back("Electron track length > 30 cm ");
 		//cutNames->push_back("Track fires gg hit in first two layers of cells (0 or 1)");
-		//cutNames->push_back("Unassociated prompt Geiger hits 15 cm from the vertex on the foil == 0");
-		//cutNames->push_back("Unassociated prompt Geiger hits anywhere in the detector <= 2");
+		cutNames->push_back("Unassociated prompt Geiger hits 15 cm from the vertex on the foil == 0");
+		cutNames->push_back("Unassociated prompt Geiger hits anywhere in the detector <= 2");
 		cutNames->push_back("Not an hot spot");
 		cutNames->push_back("Tot energy > 3 MeV");
 		cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4");
@@ -1467,11 +1467,11 @@ namespace ProcessChannel {
 		    if (el_trkSign[0] == el_trkSign[1] )							  continue; hAnaCutFlow -> Fill(currentcut++);
 			if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3)     			  continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probInt > 0.01)                                  			  continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (probExt_0_to_1 < 0.04 or probExt_1_to_0 < 0.04) 			  continue; hAnaCutFlow -> Fill(currentcut++);
-			//if (el_pathLength_[0] < 30 or el_pathLength_[1] < 30) 			  continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (probExt_0_to_1 < 0.04 and probExt_1_to_0 < 0.04) 			  continue; hAnaCutFlow -> Fill(currentcut++);
+			if (el_pathLength_[0] < 30 or el_pathLength_[1] < 30) 			  continue; hAnaCutFlow -> Fill(currentcut++);
 			//if ( el_first_hit_layer_[0] > 1 or el_first_hit_layer_[1] > 1 )   continue; hAnaCutFlow -> Fill(currentcut++);
-			//if ( nCloseNAPromptHits > 0 ) 			                          continue; hAnaCutFlow -> Fill(currentcut++);
-			//if ( nFarNAPromptHits > 2   ) 			                          continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( nCloseNAPromptHits > 0 ) 			                          continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( nFarNAPromptHits > 2   ) 			                          continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( IsHotSpot(eVertex->z(), vertexSector) ) 	     			  continue; hAnaCutFlow -> Fill(currentcut++);
 			if (el_energy_[0] + el_energy_[1] < 3 )              			  continue; hAnaCutFlow -> Fill(currentcut++);
 			
