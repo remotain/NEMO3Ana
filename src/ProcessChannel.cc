@@ -67,23 +67,37 @@ namespace ProcessChannel {
 	void SetFirstRunNumber( int run ) { _RunFirst = run; };
 	void SetLastRunNumber( int run ) { _RunLast = run; };
 
+	bool CheckRunStatus(int status) {
+		
+		if ( status ==  1 ) return kTRUE;		
+		//else if ( status ==      2 ) return kTRUE;
+		//else if ( status ==     10 ) return kTRUE;
+		//else if ( status == 200002 ) return kTRUE;
+		//else if ( status == 200010 ) return kTRUE;
+		//else if ( status == 200001 ) return kTRUE;
+		
+		else                    	 return kFALSE;
+		
+	}
+
 	bool CheckRunNumber( int run ) {
 		
 		// Check first the run is not an excluded one (neutrons run)
-		int n_excluded_run = 86;
-		int excluded_run[] = {1486,1487,1488,1489,1490,1491,
-			1492,1493,1494,1495,1496,1497,1498,1499,1500,1501,
-			1502,1503,1504,1505,1506,1507,1508,1509,2890,2891,
-			2892,1644,1645,1646,1647,1648,1649,1650,1651,1652,
-			1653,1654,1655,1656,1657,1658,1659,2894,2895,3000,
-			3001,5024,5025,5026,5027,5028,5030,5031,5032,5033,
-			5034,5035,2774,2775,5036,5037,8532,8533,8534,8535,
-			5239,8536,8537,8538,8539,5240,5241,5242,5243,5244,
-			5245,5246,5247,5248,5249,5250,5251,5252,5253,5254}; 
-			
-		for ( int i = 0; i < n_excluded_run; i++ ) {
-			if( run == excluded_run[i] ) return kFALSE;
-		}
+		//int n_excluded_run = 95;
+		//int excluded_run[] = {1486,1487,1488,1489,1490,1491,
+		//	1492,1493,1494,1495,1496,1497,1498,1499,1500,1501,
+		//	1502,1503,1504,1505,1506,1507,1508,1509,2890,2891,
+		//	2892,1644,1645,1646,1647,1648,1649,1650,1651,1652,
+		//	1653,1654,1655,1656,1657,1658,1659,2894,2895,3000,
+		//	3001,5024,5025,5026,5027,5028,5030,5031,5032,5033,
+		//	5034,5035,2774,2775,5036,5037,8532,8533,8534,8535,
+		//	5239,8536,8537,8538,8539,5240,5241,5242,5243,5244,
+		//	5245,5246,5247,5248,5249,5250,5251,5252,5253,5254,
+		//	8541,8542,8543,8544,8545,8546,8547,8548,8549}; 
+		//	
+		//for ( int i = 0; i < n_excluded_run; i++ ) {
+		//	if( run == excluded_run[i] ) return kFALSE;
+		//}
 		
 		// Check run is within give run limits
 		if ( run >= _RunFirst && run <= _RunLast )     return kTRUE;
@@ -268,6 +282,7 @@ namespace ProcessChannel {
 		// Make Ana cut flow histogram
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
+	    cutNames->push_back("Run status = 1 (GOOD RUN) ");
 		cutNames->push_back("Cd-116 sector (18) ");
 	    cutNames->push_back("Energy of the electron > 500 keV ");
 		cutNames->push_back("Electron track length > 60 cm ");
@@ -405,12 +420,13 @@ namespace ProcessChannel {
 			hAnaCutFlow -> Fill(currentcut++);
 
 			// Implement selection
-		    if ( !CheckRunNumber(run) ) continue;
+		    if ( !CheckRunNumber(run) )                                      continue;
+			if ( !CheckRunStatus(runType) )                                  continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
 			if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++); // Cd foil only
-			if ( el_trkSign > 0)  						  continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
-			if ( el_energy < 0.5) 						  continue; hAnaCutFlow -> Fill(currentcut++); // E > 500 keV only
-			if ( el_pathLength < 60 )					  continue; hAnaCutFlow -> Fill(currentcut++);
-			if ( IsHotSpot(eVertex->z(), vertexSector) )  continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( el_trkSign > 0)  						                     continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
+			if ( el_energy < 0.5) 						                     continue; hAnaCutFlow -> Fill(currentcut++); // E > 500 keV only
+			if ( el_pathLength < 60 )					                     continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( IsHotSpot(eVertex->z(), vertexSector) )                     continue; hAnaCutFlow -> Fill(currentcut++);
 			// 3. no hotspot
 		
 			// Apply radon map
@@ -550,6 +566,7 @@ namespace ProcessChannel {
 		// Make Ana cut flow histogram
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
+		cutNames->push_back("Run status = 1 (GOOD RUN) ");
 		cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign");
 	    cutNames->push_back("Energy of the electron > 200 keV ");
@@ -869,23 +886,23 @@ namespace ProcessChannel {
 		
 	       	nb = tree->GetEntry(iEvt); nbytes += nb;
 			
-			
 			double el_vtx_z_mean_ = (el_vtx_z_[0]+el_vtx_z_[1])/2;
 				
 			unsigned int currentcut = 0;
 			hAnaCutFlow -> Fill(currentcut++);
 
 			// Implement selection
-		    if ( !CheckRunNumber(run) ) continue;
+		    if ( !CheckRunNumber(run) )                                         continue;
+			if ( !CheckRunStatus(runType) )                                     continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
 			if (sectorId != 18 || IsExcludedSpot(el_vtx_z_mean_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					  continue; hAnaCutFlow -> Fill(currentcut++);
-			if (el_energy_[0] < 0.2 or el_energy_[1] < 0.2)        			  continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (el_pathLength_[0] + el_pathLength_[1] < 60)        			  continue; hAnaCutFlow -> Fill(currentcut++);
-			if ( el_first_hit_layer_[0] > 1 or el_first_hit_layer_[1] > 1 )   continue; hAnaCutFlow -> Fill(currentcut++);
-			if (probInt < 0.01)                                    			  continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (probExt_0_to_1 > 0.01 or probExt_1_to_0 > 0.01)    			  continue; hAnaCutFlow -> Fill(currentcut++);
-			//if (nCloseNAPromptHits > 2 or nFarNAPromptHits > 2 ) 			  continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (elOnSameSide and nCloseNAPromptHits_Opposite != 0) 			  continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					    continue; hAnaCutFlow -> Fill(currentcut++);
+			if (el_energy_[0] < 0.2 or el_energy_[1] < 0.2)        			    continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (el_pathLength_[0] + el_pathLength_[1] < 60)        			    continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( el_first_hit_layer_[0] > 1 or el_first_hit_layer_[1] > 1 )     continue; hAnaCutFlow -> Fill(currentcut++);
+			if (probInt < 0.01)                                    			    continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (probExt_0_to_1 > 0.01 or probExt_1_to_0 > 0.01)    			    continue; hAnaCutFlow -> Fill(currentcut++);
+			//if (nCloseNAPromptHits > 2 or nFarNAPromptHits > 2 ) 			    continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (elOnSameSide and nCloseNAPromptHits_Opposite != 0) 			    continue; hAnaCutFlow -> Fill(currentcut++);
 			
 			// No electron hit the petals near the foils
 		    if ((el_caloiobt[0] > 1 and (el_calofcll[0] == 1 or el_calofcll[0] == 2)) or 
@@ -1270,6 +1287,7 @@ namespace ProcessChannel {
 		// Make Ana cut flow histogram
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
+		cutNames->push_back("Run status = 1 (GOOD RUN) ");
 		cutNames->push_back("Cd-116 sector (18) ");
 		//cutNames->push_back("Total energy from gamma clusters < 150 keV");
 	    cutNames->push_back("Track with opposite curvature");
@@ -1465,7 +1483,8 @@ namespace ProcessChannel {
 			hAnaCutFlow -> Fill(currentcut++);
 
 			// Implement selection
-			if ( !CheckRunNumber(run) ) continue;
+			if ( !CheckRunNumber(run) )                                       continue;
+			if ( !CheckRunStatus(runType) )                                   continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
 			//if ( totELowEnergyGammas > 0.150 or totEHighEnergyGammas > 0.150 ) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (sectorId != 18 || IsExcludedSpot(eVertex->z(), vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_trkSign[0] == el_trkSign[1] )							  continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1670,6 +1689,7 @@ namespace ProcessChannel {
 		// Make Ana cut flow histogram
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
+		cutNames->push_back("Run status = 1 (GOOD RUN) ");
 		cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign ");
 	    cutNames->push_back("One gamma cluster with energy > 200 keV ");
@@ -1735,6 +1755,7 @@ namespace ProcessChannel {
 		// Declaration of leaf types
 	    Int_t           run                      ; tree->SetBranchAddress("run"                   , &run                   );
 	    Int_t           event                    ; tree->SetBranchAddress("event"                 , &event                 );
+	    Int_t           runType                  ; tree->SetBranchAddress("runType"               , &runType               );
 	    Int_t           timeStampSec             ; tree->SetBranchAddress("timeStampSec"          , &timeStampSec          );
 	    Int_t           timeStampNanoS           ; tree->SetBranchAddress("timeStampNanoS"        , &timeStampNanoS        );
 	    Double_t        eventTime                ; tree->SetBranchAddress("eventTime"             , &eventTime             );
@@ -1856,7 +1877,8 @@ namespace ProcessChannel {
 	          gmc_ext_prob_g_to_e_[0] : gmc_ext_prob_e_to_g_[0];
 
 			// Implement selection
-			if ( !CheckRunNumber(run) ) continue;
+			if ( !CheckRunNumber(run) )                                     continue;
+			if ( !CheckRunStatus(runType) )                                 continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
 		    if ( sectorId != 18 or IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( el_trkSign >= 0 )											continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( nHighEnergyClusters_ != 1 or gmc_energy_[0] < 0.2)			continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1990,6 +2012,7 @@ namespace ProcessChannel {
 		// Make Ana cut flow histogram
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
+		cutNames->push_back("Run status = 1 (GOOD RUN) ");
 	    cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign ");
 	    cutNames->push_back("Two gamma cluster with energy > 200 keV ");
@@ -2065,6 +2088,7 @@ namespace ProcessChannel {
 		// Declaration of leaf types
 	    Int_t           run                      ; tree->SetBranchAddress("run"                   , &run                   );
 	    Int_t           event                    ; tree->SetBranchAddress("event"                 , &event                 );
+	    Int_t           runType                  ; tree->SetBranchAddress("runType"               , &runType               );
 	    Int_t           timeStampSec             ; tree->SetBranchAddress("timeStampSec"          , &timeStampSec          );
 	    Int_t           timeStampNanoS           ; tree->SetBranchAddress("timeStampNanoS"        , &timeStampNanoS        );
 	    Double_t        eventTime                ; tree->SetBranchAddress("eventTime"             , &eventTime             );
@@ -2180,7 +2204,8 @@ namespace ProcessChannel {
 				
 			unsigned int currentcut = 0;
 			hAnaCutFlow -> Fill(currentcut++);
-			if ( !CheckRunNumber(run) ) continue;
+			if ( !CheckRunNumber(run) )                                     continue;
+			if ( !CheckRunStatus(runType) )                                 continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
 	        if ( sectorId != 18 or IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow->Fill(currentcut++);
 			if ( el_trkSign >=0 ) 											continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( nHighEnergyClusters_ != 2 or
@@ -2351,6 +2376,7 @@ namespace ProcessChannel {
 		// Make Ana cut flow histogram
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
+		cutNames->push_back("Run status = 1 (GOOD RUN) ");
 	    cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign ");
 	    cutNames->push_back("Three gamma cluster with energy > 200 keV");
@@ -2413,6 +2439,7 @@ namespace ProcessChannel {
 		// Declaration of leaf types
 	    Int_t           run                      ; tree->SetBranchAddress("run"                   , &run                   );
 	    Int_t           event                    ; tree->SetBranchAddress("event"                 , &event                 );
+	    Int_t           runType                  ; tree->SetBranchAddress("runType"               , &runType               );
 	    Int_t           timeStampSec             ; tree->SetBranchAddress("timeStampSec"          , &timeStampSec          );
 	    Int_t           timeStampNanoS           ; tree->SetBranchAddress("timeStampNanoS"        , &timeStampNanoS        );
 	    Double_t        eventTime                ; tree->SetBranchAddress("eventTime"             , &eventTime             );
@@ -2528,7 +2555,8 @@ namespace ProcessChannel {
 				
 			unsigned int currentcut = 0;
 			hAnaCutFlow -> Fill(currentcut++);
-			if ( !CheckRunNumber(run) ) continue;
+			if ( !CheckRunNumber(run) )                                     continue;
+			if ( !CheckRunStatus(runType) )                                 continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
 	        if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow->Fill(currentcut++);
 			if ( el_trkSign >=0 ) 											continue; hAnaCutFlow->Fill(currentcut++);
 	        if ( nHighEnergyClusters_ != 3  or gmc_energy_[0] < 0.2 or 
@@ -2683,6 +2711,7 @@ namespace ProcessChannel {
 		// Make Ana cut flow histogram
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
+		cutNames->push_back("Run status = 1 (GOOD RUN) ");
 		cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign ");
 	    cutNames->push_back("One gamma cluster with energy > 150 keV ");
@@ -2769,6 +2798,7 @@ namespace ProcessChannel {
 		// Declaration of leaf types
 	    Int_t           run                      ; tree->SetBranchAddress("run"                   , &run                   );
 	    Int_t           event                    ; tree->SetBranchAddress("event"                 , &event                 );
+	    Int_t           runType                  ; tree->SetBranchAddress("runType"               , &runType               );
 	    Int_t           timeStampSec             ; tree->SetBranchAddress("timeStampSec"          , &timeStampSec          );
 	    Int_t           timeStampNanoS           ; tree->SetBranchAddress("timeStampNanoS"        , &timeStampNanoS        );
 	    Double_t        eventTime                ; tree->SetBranchAddress("eventTime"             , &eventTime             );
@@ -2877,6 +2907,7 @@ namespace ProcessChannel {
 
 			// Implement selection
 			if ( !CheckRunNumber(run) ) continue;
+			if ( !CheckRunStatus(runType) )                                 continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
 		    if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( el_trkSign >=0 ) 											continue; hAnaCutFlow->Fill(currentcut++);
 			if ( nHighEnergyClusters_ != 1 ) 	      						continue; hAnaCutFlow -> Fill(currentcut++);
@@ -3067,6 +3098,7 @@ namespace ProcessChannel {
 		// Make Ana cut flow histogram
 	    std::vector<std::string>* cutNames = new std::vector<std::string>();
 	    cutNames->push_back("All events ");
+		cutNames->push_back("Run status = 1 (GOOD RUN) ");
 	    cutNames->push_back("Cd-116 sector (18) ");
 	    cutNames->push_back("Negative electron track sign");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
@@ -3238,7 +3270,8 @@ namespace ProcessChannel {
 				
 			unsigned int currentcut = 0;
 			hAnaCutFlow -> Fill(currentcut++);
-			if ( !CheckRunNumber(run) ) continue;
+			if ( !CheckRunNumber(run) )                                      continue;
+			if ( !CheckRunStatus(runType) )                                  continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
 	        if(sectorId != 18 || IsExcludedSpot(eVertex->z(), vertexSector)) continue; hAnaCutFlow->Fill(currentcut++);
 	        if(el_trkSign >= 0 ) 											 continue; hAnaCutFlow->Fill(currentcut++);
 			if(el_energy   < 0.3)                       					 continue; hAnaCutFlow->Fill(currentcut++);

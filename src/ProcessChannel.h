@@ -20,9 +20,10 @@ namespace ProcessChannel {
 	TString GetOutputFilePath ();
 	TString GetOutputFileName ();
 	
-	void SetFirstRunNumber ( int run );
-	void SetLastRunNumber  ( int run );
-	bool CheckRunNumber    ( int run );
+	void SetFirstRunNumber ( int run    );
+	void SetLastRunNumber  ( int run    );
+	bool CheckRunNumber    ( int run    );
+	bool CheckRunStatus    ( int status );	
 		
 	enum ChannelType_t {
 		kOneElectron                   , 
