@@ -2,15 +2,27 @@
 
 	gSystem->Load("/afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/build/lib/libNEMO3Ana.so");
 	
-	// Run time
-	DataManagement::SetTotalRunTime            (    167629292);
-	DataManagement::SetTotalAcceptedRunTime    (    167629292);
-	DataManagement::SetTotalDeadTime           (1868832.32295);
-	DataManagement::SetTotalAcceptedDeadTime   (1868832.32295); 
-	DataManagement::SetTotalAcceptedRunTimeP1  (     33859178); 
-	DataManagement::SetTotalAcceptedDeadTimeP1 ( 457955.57403);
-	DataManagement::SetTotalAcceptedRunTimeP2  (    133770114);
-	DataManagement::SetTotalAcceptedDeadTimeP2 (1410876.74892);
+	// Run time STANDARD RUN
+	// DataManagement::SetTotalRunTime            (    167629292);
+	// DataManagement::SetTotalAcceptedRunTime    (    167629292);
+	// DataManagement::SetTotalDeadTime           (1868832.32295);
+	// DataManagement::SetTotalAcceptedDeadTime   (1868832.32295); 
+	// DataManagement::SetTotalAcceptedRunTimeP1  (     33859178); 
+	// DataManagement::SetTotalAcceptedDeadTimeP1 ( 457955.57403);
+	// DataManagement::SetTotalAcceptedRunTimeP2  (    133770114);
+	// DataManagement::SetTotalAcceptedDeadTimeP2 (1410876.74892);
+
+	// Run time GOOD RUN
+	DataManagement::SetTotalRunTime            (    149287469.000);
+	DataManagement::SetTotalAcceptedRunTime    (    149287469.000);
+	DataManagement::SetTotalDeadTime           (      1673710.109);
+	DataManagement::SetTotalAcceptedDeadTime   (      1673710.109);
+	 
+	DataManagement::SetTotalAcceptedRunTimeP1  (     29308968.000); 
+	DataManagement::SetTotalAcceptedDeadTimeP1 (       397833.032);
+	DataManagement::SetTotalAcceptedRunTimeP2  (    119978501.000);
+	DataManagement::SetTotalAcceptedDeadTimeP2 (      1275877.077);
+
 	
 	double Data_AccptRunTimeP1 = DataManagement::GetTotalAcceptedRunTimeP1() - DataManagement::GetTotalAcceptedDeadTimeP1();
 	double Data_AccptRunTimeP2 = DataManagement::GetTotalAcceptedRunTimeP2() - DataManagement::GetTotalAcceptedDeadTimeP2();
@@ -62,6 +74,7 @@
 	DataManagement::AddDataSet ( new DataSet ( "FeShield_Bi214"    , 3.9999433937e+12 ,  141497952*Phase1Fraction ,  141497952*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "FeShield_Tl208"    , 199999206400     ,   25062875*Phase1Fraction ,   25062875*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "MuMetal_Co60"      ,  23999660700     ,   42411984*Phase1Fraction ,   42411984*Phase2Fraction ) );
+	DataManagement::AddDataSet ( new DataSet ( "MuMetal_Pa234m"    , 1.0199378314e+12 ,    8367839*Phase1Fraction ,   8367839*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "MuMetal_g1000"     ,  29999948100     ,   17273818*Phase1Fraction ,   17273818*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "Mylar_Bi214"       ,    100000000     ,   63403711*Phase1Fraction ,   63403711*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "Mylar_Pb214"       ,    100000000     ,   27386210*Phase1Fraction ,   27386210*Phase2Fraction ) );
@@ -87,6 +100,7 @@
 	DataManagement::AddDataSet ( new DataSet ( "SteelFrame_Bi214"  ,  14999862300     ,   32697117*Phase1Fraction ,   32697117*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "SteelFrame_Co60"   ,   7999944800     ,   29122389*Phase1Fraction ,   29122389*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "SteelFrame_K40"    ,  59999460900     ,   22205606*Phase1Fraction ,   22205606*Phase2Fraction ) );
+	DataManagement::AddDataSet ( new DataSet ( "SteelFrame_Pa234m" , 4.001938928e+11  ,  131115185*Phase1Fraction ,   131115185*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "SteelFrame_Tl208"  ,   2999970300     ,   15164507*Phase1Fraction ,   15164507*Phase2Fraction ) );
 
 }
