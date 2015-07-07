@@ -1729,6 +1729,11 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130      ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_warm" , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130      ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_cold" , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130      ) );
+
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy"     , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.1 MeV", 60, 0, 6           ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy"       , d->GetName()) , "; E_{e}; No. Events / 0.1 MeV"              ,  60, 0, 6  ) );
+		histo_collection -> Add( new TH1D ( TString::Format("%s_h_g_energy"       , d->GetName()) , "; E_{#gamma}; No. Events / 0.1 MeV"         ,  60, 0, 6  ) );
+
 						
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy_P1"      , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.1 MeV", 60, 0, 6           ) );
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy_P1"       , d->GetName()) , "; E_{e}; No. Events / 0.1 MeV"              ,  60, 0, 6  ) );
@@ -1935,6 +1940,9 @@ namespace ProcessChannel {
 			else if( IsColdSpot(el_vtx_z_, vertexSector) )
 				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_cold" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
 
+			histo_collection->Find(TString::Format("%s_h_tot_energy" , d->GetName()) ) -> Fill(el_energy_ + gmc_energy_[0], weight);
+			histo_collection->Find(TString::Format("%s_h_e_energy"   , d->GetName()) ) -> Fill(el_energy_, weight);
+			histo_collection->Find(TString::Format("%s_h_g_energy"   , d->GetName()) ) -> Fill(gmc_energy_[0], weight);
 
 		    if (run < 3396) {
 					

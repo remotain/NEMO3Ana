@@ -7,6 +7,7 @@
 #include "Component.h"
 
 #include "TGraph.h"
+#include "TH2F.h"
 #include "TCanvas.h"
 #include "TString.h"
 #include "TMath.h"
@@ -66,7 +67,7 @@ namespace Fit{
 					
 				} else {
 					
-					l_likelihood += - 1;
+					l_likelihood += -TMath::LnGamma(h_data->GetBinContent(i)+1);
 					
 				}
 							
@@ -77,17 +78,19 @@ namespace Fit{
 			while ( Component * comp = (Component *) next3() ){
 				
 				if( comp->IsGausConstraint() ){
-						l_likelihood += TMath::Log( TMath::Gaus(x[comp->GetParameter()->GetOrder()]*comp->GetAdjustment(), comp->GetAdjustment(), comp->GetNSigma()*comp->GetAdjustmentErr(), true) );
-					}
+					l_likelihood += TMath::Log( TMath::Gaus(x[comp->GetParameter()->GetOrder()]*comp->GetAdjustment(), comp->GetAdjustment(), comp->GetAdjustmentErr()*x[comp->GetParameter()->GetOrder()], true) );
+					//l_likelihood += TMath::Log( TMath::Gaus(x[comp->GetParameter()->GetOrder()]*comp->GetAdjustment(), comp->GetAdjustment(), comp->GetNSigma()*comp->GetAdjustmentErr()*x[comp->GetParameter()->GetOrder()], true) );
 				}
-				
+			}
+			
 			h_mc->Delete();
 		
 		}
 		
 		// Return -log(L)
-		return -l_likelihood;
 		
+		return -l_likelihood;
+	
 	}
 	
 	//////////////////////////////////////////////////////////////////////////////
@@ -99,6 +102,8 @@ namespace Fit{
 	void DoDrawContour( unsigned int nstep) {_DoDrawContour = true; _nStepContour = nstep; };
 	bool _DoDrawScan = false; unsigned int _nStepScan = 1000;
 	void DoDrawScan( unsigned int nstep ) {_DoDrawScan = true; _nStepScan = nstep; };
+	bool _DoDrawCorrelationMatrix = false;
+	void DoDrawCorrelationMatrix(){ _DoDrawCorrelationMatrix = true; };
 		
 	void Run(const char * minimizerType, const char * algoType){
 		
@@ -231,6 +236,27 @@ namespace Fit{
 			}	
 		}
 		
+		if( _DoDrawCorrelationMatrix ){ 
+			
+			TCanvas * c1 = new TCanvas("CorrelationMatrix", "Correlation Matrix");
+			TH2F * CorrelationMatrix = new TH2F("CorrelationMatrix", "CorrelationMatrix", min->NDim(), 0, min->NDim(), min->NDim(), 0, min->NDim());
+			CorrelationMatrix->GetZaxis()->SetRangeUser(-1,1);
+			CorrelationMatrix->GetXaxis()->SetTitleOffset(4.);						
+			CorrelationMatrix->GetYaxis()->SetTitleOffset(4.);						
+						
+			for( int i = 0; i < min->NDim(); i++ ){	
+				for( int j = 0; j < min->NDim(); j++ ){
+					
+					CorrelationMatrix->GetXaxis()->SetBinLabel(i, min->VariableName(i).c_str() );
+					CorrelationMatrix->GetYaxis()->SetBinLabel(i, min->VariableName(i).c_str() );
+
+					CorrelationMatrix->SetBinContent(i,j, min->Correlation(i,j));
+			
+				}
+			}
+			CorrelationMatrix->Draw("COLZ,TEXT");
+		}
+				
 		// Compute the chi2
 		double dof = 0;
 		TIter next3( DataManagement::GetObservableCollection() );
@@ -238,7 +264,6 @@ namespace Fit{
 			dof += obs->GetFitRangeUpBin() - obs->GetFitRangeLowBin();
 		} dof -= min->NFree();
 		std::cout << "CHI^2/dof = " << 2*min->MinValue() << "/" << dof << " = " << 2*min->MinValue()/dof << std::endl;	
-		
 		
 	}
 

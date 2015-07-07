@@ -7,5 +7,6 @@ namespace Fit {
 	
 	void DoDrawContour( unsigned int nstep = 100);
 	void DoDrawScan( unsigned int nstep  = 1000);
+	void DoDrawCorrelationMatrix();
 	
 };

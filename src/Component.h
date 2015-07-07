@@ -31,7 +31,7 @@ public:
 			_FillColor        = kWhite;
 			_LineColor        = kBlack;
 			_IsGausConstraint = false;
-			_nSigma           = 0; 
+			_nSigma           = 1; 
 			
 		};
 
@@ -74,7 +74,7 @@ public:
 			_FillColor        = kWhite;
 			_LineColor        = kBlack;
 			_IsGausConstraint = false;
-			_nSigma           = 0; 
+			_nSigma           = 1; 
 				
 			Info("Component()","New component %s (%s,%s,%f)", GetName(), _DataSet->GetName(), "Null", _Adjustment);
 	
