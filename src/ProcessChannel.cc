@@ -312,14 +312,17 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_totGammaEnergy"        , d->GetName()) , "; #Sigma E_{#gamma}^{high} / MeV; No.Events / 0.05 MeV", 50, 0, 2.5) );
 		
 		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect"         , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );
+		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_hot"     , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );
 		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_warm"    , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );		
 		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_cold"    , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );		
 
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ"               , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );		
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_hot"           , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_warm"          , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_cold"          , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
 
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector"          , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector_hot"      , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector_warm"     , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexSector_cold"     , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 
@@ -416,19 +419,6 @@ namespace ProcessChannel {
 		
 	       	nb = tree->GetEntry(iEvt); nbytes += nb;
 
-			unsigned int currentcut = 0;
-			hAnaCutFlow -> Fill(currentcut++);
-
-			// Implement selection
-		    if ( !CheckRunNumber(run) )                                      continue;
-			if ( !CheckRunStatus(runType) )                                  continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
-			if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++); // Cd foil only
-			if ( el_trkSign > 0)  						                     continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
-			if ( el_energy < 0.5) 						                     continue; hAnaCutFlow -> Fill(currentcut++); // E > 500 keV only
-			if ( el_pathLength < 60 )					                     continue; hAnaCutFlow -> Fill(currentcut++);
-			if ( IsHotSpot(eVertex->z(), vertexSector) )                     continue; hAnaCutFlow -> Fill(currentcut++);
-			// 3. no hotspot
-		
 			// Apply radon map
 		    double weight = 1;    
 			std::string name (d->GetName());
@@ -445,7 +435,30 @@ namespace ProcessChannel {
 	        if(std::string::npos != name.find("Co60")){
 	        	weight *= exp(-(log(2)/(1925.2*86400.0))*eventTime);
 	        }
-		
+
+			unsigned int currentcut = 0;
+			hAnaCutFlow -> Fill(currentcut++);
+
+			// Implement selection
+		    if ( !CheckRunNumber(run) )                                      continue;
+			if ( !CheckRunStatus(runType) )                                  continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
+			if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++); // Cd foil only
+			if ( el_trkSign > 0)  						                     continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
+			if ( el_energy < 0.5) 						                     continue; hAnaCutFlow -> Fill(currentcut++); // E > 500 keV only
+			if ( el_pathLength < 60 )					                     continue; hAnaCutFlow -> Fill(currentcut++);
+			
+			
+			if ( IsHotSpot(eVertex->z(), vertexSector) ){
+			
+				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_hot" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
+				histo_collection->Find( TString::Format("%s_h_vertexZ_hot"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
+				histo_collection->Find( TString::Format("%s_h_vertexSector_hot"  , d->GetName()) ) -> Fill(vertexSector, weight);
+			
+				continue; hAnaCutFlow -> Fill(currentcut++);
+				
+			}
+			// 3. no hotspot
+				
 			// Fill histogram
 		    histo_collection->Find( TString::Format("%s_h_run"              , d->GetName()) ) -> Fill(run                   , weight);
 		    histo_collection->Find( TString::Format("%s_h_electronEnergy"   , d->GetName()) ) -> Fill(el_energy             , weight);
