@@ -1907,7 +1907,13 @@ namespace ProcessChannel {
 			//	 gmc_nNAPromptHits_[0] == 0 and gmc_nNADelayedHits_[0] == 0) ) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( gmc_int_prob_[0] < 0.04 )            						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( ext_prob > 0.01 ) 			          						continue; hAnaCutFlow -> Fill(currentcut++);
-			if ( IsHotSpot(el_vtx_z_, vertexSector) ) 						continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( IsHotSpot(el_vtx_z_, vertexSector) ){
+
+				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_hot" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);	
+				continue; hAnaCutFlow -> Fill(currentcut++);
+
+			}
+			
 			// Apply radon map
 		    double weight = 1; 
 			std::string name (d->GetName());   
