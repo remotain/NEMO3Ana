@@ -310,11 +310,12 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_trueSourceId"          , d->GetName()) , "; True Source; No.Events",   4, -1.5, 2.5                          ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_nGammas"               , d->GetName()) , "; No. #gammas; No.Events", 15, -0.5, 14.5                          ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_totGammaEnergy"        , d->GetName()) , "; #Sigma E_{#gamma}^{high} / MeV; No.Events / 0.05 MeV", 50, 0, 2.5) );
-		
-		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect"         , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );
-		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_hot"     , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );
-		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_warm"    , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );		
-		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_cold"    , d->GetName()) , "; Sector ; Z_{vertex} / cm ; ", 500, 18, 19 , 520, -130, 130       ) );		
+
+		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_all"          , d->GetName()) , "; Sector ; Z (cm) ; ", 250, 18, 19 , 130, -120, 120       ) );		
+		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect"         , d->GetName()) , "; Sector ; Z (cm) ; ", 250, 18, 19 , 130, -120, 120       ) );
+		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_hot"     , d->GetName()) , "; Sector ; Z (cm) ; ", 250, 18, 19 , 130, -120, 120       ) );
+		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_warm"    , d->GetName()) , "; Sector ; Z (cm) ; ", 250, 18, 19 , 130, -120, 120       ) );		
+		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_cold"    , d->GetName()) , "; Sector ; Z (cm) ; ", 250, 18, 19 , 130, -120, 120       ) );		
 
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ"               , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );		
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_vertexZ_hot"           , d->GetName()) , "; Z_{vertex} / cm ; No.Events / cm", 260, -130, 130                ) );
@@ -442,7 +443,12 @@ namespace ProcessChannel {
 			// Implement selection
 		    if ( !CheckRunNumber(run) )                                      continue;
 			if ( !CheckRunStatus(runType) )                                  continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
-			if ( sectorId != 18 || IsExcludedSpot(el_vtx_z_, vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++); // Cd foil only
+			
+			// Keep sector 18. Exclude calibration tube
+			if ( sectorId != 18 ) continue; 
+			histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_all" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);
+			if ( IsExcludedSpot(el_vtx_z_, vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++);
+			
 			if ( el_trkSign > 0)  						                     continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
 			if ( el_energy < 0.5) 						                     continue; hAnaCutFlow -> Fill(currentcut++); // E > 500 keV only
 			if ( el_pathLength < 60 )					                     continue; hAnaCutFlow -> Fill(currentcut++);
@@ -454,9 +460,9 @@ namespace ProcessChannel {
 				histo_collection->Find( TString::Format("%s_h_vertexZ_hot"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
 				histo_collection->Find( TString::Format("%s_h_vertexSector_hot"  , d->GetName()) ) -> Fill(vertexSector, weight);
 			
-				continue; hAnaCutFlow -> Fill(currentcut++);
-				
-			}
+				continue;
+			
+			} hAnaCutFlow -> Fill(currentcut++);
 			// 3. no hotspot
 				
 			// Fill histogram
@@ -1738,10 +1744,11 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_nLowEnergyGamma" , d->GetName()) , "; N_{#gamma} low E; No.Events", 20, -0.5, 19.5							) );                     
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_layer_vs_side"   , d->GetName()) , "Layer vs Side; Side; Layer", 4, -1.5, 2.5, 10, -0.5, 9.5				) );			            
 
-	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"      , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130      ) );
-	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130      ) );
-	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_warm" , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130      ) );
-	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_cold" , d->GetName()) , "; Sector Number; Z_{vertex} / cm", 500, 18, 19, 520, -130, 130      ) );
+		histo_collection -> Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_all"      , d->GetName()) , "; Sector; Z (cm)", 250, 18, 19, 130, -120, 120      ) );		
+	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"      , d->GetName()) , "; Sector; Z (cm)", 250, 18, 19, 130, -120, 120      ) );
+	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) , "; Sector; Z (cm)", 250, 18, 19, 130, -120, 120      ) );
+	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_warm" , d->GetName()) , "; Sector; Z (cm)", 250, 18, 19, 130, -120, 120      ) );
+	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_cold" , d->GetName()) , "; Sector; Z (cm)", 250, 18, 19, 130, -120, 120      ) );
 
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_tot_energy"     , d->GetName()) , "; E_{#gamma} + E_{e}; No. Events / 0.1 MeV", 60, 0, 6           ) );
 		histo_collection -> Add( new TH1D ( TString::Format("%s_h_e_energy"       , d->GetName()) , "; E_{e}; No. Events / 0.1 MeV"              ,  60, 0, 6  ) );
@@ -1897,7 +1904,12 @@ namespace ProcessChannel {
 			// Implement selection
 			if ( !CheckRunNumber(run) )                                     continue;
 			if ( !CheckRunStatus(runType) )                                 continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
-		    if ( sectorId != 18 or IsExcludedSpot(el_vtx_z_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
+		    
+			// Keep sector 18. Exclude calibration tube.
+			if ( sectorId != 18) continue;			
+			histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_all", d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);	
+			if ( IsExcludedSpot(el_vtx_z_, vertexSector))	continue; hAnaCutFlow -> Fill(currentcut++);
+				
 			if ( el_trkSign >= 0 )											continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( nHighEnergyClusters_ != 1 or gmc_energy_[0] < 0.2)			continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( el_energy_ < 0.3 )                   						continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1907,12 +1919,12 @@ namespace ProcessChannel {
 			//	 gmc_nNAPromptHits_[0] == 0 and gmc_nNADelayedHits_[0] == 0) ) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( gmc_int_prob_[0] < 0.04 )            						continue; hAnaCutFlow -> Fill(currentcut++);
 		    if ( ext_prob > 0.01 ) 			          						continue; hAnaCutFlow -> Fill(currentcut++);
+			
+			// Exclude hot spots
 			if ( IsHotSpot(el_vtx_z_, vertexSector) ){
-
 				histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect_hot" , d->GetName()) ) -> Fill(vertexSector, el_vtx_z_);	
-				continue; hAnaCutFlow -> Fill(currentcut++);
-
-			}
+				continue; 
+			} hAnaCutFlow -> Fill(currentcut++);
 			
 			// Apply radon map
 		    double weight = 1; 
