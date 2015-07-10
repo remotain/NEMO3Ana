@@ -311,7 +311,7 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_nGammas"               , d->GetName()) , "; No. #gammas; No.Events", 15, -0.5, 14.5                          ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_totGammaEnergy"        , d->GetName()) , "; #Sigma E_{#gamma}^{high} / MeV; No.Events / 0.05 MeV", 50, 0, 2.5) );
 
-		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_all"          , d->GetName()) , "; Sector ; Z (cm) ; ", 250, 18, 19 , 130, -120, 120       ) );		
+		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_all"          , d->GetName()) , "; Sector ; Z (cm) ; ", 250, 18, 19 , 130, -120, 120       ) );		
 		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect"         , d->GetName()) , "; Sector ; Z (cm) ; ", 250, 18, 19 , 130, -120, 120       ) );
 		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_hot"     , d->GetName()) , "; Sector ; Z (cm) ; ", 250, 18, 19 , 130, -120, 120       ) );
 		histo_collection->Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_warm"    , d->GetName()) , "; Sector ; Z (cm) ; ", 250, 18, 19 , 130, -120, 120       ) );		
@@ -1744,7 +1744,7 @@ namespace ProcessChannel {
 	    histo_collection -> Add( new TH1D( TString::Format("%s_h_nLowEnergyGamma" , d->GetName()) , "; N_{#gamma} low E; No.Events", 20, -0.5, 19.5							) );                     
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_layer_vs_side"   , d->GetName()) , "Layer vs Side; Side; Layer", 4, -1.5, 2.5, 10, -0.5, 9.5				) );			            
 
-		histo_collection -> Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_all"      , d->GetName()) , "; Sector; Z (cm)", 250, 18, 19, 130, -120, 120      ) );		
+		histo_collection -> Add( new TH2D ( TString::Format("%s_h_vtx_z_vs_sect_all" , d->GetName()) , "; Sector; Z (cm)", 250, 18, 19, 130, -120, 120      ) );		
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect"      , d->GetName()) , "; Sector; Z (cm)", 250, 18, 19, 130, -120, 120      ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_hot"  , d->GetName()) , "; Sector; Z (cm)", 250, 18, 19, 130, -120, 120      ) );
 	    histo_collection -> Add( new TH2D( TString::Format("%s_h_vtx_z_vs_sect_warm" , d->GetName()) , "; Sector; Z (cm)", 250, 18, 19, 130, -120, 120      ) );
