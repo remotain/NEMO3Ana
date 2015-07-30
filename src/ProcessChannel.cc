@@ -917,7 +917,7 @@ namespace ProcessChannel {
 		    if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					    continue; hAnaCutFlow -> Fill(currentcut++);
 			if (el_energy_[0] < 0.2 or el_energy_[1] < 0.2)        			    continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_pathLength_[0] + el_pathLength_[1] < 60)        			    continue; hAnaCutFlow -> Fill(currentcut++);
-			if ( el_first_hit_layer_[0] > 1 or el_first_hit_layer_[1] > 1 )     continue; hAnaCutFlow -> Fill(currentcut++);
+			if ( el_first_hit_layer_[0] > 0 or el_first_hit_layer_[1] > 0 )     continue; hAnaCutFlow -> Fill(currentcut++);
 			if (probInt < 0.01)                                    			    continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probExt_0_to_1 > 0.01 or probExt_1_to_0 > 0.01)    			    continue; hAnaCutFlow -> Fill(currentcut++);
 			//if (nCloseNAPromptHits > 2 or nFarNAPromptHits > 2 ) 			    continue; hAnaCutFlow -> Fill(currentcut++);
