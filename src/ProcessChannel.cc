@@ -590,13 +590,13 @@ namespace ProcessChannel {
 		cutNames->push_back("Negative track sign");
 	    cutNames->push_back("Energy of the electron > 200 keV ");
 		cutNames->push_back("Sum track length > 60 cm ");
-		cutNames->push_back("Track fires gg hit in first two layers of cells (0 or 1)");
+		cutNames->push_back("Track fires gg hit in first layers of cells (0)");
 		cutNames->push_back("Internal probability > 0.01");
 		cutNames->push_back("External probability < 0.01");
 		//cutNames->push_back("Hits not associated to the track <= 2");
 		cutNames->push_back("No unassociated hits opposite to the electrons");
 	    cutNames->push_back("No electron hits petal near the foil");
-		cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4 cm");
+		//cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4 cm");
 		cutNames->push_back("Not an hot spot");
 		
 	    unsigned int nCuts = cutNames->size();
@@ -676,6 +676,7 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr"                 , d->GetName()) , "; cm; No.Events / 1mm", 300,   0, 30                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_el_0_x"             , d->GetName()) , "; cm; No.Events / 1mm", 300, -170, 170                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_el_0_y"             , d->GetName()) , "; cm; No.Events / 1mm", 300, -170, 170                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_el_0_z"             , d->GetName()) , "; cm; No.Events / 1mm", 300, -130, 130                              ) );
@@ -962,7 +963,7 @@ namespace ProcessChannel {
 
 			// Last cut on vertex position on foil
 		    TVector3 delta_v = el_vtx_min - el_vtx_max;
-		    if (TMath::Abs(delta_v.z()) > 8 or delta_v.Perp() > 4) continue; hAnaCutFlow -> Fill(currentcut++);
+		    //if (TMath::Abs(delta_v.z()) > 8 or delta_v.Perp() > 4) continue; hAnaCutFlow -> Fill(currentcut++);
 
 			if ( IsHotSpot(eVertex->z(), vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++);
 
@@ -1050,6 +1051,7 @@ namespace ProcessChannel {
 		    histo_collection->Find(TString::Format("%s_h_vtx_dx"                 , d->GetName()) ) -> Fill(delta_v.x()            , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_dy"                 , d->GetName()) ) -> Fill(delta_v.y()            , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_dz"                 , d->GetName()) ) -> Fill(delta_v.z()            , weight);
+		    histo_collection->Find(TString::Format("%s_h_vtx_dr"                 , d->GetName()) ) -> Fill(delta_v.Perp()         , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_el_0_x"             , d->GetName()) ) -> Fill(el_vtx_x_[0]           , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_el_0_y"             , d->GetName()) ) -> Fill(el_vtx_y_[0]           , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_el_0_z"             , d->GetName()) ) -> Fill(el_vtx_z_[0]           , weight);
