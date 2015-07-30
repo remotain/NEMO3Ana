@@ -1,0 +1,9 @@
+Data 40 /unix/nemo2/users/remoto/analysis/Cadmium/DataLists/Data/DataFilesMCRunList.lst
+Mylar_Bi214 10 /unix/nemo2/users/remoto/analysis/Cadmium/DataLists/InternalBackgrounds/Mylar/DataFilesMylar_Bi214.lst
+MoCom_Bi214 20 /unix/nemo2/users/remoto/analysis/Cadmium/DataLists/InternalBackgrounds/Mo100/DataFilesMoCom_Bi214.lst
+MoMet_Bi214 20 /unix/nemo2/users/remoto/analysis/Cadmium/DataLists/InternalBackgrounds/Mo100/DataFilesMoMet_Bi214.lst
+Mylar_Bi214 10 /unix/nemo2/users/remoto/analysis/Cadmium/DataLists/InternalBackgrounds/Mylar/DataFilesMylar_Bi214.lst
+Air_Bi214 1 /unix/nemo2/users/remoto/analysis/Cadmium/DataLists/RadonBackgrounds/DataFilesAir_Bi214.lst
+SFoil_Bi214 20 /unix/nemo2/users/remoto/analysis/Cadmium/DataLists/RadonBackgrounds/DataFilesSFoil_Bi214.lst
+SScin_Bi214 3 /unix/nemo2/users/remoto/analysis/Cadmium/DataLists/RadonBackgrounds/DataFilesSScin_Bi214.lst
+SWire_Bi214 20 /unix/nemo2/users/remoto/analysis/Cadmium/DataLists/RadonBackgrounds/DataFilesSWire_Bi214.lst

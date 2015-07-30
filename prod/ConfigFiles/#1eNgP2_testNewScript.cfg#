@@ -1,0 +1,15 @@
+q# This is a comment
+# This 2
+RunList /home/cvilela/caAnalysis/Runlists/RecoRunList_P2_Standard.lst
+
+ExecName Ca1eExe
+
+Queue medium
+
+CfgFile /home/cvilela/caAnalysis/Scripts/ConfigFiles/aConfigFile_P2.txt
+
+OutPath /home/cvilela/unix_nemo3/HerewardDevel/TestEventAccounting/testAccounting/
+RelVer devel
+RelPath /home/cvilela/unix_nemo3/HerewardDevel/TestEventAccounting/Hereward_devel/
+SuperNemoConfig /home/torre/SuperNEMO/SNemoPkgBuilder/snemosoft.sh
+Nev -1
