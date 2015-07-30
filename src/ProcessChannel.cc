@@ -596,7 +596,7 @@ namespace ProcessChannel {
 		//cutNames->push_back("Hits not associated to the track <= 2");
 		cutNames->push_back("No unassociated hits opposite to the electrons");
 	    cutNames->push_back("No electron hits petal near the foil");
-		cutNames->push_back("|dz_vtx| < 4 cm and radial distance < 2");
+		cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4 cm");
 		cutNames->push_back("Not an hot spot");
 		
 	    unsigned int nCuts = cutNames->size();
