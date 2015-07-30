@@ -2,7 +2,7 @@
 
 	gSystem->Load("/afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/build/lib/libNEMO3Ana.so");
 	
-	// Run time STANDARD RUN
+	// Run time
 	DataManagement::SetTotalRunTime            (    167629292);
 	DataManagement::SetTotalAcceptedRunTime    (    167629292);
 	DataManagement::SetTotalDeadTime           (1868832.32295);
@@ -11,17 +11,6 @@
 	DataManagement::SetTotalAcceptedDeadTimeP1 ( 457955.57403);
 	DataManagement::SetTotalAcceptedRunTimeP2  (    133770114);
 	DataManagement::SetTotalAcceptedDeadTimeP2 (1410876.74892);
-
-	// Run time GOOD RUN
-	//DataManagement::SetTotalRunTime            (    149287469.000);
-	//DataManagement::SetTotalAcceptedRunTime    (    149287469.000);
-	//DataManagement::SetTotalDeadTime           (      1673710.109);
-	//DataManagement::SetTotalAcceptedDeadTime   (      1673710.109); 	 
-	//DataManagement::SetTotalAcceptedRunTimeP1  (     29308968.000); 
-	//DataManagement::SetTotalAcceptedDeadTimeP1 (       397833.032);
-	//DataManagement::SetTotalAcceptedRunTimeP2  (    119978501.000);
-	//DataManagement::SetTotalAcceptedDeadTimeP2 (      1275877.077);
-
 	
 	double Data_AccptRunTimeP1 = DataManagement::GetTotalAcceptedRunTimeP1() - DataManagement::GetTotalAcceptedDeadTimeP1();
 	double Data_AccptRunTimeP2 = DataManagement::GetTotalAcceptedRunTimeP2() - DataManagement::GetTotalAcceptedDeadTimeP2();
@@ -66,14 +55,13 @@
 	DataManagement::AddDataSet ( new DataSet ( "Cd116_Tl207"       ,      5000000     ,    2435171*Phase1Fraction ,    2435171*Phase2Fraction ) );               
 	DataManagement::AddDataSet ( new DataSet ( "Cd116_Tl208"       ,     49988700     ,   34996966*Phase1Fraction ,   34996966*Phase2Fraction ) );               
 	DataManagement::AddDataSet ( new DataSet ( "Cd116_Y90"         ,     20000000     ,   13955404*Phase1Fraction ,   13955404*Phase2Fraction ) );               
-	DataManagement::AddDataSet ( new DataSet ( "Cd116_Pb214_VT"    ,     20000000     ,    4300821*Phase1Fraction ,    4300821*Phase2Fraction ) );               
+	DataManagement::AddDataSet ( new DataSet ( "Cd116_pb214_VT"    ,     20000000     ,    4300821*Phase1Fraction ,    4300821*Phase2Fraction ) );               
 	DataManagement::AddDataSet ( new DataSet ( "CuPetals_Co60"     ,   3199953200     ,    2734718*Phase1Fraction ,    2734718*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "CuTower_Co60"      ,   7999983400     ,    9585817*Phase1Fraction ,    9585817*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "FeShield_Ac228"    , 259991150700     ,    3820592*Phase1Fraction ,    3820592*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "FeShield_Bi214"    , 3.9999433937e+12 ,  141497952*Phase1Fraction ,  141497952*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "FeShield_Tl208"    , 199999206400     ,   25062875*Phase1Fraction ,   25062875*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "MuMetal_Co60"      ,  23999660700     ,   42411984*Phase1Fraction ,   42411984*Phase2Fraction ) );
-	DataManagement::AddDataSet ( new DataSet ( "MuMetal_Pa234m"    , 1.0199378314e+12 ,    8367839*Phase1Fraction ,   8367839*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "MuMetal_g1000"     ,  29999948100     ,   17273818*Phase1Fraction ,   17273818*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "Mylar_Bi214"       ,    100000000     ,   63403711*Phase1Fraction ,   63403711*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "Mylar_Pb214"       ,    100000000     ,   27386210*Phase1Fraction ,   27386210*Phase2Fraction ) );
@@ -99,7 +87,6 @@
 	DataManagement::AddDataSet ( new DataSet ( "SteelFrame_Bi214"  ,  14999862300     ,   32697117*Phase1Fraction ,   32697117*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "SteelFrame_Co60"   ,   7999944800     ,   29122389*Phase1Fraction ,   29122389*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "SteelFrame_K40"    ,  59999460900     ,   22205606*Phase1Fraction ,   22205606*Phase2Fraction ) );
-	DataManagement::AddDataSet ( new DataSet ( "SteelFrame_Pa234m" , 4.001938928e+11  ,  131115185*Phase1Fraction ,   131115185*Phase2Fraction ) );
 	DataManagement::AddDataSet ( new DataSet ( "SteelFrame_Tl208"  ,   2999970300     ,   15164507*Phase1Fraction ,   15164507*Phase2Fraction ) );
 
 }

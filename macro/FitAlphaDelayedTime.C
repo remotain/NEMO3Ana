@@ -9,7 +9,7 @@
 	// Load OneElectronHistos in HistoCollection
 	HistoCollection * hcoll = new HistoCollection("OneElectronOneAlphaHistos", "OneElectronOneAlphaHistos");
 
-	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20150127/OneElectronOneAlphaHistos.root");
+	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20150603/OneElectronOneAlphaHistos.root");
 	TDirectory * fdir = 0;
 
 	fdir = (TDirectory *) f->Get("Data"); fdir->cd();
@@ -24,7 +24,7 @@
 	Bkg.setConstant(kTRUE);
 	
 	RooRealVar Activity ( "Activity" , "A"          , 1.60 , 0. , 2 ) ; 
-	RooRealVar Thalf    ( "Thalf"    , "T_{1/2}"    , 164.3 , 0. , 200. ) ;
+	RooRealVar Thalf    ( "Thalf"    , "T_{1/2}"    , 164.6 , 0. , 200. ) ;
 	//Thalf.setConstant(kTRUE);
 	
 	//RooGenericPdf Pdf("Pdf","Bkg + Activity * exp( - log(2) * Time / Thalf )",RooArgSet(Bkg, Activity, Time, Thalf)) ;
@@ -74,7 +74,7 @@
 	leg->SetTextSize(15);
 	leg->Draw();
 	
-	
+	(TPad*)gROOT->GetSelectedPad()->Print("FitOneElectronOneAlpha_DelayTime.pdf");
 	
 	
 }

@@ -16,10 +16,13 @@
 	ProcessChannel::SetOutputFilePath("/Users/alberto/Software/SuperNEMO/work/nemo3/plot_test/");
 	ProcessChannel::SetOutputFileName("OneElectronHistos.root");
 	
+	ProcessChannel::SetFirstRunNumber(0);
+	ProcessChannel::SetLastRunNumber(5000);
+	
 	// Run
 	TBenchmark * benchmark = new TBenchmark();
 	benchmark->Start("Run");
-	ProcessChannel::Run();
+	ProcessChannel::Run(100000);
 	benchmark->Show("Run");
 	
 }

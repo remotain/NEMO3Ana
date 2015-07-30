@@ -38,9 +38,9 @@
 	// Fit parameters
 	//
 	//////////////////////////////////////////////////////////////////////////////	
-	DataManagement::AddParameter( new Parameter( "Cd116_Tl208"        , "Cd116_Tl208"         ,  0 , 0.00013    , 0.1 ) );    
-	DataManagement::AddParameter( new Parameter( "Cd116_Bi214"        , "Cd116_Bi214"         ,  1 , 0.00040    , 0.1 ) );    
-	DataManagement::AddParameter( new Parameter( "cMylar_Bi214"       , "cMylar_Bi214"        ,  2 , 1. , 0.1 ) );    	
+	DataManagement::AddParameter( new Parameter( "cCd116_Tl208"        , "cCd116_Tl208"         ,  0 , 1. , 0.1 ) );    
+	DataManagement::AddParameter( new Parameter( "cCd116_Bi214"        , "cCd116_Bi214"         ,  1 , 1. , 0.1 ) );    
+	DataManagement::AddParameter( new Parameter( "cMylar_Bi214"        , "cMylar_Bi214"         ,  2 , 1. , 0.1 ) );    	
 
 	DataManagement::AddParameter( new Parameter( "cCd116_K40_cold"    , "cCd116_K40_cold"     ,  3 , 9.97850e-01 , 0.1 ) ); //DataManagement::FindParameter( "cCd116_K40_cold"    ) -> SetFix();  
 	DataManagement::AddParameter( new Parameter( "cCd116_Pa234m_cold" , "cCd116_Pa234m_cold"  ,  4 , 9.58546e-01 , 0.1 ) ); //DataManagement::FindParameter( "cCd116_Pa234m_cold" ) -> SetFix();  
@@ -94,9 +94,9 @@
 	// Tl-208
 	//
 	//////////////////////////////////////////////////////////////////////////////false
-	DataManagement::AddComponent( new Component( "Cd116_Tl208"     , "^{208}Tl Cd116"    , DataManagement::FindDataSet( "Cd116_Tl208" ) , DataManagement::FindParameter( "Cd116_Tl208"     ) , 0.440        )); DataManagement::FindComponent("Cd116_Tl208")->SetFillColor( kOrange + 3 );	
-	DataManagement::AddComponent( new Component( "Cd116_Ac228"     , "^{228}Ac Cd116"    , DataManagement::FindDataSet( "Cd116_Ac228" ) , DataManagement::FindParameter( "Cd116_Tl208"     ) , 0.440/0.3594 )); DataManagement::FindComponent("Cd116_Ac228")->SetFillColor( kOrange + 2 );	
-	DataManagement::AddComponent( new Component( "Cd116_Bi212"     , "^{212}Bi Cd116"    , DataManagement::FindDataSet( "Cd116_Bi212" ) , DataManagement::FindParameter( "Cd116_Tl208"     ) , 0.440/0.3594 )); DataManagement::FindComponent("Cd116_Bi212")->SetFillColor( kOrange + 2 );	
+	DataManagement::AddComponent( new Component( "Cd116_Tl208"     , "^{208}Tl Cd116"    , DataManagement::FindDataSet( "Cd116_Tl208" ) , DataManagement::FindParameter( "cCd116_Tl208"     ) , 0.00013*0.440        , 0.0000304383*0.440        , true, 1)); DataManagement::FindComponent("Cd116_Tl208")->SetFillColor( kOrange + 3 );	
+	DataManagement::AddComponent( new Component( "Cd116_Ac228"     , "^{228}Ac Cd116"    , DataManagement::FindDataSet( "Cd116_Ac228" ) , DataManagement::FindParameter( "cCd116_Tl208"     ) , 0.00013*0.440/0.3594 , 0.0000304383*0.440/0.3594 , true, 1)); DataManagement::FindComponent("Cd116_Ac228")->SetFillColor( kOrange + 2 );	
+	DataManagement::AddComponent( new Component( "Cd116_Bi212"     , "^{212}Bi Cd116"    , DataManagement::FindDataSet( "Cd116_Bi212" ) , DataManagement::FindParameter( "cCd116_Tl208"     ) , 0.00013*0.440/0.3594 , 0.0000304383*0.440/0.3594 , true, 1)); DataManagement::FindComponent("Cd116_Bi212")->SetFillColor( kOrange + 2 );	
 	DataManagement::AddComponent( new Component( "SWire_Tl208_P1"  , "^{208}Tl SWire P1" , DataManagement::FindDataSet( "SWire_Tl208" ) , DataManagement::FindParameter( "cSwire_Tl208_P1" ) , 3.5E-03               , 0.4E-03              , true , 1 )); DataManagement::FindComponent( "SWire_Tl208_P1"  )->SetFillColor( kAzure + 1 );
 	DataManagement::AddComponent( new Component( "SWire_Tl208_P2"  , "^{208}Tl SWire P2" , DataManagement::FindDataSet( "SWire_Tl208" ) , DataManagement::FindParameter( "cSwire_Tl208_P2" ) , 2.9E-03               , 0.4E-03              , true , 1 )); DataManagement::FindComponent( "SWire_Tl208_P2"  )->SetFillColor( kAzure + 2 );
 
@@ -110,8 +110,8 @@
 	// Bi-214
 	//
 	//////////////////////////////////////////////////////////////////////////////
-	DataManagement::AddComponent( new Component( "Cd116_Bi214" , "^{214}Bi Cd116" , DataManagement::FindDataSet( "Cd116_Bi214"    ) , DataManagement::FindParameter( "Cd116_Bi214"  ) , 0.440 )); DataManagement::FindComponent("Cd116_Bi214")->SetFillColor( kGreen +  0 );
-	DataManagement::AddComponent( new Component( "Cd116_Pb214" , "^{214}Pb Cd116" , DataManagement::FindDataSet( "Cd116_Pb214_VT" ) , DataManagement::FindParameter( "Cd116_Bi214"  ) , 0.440 )); DataManagement::FindComponent("Cd116_Pb214")->SetFillColor( kGreen +  1 );
+	DataManagement::AddComponent( new Component( "Cd116_Bi214" , "^{214}Bi Cd116" , DataManagement::FindDataSet( "Cd116_Bi214"    ) , DataManagement::FindParameter( "cCd116_Bi214"  ) , 0.440*0.0004     , 0.440*0.0001      , true, 1 )); DataManagement::FindComponent("Cd116_Bi214")->SetFillColor( kGreen +  0 );
+	DataManagement::AddComponent( new Component( "Cd116_Pb214" , "^{214}Pb Cd116" , DataManagement::FindDataSet( "Cd116_Pb214_VT" ) , DataManagement::FindParameter( "cCd116_Bi214"  ) , 0.440*0.0004     , 0.440*0.0001      , true, 1 )); DataManagement::FindComponent("Cd116_Pb214")->SetFillColor( kGreen +  1 );
 	DataManagement::AddComponent( new Component( "Mylar_Bi214" , "^{214}Bi Mylar" , DataManagement::FindDataSet( "Mylar_Bi214"    ) , DataManagement::FindParameter( "cMylar_Bi214"  ) , 0.888*0.00278224 , 0.888*0.000344817 , true, 1 )); DataManagement::FindComponent("Mylar_Bi214")->SetFillColor( kGreen +  2 );
 	DataManagement::AddComponent( new Component( "Mylar_Pb214" , "^{214}Pb Mylar" , DataManagement::FindDataSet( "Mylar_Pb214"    ) , DataManagement::FindParameter( "cMylar_Bi214"  ) , 0.888*0.00278224 , 0.888*0.000344817 , true, 1 )); DataManagement::FindComponent("Mylar_Pb214")->SetFillColor( kGreen +  3 );
 	
