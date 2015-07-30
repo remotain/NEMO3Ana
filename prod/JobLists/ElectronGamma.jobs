@@ -1,4 +1,4 @@
-Data 30 /unix/nemo1/reco/reco_20130206_final/DataListsata/DataFilesMCRunList.lst
+Data 30 /unix/nemo1/reco/reco_20130206_final/DataLists/Data/DataFilesMCRunList.lst
 CuPetals_Co60 1 /unix/nemo1/reco/reco_20130206_final/DataLists/ExternalBackgrounds/DataFilesCuPetals_Co60.lst
 CuTower_Co60 1 /unix/nemo1/reco/reco_20130206_final/DataLists/ExternalBackgrounds/DataFilesCuTower_Co60.lst
 FeShield_Ac228 1 /unix/nemo1/reco/reco_20130206_final/DataLists/ExternalBackgrounds/DataFilesFeShield_Ac228.lst
@@ -34,7 +34,7 @@ SWire_Bi210 30 /unix/nemo1/reco/reco_20130206_final/DataLists/RadonBackgrounds/D
 SWire_Bi214 30 /unix/nemo1/reco/reco_20130206_final/DataLists/RadonBackgrounds/DataFilesSWire_Bi214.lst
 SWire_Pb214 20 /unix/nemo1/reco/reco_20130206_final/DataLists/RadonBackgrounds/DataFilesSWire_Pb214.lst
 SWire_Tl208 10 /unix/nemo1/reco/reco_20130206_final/DataLists/RadonBackgrounds/DataFilesSWire_Tl208.lst
-Mylar_Bi214 10 /unix/nemo1/reco/reco_20130206_final/DataLists/InternalBackgrounds/Mylar/DataFilesMylar_Bi214.lst
+Mylar_Bi214 20 /unix/nemo1/reco/reco_20130206_final/DataLists/InternalBackgrounds/Mylar/DataFilesMylar_Bi214.lst
 Mylar_Pb214 10 /unix/nemo1/reco/reco_20130206_final/DataLists/InternalBackgrounds/Mylar/DataFilesMylar_Pb214.lst
 Cd116_Ac228 1 /unix/nemo1/reco/reco_20130206_final/DataLists/InternalBackgrounds/Cd116/DataFilesCd116_ac228.lst
 Cd116_Bi212 2 /unix/nemo1/reco/reco_20130206_final/DataLists/InternalBackgrounds/Cd116/DataFilesCd116_bi212.lst
