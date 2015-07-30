@@ -962,7 +962,7 @@ namespace ProcessChannel {
 
 			// Last cut on vertex position on foil
 		    TVector3 delta_v = el_vtx_min - el_vtx_max;
-		    if (TMath::Abs(delta_v.z()) > 4 or delta_v.Perp() > 2) continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (TMath::Abs(delta_v.z()) > 8 or delta_v.Perp() > 4) continue; hAnaCutFlow -> Fill(currentcut++);
 
 			if ( IsHotSpot(eVertex->z(), vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++);
 
