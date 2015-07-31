@@ -588,7 +588,7 @@ namespace ProcessChannel {
 		cutNames->push_back("Run status = 1 (GOOD RUN) ");
 		cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign");
-	    cutNames->push_back("Energy of the electron > 200 keV ");
+	    cutNames->push_back("Energy of the electron > 300 keV ");
 		cutNames->push_back("Sum track length > 60 cm ");
 		cutNames->push_back("Track fires gg hit in first layers of cells (0)");
 		cutNames->push_back("Internal probability > 0.01");
@@ -673,16 +673,60 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nCloseDelayedHits"      , d->GetName()) , "; N. close delayed hits; No.Events", 21, -0.5, 20.5                 ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nFarDelayedClusters"    , d->GetName()) , "; N. far delayed clusters; No.Events", 21, -0.5, 20.5               ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_nCloseDelayedCslusters" , d->GetName()) , "; N. close delayed clusters; No.Events", 21, -0.5, 20.5             ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -15, 15                                ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr"                 , d->GetName()) , "; cm; No.Events / 1mm", 300,   0, 30                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_el_0_x"             , d->GetName()) , "; cm; No.Events / 1mm", 300, -170, 170                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_el_0_y"             , d->GetName()) , "; cm; No.Events / 1mm", 300, -170, 170                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_el_0_z"             , d->GetName()) , "; cm; No.Events / 1mm", 300, -130, 130                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_el_1_x"             , d->GetName()) , "; cm; No.Events / 1mm", 300, -170, 170                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_el_1_y"             , d->GetName()) , "; cm; No.Events / 1mm", 300, -170, 170                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_el_1_z"             , d->GetName()) , "; cm; No.Events / 1mm", 300, -130, 130                              ) );
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//
+		// VERTEX DISTRIBUTION
+		//
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz"                 , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr"                 , d->GetName()) , "; cm; No.Events / 1mm", 300,   0, 60                                ) );
+
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx_P1"              , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy_P1"              , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz_P1"              , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr_P1"              , d->GetName()) , "; cm; No.Events / 1mm", 300,   0, 60                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx_P2"              , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy_P2"              , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz_P2"              , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr_P2"              , d->GetName()) , "; cm; No.Events / 1mm", 300,   0, 60                                ) );
+
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx_P1_cold"         , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy_P1_cold"         , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz_P1_cold"         , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr_P1_cold"         , d->GetName()) , "; cm; No.Events / 1mm", 300,   0, 60                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx_P2_cold"         , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy_P2_cold"         , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz_P2_cold"         , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr_P2_cold"         , d->GetName()) , "; cm; No.Events / 1mm", 300,   0, 60                                ) );
+
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx_P1_warm"         , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy_P1_warm"         , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz_P1_warm"         , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr_P1_warm"         , d->GetName()) , "; cm; No.Events / 1mm", 300,   0, 60                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx_P2_warm"         , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy_P2_warm"         , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz_P2_warm"         , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr_P2_warm"         , d->GetName()) , "; cm; No.Events / 1mm", 300,   0, 60                                ) );
+
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx_P1_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy_P1_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz_P1_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr_P1_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300,   0, 60                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dx_P2_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy_P2_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz_P2_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr_P2_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300,   0, 60                                ) );
+
+
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//
@@ -916,7 +960,7 @@ namespace ProcessChannel {
 			if ( !CheckRunStatus(runType) )                                     continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
 			if (sectorId != 18 || IsExcludedSpot(el_vtx_z_mean_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					    continue; hAnaCutFlow -> Fill(currentcut++);
-			if (el_energy_[0] < 0.2 or el_energy_[1] < 0.2)        			    continue; hAnaCutFlow -> Fill(currentcut++);
+			if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3 )       			    continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_pathLength_[0] + el_pathLength_[1] < 60)        			    continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( el_first_hit_layer_[0] > 0 or el_first_hit_layer_[1] > 0 )     continue; hAnaCutFlow -> Fill(currentcut++);
 			if (probInt < 0.01)                                    			    continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1048,10 +1092,6 @@ namespace ProcessChannel {
 		    histo_collection->Find(TString::Format("%s_h_nCloseDelayedHits"      , d->GetName()) ) -> Fill(nCloseDelayedHits      , weight);
 		    histo_collection->Find(TString::Format("%s_h_nFarDelayedClusters"    , d->GetName()) ) -> Fill(nFarDelayedClusters    , weight);
 		    histo_collection->Find(TString::Format("%s_h_nCloseDelayedCslusters" , d->GetName()) ) -> Fill(nCloseDelayedCslusters , weight);
-		    histo_collection->Find(TString::Format("%s_h_vtx_dx"                 , d->GetName()) ) -> Fill(delta_v.x()            , weight);
-		    histo_collection->Find(TString::Format("%s_h_vtx_dy"                 , d->GetName()) ) -> Fill(delta_v.y()            , weight);
-		    histo_collection->Find(TString::Format("%s_h_vtx_dz"                 , d->GetName()) ) -> Fill(delta_v.z()            , weight);
-		    histo_collection->Find(TString::Format("%s_h_vtx_dr"                 , d->GetName()) ) -> Fill(delta_v.Perp()         , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_el_0_x"             , d->GetName()) ) -> Fill(el_vtx_x_[0]           , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_el_0_y"             , d->GetName()) ) -> Fill(el_vtx_y_[0]           , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_el_0_z"             , d->GetName()) ) -> Fill(el_vtx_z_[0]           , weight);
@@ -1069,6 +1109,12 @@ namespace ProcessChannel {
 			histo_collection->Find(TString::Format("%s_h_cosTheta"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 	        histo_collection->Find(TString::Format("%s_h_tot_e_energy" , d->GetName()) ) -> Fill(tot_e         , weight);
 			
+		    histo_collection->Find(TString::Format("%s_h_vtx_dx"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
+		    histo_collection->Find(TString::Format("%s_h_vtx_dy"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
+		    histo_collection->Find(TString::Format("%s_h_vtx_dz"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
+		    histo_collection->Find(TString::Format("%s_h_vtx_dr"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
+			
+			
 			// Start P1
 		    if (run < 3396) {
 
@@ -1078,22 +1124,43 @@ namespace ProcessChannel {
 				histo_collection->Find(TString::Format("%s_h_cosTheta_P1"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 		        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1" , d->GetName()) ) -> Fill(tot_e         , weight);
 
+			    histo_collection->Find(TString::Format("%s_h_vtx_dx_P1"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
+			    histo_collection->Find(TString::Format("%s_h_vtx_dy_P1"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
+			    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
+			    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
+
+
 				// P1 Hot/Cold/Warm
 				if( IsHotSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_hot" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_hot" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_hot"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_hot" , d->GetName()) ) -> Fill(tot_e         , weight);
+					
+				    histo_collection->Find(TString::Format("%s_h_vtx_dx_P1_hot"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dy_P1_hot"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1_hot"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1_hot"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);	
 				} else if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_warm" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_warm"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_warm" , d->GetName()) ) -> Fill(tot_e         , weight);
+					
+				    histo_collection->Find(TString::Format("%s_h_vtx_dx_P1_warm"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dy_P1_warm"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1_warm"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1_warm"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);	
 				} else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_cold" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_cold" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_cold"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_cold" , d->GetName()) ) -> Fill(tot_e         , weight);
+					
+				    histo_collection->Find(TString::Format("%s_h_vtx_dx_P1_cold"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dy_P1_cold"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1_cold"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1_cold"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 				}
 
 				// Start SS/OS
@@ -1173,22 +1240,43 @@ namespace ProcessChannel {
 				histo_collection->Find(TString::Format("%s_h_cosTheta_P2"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 		        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2" , d->GetName()) ) -> Fill(tot_e         , weight);
 
+			    histo_collection->Find(TString::Format("%s_h_vtx_dx_P2"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
+			    histo_collection->Find(TString::Format("%s_h_vtx_dy_P2"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
+			    histo_collection->Find(TString::Format("%s_h_vtx_dz_P2"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
+			    histo_collection->Find(TString::Format("%s_h_vtx_dr_P2"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
+
+
 				// P2 Hot/Cold/Warm
 				if( IsHotSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_hot" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_hot" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P2_hot"    , d->GetName()) ) -> Fill(cosTheta      , weight);
 			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_hot" , d->GetName()) ) -> Fill(tot_e         , weight);
+						
+					histo_collection->Find(TString::Format("%s_h_vtx_dx_P2_hot"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
+					histo_collection->Find(TString::Format("%s_h_vtx_dy_P2_hot"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
+					histo_collection->Find(TString::Format("%s_h_vtx_dz_P2_hot"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
+					histo_collection->Find(TString::Format("%s_h_vtx_dr_P2_hot"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 				} else if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_warm" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P2_warm"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_warm" , d->GetName()) ) -> Fill(tot_e         , weight);
+					
+				    histo_collection->Find(TString::Format("%s_h_vtx_dx_P2_warm"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dy_P2_warm"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P2_warm"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P2_warm"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 				} else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_cold" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_cold" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P2_cold"     , d->GetName()) ) -> Fill(cosTheta      , weight);
 			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P2_cold" , d->GetName()) ) -> Fill(tot_e         , weight);
+					
+				    histo_collection->Find(TString::Format("%s_h_vtx_dx_P2_cold"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dy_P2_cold"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P2_cold"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P2_cold"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 				}
 				
 				// Start SS/OS
