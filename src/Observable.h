@@ -105,6 +105,11 @@ public:
 	virtual void PrintDetails();
 	virtual void Chi2Test(TH1 * hData, TH1 * hModel, double & chi2, int & ndf);
 	
+	// chi2 and ks test
+	double GetChi2   () { return _chi2; };
+	double GetPValue () { return _pval; };
+	double GetKS     () { return _ks;   };
+	
 private:
 
 	TH1 * _Data;
@@ -124,6 +129,8 @@ private:
 		
 	// for chi2
 	Double_t _chi2;
+	Double_t _pval; // chi2 pvalue
+	Double_t _ks; // Kolmogorow test
 	Int_t    _ndf;
 	Int_t    _igood;
 	

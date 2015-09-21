@@ -160,9 +160,16 @@ void Observable::Draw(Option_t* option){
 	leg->AddEntry(_Data, TString::Format("%s (%0.f evt.)", "Data", _Data->Integral() ), "PL");
 	leg->AddEntry((TObject*) 0, TString::Format("Total MC (%0.f #pm %0.f evt.)", tot_evt_mc, tot_evt_mc_err), "");
 
-	// Original ROOT chi2 calculation
-	//_chi2 = 0; _ndf = 0;
-	//_Data->Chi2TestX(hsum, _chi2, _ndf, _igood, "UU") ;
+	
+	//std::cout << "--------------------------------------------------" << std::endl;
+	//std::cout << GetName() << std::endl;
+	_chi2 = 0; _ndf = 0;
+	_pval = _Data->Chi2TestX(hsum, _chi2, _ndf, _igood, "UW") ;
+	//std::cout << TString::Format("#chi^2/dof (%.1f/%d), p-value %.3f", _chi2, _ndf, _pval) << std::endl;
+	_ks = _Data-> KolmogorovTest(hsum) ;
+	//std::cout << TString::Format("KS %.3f", _ks) << std::endl;
+	//std::cout << "--------------------------------------------------" << std::endl;
+
 	//leg->AddEntry((TObject*) 0, TString::Format("#chi^2/dof (%.1f/%d)", _chi2, _ndf), "");
 
 	// My own chi2 calculation
@@ -172,7 +179,7 @@ void Observable::Draw(Option_t* option){
 	TCanvas * canvas = new TCanvas(GetName(), GetTitle(), 500, 500);
 
 	// Upper plot will be in pad1                                               
-    TPad *pad1 = new TPad("pad1", "pad1", 0, 0.3, 1, 1.0);
+    TPad *pad1 = new TPad("pad1", "pad1", 0, 0.40, 1, 1.0);
 	pad1->SetLogy( _LogScale );
 	pad1->SetTickx();
 	pad1->SetTicky();
@@ -199,9 +206,9 @@ void Observable::Draw(Option_t* option){
 	leg->Draw();
 	
 	canvas->cd();	
-    TPad *pad2 = new TPad("pad2", "pad2", 0, 0.05, 1, 0.3);
+    TPad *pad2 = new TPad("pad2", "pad2", 0, 0.25, 1, 0.40);
     pad2->SetTopMargin(0.1);
-    pad2->SetBottomMargin(0.4);
+    pad2->SetBottomMargin(0.01);
 	pad2->SetRightMargin(0.05) ;
 	pad2->SetTickx();
 	pad2->SetTicky();
@@ -212,10 +219,41 @@ void Observable::Draw(Option_t* option){
 	hratio->SetTitle("");
 	hratio->Divide(hsum);
 		
+	hratio->GetYaxis()->SetNdivisions(505) ; 	
 	hratio->GetYaxis()->SetTitle("Data/MC") ; 
 	hratio->GetYaxis()->CenterTitle(kTRUE);
-	hratio->GetYaxis()->SetRangeUser(0.0,2.5);
+	hratio->GetYaxis()->SetRangeUser(0.5,1.5);
 	hratio->Draw();
+	
+	canvas->cd();	
+    TPad *pad3 = new TPad("pad3", "pad3", 0, 0.01, 1, 0.25);
+    pad3->SetTopMargin(0.1);
+    pad3->SetBottomMargin(0.4);
+	pad3->SetRightMargin(0.05) ;
+	pad3->SetTickx();
+	pad3->SetTicky();
+    pad3->Draw();
+    pad3->cd();
+	
+	TH1D * hres = (TH1D*) _Data->Clone( TString::Format("residuals_%s", _Data->GetName()) );
+	hres->SetTitle("");
+	hres->Add(hsum, -1);
+	
+	for (unsigned int i = 1; i <= hratio->GetNbinsX(); i++){
+	
+		if( hratio->GetBinError(i) == 0 ) continue;
+		
+		hres->SetBinContent(i, hres->GetBinContent(i) / TMath::Sqrt( _Data->GetBinContent(i) ) );
+		hres->SetBinError(i, TMath::Sqrt( TMath::Abs(hres->GetBinContent(i)) ) );
+	
+	
+	}  
+	
+	hres->GetYaxis()->SetNdivisions(505) ; 
+	hres->GetYaxis()->SetTitle("Residuals") ; 
+	hres->GetYaxis()->CenterTitle(kTRUE);
+	hres->GetYaxis()->SetRangeUser(-5.0,5.0);
+	hres->Draw();
 	
 };
 
@@ -276,7 +314,7 @@ void Observable::PrintDetails(){
 		}
 		
 		std::cout << "--------------------------------------------------" << std::endl;	
-		
+				
 	}
 	
 };
