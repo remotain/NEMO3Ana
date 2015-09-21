@@ -1,4 +1,3 @@
-
 #include "TROOT.h"
 #include "TIterator.h"
 #include "TFile.h"
@@ -589,14 +588,14 @@ namespace ProcessChannel {
 		cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
-		cutNames->push_back("Sum track length > 60 cm ");
-		cutNames->push_back("Track fires gg hit in first layers of cells (0)");
+		cutNames->push_back("Track lengths > 30 cm ");
+		cutNames->push_back("Track fires gg hit in first (0) layers of cells");
 		cutNames->push_back("Internal probability > 0.01");
 		cutNames->push_back("External probability < 0.01");
 		//cutNames->push_back("Hits not associated to the track <= 2");
 		cutNames->push_back("No unassociated hits opposite to the electrons");
-	    cutNames->push_back("No electron hits petal near the foil");
-		cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4 cm");
+		cutNames->push_back("No electron hits petal near the foil");
+		cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4 cm"); // BOOKMARK	    
 		cutNames->push_back("Not an hot spot");
 		
 	    unsigned int nCuts = cutNames->size();
@@ -961,7 +960,7 @@ namespace ProcessChannel {
 			if (sectorId != 18 || IsExcludedSpot(el_vtx_z_mean_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					    continue; hAnaCutFlow -> Fill(currentcut++);
 			if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3 )       			    continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (el_pathLength_[0] + el_pathLength_[1] < 60)        			    continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (el_pathLength_[0] < 30 or el_pathLength_[1] < 30)        			    continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( el_first_hit_layer_[0] > 0 or el_first_hit_layer_[1] > 0 )     continue; hAnaCutFlow -> Fill(currentcut++);
 			if (probInt < 0.01)                                    			    continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (probExt_0_to_1 > 0.01 or probExt_1_to_0 > 0.01)    			    continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1006,8 +1005,10 @@ namespace ProcessChannel {
 		    }
 
 			// Last cut on vertex position on foil
-		    TVector3 delta_v = el_vtx_min - el_vtx_max;
+		    TVector3 delta_v = el_vtx_min - el_vtx_max; // BOOKMARKS
 		    if (TMath::Abs(delta_v.z()) > 8 or delta_v.Perp() > 4) continue; hAnaCutFlow -> Fill(currentcut++);
+		    
+		    
 
 			if ( IsHotSpot(eVertex->z(), vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++);
 
