@@ -576,6 +576,18 @@ namespace ProcessChannel {
 		histo_collection->GetCollection()->SetOwner(kTRUE);
 		TH1D::SetDefaultSumw2(kTRUE);
 
+		// Output tree
+		TTree * output_tree = new TTree(d->GetName(), "");		
+	    Double_t output_min_el_en        = 0 ;  TBranch * b_output_min_el_en        = output_tree->Branch("min_el_en"        , &output_min_el_en        , "min_el_en/D"       );
+	    Double_t output_max_el_en        = 0 ;  TBranch * b_output_max_el_en        = output_tree->Branch("max_el_en"        , &output_max_el_en        , "max_el_en/D"       );
+	    Double_t output_min_el_track_len = 0 ;  TBranch * b_output_min_el_track_len = output_tree->Branch("min_el_track_len" , &output_min_el_track_len , "min_el_track_len/D");
+	    Double_t output_max_el_track_len = 0 ;  TBranch * b_output_max_el_track_len = output_tree->Branch("max_el_track_len" , &output_max_el_track_len , "max_el_track_len/D");
+	    Double_t output_min_el_sign      = 0 ;  TBranch * b_output_min_el_sign      = output_tree->Branch("min_el_sign"      , &output_min_el_sign      , "min_el_sign/D"     );
+	    Double_t output_max_el_sign      = 0 ;  TBranch * b_output_max_el_sign      = output_tree->Branch("max_el_sign"      , &output_max_el_sign      , "max_el_sign/D"     );
+	    Double_t output_cos_theta        = 0 ;  TBranch * b_output_cos_theta        = output_tree->Branch("cos_theta"        , &output_cos_theta        , "cos_theta/D"       );
+	    Double_t output_prob_int         = 0 ;  TBranch * b_output_prob_int         = output_tree->Branch("prob_int"         , &output_prob_int         , "prob_int/D"        );
+		Double_t output_weight           = 0 ;  TBranch * b_output_weight           = output_tree->Branch("weight"           , &output_weight           , "weight/D"          );
+
 		// Retry Reco cut flow histogram
 		TDirectoryFile * f0 = (TDirectoryFile*) _InputFile->Get("CutFlowManager");
 	    TH1F* hRecoCutFlow = (TH1F*)f0->FindObjectAny("CutFlowManager_hCutFlow_")->Clone(TString::Format("%s_h_RecoCutFlow", d->GetName()));
@@ -972,32 +984,38 @@ namespace ProcessChannel {
 		        (el_caloiobt[1] > 1 and (el_calofcll[1] == 1 or el_calofcll[1] == 2))) continue; hAnaCutFlow->Fill(currentcut++);
 
 			// Set min and max variables
-		    double el_energy_min   , el_energy_max   ;
-		    double el_dEnergy_min  , el_dEnergy_max  ; 
-		    double el_beta_min     , el_beta_max     ;
-		    double el_dBeta_min    , el_dBeta_max    ;
-		    double el_dMeasTime_min, el_dMeasTime_max;
-		    double el_dThTof_min   , el_dThTof_max   ;
+		    double el_energy_min    , el_energy_max   ;
+		    double el_dEnergy_min   , el_dEnergy_max  ; 
+		    double el_beta_min      , el_beta_max     ;
+		    double el_dBeta_min     , el_dBeta_max    ;
+		    double el_dMeasTime_min , el_dMeasTime_max;
+		    double el_dThTof_min    , el_dThTof_max   ;
+		    double el_track_len_min , el_track_len_max;
+			double el_trkSign_min   , el_trkSign_max  ;
 
 		    TVector3 el_vtx_min, el_vtx_max, el_ip_min, el_ip_max;
 		    if (el_energy_[0] < el_energy_[1]) {
-		      el_energy_min    = el_energy_[0]   ; el_energy_max    = el_energy_[1]   ;
-		      el_dEnergy_min   = el_dEnergy_[0]  ; el_dEnergy_max   = el_dEnergy_[1]  ;
-		      el_beta_min      = el_beta_[0]     ; el_beta_max      = el_beta_[1]     ;
-		      el_dBeta_min     = el_dBeta_[0]    ; el_dBeta_max     = el_dBeta_[1]    ;
-		      el_dMeasTime_min = el_dMeasTime_[0]; el_dMeasTime_max = el_dMeasTime_[1];
-		      el_dThTof_min    = el_dThTof_[0]   ; el_dThTof_max    = el_dThTof_[1]   ;      
+		      el_energy_min    = el_energy_[0]    ; el_energy_max    = el_energy_[1]    ;
+		      el_dEnergy_min   = el_dEnergy_[0]   ; el_dEnergy_max   = el_dEnergy_[1]   ;
+		      el_beta_min      = el_beta_[0]      ; el_beta_max      = el_beta_[1]      ;
+		      el_dBeta_min     = el_dBeta_[0]     ; el_dBeta_max     = el_dBeta_[1]     ;
+		      el_dMeasTime_min = el_dMeasTime_[0] ; el_dMeasTime_max = el_dMeasTime_[1] ;
+		      el_dThTof_min    = el_dThTof_[0]    ; el_dThTof_max    = el_dThTof_[1]    ;      
+		      el_track_len_min = el_pathLength_[0]; el_track_len_max = el_pathLength_[1];
+		      el_trkSign_min   = el_trkSign[0]    ; el_trkSign_max   = el_trkSign[1]    ;
 		      el_vtx_min.SetXYZ(el_vtx_x_[0], el_vtx_y_[0], el_vtx_z_[0]);
 		      el_vtx_max.SetXYZ(el_vtx_x_[1], el_vtx_y_[1], el_vtx_z_[1]);
 		      el_ip_min .SetXYZ(el_ip_x_[0] , el_ip_y_[0] , el_ip_z_[0] ); 
 		      el_ip_max .SetXYZ(el_ip_x_[1] , el_ip_y_[1] , el_ip_z_[1] );
 		    } else {
-		      el_energy_min    = el_energy_[1]   ; el_energy_max    = el_energy_[0]   ;
-		      el_dEnergy_min   = el_dEnergy_[1]  ; el_dEnergy_max   = el_dEnergy_[0]  ;
-		      el_beta_min      = el_beta_[1]     ; el_beta_max      = el_beta_[0]     ;
-		      el_dBeta_min     = el_dBeta_[1]    ; el_dBeta_max     = el_dBeta_[0]    ;
-		      el_dMeasTime_min = el_dMeasTime_[1]; el_dMeasTime_max = el_dMeasTime_[0];
-		      el_dThTof_min    = el_dThTof_[1]   ; el_dThTof_max    = el_dThTof_[0]   ;      
+		      el_energy_min    = el_energy_[1]   ; el_energy_max    = el_energy_[0]     ;
+		      el_dEnergy_min   = el_dEnergy_[1]  ; el_dEnergy_max   = el_dEnergy_[0]    ;
+		      el_beta_min      = el_beta_[1]     ; el_beta_max      = el_beta_[0]       ;
+		      el_dBeta_min     = el_dBeta_[1]    ; el_dBeta_max     = el_dBeta_[0]      ;
+		      el_dMeasTime_min = el_dMeasTime_[1]; el_dMeasTime_max = el_dMeasTime_[0]  ;
+		      el_dThTof_min    = el_dThTof_[1]   ; el_dThTof_max    = el_dThTof_[0]     ;      
+		      el_track_len_min = el_pathLength_[1]; el_track_len_max = el_pathLength_[0];
+		      el_trkSign_min   = el_trkSign[1]    ; el_trkSign_max   = el_trkSign[0]    ;
 		      el_vtx_min.SetXYZ(el_vtx_x_[1], el_vtx_y_[1], el_vtx_z_[1]);
 		      el_vtx_max.SetXYZ(el_vtx_x_[0], el_vtx_y_[0], el_vtx_z_[0]);
 		      el_ip_min .SetXYZ(el_ip_x_[1] , el_ip_y_[1] , el_ip_z_[1] );
@@ -1008,10 +1026,8 @@ namespace ProcessChannel {
 		    TVector3 delta_v = el_vtx_min - el_vtx_max; // BOOKMARKS
 		    if (TMath::Abs(delta_v.z()) > 8 or delta_v.Perp() > 4) continue; hAnaCutFlow -> Fill(currentcut++);
 		    
-		    
-
 			if ( IsHotSpot(eVertex->z(), vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++);
-
+			
 			// Apply radon map
 		    double weight = 1;    
 			std::string name (d->GetName());
@@ -1028,6 +1044,19 @@ namespace ProcessChannel {
 	        if(std::string::npos != name.find("Co60")){
 	        	weight *= exp(-(log(2)/(1925.2*86400.0))*eventTime);
 	        }
+			
+			// Fill output tree
+			output_min_el_en        = 0.; output_min_el_en        = el_energy_min    ;
+			output_max_el_en        = 0.; output_max_el_en        = el_energy_max    ;
+			output_min_el_track_len = 0.; output_min_el_track_len = el_track_len_min ;
+			output_max_el_track_len = 0.; output_max_el_track_len = el_track_len_max ;
+			output_min_el_sign      = 0.; output_min_el_sign      = el_trkSign_min   ;
+			output_max_el_sign      = 0.; output_max_el_sign      = el_trkSign_max   ;
+			output_cos_theta        = 0.; output_cos_theta        = cosTheta         ;
+			output_prob_int         = 0.; output_prob_int         = probInt          ;
+			output_weight           = 0.; output_weight           = weight           ;
+
+			output_tree->Fill();
 		
 			// Fill histogram
 		    histo_collection->Find(TString::Format("%s_h_run"                    , d->GetName()) ) -> Fill(run                    , weight);
@@ -1350,15 +1379,16 @@ namespace ProcessChannel {
 
 		} // End event loop
 
-		std::cout << "before output file" << std::endl;
+		//std::cout << "before output file" << std::endl;
 		TFile * _OutputFile = new TFile(_OutputFilePath + _OutputFileName, "UPDATE");
 		_OutputFile->Print();
 		histo_collection->Write();
-		
+		output_tree->Write();
+
 		//histo_collection->SaveAs("test.pdf");
 	
 		// Delete the remaining crap
-		histo_collection->Delete();	
+		histo_collection->Delete();	output_tree->Delete();
 		tree->Delete();
 		f0->Close() ; f1->Close() ; 
 		_InputFile->Close(); _OutputFile->Close();
