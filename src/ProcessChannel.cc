@@ -578,15 +578,15 @@ namespace ProcessChannel {
 
 		// Output tree
 		TTree * output_tree = new TTree("output_tree", "");		
-	    Double_t output_min_el_en        = 0 ;  TBranch * b_output_min_el_en        = output_tree->Branch("min_el_en"        , &output_min_el_en        , "min_el_en/D"       );
-	    Double_t output_max_el_en        = 0 ;  TBranch * b_output_max_el_en        = output_tree->Branch("max_el_en"        , &output_max_el_en        , "max_el_en/D"       );
-	    Double_t output_min_el_track_len = 0 ;  TBranch * b_output_min_el_track_len = output_tree->Branch("min_el_track_len" , &output_min_el_track_len , "min_el_track_len/D");
-	    Double_t output_max_el_track_len = 0 ;  TBranch * b_output_max_el_track_len = output_tree->Branch("max_el_track_len" , &output_max_el_track_len , "max_el_track_len/D");
-	    Double_t output_min_el_sign      = 0 ;  TBranch * b_output_min_el_sign      = output_tree->Branch("min_el_sign"      , &output_min_el_sign      , "min_el_sign/D"     );
-	    Double_t output_max_el_sign      = 0 ;  TBranch * b_output_max_el_sign      = output_tree->Branch("max_el_sign"      , &output_max_el_sign      , "max_el_sign/D"     );
-	    Double_t output_cos_theta        = 0 ;  TBranch * b_output_cos_theta        = output_tree->Branch("cos_theta"        , &output_cos_theta        , "cos_theta/D"       );
-	    Double_t output_prob_int         = 0 ;  TBranch * b_output_prob_int         = output_tree->Branch("prob_int"         , &output_prob_int         , "prob_int/D"        );
-		Double_t output_weight           = 0 ;  TBranch * b_output_weight           = output_tree->Branch("weight"           , &output_weight           , "weight/D"          );
+	    Double_t output_min_el_en        = 0 ; output_tree->Branch("min_el_en"        , &output_min_el_en        , "min_el_en/D"       );
+	    Double_t output_max_el_en        = 0 ; output_tree->Branch("max_el_en"        , &output_max_el_en        , "max_el_en/D"       );
+	    Double_t output_min_el_track_len = 0 ; output_tree->Branch("min_el_track_len" , &output_min_el_track_len , "min_el_track_len/D");
+	    Double_t output_max_el_track_len = 0 ; output_tree->Branch("max_el_track_len" , &output_max_el_track_len , "max_el_track_len/D");
+	    Double_t output_min_el_sign      = 0 ; output_tree->Branch("min_el_sign"      , &output_min_el_sign      , "min_el_sign/D"     );
+	    Double_t output_max_el_sign      = 0 ; output_tree->Branch("max_el_sign"      , &output_max_el_sign      , "max_el_sign/D"     );
+	    Double_t output_cos_theta        = 0 ; output_tree->Branch("cos_theta"        , &output_cos_theta        , "cos_theta/D"       );
+	    Double_t output_prob_int         = 0 ; output_tree->Branch("prob_int"         , &output_prob_int         , "prob_int/D"        );
+		Double_t output_weight           = 0 ; output_tree->Branch("weight"           , &output_weight           , "weight/D"          );
 
 		// Retry Reco cut flow histogram
 		TDirectoryFile * f0 = (TDirectoryFile*) _InputFile->Get("CutFlowManager");
@@ -1046,15 +1046,17 @@ namespace ProcessChannel {
 	        }
 			
 			// Fill output tree
-			output_min_el_en        = 0.; output_min_el_en        = el_energy_min    ; b_output_min_el_en        -> Fill();
-			output_max_el_en        = 0.; output_max_el_en        = el_energy_max    ; b_output_max_el_en        -> Fill();
-			output_min_el_track_len = 0.; output_min_el_track_len = el_track_len_min ; b_output_min_el_track_len -> Fill();
-			output_max_el_track_len = 0.; output_max_el_track_len = el_track_len_max ; b_output_max_el_track_len -> Fill();
-			output_min_el_sign      = 0.; output_min_el_sign      = el_trkSign_min   ; b_output_min_el_sign      -> Fill();
-			output_max_el_sign      = 0.; output_max_el_sign      = el_trkSign_max   ; b_output_max_el_sign      -> Fill();
-			output_cos_theta        = 0.; output_cos_theta        = cosTheta         ; b_output_cos_theta        -> Fill();
-			output_prob_int         = 0.; output_prob_int         = probInt          ; b_output_prob_int         -> Fill();
-			output_weight           = 0.; output_weight           = weight           ; b_output_weight           -> Fill();
+			output_min_el_en        = 0.; output_min_el_en        = el_energy_min    ;
+			output_max_el_en        = 0.; output_max_el_en        = el_energy_max    ;
+			output_min_el_track_len = 0.; output_min_el_track_len = el_track_len_min ;
+			output_max_el_track_len = 0.; output_max_el_track_len = el_track_len_max ;
+			output_min_el_sign      = 0.; output_min_el_sign      = el_trkSign_min   ;
+			output_max_el_sign      = 0.; output_max_el_sign      = el_trkSign_max   ;
+			output_cos_theta        = 0.; output_cos_theta        = cosTheta         ;
+			output_prob_int         = 0.; output_prob_int         = probInt          ;
+			output_weight           = 0.; output_weight           = weight           ;
+		
+			output_tree->Fill();
 		
 			// Fill histogram
 		    histo_collection->Find(TString::Format("%s_h_run"                    , d->GetName()) ) -> Fill(run                    , weight);
