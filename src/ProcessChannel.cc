@@ -578,15 +578,15 @@ namespace ProcessChannel {
 
 		// Output tree
 		TTree * output_tree = new TTree("output_tree", "");		
-	    Double_t output_min_el_en        = 0. ; output_tree->Branch("min_el_en"        , &output_min_el_en        , "min_el_en/F"       );
-	    Double_t output_max_el_en        = 0. ; output_tree->Branch("max_el_en"        , &output_max_el_en        , "max_el_en/F"       );
-	    Double_t output_min_el_track_len = 0. ; output_tree->Branch("min_el_track_len" , &output_min_el_track_len , "min_el_track_len/F");
-	    Double_t output_max_el_track_len = 0. ; output_tree->Branch("max_el_track_len" , &output_max_el_track_len , "max_el_track_len/F");
-	    Double_t output_min_el_sign      = 0. ; output_tree->Branch("min_el_sign"      , &output_min_el_sign      , "min_el_sign/F"     );
-	    Double_t output_max_el_sign      = 0. ; output_tree->Branch("max_el_sign"      , &output_max_el_sign      , "max_el_sign/F"     );
-	    Double_t output_cos_theta        = 0. ; output_tree->Branch("cos_theta"        , &output_cos_theta        , "cos_theta/F"       );
-	    Double_t output_prob_int         = 0. ; output_tree->Branch("prob_int"         , &output_prob_int         , "prob_int/F"        );
-		Double_t output_weight           = 0. ; output_tree->Branch("weight"           , &output_weight           , "weight/F"          );
+	    Double_t output_min_el_en        ; output_tree->Branch("min_el_en"        , &output_min_el_en        , "output_min_el_en/F"       );
+	    Double_t output_max_el_en        ; output_tree->Branch("max_el_en"        , &output_max_el_en        , "output_max_el_en/F"       );
+	    Double_t output_min_el_track_len ; output_tree->Branch("min_el_track_len" , &output_min_el_track_len , "output_min_el_track_len/F");
+	    Double_t output_max_el_track_len ; output_tree->Branch("max_el_track_len" , &output_max_el_track_len , "output_max_el_track_len/F");
+	    Double_t output_min_el_sign      ; output_tree->Branch("min_el_sign"      , &output_min_el_sign      , "output_min_el_sign/F"     );
+	    Double_t output_max_el_sign      ; output_tree->Branch("max_el_sign"      , &output_max_el_sign      , "output_max_el_sign/F"     );
+	    Double_t output_cos_theta        ; output_tree->Branch("cos_theta"        , &output_cos_theta        , "output_cos_theta/F"       );
+	    Double_t output_prob_int         ; output_tree->Branch("prob_int"         , &output_prob_int         , "output_prob_int/F"        );
+		Double_t output_weight           ; output_tree->Branch("weight"           , &output_weight           , "output_weight/F"          );
 
 		// Retry Reco cut flow histogram
 		TDirectoryFile * f0 = (TDirectoryFile*) _InputFile->Get("CutFlowManager");
@@ -1046,15 +1046,15 @@ namespace ProcessChannel {
 	        }
 			
 			// Fill output tree
-			output_min_el_en        = 0.; output_min_el_en        = el_energy_min    ;
-			output_max_el_en        = 0.; output_max_el_en        = el_energy_max    ;
-			output_min_el_track_len = 0.; output_min_el_track_len = el_track_len_min ;
-			output_max_el_track_len = 0.; output_max_el_track_len = el_track_len_max ;
-			output_min_el_sign      = 0.; output_min_el_sign      = el_trkSign_min   ;
-			output_max_el_sign      = 0.; output_max_el_sign      = el_trkSign_max   ;
-			output_cos_theta        = 0.; output_cos_theta        = cosTheta         ;
-			output_prob_int         = 0.; output_prob_int         = probInt          ;
-			output_weight           = 0.; output_weight           = weight           ;
+			output_min_el_en        = el_energy_min    ;
+			output_max_el_en        = el_energy_max    ;
+			output_min_el_track_len = el_track_len_min ;
+			output_max_el_track_len = el_track_len_max ;
+			output_min_el_sign      = el_trkSign_min   ;
+			output_max_el_sign      = el_trkSign_max   ;
+			output_cos_theta        = cosTheta         ;
+			output_prob_int         = probInt          ;
+			output_weight           = weight           ;
 		
 			output_tree->Fill();
 		
@@ -1388,15 +1388,11 @@ namespace ProcessChannel {
 
 		//histo_collection->SaveAs("test.pdf");
 	
-		// Close files
-		_InputFile->Close();		
-		_OutputFile->Close();
-		f0->Close() ; f1->Close() ; 
-
 		// Delete the remaining crap
 		histo_collection->Delete();	output_tree->Delete();
 		tree->Delete();
-
+		f0->Close() ; f1->Close() ; 
+		_InputFile->Close(); _OutputFile->Close();
 	
 		return kTRUE;
 
