@@ -1388,11 +1388,15 @@ namespace ProcessChannel {
 
 		//histo_collection->SaveAs("test.pdf");
 	
+		// Close files
+		_InputFile->Close();		
+		_OutputFile->Close();
+		f0->Close() ; f1->Close() ; 
+
 		// Delete the remaining crap
 		histo_collection->Delete();	output_tree->Delete();
 		tree->Delete();
-		f0->Close() ; f1->Close() ; 
-		_InputFile->Close(); _OutputFile->Close();
+
 	
 		return kTRUE;
 
