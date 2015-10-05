@@ -579,15 +579,15 @@ namespace ProcessChannel {
 		// Output tree
 		TString tmp_tree_name = "_tree";
 		TTree * output_tree = new TTree(d->GetName() + tmp_tree_name, "");		
-	    Double_t output_min_el_en        ; output_tree->Branch("min_el_en"        , &output_min_el_en        , "output_min_el_en/F"       );
-	    Double_t output_max_el_en        ; output_tree->Branch("max_el_en"        , &output_max_el_en        , "output_max_el_en/F"       );
-	    Double_t output_min_el_track_len ; output_tree->Branch("min_el_track_len" , &output_min_el_track_len , "output_min_el_track_len/F");
-	    Double_t output_max_el_track_len ; output_tree->Branch("max_el_track_len" , &output_max_el_track_len , "output_max_el_track_len/F");
-	    Double_t output_min_el_sign      ; output_tree->Branch("min_el_sign"      , &output_min_el_sign      , "output_min_el_sign/F"     );
-	    Double_t output_max_el_sign      ; output_tree->Branch("max_el_sign"      , &output_max_el_sign      , "output_max_el_sign/F"     );
-	    Double_t output_cos_theta        ; output_tree->Branch("cos_theta"        , &output_cos_theta        , "output_cos_theta/F"       );
-	    Double_t output_prob_int         ; output_tree->Branch("prob_int"         , &output_prob_int         , "output_prob_int/F"        );
-		Double_t output_weight           ; output_tree->Branch("weight"           , &output_weight           , "output_weight/F"          );
+	    Double_t output_min_el_en        ; output_tree->Branch("min_el_en"        , &output_min_el_en        );
+	    Double_t output_max_el_en        ; output_tree->Branch("max_el_en"        , &output_max_el_en        );
+	    Double_t output_min_el_track_len ; output_tree->Branch("min_el_track_len" , &output_min_el_track_len );
+	    Double_t output_max_el_track_len ; output_tree->Branch("max_el_track_len" , &output_max_el_track_len );
+	    Double_t output_min_el_sign      ; output_tree->Branch("min_el_sign"      , &output_min_el_sign      );
+	    Double_t output_max_el_sign      ; output_tree->Branch("max_el_sign"      , &output_max_el_sign      );
+	    Double_t output_cos_theta        ; output_tree->Branch("cos_theta"        , &output_cos_theta        );
+	    Double_t output_prob_int         ; output_tree->Branch("prob_int"         , &output_prob_int         );
+		Double_t output_weight           ; output_tree->Branch("weight"           , &output_weight           );
 
 		// Retry Reco cut flow histogram
 		TDirectoryFile * f0 = (TDirectoryFile*) _InputFile->Get("CutFlowManager");
@@ -1045,9 +1045,10 @@ namespace ProcessChannel {
 	        if(std::string::npos != name.find("Co60")){
 	        	weight *= exp(-(log(2)/(1925.2*86400.0))*eventTime);
 	        }
+						
 			
 			// Fill output tree
-			output_min_el_en        = el_energy_min    ;
+			output_min_el_en        = el_energy_min    ; 
 			output_max_el_en        = el_energy_max    ;
 			output_min_el_track_len = el_track_len_min ;
 			output_max_el_track_len = el_track_len_max ;
