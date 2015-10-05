@@ -1382,21 +1382,23 @@ namespace ProcessChannel {
 		} // End event loop
 
 		//std::cout << "before output file" << std::endl;
-		TFile * _OutputFile = new TFile(_OutputFilePath + _OutputFileName, "UPDATE");
-		_OutputFile->Print();
-		
+		TFile * _OutputFile_histo = new TFile(_OutputFilePath + _OutputFileName, "UPDATE");
+		_OutputFile_histo->Print();
 		histo_collection->Write();		
+		histo_collection->Delete();
+		_OutputFile_histo->Close();
 		
-		//_OutputFile->cd(histo_collection->GetName());
+		TFile * _OutputFile_tree = new TFile(_OutputFilePath + "TwoElectronIntTree.root", "UPDATE");
+		_OutputFile_tree->Print();
 		output_tree->Write();
-
-		//histo_collection->SaveAs("test.pdf");
-	
+		output_tree->Delete();
+		_OutputFile_tree->Close();
+		
 		// Delete the remaining crap
-		histo_collection->Delete();	output_tree->Delete();
+		
 		tree->Delete();
 		f0->Close() ; f1->Close() ; 
-		_InputFile->Close(); _OutputFile->Close();
+		_InputFile->Close();  
 	
 		return kTRUE;
 
