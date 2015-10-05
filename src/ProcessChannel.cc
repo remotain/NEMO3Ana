@@ -577,6 +577,7 @@ namespace ProcessChannel {
 		TH1D::SetDefaultSumw2(kTRUE);
 
 		// Output tree
+		TFile * _OutputFile_tree = new TFile(_OutputFilePath + "TwoElectronIntTree.root", "UPDATE");
 		TString tmp_tree_name = "_tree";
 		TTree * output_tree = new TTree(d->GetName() + tmp_tree_name, "");		
 	    Double_t output_min_el_en        ; output_tree->Branch("min_el_en"        , &output_min_el_en        );
@@ -588,8 +589,11 @@ namespace ProcessChannel {
 	    Double_t output_cos_theta        ; output_tree->Branch("cos_theta"        , &output_cos_theta        );
 	    Double_t output_prob_int         ; output_tree->Branch("prob_int"         , &output_prob_int         );
 		Double_t output_weight           ; output_tree->Branch("weight"           , &output_weight           );
+		
+		output_tree->Write();
 
 		// Retry Reco cut flow histogram
+		_InputFile->cd();
 		TDirectoryFile * f0 = (TDirectoryFile*) _InputFile->Get("CutFlowManager");
 	    TH1F* hRecoCutFlow = (TH1F*)f0->FindObjectAny("CutFlowManager_hCutFlow_")->Clone(TString::Format("%s_h_RecoCutFlow", d->GetName()));
 		histo_collection->Add( hRecoCutFlow );
@@ -1388,8 +1392,8 @@ namespace ProcessChannel {
 		histo_collection->Delete();
 		_OutputFile_histo->Close();
 		
-		TFile * _OutputFile_tree = new TFile(_OutputFilePath + "TwoElectronIntTree.root", "UPDATE");
 		_OutputFile_tree->Print();
+		_OutputFile_tree->cd();
 		output_tree->Write();
 		output_tree->Delete();
 		_OutputFile_tree->Close();
