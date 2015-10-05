@@ -577,7 +577,8 @@ namespace ProcessChannel {
 		TH1D::SetDefaultSumw2(kTRUE);
 
 		// Output tree
-		TTree * output_tree = new TTree("output_tree", "");		
+		TString tmp_tree_name = "_tree";
+		TTree * output_tree = new TTree(d->GetName() + tmp_tree_name, "");		
 	    Double_t output_min_el_en        ; output_tree->Branch("min_el_en"        , &output_min_el_en        , "output_min_el_en/F"       );
 	    Double_t output_max_el_en        ; output_tree->Branch("max_el_en"        , &output_max_el_en        , "output_max_el_en/F"       );
 	    Double_t output_min_el_track_len ; output_tree->Branch("min_el_track_len" , &output_min_el_track_len , "output_min_el_track_len/F");
@@ -1384,6 +1385,8 @@ namespace ProcessChannel {
 		_OutputFile->Print();
 		
 		histo_collection->Write();		
+		
+		//_OutputFile->cd(histo_collection->GetName());
 		output_tree->Write();
 
 		//histo_collection->SaveAs("test.pdf");
