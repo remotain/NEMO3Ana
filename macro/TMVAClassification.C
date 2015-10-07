@@ -88,7 +88,7 @@ void TMVAClassification( TString myMethodList = "" )
    Use["CutsSA"]          = 0;
    // 
    // --- 1-dimensional likelihood ("naive Bayes estimator")
-   Use["Likelihood"]      = 1;
+   Use["Likelihood"]      = 0;
    Use["LikelihoodD"]     = 0; // the "D" extension indicates decorrelated input variables (see option strings)
    Use["LikelihoodPCA"]   = 0; // the "PCA" extension indicates PCA-transformed input variables (see option strings)
    Use["LikelihoodKDE"]   = 0;
@@ -120,7 +120,7 @@ void TMVAClassification( TString myMethodList = "" )
    // --- Neural Networks (all are feed-forward Multilayer Perceptrons)
    Use["MLP"]             = 0; // Recommended ANN
    Use["MLPBFGS"]         = 0; // Recommended ANN with optional training method
-   Use["MLPBNN"]          = 1; // Recommended ANN with BFGS training method and bayesian regulator
+   Use["MLPBNN"]          = 0; // Recommended ANN with BFGS training method and bayesian regulator
    Use["CFMlpANN"]        = 0; // Depreciated ANN from ALEPH
    Use["TMlpANN"]         = 0; // ROOT's own ANN
    //
@@ -165,7 +165,7 @@ void TMVAClassification( TString myMethodList = "" )
 
    // Create a ROOT output file where TMVA will store ntuples, histograms, etc.
    TString outfileName( "TMVA.root" );
-   TString outfileDir( "/sps/nemo/scratch/remoto/nemo3/plot/" );
+   TString outfileDir( "./" );
    TFile* outputFile = TFile::Open( outfileDir + outfileName, "RECREATE" );
    
    // Create the factory object. Later you can choose the methods
@@ -194,12 +194,14 @@ void TMVAClassification( TString myMethodList = "" )
    //factory->AddVariable( "var3",                "Variable 3", "units", 'F' );
    //factory->AddVariable( "var4",                "Variable 4", "units", 'F' );
 
-   factory->AddVariable( "min_el_en"        , 'F' );  
-   factory->AddVariable( "max_el_en"        , 'F' );  
-   factory->AddVariable( "min_el_track_len" , 'F' );       
-   factory->AddVariable( "max_el_track_len" , 'F' );       
-   factory->AddVariable( "cos_theta"        , 'F' );
-   factory->AddVariable( "prob_int"         , 'F' );
+   factory->AddVariable( "min_el_en"                                                 , 'F' );  
+   factory->AddVariable( "max_el_en"                                                 , 'F' );  
+   factory->AddVariable( "el_en_asym := (max_el_en-min_el_en)/(min_el_en+max_el_en)" , 'F' );  
+   factory->AddVariable( "el_en_sum := min_el_en+max_el_en" , 'F' );  
+   factory->AddVariable( "cos_theta"                                                 , 'F' );
+   factory->AddVariable( "prob_int"                                                  , 'F' );
+   factory->AddVariable( "min_el_track_len"                                          , 'F' );       
+   factory->AddVariable( "max_el_track_len"                                          , 'F' );       
  
    // You can add so-called "Spectator variables", which are not used in the MVA training,
    // but will appear in the final "TestTree" produced by TMVA. This TestTree will contain the
@@ -209,7 +211,8 @@ void TMVAClassification( TString myMethodList = "" )
 
    // Read training and test data
    // (it is also possible to use ASCII format as input -> see TMVA Users Guide)
-   TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
+   //TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
+   TString fdir = "/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
    TString fname = "TwoElectronIntTree.root";
       
    TFile *input = TFile::Open( fdir + fname );
