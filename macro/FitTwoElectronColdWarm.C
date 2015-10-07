@@ -807,8 +807,8 @@
 	// Add for fitting
 	//
 	//////////////////////////////////////////////////////////////////////////////	
-	DataManagement::AddObservable( tot_e_energy_P1_cold );	
-	DataManagement::AddObservable( tot_e_energy_P2_cold );	
+	//DataManagement::AddObservable( tot_e_energy_P1_cold );	
+	//DataManagement::AddObservable( tot_e_energy_P2_cold );	
 	DataManagement::AddObservable( tot_e_energy_P1_warm );	
 	DataManagement::AddObservable( tot_e_energy_P2_warm );	
 

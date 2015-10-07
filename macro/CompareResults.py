@@ -3,64 +3,45 @@ import argparse
 from array import *
 from ROOT import *
 
-n = 3
+n = 4
 
-names = ("This work", "Zac/Benton", "Solotvina")
+names = ("This work", "Zac/Benton", "Solotvina", "NEMO-2")
 
-t    = array('d', [2.75, 2.88, 2.9]  )
-y    = array('d', [1, 2, 3]  )
-ey   = array('d', [0.05, 0.05, 0.05]  )
-zero = array('d', [0.0, 0.0, 0.0]  )
-stat = array('d', [0.05, 0.04, 0.06] )
-syst_low = array('d', [-0.17, -0.17, -0.38] )
-syst_up  = array('d', [+0.17, +0.16, +0.40] )
+t    = array('d', [2.75, 2.88, 2.9, 3.75]  )
+y    = array('d', [0, 1, 2, 3]  )
+ey   = array('d', [0.05, 0.05, 0.05, 0.05]  )
+zero = array('d', [0.0, 0.0, 0.0, 0]  )
+stat = array('d', [0.06, 0.04, 0.06, 0.35] )
+syst_low = array('d', [-0.17, -0.16, -0.38, -0.21] )
+syst_up  = array('d', [+0.16, +0.16, +0.40, +0.21] )
 
-stat_syst_low_l = list()
-stat_syst_up_l  = list()
+stat_syst_low = list()
+stat_syst_up = list()
+stat_syst = list()
 
-for i in range(3):
+for i in range(n):
     
-    stat_syst_low_l.append( sqrt(stat[i]*stat[i] + syst_low[i]*syst_low[i]) )
-    stat_syst_up_l.append( sqrt(stat[i]*stat[i] + syst_up[i]*syst_up[i]) )
+    stat_syst_low.append( sqrt(stat[i]*stat[i] + syst_low[i]*syst_low[i]) )
+    stat_syst_up.append( sqrt(stat[i]*stat[i] + syst_up[i]*syst_up[i]) )
 
-stat_syst_low = array( 'd', stat_syst_low_l)
-stat_syst_up = array( 'd', stat_syst_up_l)
+stat_syst.append(stat_syst_low)
+stat_syst.append(stat_syst_up)
 
-print stat_syst_low 
-print stat_syst_up 
+#print stat_syst
 
-c = TCanvas()
-c.SetGridx(False)
-c.SetGridy(False)
+import matplotlib.pyplot as plt
+import numpy as np
 
-gr_stat_syst = TGraphAsymmErrors(3,t,y,stat_syst_low,stat_syst_up,ey,ey);
-gr_stat_syst.SetTitle("; T_{1/2}^{2#nu} #times 10^{19} [y] ;");
-gr_stat_syst.SetMarkerColor(4);
-gr_stat_syst.SetMarkerStyle(21);
+plt.errorbar(t,y,None,stat_syst, xlolims=True, marker='s', linewidth=0, elinewidth=10 ,ecolor='green')
 
-gr_stat_syst.SetFillColor(kOrange+10);
-gr_stat_syst.Draw("A2");
+plt.errorbar(t,y,None,stat,marker='s', linewidth=0, elinewidth=2, ecolor='black',mfc='black')
 
-ay = gr_stat_syst.GetHistogram().GetYaxis();
-y1 = ay.GetBinLowEdge(1);
-y2 = ay.GetBinUpEdge(ay.GetNbins());
-gr_stat_syst.GetHistogram().GetYaxis().Set(3,y1,y2);
-gr_stat_syst.GetHistogram().GetYaxis().SetBinLabel(1,names[0]);
-gr_stat_syst.GetHistogram().GetYaxis().SetBinLabel(2,names[1]);
-gr_stat_syst.GetHistogram().GetYaxis().SetBinLabel(3,names[2]);
+plt.yticks( np.arange(4), names )
 
-gr_stat_only = TGraphAsymmErrors(3,t,y,stat,stat,zero,zero);
-gr_stat_only.SetTitle("; T_{1/2}^{2#nu} #times 10^{19} [y] ;");
-gr_stat_only.SetMarkerColor(1);
-gr_stat_only.SetMarkerStyle(20);
-gr_stat_syst.SetLineWidth(2);
-gr_stat_syst.SetFillColor(kOrange);
-gr_stat_only.Draw("Psame");
+plt.axis([2.42,4.2,-1,4])
 
-c.Update()
+plt.xlabel(r'$^{116}$Cd 2$\nu\beta\beta$ half-life [$\times 10^{19}$ y]')
 
-#"comparison", "; T_{1/2}^{2#nu} #times 10^{19} [y] ;");
+plt.grid(axis='x')
 
-
-
-raw_input("wait...")
+plt.show()

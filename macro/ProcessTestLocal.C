@@ -10,19 +10,19 @@
 
 	// Set basic path	
 	ProcessChannel::SetInputFilePath ("/Users/alberto/Software/SuperNEMO/work/nemo3/");
-	ProcessChannel::SetInputFileName ("SingleElectronAnalysis_output.root");
-	ProcessChannel::SetInputDirName  ("SingleElectronSearch");
-	ProcessChannel::SetInputTreeName ("SingleElectronSearch");	
+	ProcessChannel::SetInputFileName ("TwoElectronNtuplizerExe_Int_output.root");
+	ProcessChannel::SetInputDirName  ("TwoElectronNtuplizer");
+	ProcessChannel::SetInputTreeName ("TwoElectronNtuplizer");	
 	ProcessChannel::SetOutputFilePath("/Users/alberto/Software/SuperNEMO/work/nemo3/plot_test/");
-	ProcessChannel::SetOutputFileName("OneElectronHistos.root");
+	ProcessChannel::SetOutputFileName("TwoElectronIntHistos.root");
 	
-	ProcessChannel::SetFirstRunNumber(0);
-	ProcessChannel::SetLastRunNumber(5000);
+	//ProcessChannel::SetFirstRunNumber(0);
+	//ProcessChannel::SetLastRunNumber(5000);
 	
 	// Run
 	TBenchmark * benchmark = new TBenchmark();
 	benchmark->Start("Run");
-	ProcessChannel::Run(100000);
+	ProcessChannel::Run(2000000);
 	benchmark->Show("Run");
 	
 }
