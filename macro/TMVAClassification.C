@@ -165,7 +165,8 @@ void TMVAClassification( TString myMethodList = "" )
 
    // Create a ROOT output file where TMVA will store ntuples, histograms, etc.
    TString outfileName( "TMVA.root" );
-   TFile* outputFile = TFile::Open( outfileName, "RECREATE" );
+   TString outfileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/" );
+   TFile* outputFile = TFile::Open( outfileDir + outfileName, "RECREATE" );
 
    // Create the factory object. Later you can choose the methods
    // whose performance you'd like to investigate. The factory is 
@@ -208,7 +209,8 @@ void TMVAClassification( TString myMethodList = "" )
 
    // Read training and test data
    // (it is also possible to use ASCII format as input -> see TMVA Users Guide)
-   TString fdir = "/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
+   //TString fdir = "/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
+   TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
    TString fname = "TwoElectronIntTree.root";
       
    TFile *input = TFile::Open( fdir + fname );
