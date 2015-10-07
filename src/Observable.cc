@@ -162,12 +162,12 @@ void Observable::Draw(Option_t* option){
 
 	
 	//std::cout << "--------------------------------------------------" << std::endl;
-	//std::cout << GetName() << std::endl;
+	std::cout << GetName() << std::endl;
 	_chi2 = 0; _ndf = 0;
 	_pval = _Data->Chi2TestX(hsum, _chi2, _ndf, _igood, "UW") ;
 	//std::cout << TString::Format("#chi^2/dof (%.1f/%d), p-value %.3f", _chi2, _ndf, _pval) << std::endl;
 	_ks = _Data-> KolmogorovTest(hsum) ;
-	//std::cout << TString::Format("KS %.3f", _ks) << std::endl;
+	std::cout << TString::Format("KS %.3f", _ks) << std::endl;
 	//std::cout << "--------------------------------------------------" << std::endl;
 
 	//leg->AddEntry((TObject*) 0, TString::Format("#chi^2/dof (%.1f/%d)", _chi2, _ndf), "");

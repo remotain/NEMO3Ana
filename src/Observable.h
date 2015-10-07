@@ -109,6 +109,7 @@ public:
 	double GetChi2   () { return _chi2; };
 	double GetPValue () { return _pval; };
 	double GetKS     () { return _ks;   };
+	double GetNDF    () { return _ndf;  };
 	
 private:
 
