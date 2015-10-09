@@ -1,5 +1,5 @@
 /**********************************************************************************
- * Project   : TMVA - a Root-integrated toolkit for multivariate data analysis    *
+
  * Package   : TMVA                                                               *
  * Exectuable: TMVAClassificationApplication                                      *
  *                                                                                *
@@ -235,7 +235,7 @@ void TMVAClassificationApplication( TString myMethodList = "", Int_t idx = -1 )
    
    for(std::vector<std::string>::iterator spit = samples.begin(); spit !=samples.end(); spit++) { 
 
-   	   if( idx != -1 && spit != samples[idx] ) continue;
+   	   if( idx != -1 && *spit != samples[idx-1] ) continue;
 		   
    	   // Book output histograms
 	   UInt_t nbin = 100;
@@ -428,7 +428,7 @@ void TMVAClassificationApplication( TString myMethodList = "", Int_t idx = -1 )
 
        // --- Write histograms
        
-       TFile *target  = new TFile( fdir + "TMVApp.root","UPDATE" );
+       TFile *target  = new TFile( fdir + "TMVApp_" + TString(*spit) + ".root","UPDATE" );
        if (Use["Likelihood"   ])   histLk     ->Write( TString(*spit) + "_" + "MVA_Likelihood"    );
        if (Use["LikelihoodD"  ])   histLkD    ->Write( TString(*spit) + "_" + "MVA_LikelihoodD"   );
        if (Use["LikelihoodPCA"])   histLkPCA  ->Write( TString(*spit) + "_" + "MVA_LikelihoodPCA" );
@@ -467,7 +467,7 @@ void TMVAClassificationApplication( TString myMethodList = "", Int_t idx = -1 )
        if (Use["Fisher"]) { if (probHistFi != 0) probHistFi->Write(); if (rarityHistFi != 0) rarityHistFi->Write(); }
        target->Close();
        
-       std::cout << "--- Created root file: \"TMVApp.root\" containing the MVA output histograms" << std::endl;
+       std::cout << "--- Created root file: \"TMVApp_"<< *spit << ".root\" containing the MVA output histograms" << std::endl;
        
        if (Use["Likelihood"])    delete histLk     ;
        if (Use["LikelihoodD"])   delete histLkD    ;
