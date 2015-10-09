@@ -22,10 +22,3 @@
 #root -b -q /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/ProcessTwoElectronExt.C+ 
 #root -b -q /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/ProcessTwoElectronInt.C+ 
 #root -b -q /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/ProcessOneElectronOneAlpha.C+ 
-#
-################################################################################
-# Submit TMVA jobs
-################################################################################
-#
-source /usr/local/root/v5.34.18/bin/thisroot.sh 
-root -b -q /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/TMVAClassification.C+
