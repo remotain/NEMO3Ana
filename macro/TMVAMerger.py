@@ -1,7 +1,4 @@
 #!/usr/bin/python
-import argparse
-
-parser = argparse.ArgumentParser(description='Merge TMVA Application output files')
 
 from ROOT import *
 
@@ -11,7 +8,7 @@ file_name_template = "TMVApp_"
 
 file_name_merged = "TMVApp.root"
 
-label_lists = (
+labels_list = (
 "Data",
 "Cd116_2b0n_m1",
 "Cd116_Tl208",
@@ -50,13 +47,23 @@ label_lists = (
 
 f = TFile.Open(file_path + file_name_merged, "RECREATE")
 
-for label in label_list:
+for label in labels_list:
     
-    f_tmp = TFile.Open(file_path + file_name_template + label + ".root", "READ")
+    print "\n Open " + file_name_template + label + ".root...", 
+
+    f_tmp = TFile.Open(file_path + "TMVApp_tmp/" +  file_name_template + label + ".root", "READ")
+
+    if not f_tmp or f_tmp.IsZombie():
+        print "Failed!"
+        continue
     
-    h = f_tmp.Get( label + "_BDT")
+    print "Done!"
+
+    h = f_tmp.Get( label + "_MVA_BDT")
     
     f.cd()
     h.Write()
     
-    
+f.Print()
+f.ls()
+f.Close()    
