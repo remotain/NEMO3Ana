@@ -111,8 +111,18 @@ target_link_libraries(NEMO3Ana ${ROOT_LIBRARIES})
 ############### install the library ###################
 install(TARGETS NEMO3Ana DESTINATION ${CMAKE_BINARY_DIR}/lib)
 
-############### Link some esxecutables ###################
-#set(ProcessSingleElectron src/ProcessSingleElectron.cc)
-#add_executable(ProcessSingleElectron ${ProcessSingleElectron})
-#target_link_libraries(ProcessSingleElectron NEMO3Ana)
-#target_link_libraries(test KalmanTrackFit)
+############### Executable to be linked to Collie  ###################
+add_library(CollieCLHEP SHARED IMPORTED)
+set_property(TARGET CollieCLHEP PROPERTY IMPORTED_LOCATION /afs/in2p3.fr/throng/nemo/users/remoto/work/collie/CLHEP/lib/libCollieCLHEP.so)
+add_library(CollieIO SHARED IMPORTED)
+set_property(TARGET CollieIO PROPERTY IMPORTED_LOCATION /afs/in2p3.fr/throng/nemo/users/remoto/work/collie/lib/libCollieIO.so)
+add_library(CollieLimit SHARED IMPORTED)
+set_property(TARGET CollieLimit PROPERTY IMPORTED_LOCATION /afs/in2p3.fr/throng/nemo/users/remoto/work/collie/lib/libCollieLimit.so)
+
+include_directories(/afs/in2p3.fr/throng/nemo/users/remoto/work/collie/CLHEP/Units)
+include_directories(/afs/in2p3.fr/throng/nemo/users/remoto/work/collie/io/include)
+include_directories(/afs/in2p3.fr/throng/nemo/users/remoto/work/collie/limit/include)
+
+add_executable(collieIOexample ${CMAKE_CURRENT_SOURCE_DIR}/src/collieIOexample.cc)
+target_link_libraries(collieIOexample CollieCLHEP CollieIO CollieLimit ${ROOT_LIBRARIES})
+#install_files(${EXECUTABLE_OUTPUT_PATH} FILES collieIOexample)
