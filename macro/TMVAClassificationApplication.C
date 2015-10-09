@@ -28,7 +28,7 @@
 
 using namespace TMVA;
 
-void TMVAClassificationApplication( TString myMethodList = "" ) 
+void TMVAClassificationApplication( TString myMethodList = "", Int_t idx = -1 ) 
 {   
 #ifdef __CINT__
    gROOT->ProcessLine( ".O0" ); // turn off optimization in CINT
@@ -179,8 +179,8 @@ void TMVAClassificationApplication( TString myMethodList = "" )
    std::cout << "--- TMVAClassificationApp    : Using input file: " << input->GetName() << std::endl;
 
    // Recreate the otput file (delete existing file)
-   TFile *target  = new TFile( fdir + "TMVApp.root","RECREATE" );
-   target.Close();
+   //TFile *target  = new TFile( fdir + "TMVApp.root","RECREATE" );
+   //target.Close();
 
    // List of three to consider
    std::vector<std::string> samples;
@@ -233,8 +233,10 @@ void TMVAClassificationApplication( TString myMethodList = "" )
       }
    }
    
-   for(std::vector<std::string>::iterator spit = samples.begin(); spit !=samples.end(); spit++) {
-	   	   
+   for(std::vector<std::string>::iterator spit = samples.begin(); spit !=samples.end(); spit++) { 
+
+   	   if( idx != -1 && spit != samples[idx] ) continue;
+		   
    	   // Book output histograms
 	   UInt_t nbin = 100;
 	   TH1F   *histLk(0), *histLkD(0), *histLkPCA(0), *histLkKDE(0), *histLkMIX(0), *histPD(0), *histPDD(0);
