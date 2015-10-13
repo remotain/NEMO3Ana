@@ -8,12 +8,13 @@ int main(int argc, char* argv[]) {
   /////////////////////////////////////////
   CollieIOFile* cfile = new CollieIOFile();
   // Specify outputfile and channel name  
-  cfile->initFile("exampleCollieIOfile.root", "My Channel");  
+  
+  cfile->initFile("/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/CollieIO.root", "BDT_Score");  
 
   // Define your input histograms
-  double Xmin = 0.0; 
-  double Xmax = 1.0;
-  int Nbins = 40;
+  double Xmin = -0.8; 
+  double Xmax = +0.8;
+  int Nbins = 100;
   //
 
   cfile->setInputHist(Xmin,Xmax,Nbins);
@@ -36,90 +37,213 @@ int main(int argc, char* argv[]) {
   // The value doesn't matter if you're not smoothing.
   //
   //  cfile->setHistNorm(50000);
-  
-  
+
   //Define backgrounds
   vector<string> bkgdNames;
-  bkgdNames.push_back("Bkgd1");
-  bkgdNames.push_back("Bkgd2");
+
+  bkgdNames.push_back("Cd116_Tl208");      
+  bkgdNames.push_back("Cd116_Ac228");      
+  bkgdNames.push_back("Cd116_Bi212");      
+  bkgdNames.push_back("Cd116_Bi214");      
+  bkgdNames.push_back("Cd116_Pb214");      
+  bkgdNames.push_back("Mylar_Bi214");      
+  bkgdNames.push_back("Mylar_Pb214");      
+  bkgdNames.push_back("Cd116_K40_cold"); 
+  bkgdNames.push_back("Cd116_K40_warm"); 
+  bkgdNames.push_back("Cd116_Pa234m_cold");
+  bkgdNames.push_back("Cd116_Pa234m_warm");
+  bkgdNames.push_back("SFoil_Bi210_cold");      
+  bkgdNames.push_back("SFoil_Bi210_warm");      
+  bkgdNames.push_back("SWire_Bi210_P1"); 
+  bkgdNames.push_back("SWire_Bi210_P2"); 
+  bkgdNames.push_back("SScin_Bi210");      
+  bkgdNames.push_back("SScin_Bi214");      
+  bkgdNames.push_back("SWire_Tl208_P1"); 
+  bkgdNames.push_back("SWire_Tl208_P2"); 
+  bkgdNames.push_back("SWire_Bi214_P1"); 
+  bkgdNames.push_back("SWire_Bi214_P2"); 
+  bkgdNames.push_back("SFoil_Bi214_P1"); 
+  bkgdNames.push_back("SFoil_Bi214_P2"); 
+  bkgdNames.push_back("SWire_Pb214_P1"); 
+  bkgdNames.push_back("SWire_Pb214_P2"); 
+  bkgdNames.push_back("SFoil_Pb214_P1"); 
+  bkgdNames.push_back("SFoil_Pb214_P2"); 
+  bkgdNames.push_back("FeShield_Bi214");   
+  bkgdNames.push_back("FeShield_Tl208");   
+  bkgdNames.push_back("FeShield_Ac228");   
+  bkgdNames.push_back("CuTower_Co60");     
+  bkgdNames.push_back("Air_Bi214_P1");     
+  bkgdNames.push_back("PMT_Bi214");        
+  bkgdNames.push_back("PMT_Tl208");        
+  bkgdNames.push_back("PMT_Ac228");        
+  bkgdNames.push_back("PMT_K40");          
+  bkgdNames.push_back("ScintInn_K40");     
+  bkgdNames.push_back("ScintOut_K40");     
+  bkgdNames.push_back("ScintPet_K40");     
+  bkgdNames.push_back("MuMetal_Pa234m");   
+  bkgdNames.push_back("Cd116_2b2n_m14");   
+  
   cfile->createChannel(bkgdNames);
   
   
-  // For this example, generate backgrounds, signal, data, and systematics
-  TH1D* bkgd1 = new TH1D("bkgd1","bkgd1",Nbins,Xmin,Xmax);
-  TH1D* bkgd2 = new TH1D("bkgd2","bkgd2",Nbins,Xmin,Xmax);
-  TH1D* bkgd2SystP = new TH1D("bkgd2systP","bkgd2systP",Nbins,Xmin,Xmax);
-  TH1D* bkgd2SystN = new TH1D("bkgd2systN","bkgd2systN",Nbins,Xmin,Xmax);
-  
-  TH1D* sig = new TH1D("sig","sig",Nbins,Xmin,Xmax);
-  TH1D* sigSystP = new TH1D("sig_systP","sig_systP",Nbins,Xmin,Xmax);
-  TH1D* sigSystN = new TH1D("sig_systN","sig_systN",Nbins,Xmin,Xmax);
-  TH1D* data = new TH1D("data","data",Nbins,Xmin,Xmax);
-  
-  // Make sure you keep track of statistical uncertainties in histograms correctly
-  bkgd1->Sumw2();
-  bkgd2->Sumw2();
-  bkgd2SystP->Sumw2();
-  bkgd2SystN->Sumw2();
-  sig->Sumw2();
-  sigSystP->Sumw2();
-  sigSystN->Sumw2();
-  data->Sumw2();
+  //// For this example, generate backgrounds, signal, data, and systematics
+  //TH1D* bkgd1 = new TH1D("bkgd1","bkgd1",Nbins,Xmin,Xmax);
+  //TH1D* bkgd2 = new TH1D("bkgd2","bkgd2",Nbins,Xmin,Xmax);
+  //
+  //TH1D* bkgd2SystP = new TH1D("bkgd2systP","bkgd2systP",Nbins,Xmin,Xmax);
+  //TH1D* bkgd2SystN = new TH1D("bkgd2systN","bkgd2systN",Nbins,Xmin,Xmax);
+  //
+  //TH1D* sig = new TH1D("sig","sig",Nbins,Xmin,Xmax);
+  //TH1D* sigSystP = new TH1D("sig_systP","sig_systP",Nbins,Xmin,Xmax);
+  //TH1D* sigSystN = new TH1D("sig_systN","sig_systN",Nbins,Xmin,Xmax);
+  //TH1D* data = new TH1D("data","data",Nbins,Xmin,Xmax);
+  //
+  //// Make sure you keep track of statistical uncertainties in histograms correctly
+  //bkgd1->Sumw2();
+  //bkgd2->Sumw2();
+  //bkgd2SystP->Sumw2();
+  //bkgd2SystN->Sumw2();
+  //sig->Sumw2();
+  //sigSystP->Sumw2();
+  //sigSystN->Sumw2();
+  //data->Sumw2();
   
   
   //Otherwise, get your input histograms from an external file
   //
-  //  TFile infile("myInputFile.root");
-  //  TH1D* data = (TH1D*)infile.Get("data");
-  //  TH1D* signal = (TH1D*)infile.Get("signal");
-  //  TH1D* bkgd1 = (TH1D*)infile.Get("bkgd1");
+  TFile infile("/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/TMVApp.root");
+  
+  TH1D* data = (TH1D*)infile.Get("Data_MVA_BDT");
 
+  TH1D* sig = (TH1D*)infile.Get("Cd116_2b0n_m1_MVA_BDT");
+  
+  TH1D * Cd116_Tl208       = (TH1D*) infile.Get("Cd116_Tl208")    ; Cd116_Tl208       -> Sumw2() ; Cd116_Tl208       -> Scale( 5.93799  ); 
+  TH1D * Cd116_Ac228       = (TH1D*) infile.Get("Cd116_Ac228")    ; Cd116_Ac228       -> Sumw2() ; Cd116_Ac228       -> Scale( 6.92654  ); 
+  TH1D * Cd116_Bi212       = (TH1D*) infile.Get("Cd116_Bi212")    ; Cd116_Bi212       -> Sumw2() ; Cd116_Bi212       -> Scale( 2.74751  ); 
+  TH1D * Cd116_Bi214       = (TH1D*) infile.Get("Cd116_Bi214")    ; Cd116_Bi214       -> Sumw2() ; Cd116_Bi214       -> Scale( 18.3589  ); 
+  TH1D * Cd116_Pb214       = (TH1D*) infile.Get("Cd116_Pb214_VT") ; Cd116_Pb214       -> Sumw2() ; Cd116_Pb214       -> Scale( 0.187229 ); 
+  TH1D * Mylar_Bi214       = (TH1D*) infile.Get("Mylar_Bi214")    ; Mylar_Bi214       -> Sumw2() ; Mylar_Bi214       -> Scale( 11.1957  ); 
+  TH1D * Mylar_Pb214       = (TH1D*) infile.Get("Mylar_Pb214")    ; Mylar_Pb214       -> Sumw2() ; Mylar_Pb214       -> Scale( 0.49351  ); 
+  TH1D * Cd116_K40_cold    = (TH1D*) infile.Get("Cd116_K40")      ; Cd116_K40_cold    -> Sumw2() ; Cd116_K40_cold    -> Scale( 9.02821  ); 
+  TH1D * Cd116_K40_warm    = (TH1D*) infile.Get("Cd116_K40")      ; Cd116_K40_warm    -> Sumw2() ; Cd116_K40_warm    -> Scale( 25.9862  ); 
+  TH1D * Cd116_Pa234m_cold = (TH1D*) infile.Get("Cd116_Pa234m")   ; Cd116_Pa234m_cold -> Sumw2() ; Cd116_Pa234m_cold -> Scale( 27.6202  ); 
+  TH1D * Cd116_Pa234m_warm = (TH1D*) infile.Get("Cd116_Pa234m")   ; Cd116_Pa234m_warm -> Sumw2() ; Cd116_Pa234m_warm -> Scale( 72.5556  ); 
+  TH1D * SFoil_Bi210_cold  = (TH1D*) infile.Get("SFoil_Bi210")    ; SFoil_Bi210_cold  -> Sumw2() ; SFoil_Bi210_cold  -> Scale( 0.  ); 
+  TH1D * SFoil_Bi210_warm  = (TH1D*) infile.Get("SFoil_Bi210")    ; SFoil_Bi210_warm  -> Sumw2() ; SFoil_Bi210_warm  -> Scale( 23.2433  );   
+  TH1D * SWire_Bi210_P1    = (TH1D*) infile.Get("SWire_Bi210")    ; SWire_Bi210_P1    -> Sumw2() ; SWire_Bi210_P1    -> Scale( 0.136145 ); 
+  TH1D * SWire_Bi210_P2    = (TH1D*) infile.Get("SWire_Bi210")    ; SWire_Bi210_P2    -> Sumw2() ; SWire_Bi210_P2    -> Scale( 0.624186 ); 
+  TH1D * SScin_Bi210       = (TH1D*) infile.Get("SScin_Bi210")    ; SScin_Bi210       -> Sumw2() ; SScin_Bi210       -> Scale( 1.75763  ); 
+  TH1D * SScin_Bi214       = (TH1D*) infile.Get("SScin_Bi214")    ; SScin_Bi214       -> Sumw2() ; SScin_Bi214       -> Scale( 0.0505381); 
+  TH1D * SWire_Tl208_P1    = (TH1D*) infile.Get("SWire_Tl208")    ; SWire_Tl208_P1    -> Sumw2() ; SWire_Tl208_P1    -> Scale( 0.217615 ); 
+  TH1D * SWire_Tl208_P2    = (TH1D*) infile.Get("SWire_Tl208")    ; SWire_Tl208_P2    -> Sumw2() ; SWire_Tl208_P2    -> Scale( 1.07721  ); 
+  TH1D * SWire_Bi214_P1    = (TH1D*) infile.Get("SWire_Bi214")    ; SWire_Bi214_P1    -> Sumw2() ; SWire_Bi214_P1    -> Scale( 21.4388  ); 
+  TH1D * SWire_Bi214_P2    = (TH1D*) infile.Get("SWire_Bi214")    ; SWire_Bi214_P2    -> Sumw2() ; SWire_Bi214_P2    -> Scale( 17.9663  ); 
+  TH1D * SFoil_Bi214_P1    = (TH1D*) infile.Get("SFoil_Bi214")    ; SFoil_Bi214_P1    -> Sumw2() ; SFoil_Bi214_P1    -> Scale( 5.7695   ); 
+  TH1D * SFoil_Bi214_P2    = (TH1D*) infile.Get("SFoil_Bi214")    ; SFoil_Bi214_P2    -> Sumw2() ; SFoil_Bi214_P2    -> Scale( 2.73967  ); 
+  TH1D * SWire_Pb214_P1    = (TH1D*) infile.Get("SWire_Pb214")    ; SWire_Pb214_P1    -> Sumw2() ; SWire_Pb214_P1    -> Scale( 0.457038 ); 
+  TH1D * SWire_Pb214_P2    = (TH1D*) infile.Get("SWire_Pb214")    ; SWire_Pb214_P2    -> Sumw2() ; SWire_Pb214_P2    -> Scale( 0.648715 ); 
+  TH1D * SFoil_Pb214_P1    = (TH1D*) infile.Get("SFoil_Pb214")    ; SFoil_Pb214_P1    -> Sumw2() ; SFoil_Pb214_P1    -> Scale( 0.215401 ); 
+  TH1D * SFoil_Pb214_P2    = (TH1D*) infile.Get("SFoil_Pb214")    ; SFoil_Pb214_P2    -> Sumw2() ; SFoil_Pb214_P2    -> Scale( 0.189179 ); 
+  TH1D * FeShield_Bi214    = (TH1D*) infile.Get("FeShield_Bi214") ; FeShield_Bi214    -> Sumw2() ; FeShield_Bi214    -> Scale( 50.1037  ); 
+  TH1D * FeShield_Tl208    = (TH1D*) infile.Get("FeShield_Tl208") ; FeShield_Tl208    -> Sumw2() ; FeShield_Tl208    -> Scale( 1.1935   ); 
+  TH1D * FeShield_Ac228    = (TH1D*) infile.Get("FeShield_Ac228") ; FeShield_Ac228    -> Sumw2() ; FeShield_Ac228    -> Scale( 0.176176 ); 
+  TH1D * CuTower_Co60      = (TH1D*) infile.Get("CuTower_Co60")   ; CuTower_Co60      -> Sumw2() ; CuTower_Co60      -> Scale( 3.79642  ); 
+  TH1D * Air_Bi214_P1      = (TH1D*) infile.Get("Air_Bi214_P1")   ; Air_Bi214_P1      -> Sumw2() ; Air_Bi214_P1      -> Scale( 4.19156  ); 
+  TH1D * PMT_Bi214         = (TH1D*) infile.Get("PMT_Bi214")      ; PMT_Bi214         -> Sumw2() ; PMT_Bi214         -> Scale( 30.6795  ); 
+  TH1D * PMT_Tl208         = (TH1D*) infile.Get("PMT_Tl208")      ; PMT_Tl208         -> Sumw2() ; PMT_Tl208         -> Scale( 23.2697  ); 
+  TH1D * PMT_Ac228         = (TH1D*) infile.Get("PMT_Ac228")      ; PMT_Ac228         -> Sumw2() ; PMT_Ac228         -> Scale( 3.60937  ); 
+  TH1D * PMT_K40           = (TH1D*) infile.Get("PMT_K40")        ; PMT_K40           -> Sumw2() ; PMT_K40           -> Scale( 16.792   ); 
+  TH1D * ScintInn_K40      = (TH1D*) infile.Get("ScintInn_K40")   ; ScintInn_K40      -> Sumw2() ; ScintInn_K40      -> Scale( 0.33559  ); 
+  TH1D * ScintOut_K40      = (TH1D*) infile.Get("ScintOut_K40")   ; ScintOut_K40      -> Sumw2() ; ScintOut_K40      -> Scale( 0.604063 ); 
+  TH1D * ScintPet_K40      = (TH1D*) infile.Get("ScintPet_K40")   ; ScintPet_K40      -> Sumw2() ; ScintPet_K40      -> Scale( 1.00676  ); 
+  TH1D * MuMetal_Pa234m    = (TH1D*) infile.Get("MuMetal_Pa234m") ; MuMetal_Pa234m    -> Sumw2() ; MuMetal_Pa234m    -> Scale( 0.664017 ); 
+  TH1D * Cd116_2b2n_m14    = (TH1D*) infile.Get("Cd116_2b2n_m14") ; Cd116_2b2n_m14    -> Sumw2() ; Cd116_2b2n_m14    -> Scale( 4913.49  ); 
+	
   TRandom r(1234);
   double niter = 5e5;
   
   //We'll make three mass points...
-  for(int m=100; m<=150; m+=25){
+  for(int m=100; m<=100; m+=25){
     
-    bkgd1->Scale(0);
-    bkgd2->Scale(0);
-    sig->Scale(0);
-    data->Scale(0);
-    bkgd2SystP->Scale(0);
-    bkgd2SystN->Scale(0);
-    sigSystP->Scale(0);
-    sigSystN->Scale(0);
+    //bkgd1->Scale(0);
+    //bkgd2->Scale(0);
+    //sig->Scale(0);
+    //data->Scale(0);
+    //bkgd2SystP->Scale(0);
+    //bkgd2SystN->Scale(0);
+    //sigSystP->Scale(0);
+    //sigSystN->Scale(0);
 
     // For this example, randomly fill histograms
-    for(int i=0; i<niter; i++){
-      //Flat background
-      bkgd1->Fill(r.Rndm(),150.0/niter);
-      
-      //Fill data with 5% higher bkgd1 rate
-      data->Fill(r.Rndm(), 157.5/niter);
-      
-      //Falling background
-      bkgd2->Fill(r.Gaus(0,0.30),600.0/niter);
-      
-      //Shape-dependent bkgd systematic
-      bkgd2SystP->Fill(r.Gaus(0,0.305),605.0/niter);
-      bkgd2SystN->Fill(r.Gaus(0,0.295),595.0/niter);
-      
-      //Fill data with 2% lower rate and 1/2 sigma morphed shape
-      data->Fill(r.Gaus(0,0.2975), 588.0/niter);
-      
-      //Peaked signal
-      sig->Fill(r.Gaus(1,0.15),15/niter);
-      
-      //Shape-dependent signal systematic
-      sigSystP->Fill(r.Gaus(1,0.145),15/niter);
-      sigSystN->Fill(r.Gaus(1,0.155),15/niter);
-    }
+    //for(int i=0; i<niter; i++){
+    //  //Flat background
+    //  bkgd1->Fill(r.Rndm(),150.0/niter);
+    //  
+    //  //Fill data with 5% higher bkgd1 rate
+    //  data->Fill(r.Rndm(), 157.5/niter);
+    //  
+    //  //Falling background
+    //  bkgd2->Fill(r.Gaus(0,0.30),600.0/niter);
+    //  
+    //  //Shape-dependent bkgd systematic
+    //  bkgd2SystP->Fill(r.Gaus(0,0.305),605.0/niter);
+    //  bkgd2SystN->Fill(r.Gaus(0,0.295),595.0/niter);
+    //  
+    //  //Fill data with 2% lower rate and 1/2 sigma morphed shape
+    //  data->Fill(r.Gaus(0,0.2975), 588.0/niter);
+    //  
+    //  //Peaked signal
+    //  sig->Fill(r.Gaus(1,0.15),15/niter);
+    //  
+    //  //Shape-dependent signal systematic
+    //  sigSystP->Fill(r.Gaus(1,0.145),15/niter);
+    //  sigSystN->Fill(r.Gaus(1,0.155),15/niter);
+    //}
     
 
     //Backgrounds are passed in via vector
     vector<TH1D*> vbkgd;
-    vbkgd.push_back(bkgd1);
-    vbkgd.push_back(bkgd2);
+    vbkgd.push_back(Cd116_Tl208);      
+    vbkgd.push_back(Cd116_Ac228);      
+    vbkgd.push_back(Cd116_Bi212);      
+    vbkgd.push_back(Cd116_Bi214);      
+    vbkgd.push_back(Cd116_Pb214);      
+    vbkgd.push_back(Mylar_Bi214);      
+    vbkgd.push_back(Mylar_Pb214);      
+    vbkgd.push_back(Cd116_K40_cold); 
+    vbkgd.push_back(Cd116_K40_warm); 
+    vbkgd.push_back(Cd116_Pa234m_cold);
+    vbkgd.push_back(Cd116_Pa234m_warm);
+    vbkgd.push_back(SFoil_Bi210_cold);      
+    vbkgd.push_back(SFoil_Bi210_warm);      
+    vbkgd.push_back(SWire_Bi210_P1); 
+    vbkgd.push_back(SWire_Bi210_P2); 
+    vbkgd.push_back(SScin_Bi210);      
+    vbkgd.push_back(SScin_Bi214);      
+    vbkgd.push_back(SWire_Tl208_P1); 
+    vbkgd.push_back(SWire_Tl208_P2); 
+    vbkgd.push_back(SWire_Bi214_P1); 
+    vbkgd.push_back(SWire_Bi214_P2); 
+    vbkgd.push_back(SFoil_Bi214_P1); 
+    vbkgd.push_back(SFoil_Bi214_P2); 
+    vbkgd.push_back(SWire_Pb214_P1); 
+    vbkgd.push_back(SWire_Pb214_P2); 
+    vbkgd.push_back(SFoil_Pb214_P1); 
+    vbkgd.push_back(SFoil_Pb214_P2); 
+    vbkgd.push_back(FeShield_Bi214);   
+    vbkgd.push_back(FeShield_Tl208);   
+    vbkgd.push_back(FeShield_Ac228);   
+    vbkgd.push_back(CuTower_Co60);     
+    vbkgd.push_back(Air_Bi214_P1);     
+    vbkgd.push_back(PMT_Bi214);        
+    vbkgd.push_back(PMT_Tl208);        
+    vbkgd.push_back(PMT_Ac228);        
+    vbkgd.push_back(PMT_K40);          
+    vbkgd.push_back(ScintInn_K40);     
+    vbkgd.push_back(ScintOut_K40);     
+    vbkgd.push_back(ScintPet_K40);     
+    vbkgd.push_back(MuMetal_Pa234m);   
+    vbkgd.push_back(Cd116_2b2n_m14);   
     
     //Alpha parameters only matter when smoothing is utilized
     //  Input values don't matter if you're not smoothing.
@@ -155,46 +279,61 @@ int main(int argc, char* argv[]) {
   //   if by shape, must supply a histogram of the values in percent(%) fluctuations...
   //   Signal requires no index, but backgrounds must be specifically indexed (0->N bkgds)    
   //   Read the instructions in collie/io/include/CollieIOFile.hh if you're in doubt
-  cfile->createFlatSigSystematic("Lumi",0.06,0.06,m);
-  cfile->createShapeSigSystematic("SigShape",sigSystP,sigSystN,m);
+  cfile->createFlatSigSystematic("IsotopeMass"    , 0.0025 , 0.0025 ,m);
+  cfile->createFlatSigSystematic("Efficiency"     , 0.0550 , 0.0550 ,m);
+  cfile->createFlatSigSystematic("Bremsstrahlung" , 0.0050 , 0.0012 ,m);
+  cfile->createFlatSigSystematic("ThinFoil"       , 0.0073 , 0.0073 ,m);
+  cfile->createFlatSigSystematic("EnCalib"        , 0.0025 , 0.0025 ,m);
   
-  cfile->createFlatBkgdSystematic(0,"Lumi",0.06,0.06,m);
-  cfile->createFlatBkgdSystematic(1,"Lumi",0.06,0.06,m);
+  // Tl-208 Systematics
+  cfile->createFlatBkgSystematic(  0 , "Tl-208"      , 0.0004 , 0.0004 ,m);
+  cfile->createFlatBkgSystematic(  1 , "Tl-208"      , 0.0004 , 0.0004 ,m);
+  cfile->createFlatBkgSystematic(  2 , "Tl-208"      , 0.0004 , 0.0004 ,m);
+  cfile->createFlatBkgSystematic( 17 , "Tl-208"      , 0.0004 , 0.0004 ,m);
+  cfile->createFlatBkgSystematic( 18 , "Tl-208"      , 0.0004 , 0.0004 ,m);
   
-  cfile->createFlatSigSystematic("Eff",0.10,0.10,m);
-  cfile->createFlatBkgdSystematic(0,"Eff",0.10,0.10,m);
-  cfile->createFlatBkgdSystematic(1,"Eff",0.10,0.10,m);
+  // Bi-214 Systematic
+  cfile->createFlatBkgSystematic(  3 , "Bi-214"     , 0.0007 , 0.0007 ,m);
+  cfile->createFlatBkgSystematic(  4 , "Bi-214"     , 0.0007 , 0.0007 ,m);
+  cfile->createFlatBkgSystematic(  5 , "Bi-214"     , 0.0007 , 0.0007 ,m);
+  cfile->createFlatBkgSystematic(  6 , "Bi-214"     , 0.0007 , 0.0007 ,m);
   
-  cfile->createFlatBkgdSystematic(0,"Xsec1",0.15,0.15,m);
-  cfile->createFlatBkgdSystematic(1,"Xsec2",0.15,0.15,m);
-  cfile->createShapeBkgdSystematic(1,"Bkgd2Shape",bkgd2SystP,bkgd2SystN,m);
-    
-  // Example of systematics input as histograms, can be flat or function of final variable
-  //==>Use this method if you're inputing fractional shape systematics
-  //    TH1D* systP = (TH1D*)infile.Get("signal_Systematic_positive");  
-  //    TH1D* systN = (TH1D*)infile.Get("signal_Systematic_negative");  
-  //    cfile->createSigSystematic("ShapeSyst",systP,systN,m);
-  
-  //==>Use this method if you're inputing a different shape template
-  //    systP = (TH1D*)infile.Get("bkgd_BkgdShape_positive");  
-  //    systN = (TH1D*)infile.Get("bkgd_BkgdShape_negative");  
-  //    cfile->createShapeBkgdSystematic(0,"BkgdShape",systP,systN,m);
-  //    cfile->createShapeBkgdSystematic(1,"BkgdShape",systP,systN,m);
+  // Internal Systematic
+  cfile->createFlatBkgSystematic(  7 , "Internal"   , 0.0140 , 0.0176 ,m);
+  cfile->createFlatBkgSystematic(  8 , "Internal"   , 0.0140 , 0.0176 ,m);
+  cfile->createFlatBkgSystematic(  9 , "Internal"   , 0.0140 , 0.0176 ,m);
+  cfile->createFlatBkgSystematic( 10 , "Internal"   , 0.0140 , 0.0176 ,m);
+  cfile->createFlatBkgSystematic( 11 , "Internal"   , 0.0140 , 0.0176 ,m);
+  cfile->createFlatBkgSystematic( 12 , "Internal"   , 0.0140 , 0.0176 ,m);
+  cfile->createFlatBkgSystematic( 13 , "Internal"   , 0.0140 , 0.0176 ,m);
+  cfile->createFlatBkgSystematic( 14 , "Internal"   , 0.0140 , 0.0176 ,m);	
 
+  // Radon Systematic
+  cfile->createFlatBkgSystematic( 19 , "Radon"      , 0.0004 , 0.0004 ,m);	
+  cfile->createFlatBkgSystematic( 20 , "Radon"      , 0.0004 , 0.0004 ,m);	
+  cfile->createFlatBkgSystematic( 21 , "Radon"      , 0.0004 , 0.0004 ,m);	
+  cfile->createFlatBkgSystematic( 22 , "Radon"      , 0.0004 , 0.0004 ,m);	
+  cfile->createFlatBkgSystematic( 23 , "Radon"      , 0.0004 , 0.0004 ,m);	
+  cfile->createFlatBkgSystematic( 24 , "Radon"      , 0.0004 , 0.0004 ,m);	
+  cfile->createFlatBkgSystematic( 25 , "Radon"      , 0.0004 , 0.0004 ,m);           
+  cfile->createFlatBkgSystematic( 26 , "Radon"      , 0.0004 , 0.0004 ,m);           
 
-  //  ==>Option to remove prior constraint on systematic uncertainty PDF.
-  //     Floating makes a parameter a free parameter in the fit.
-  //
-  //  cfile->setBkgdFloatFlag(0,"Eff",true,m);
-  //  cfile->setBkgdFloatFlag(1,"Eff",true,m);
-  //  cfile->setSigFloatFlag("Eff",true,m);
-    
-
-  //  ==>For large uncertainties (eg, >30%) use a log-normal PDF to avoid
-  //     problems in Gaussian PDF modeling.
-  //
-  //  cfile->setLogNormalFlag("Eff",true,m);
-
+  // Externals Systematic
+  cfile->createFlatBkgSystematic( 15 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  cfile->createFlatBkgSystematic( 16 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  cfile->createFlatBkgSystematic( 27 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  cfile->createFlatBkgSystematic( 28 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  cfile->createFlatBkgSystematic( 29 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  cfile->createFlatBkgSystematic( 30 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  cfile->createFlatBkgSystematic( 31 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  cfile->createFlatBkgSystematic( 32 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  cfile->createFlatBkgSystematic( 33 , "Externals"  , 0.0061 , 0.0129 ,m);	 
+  cfile->createFlatBkgSystematic( 34 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  cfile->createFlatBkgSystematic( 35 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  cfile->createFlatBkgSystematic( 36 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  cfile->createFlatBkgSystematic( 37 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  cfile->createFlatBkgSystematic( 38 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  cfile->createFlatBkgSystematic( 39 , "Externals"  , 0.0061 , 0.0129 ,m);	
 
   }
   ///store and output channel information

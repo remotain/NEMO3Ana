@@ -9,7 +9,7 @@
 	// Load OneElectronTwoGammaHistos in HistoCollection
 	HistoCollection * hcoll= new HistoCollection("TwoElectronIntHistos", "TwoElectronIntHistos");
 
-	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20150622/TwoElectronIntHistos.root");
+	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_FINAL_TECHNOTE_20150921/TwoElectronIntHistos.root");
 	
 	TDirectory * fdir = 0;
 	TIter next(DataManagement::GetDataSetCollection()); DataSet * ds;	
@@ -807,8 +807,8 @@
 	// Add for fitting
 	//
 	//////////////////////////////////////////////////////////////////////////////	
-	//DataManagement::AddObservable( tot_e_energy_P1_cold );	
-	//DataManagement::AddObservable( tot_e_energy_P2_cold );	
+	DataManagement::AddObservable( tot_e_energy_P1_cold );	
+	DataManagement::AddObservable( tot_e_energy_P2_cold );	
 	DataManagement::AddObservable( tot_e_energy_P1_warm );	
 	DataManagement::AddObservable( tot_e_energy_P2_warm );	
 

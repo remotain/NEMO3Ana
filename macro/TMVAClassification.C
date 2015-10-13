@@ -215,7 +215,7 @@ void TMVAClassification( TString myMethodList = "" )
    TString fdir = "/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
    TString fname = "TwoElectronIntTree.root";
       
-   TFile *input = TFile::Open( fdir + fname );
+   TFile *input = TFile::Open( fdir + fname , "READ");
    
    std::cout << "--- TMVAClassification       : Using input file: " << input->GetName() << std::endl;
    

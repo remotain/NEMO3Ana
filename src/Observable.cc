@@ -30,6 +30,7 @@ double Observable::GetComponentNumEvent(Component * c, double &err) {
 
 };
 
+
 void Observable::Draw(Option_t* option){
 	
 	THStack * stack = new THStack( TString::Format("stack_%s",GetName()), GetTitle() );
