@@ -164,10 +164,10 @@ int main(int argc, char* argv[]) {
   
 	TDirectory * fdir = 0;
 	fdir = (TDirectory *) infile.Get("Data"); fdir->cd();
-	TH1D* data = (TH1D*)fdir->Get("Data_h_tot_e_energy"); data->Print("all");
+	TH1D* data = (TH1D*)fdir->Get("Data_h_tot_e_energy"); 
 
 	fdir = (TDirectory *) infile.Get("Cd116_2b0n_m1"); fdir->cd();
-	TH1D* sig = (TH1D*)fdir->Get("Cd116_2b0n_m1_h_tot_e_energy"); sig->Print("all");
+	TH1D* sig = (TH1D*)fdir->Get("Cd116_2b0n_m1_h_tot_e_energy"); 
 
 
 	fdir = (TDirectory *) infile.Get("Cd116_Tl208"   ); fdir->cd(); TH1D * Cd116_Tl208       = (TH1D*) fdir->Get("Cd116_Tl208_h_tot_e_energy"    ); /*Cd116_Tl208       -> Sumw2()*/ ; Cd116_Tl208       -> Scale( 5.93799  ); 
@@ -217,7 +217,7 @@ int main(int argc, char* argv[]) {
   double niter = 5e5;
   
   //We'll make three mass points...
-  for(int m=100; m<=100; m+=25){
+  for(int m=100; m<=150; m+=25){
     
     //bkgd1->Scale(0);
     //bkgd2->Scale(0);
