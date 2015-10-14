@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
   // Option to rebin histograms to a coarser binning
   // Eg, rebinning by 2 reduces to 10 bins
   //
-  cfile->setRebin(1);
+  //cfile->setRebin(1);
   
   // Option to smooth histograms
   // Don't smooth unless you know what you're doing
