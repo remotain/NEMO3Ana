@@ -333,61 +333,61 @@ int main(int argc, char* argv[]) {
   //   if by shape, must supply a histogram of the values in percent(%) fluctuations...
   //   Signal requires no index, but backgrounds must be specifically indexed (0->N bkgds)    
   //   Read the instructions in collie/io/include/CollieIOFile.hh if you're in doubt
-  cfile->createFlatSigSystematic("IsotopeMass"    , 0.0025 , 0.0025 ,m);
-  cfile->createFlatSigSystematic("Efficiency"     , 0.0550 , 0.0550 ,m);
-  cfile->createFlatSigSystematic("Bremsstrahlung" , 0.0050 , 0.0012 ,m);
-  cfile->createFlatSigSystematic("ThinFoil"       , 0.0073 , 0.0073 ,m);
-  cfile->createFlatSigSystematic("EnCalib"        , 0.0025 , 0.0025 ,m);
-  
-  // Tl-208 Systematics
-  cfile->createFlatBkgdSystematic(  0 , "Tl-208"      , 0.0004 , 0.0004 ,m);
-  cfile->createFlatBkgdSystematic(  1 , "Tl-208"      , 0.0004 , 0.0004 ,m);
-  cfile->createFlatBkgdSystematic(  2 , "Tl-208"      , 0.0004 , 0.0004 ,m);
-  cfile->createFlatBkgdSystematic( 17 , "Tl-208"      , 0.0004 , 0.0004 ,m);
-  cfile->createFlatBkgdSystematic( 18 , "Tl-208"      , 0.0004 , 0.0004 ,m);
-  
-  // Bi-214 Systematic
-  cfile->createFlatBkgdSystematic(  3 , "Bi-214"     , 0.0007 , 0.0007 ,m);
-  cfile->createFlatBkgdSystematic(  4 , "Bi-214"     , 0.0007 , 0.0007 ,m);
-  cfile->createFlatBkgdSystematic(  5 , "Bi-214"     , 0.0007 , 0.0007 ,m);
-  cfile->createFlatBkgdSystematic(  6 , "Bi-214"     , 0.0007 , 0.0007 ,m);
-  
-  // Internal Systematic
-  cfile->createFlatBkgdSystematic(  7 , "Internal"   , 0.0140 , 0.0176 ,m);
-  cfile->createFlatBkgdSystematic(  8 , "Internal"   , 0.0140 , 0.0176 ,m);
-  cfile->createFlatBkgdSystematic(  9 , "Internal"   , 0.0140 , 0.0176 ,m);
-  cfile->createFlatBkgdSystematic( 10 , "Internal"   , 0.0140 , 0.0176 ,m);
-  cfile->createFlatBkgdSystematic( 11 , "Internal"   , 0.0140 , 0.0176 ,m);
-  cfile->createFlatBkgdSystematic( 12 , "Internal"   , 0.0140 , 0.0176 ,m);
-  cfile->createFlatBkgdSystematic( 13 , "Internal"   , 0.0140 , 0.0176 ,m);
-  cfile->createFlatBkgdSystematic( 14 , "Internal"   , 0.0140 , 0.0176 ,m);	
-
-  // Radon Systematic
-  cfile->createFlatBkgdSystematic( 19 , "Radon"      , 0.0004 , 0.0004 ,m);	
-  cfile->createFlatBkgdSystematic( 20 , "Radon"      , 0.0004 , 0.0004 ,m);	
-  cfile->createFlatBkgdSystematic( 21 , "Radon"      , 0.0004 , 0.0004 ,m);	
-  cfile->createFlatBkgdSystematic( 22 , "Radon"      , 0.0004 , 0.0004 ,m);	
-  cfile->createFlatBkgdSystematic( 23 , "Radon"      , 0.0004 , 0.0004 ,m);	
-  cfile->createFlatBkgdSystematic( 24 , "Radon"      , 0.0004 , 0.0004 ,m);	
-  cfile->createFlatBkgdSystematic( 25 , "Radon"      , 0.0004 , 0.0004 ,m);           
-  cfile->createFlatBkgdSystematic( 26 , "Radon"      , 0.0004 , 0.0004 ,m);           
-
-  // Externals Systematic
-  cfile->createFlatBkgdSystematic( 15 , "Externals"  , 0.0061 , 0.0129 ,m);	
-  cfile->createFlatBkgdSystematic( 16 , "Externals"  , 0.0061 , 0.0129 ,m);	
-  cfile->createFlatBkgdSystematic( 27 , "Externals"  , 0.0061 , 0.0129 ,m);	
-  cfile->createFlatBkgdSystematic( 28 , "Externals"  , 0.0061 , 0.0129 ,m);	
-  cfile->createFlatBkgdSystematic( 29 , "Externals"  , 0.0061 , 0.0129 ,m);	
-  cfile->createFlatBkgdSystematic( 30 , "Externals"  , 0.0061 , 0.0129 ,m);	
-  cfile->createFlatBkgdSystematic( 31 , "Externals"  , 0.0061 , 0.0129 ,m);	
-  cfile->createFlatBkgdSystematic( 32 , "Externals"  , 0.0061 , 0.0129 ,m);	
-  cfile->createFlatBkgdSystematic( 33 , "Externals"  , 0.0061 , 0.0129 ,m);	 
-  cfile->createFlatBkgdSystematic( 34 , "Externals"  , 0.0061 , 0.0129 ,m);	
-  cfile->createFlatBkgdSystematic( 35 , "Externals"  , 0.0061 , 0.0129 ,m);	
-  cfile->createFlatBkgdSystematic( 36 , "Externals"  , 0.0061 , 0.0129 ,m);	
-  cfile->createFlatBkgdSystematic( 37 , "Externals"  , 0.0061 , 0.0129 ,m);	
-  cfile->createFlatBkgdSystematic( 38 , "Externals"  , 0.0061 , 0.0129 ,m);	
-  cfile->createFlatBkgdSystematic( 39 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatSigSystematic("IsotopeMass"    , 0.0025 , 0.0025 ,m);
+  //cfile->createFlatSigSystematic("Efficiency"     , 0.0550 , 0.0550 ,m);
+  //cfile->createFlatSigSystematic("Bremsstrahlung" , 0.0050 , 0.0012 ,m);
+  //cfile->createFlatSigSystematic("ThinFoil"       , 0.0073 , 0.0073 ,m);
+  //cfile->createFlatSigSystematic("EnCalib"        , 0.0025 , 0.0025 ,m);
+  //
+  //// Tl-208 Systematics
+  //cfile->createFlatBkgdSystematic(  0 , "Tl-208"      , 0.0004 , 0.0004 ,m);
+  //cfile->createFlatBkgdSystematic(  1 , "Tl-208"      , 0.0004 , 0.0004 ,m);
+  //cfile->createFlatBkgdSystematic(  2 , "Tl-208"      , 0.0004 , 0.0004 ,m);
+  //cfile->createFlatBkgdSystematic( 17 , "Tl-208"      , 0.0004 , 0.0004 ,m);
+  //cfile->createFlatBkgdSystematic( 18 , "Tl-208"      , 0.0004 , 0.0004 ,m);
+  //
+  //// Bi-214 Systematic
+  //cfile->createFlatBkgdSystematic(  3 , "Bi-214"     , 0.0007 , 0.0007 ,m);
+  //cfile->createFlatBkgdSystematic(  4 , "Bi-214"     , 0.0007 , 0.0007 ,m);
+  //cfile->createFlatBkgdSystematic(  5 , "Bi-214"     , 0.0007 , 0.0007 ,m);
+  //cfile->createFlatBkgdSystematic(  6 , "Bi-214"     , 0.0007 , 0.0007 ,m);
+  //
+  //// Internal Systematic
+  //cfile->createFlatBkgdSystematic(  7 , "Internal"   , 0.0140 , 0.0176 ,m);
+  //cfile->createFlatBkgdSystematic(  8 , "Internal"   , 0.0140 , 0.0176 ,m);
+  //cfile->createFlatBkgdSystematic(  9 , "Internal"   , 0.0140 , 0.0176 ,m);
+  //cfile->createFlatBkgdSystematic( 10 , "Internal"   , 0.0140 , 0.0176 ,m);
+  //cfile->createFlatBkgdSystematic( 11 , "Internal"   , 0.0140 , 0.0176 ,m);
+  //cfile->createFlatBkgdSystematic( 12 , "Internal"   , 0.0140 , 0.0176 ,m);
+  //cfile->createFlatBkgdSystematic( 13 , "Internal"   , 0.0140 , 0.0176 ,m);
+  //cfile->createFlatBkgdSystematic( 14 , "Internal"   , 0.0140 , 0.0176 ,m);	
+  //
+  //// Radon Systematic
+  //cfile->createFlatBkgdSystematic( 19 , "Radon"      , 0.0004 , 0.0004 ,m);	
+  //cfile->createFlatBkgdSystematic( 20 , "Radon"      , 0.0004 , 0.0004 ,m);	
+  //cfile->createFlatBkgdSystematic( 21 , "Radon"      , 0.0004 , 0.0004 ,m);	
+  //cfile->createFlatBkgdSystematic( 22 , "Radon"      , 0.0004 , 0.0004 ,m);	
+  //cfile->createFlatBkgdSystematic( 23 , "Radon"      , 0.0004 , 0.0004 ,m);	
+  //cfile->createFlatBkgdSystematic( 24 , "Radon"      , 0.0004 , 0.0004 ,m);	
+  //cfile->createFlatBkgdSystematic( 25 , "Radon"      , 0.0004 , 0.0004 ,m);           
+  //cfile->createFlatBkgdSystematic( 26 , "Radon"      , 0.0004 , 0.0004 ,m);           
+  //
+  //// Externals Systematic
+  //cfile->createFlatBkgdSystematic( 15 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatBkgdSystematic( 16 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatBkgdSystematic( 27 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatBkgdSystematic( 28 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatBkgdSystematic( 29 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatBkgdSystematic( 30 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatBkgdSystematic( 31 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatBkgdSystematic( 32 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatBkgdSystematic( 33 , "Externals"  , 0.0061 , 0.0129 ,m);	 
+  //cfile->createFlatBkgdSystematic( 34 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatBkgdSystematic( 35 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatBkgdSystematic( 36 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatBkgdSystematic( 37 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatBkgdSystematic( 38 , "Externals"  , 0.0061 , 0.0129 ,m);	
+  //cfile->createFlatBkgdSystematic( 39 , "Externals"  , 0.0061 , 0.0129 ,m);	
 
   }
   ///store and output channel information
