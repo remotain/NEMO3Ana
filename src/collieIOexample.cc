@@ -26,14 +26,14 @@ int main(int argc, char* argv[]) {
   // Option to rebin histograms to a coarser binning
   // Eg, rebinning by 2 reduces to 10 bins
   //
-  //cfile->setRebin(1);
+  cfile->setRebin(1);
   
   // Option to smooth histograms
   // Don't smooth unless you know what you're doing
   //
   //  cfile->setSmooth(false);
   
-  // Average number of histogram entries for smoothing purposes (default=50k)
+  // Average number of `histogram entries for smoothing purposes (default=50k)
   // The value doesn't matter if you're not smoothing.
   //
   //  cfile->setHistNorm(50000);
@@ -42,46 +42,46 @@ int main(int argc, char* argv[]) {
   vector<string> bkgdNames;
 
   bkgdNames.push_back("Cd116_Tl208");      
-  bkgdNames.push_back("Cd116_Ac228");      
-  bkgdNames.push_back("Cd116_Bi212");      
-  bkgdNames.push_back("Cd116_Bi214");      
-  bkgdNames.push_back("Cd116_Pb214");      
-  bkgdNames.push_back("Mylar_Bi214");      
-  bkgdNames.push_back("Mylar_Pb214");      
-  bkgdNames.push_back("Cd116_K40_cold"); 
-  bkgdNames.push_back("Cd116_K40_warm"); 
-  bkgdNames.push_back("Cd116_Pa234m_cold");
-  bkgdNames.push_back("Cd116_Pa234m_warm");
-  bkgdNames.push_back("SFoil_Bi210_cold");      
-  bkgdNames.push_back("SFoil_Bi210_warm");      
-  bkgdNames.push_back("SWire_Bi210_P1"); 
-  bkgdNames.push_back("SWire_Bi210_P2"); 
-  bkgdNames.push_back("SScin_Bi210");      
-  bkgdNames.push_back("SScin_Bi214");      
-  bkgdNames.push_back("SWire_Tl208_P1"); 
-  bkgdNames.push_back("SWire_Tl208_P2"); 
-  bkgdNames.push_back("SWire_Bi214_P1"); 
-  bkgdNames.push_back("SWire_Bi214_P2"); 
-  bkgdNames.push_back("SFoil_Bi214_P1"); 
-  bkgdNames.push_back("SFoil_Bi214_P2"); 
-  bkgdNames.push_back("SWire_Pb214_P1"); 
-  bkgdNames.push_back("SWire_Pb214_P2"); 
-  bkgdNames.push_back("SFoil_Pb214_P1"); 
-  bkgdNames.push_back("SFoil_Pb214_P2"); 
-  bkgdNames.push_back("FeShield_Bi214");   
-  bkgdNames.push_back("FeShield_Tl208");   
-  bkgdNames.push_back("FeShield_Ac228");   
-  bkgdNames.push_back("CuTower_Co60");     
-  bkgdNames.push_back("Air_Bi214_P1");     
-  bkgdNames.push_back("PMT_Bi214");        
-  bkgdNames.push_back("PMT_Tl208");        
-  bkgdNames.push_back("PMT_Ac228");        
-  bkgdNames.push_back("PMT_K40");          
-  bkgdNames.push_back("ScintInn_K40");     
-  bkgdNames.push_back("ScintOut_K40");     
-  bkgdNames.push_back("ScintPet_K40");     
-  bkgdNames.push_back("MuMetal_Pa234m");   
-  bkgdNames.push_back("Cd116_2b2n_m14");   
+  //bkgdNames.push_back("Cd116_Ac228");      
+  //bkgdNames.push_back("Cd116_Bi212");      
+  //bkgdNames.push_back("Cd116_Bi214");      
+  //bkgdNames.push_back("Cd116_Pb214");      
+  //bkgdNames.push_back("Mylar_Bi214");      
+  //bkgdNames.push_back("Mylar_Pb214");      
+  //bkgdNames.push_back("Cd116_K40_cold"); 
+  //bkgdNames.push_back("Cd116_K40_warm"); 
+  //bkgdNames.push_back("Cd116_Pa234m_cold");
+  //bkgdNames.push_back("Cd116_Pa234m_warm");
+  //bkgdNames.push_back("SFoil_Bi210_cold");      
+  //bkgdNames.push_back("SFoil_Bi210_warm");      
+  //bkgdNames.push_back("SWire_Bi210_P1"); 
+  //bkgdNames.push_back("SWire_Bi210_P2"); 
+  //bkgdNames.push_back("SScin_Bi210");      
+  //bkgdNames.push_back("SScin_Bi214");      
+  //bkgdNames.push_back("SWire_Tl208_P1"); 
+  //bkgdNames.push_back("SWire_Tl208_P2"); 
+  //bkgdNames.push_back("SWire_Bi214_P1"); 
+  //bkgdNames.push_back("SWire_Bi214_P2"); 
+  //bkgdNames.push_back("SFoil_Bi214_P1"); 
+  //bkgdNames.push_back("SFoil_Bi214_P2"); 
+  //bkgdNames.push_back("SWire_Pb214_P1"); 
+  //bkgdNames.push_back("SWire_Pb214_P2"); 
+  //bkgdNames.push_back("SFoil_Pb214_P1"); 
+  //bkgdNames.push_back("SFoil_Pb214_P2"); 
+  //bkgdNames.push_back("FeShield_Bi214");   
+  //bkgdNames.push_back("FeShield_Tl208");   
+  //bkgdNames.push_back("FeShield_Ac228");   
+  //bkgdNames.push_back("CuTower_Co60");     
+  //bkgdNames.push_back("Air_Bi214_P1");     
+  //bkgdNames.push_back("PMT_Bi214");        
+  //bkgdNames.push_back("PMT_Tl208");        
+  //bkgdNames.push_back("PMT_Ac228");        
+  //bkgdNames.push_back("PMT_K40");          
+  //bkgdNames.push_back("ScintInn_K40");     
+  //bkgdNames.push_back("ScintOut_K40");     
+  //bkgdNames.push_back("ScintPet_K40");     
+  //bkgdNames.push_back("MuMetal_Pa234m");   
+  //bkgdNames.push_back("Cd116_2b2n_m14");   
   
   cfile->createChannel(bkgdNames);
   
@@ -171,46 +171,46 @@ int main(int argc, char* argv[]) {
 
 
 	fdir = (TDirectory *) infile.Get("Cd116_Tl208"   ); fdir->cd(); TH1D * Cd116_Tl208       = (TH1D*) fdir->Get("Cd116_Tl208_h_tot_e_energy"    ); /*Cd116_Tl208       -> Sumw2()*/ ; Cd116_Tl208       -> Scale( 5.93799  ); 
-	fdir = (TDirectory *) infile.Get("Cd116_Ac228"   ); fdir->cd(); TH1D * Cd116_Ac228       = (TH1D*) fdir->Get("Cd116_Ac228_h_tot_e_energy"    ); /*Cd116_Ac228       -> Sumw2()*/ ; Cd116_Ac228       -> Scale( 6.92654  ); 
-	fdir = (TDirectory *) infile.Get("Cd116_Bi212"   ); fdir->cd(); TH1D * Cd116_Bi212       = (TH1D*) fdir->Get("Cd116_Bi212_h_tot_e_energy"    ); /*Cd116_Bi212       -> Sumw2()*/ ; Cd116_Bi212       -> Scale( 2.74751  ); 
-	fdir = (TDirectory *) infile.Get("Cd116_Bi214"   ); fdir->cd(); TH1D * Cd116_Bi214       = (TH1D*) fdir->Get("Cd116_Bi214_h_tot_e_energy"    ); /*Cd116_Bi214       -> Sumw2()*/ ; Cd116_Bi214       -> Scale( 18.3589  ); 
-	fdir = (TDirectory *) infile.Get("Cd116_Pb214_VT"); fdir->cd(); TH1D * Cd116_Pb214       = (TH1D*) fdir->Get("Cd116_Pb214_VT_h_tot_e_energy" ); /*Cd116_Pb214       -> Sumw2()*/ ; Cd116_Pb214       -> Scale( 0.187229 ); 
-	fdir = (TDirectory *) infile.Get("Mylar_Bi214"   ); fdir->cd(); TH1D * Mylar_Bi214       = (TH1D*) fdir->Get("Mylar_Bi214_h_tot_e_energy"    ); /*Mylar_Bi214       -> Sumw2()*/ ; Mylar_Bi214       -> Scale( 11.1957  ); 
-	fdir = (TDirectory *) infile.Get("Mylar_Pb214"   ); fdir->cd(); TH1D * Mylar_Pb214       = (TH1D*) fdir->Get("Mylar_Pb214_h_tot_e_energy"    ); /*Mylar_Pb214       -> Sumw2()*/ ; Mylar_Pb214       -> Scale( 0.49351  ); 
-	fdir = (TDirectory *) infile.Get("Cd116_K40"     ); fdir->cd(); TH1D * Cd116_K40_cold    = (TH1D*) fdir->Get("Cd116_K40_h_tot_e_energy"      ); /*Cd116_K40_cold    -> Sumw2()*/ ; Cd116_K40_cold    -> Scale( 9.02821  ); 
-	fdir = (TDirectory *) infile.Get("Cd116_K40"     ); fdir->cd(); TH1D * Cd116_K40_warm    = (TH1D*) fdir->Get("Cd116_K40_h_tot_e_energy"      ); /*Cd116_K40_warm    -> Sumw2()*/ ; Cd116_K40_warm    -> Scale( 25.9862  ); 
-	fdir = (TDirectory *) infile.Get("Cd116_Pa234m"  ); fdir->cd(); TH1D * Cd116_Pa234m_cold = (TH1D*) fdir->Get("Cd116_Pa234m_h_tot_e_energy"   ); /*Cd116_Pa234m_cold -> Sumw2()*/ ; Cd116_Pa234m_cold -> Scale( 27.6202  ); 
-	fdir = (TDirectory *) infile.Get("Cd116_Pa234m"  ); fdir->cd(); TH1D * Cd116_Pa234m_warm = (TH1D*) fdir->Get("Cd116_Pa234m_h_tot_e_energy"   ); /*Cd116_Pa234m_warm -> Sumw2()*/ ; Cd116_Pa234m_warm -> Scale( 72.5556  ); 
-	fdir = (TDirectory *) infile.Get("SFoil_Bi210"   ); fdir->cd(); TH1D * SFoil_Bi210_cold  = (TH1D*) fdir->Get("SFoil_Bi210_h_tot_e_energy"    ); /*SFoil_Bi210_cold  -> Sumw2()*/ ; SFoil_Bi210_cold  -> Scale( 0.       ); 
-	fdir = (TDirectory *) infile.Get("SFoil_Bi210"   ); fdir->cd(); TH1D * SFoil_Bi210_warm  = (TH1D*) fdir->Get("SFoil_Bi210_h_tot_e_energy"    ); /*SFoil_Bi210_warm  -> Sumw2()*/ ; SFoil_Bi210_warm  -> Scale( 23.2433  ); 
-	fdir = (TDirectory *) infile.Get("SWire_Bi210"   ); fdir->cd(); TH1D * SWire_Bi210_P1    = (TH1D*) fdir->Get("SWire_Bi210_h_tot_e_energy"    ); /*SWire_Bi210_P1    -> Sumw2()*/ ; SWire_Bi210_P1    -> Scale( 0.136145 ); 
-	fdir = (TDirectory *) infile.Get("SWire_Bi210"   ); fdir->cd(); TH1D * SWire_Bi210_P2    = (TH1D*) fdir->Get("SWire_Bi210_h_tot_e_energy"    ); /*SWire_Bi210_P2    -> Sumw2()*/ ; SWire_Bi210_P2    -> Scale( 0.624186 ); 
-	fdir = (TDirectory *) infile.Get("SScin_Bi210"   ); fdir->cd(); TH1D * SScin_Bi210       = (TH1D*) fdir->Get("SScin_Bi210_h_tot_e_energy"    ); /*SScin_Bi210       -> Sumw2()*/ ; SScin_Bi210       -> Scale( 1.75763  ); 
-	fdir = (TDirectory *) infile.Get("SScin_Bi214"   ); fdir->cd(); TH1D * SScin_Bi214       = (TH1D*) fdir->Get("SScin_Bi214_h_tot_e_energy"    ); /*SScin_Bi214       -> Sumw2()*/ ; SScin_Bi214       -> Scale( 0.0505381); 
-	fdir = (TDirectory *) infile.Get("SWire_Tl208"   ); fdir->cd(); TH1D * SWire_Tl208_P1    = (TH1D*) fdir->Get("SWire_Tl208_h_tot_e_energy"    ); /*SWire_Tl208_P1    -> Sumw2()*/ ; SWire_Tl208_P1    -> Scale( 0.217615 ); 
-	fdir = (TDirectory *) infile.Get("SWire_Tl208"   ); fdir->cd(); TH1D * SWire_Tl208_P2    = (TH1D*) fdir->Get("SWire_Tl208_h_tot_e_energy"    ); /*SWire_Tl208_P2    -> Sumw2()*/ ; SWire_Tl208_P2    -> Scale( 1.07721  ); 
-	fdir = (TDirectory *) infile.Get("SWire_Bi214"   ); fdir->cd(); TH1D * SWire_Bi214_P1    = (TH1D*) fdir->Get("SWire_Bi214_h_tot_e_energy"    ); /*SWire_Bi214_P1    -> Sumw2()*/ ; SWire_Bi214_P1    -> Scale( 21.4388  ); 
-	fdir = (TDirectory *) infile.Get("SWire_Bi214"   ); fdir->cd(); TH1D * SWire_Bi214_P2    = (TH1D*) fdir->Get("SWire_Bi214_h_tot_e_energy"    ); /*SWire_Bi214_P2    -> Sumw2()*/ ; SWire_Bi214_P2    -> Scale( 17.9663  ); 
-	fdir = (TDirectory *) infile.Get("SFoil_Bi214"   ); fdir->cd(); TH1D * SFoil_Bi214_P1    = (TH1D*) fdir->Get("SFoil_Bi214_h_tot_e_energy"    ); /*SFoil_Bi214_P1    -> Sumw2()*/ ; SFoil_Bi214_P1    -> Scale( 5.7695   ); 
-	fdir = (TDirectory *) infile.Get("SFoil_Bi214"   ); fdir->cd(); TH1D * SFoil_Bi214_P2    = (TH1D*) fdir->Get("SFoil_Bi214_h_tot_e_energy"    ); /*SFoil_Bi214_P2    -> Sumw2()*/ ; SFoil_Bi214_P2    -> Scale( 2.73967  ); 
-	fdir = (TDirectory *) infile.Get("SWire_Pb214"   ); fdir->cd(); TH1D * SWire_Pb214_P1    = (TH1D*) fdir->Get("SWire_Pb214_h_tot_e_energy"    ); /*SWire_Pb214_P1    -> Sumw2()*/ ; SWire_Pb214_P1    -> Scale( 0.457038 ); 
-	fdir = (TDirectory *) infile.Get("SWire_Pb214"   ); fdir->cd(); TH1D * SWire_Pb214_P2    = (TH1D*) fdir->Get("SWire_Pb214_h_tot_e_energy"    ); /*SWire_Pb214_P2    -> Sumw2()*/ ; SWire_Pb214_P2    -> Scale( 0.648715 ); 
-	fdir = (TDirectory *) infile.Get("SFoil_Pb214"   ); fdir->cd(); TH1D * SFoil_Pb214_P1    = (TH1D*) fdir->Get("SFoil_Pb214_h_tot_e_energy"    ); /*SFoil_Pb214_P1    -> Sumw2()*/ ; SFoil_Pb214_P1    -> Scale( 0.215401 ); 
-	fdir = (TDirectory *) infile.Get("SFoil_Pb214"   ); fdir->cd(); TH1D * SFoil_Pb214_P2    = (TH1D*) fdir->Get("SFoil_Pb214_h_tot_e_energy"    ); /*SFoil_Pb214_P2    -> Sumw2()*/ ; SFoil_Pb214_P2    -> Scale( 0.189179 ); 
-	fdir = (TDirectory *) infile.Get("FeShield_Bi214"); fdir->cd(); TH1D * FeShield_Bi214    = (TH1D*) fdir->Get("FeShield_Bi214_h_tot_e_energy" ); /*FeShield_Bi214    -> Sumw2()*/ ; FeShield_Bi214    -> Scale( 50.1037  ); 
-	fdir = (TDirectory *) infile.Get("FeShield_Tl208"); fdir->cd(); TH1D * FeShield_Tl208    = (TH1D*) fdir->Get("FeShield_Tl208_h_tot_e_energy" ); /*FeShield_Tl208    -> Sumw2()*/ ; FeShield_Tl208    -> Scale( 1.1935   ); 
-	fdir = (TDirectory *) infile.Get("FeShield_Ac228"); fdir->cd(); TH1D * FeShield_Ac228    = (TH1D*) fdir->Get("FeShield_Ac228_h_tot_e_energy" ); /*FeShield_Ac228    -> Sumw2()*/ ; FeShield_Ac228    -> Scale( 0.176176 ); 
-	fdir = (TDirectory *) infile.Get("CuTower_Co60"  ); fdir->cd(); TH1D * CuTower_Co60      = (TH1D*) fdir->Get("CuTower_Co60_h_tot_e_energy"   ); /*CuTower_Co60      -> Sumw2()*/ ; CuTower_Co60      -> Scale( 3.79642  ); 
-	fdir = (TDirectory *) infile.Get("Air_Bi214"     ); fdir->cd(); TH1D * Air_Bi214_P1      = (TH1D*) fdir->Get("Air_Bi214_h_tot_e_energy"      ); /*Air_Bi214_P1      -> Sumw2()*/ ; Air_Bi214_P1      -> Scale( 4.19156  ); 
-	fdir = (TDirectory *) infile.Get("PMT_Bi214"     ); fdir->cd(); TH1D * PMT_Bi214         = (TH1D*) fdir->Get("PMT_Bi214_h_tot_e_energy"      ); /*PMT_Bi214         -> Sumw2()*/ ; PMT_Bi214         -> Scale( 30.6795  ); 
-	fdir = (TDirectory *) infile.Get("PMT_Tl208"     ); fdir->cd(); TH1D * PMT_Tl208         = (TH1D*) fdir->Get("PMT_Tl208_h_tot_e_energy"      ); /*PMT_Tl208         -> Sumw2()*/ ; PMT_Tl208         -> Scale( 23.2697  ); 
-	fdir = (TDirectory *) infile.Get("PMT_Ac228"     ); fdir->cd(); TH1D * PMT_Ac228         = (TH1D*) fdir->Get("PMT_Ac228_h_tot_e_energy"      ); /*PMT_Ac228         -> Sumw2()*/ ; PMT_Ac228         -> Scale( 3.60937  ); 
-	fdir = (TDirectory *) infile.Get("PMT_K40"       ); fdir->cd(); TH1D * PMT_K40           = (TH1D*) fdir->Get("PMT_K40_h_tot_e_energy"        ); /*PMT_K40           -> Sumw2()*/ ; PMT_K40           -> Scale( 16.792   ); 
-	fdir = (TDirectory *) infile.Get("ScintInn_K40"  ); fdir->cd(); TH1D * ScintInn_K40      = (TH1D*) fdir->Get("ScintInn_K40_h_tot_e_energy"   ); /*ScintInn_K40      -> Sumw2()*/ ; ScintInn_K40      -> Scale( 0.33559  ); 
-	fdir = (TDirectory *) infile.Get("ScintOut_K40"  ); fdir->cd(); TH1D * ScintOut_K40      = (TH1D*) fdir->Get("ScintOut_K40_h_tot_e_energy"   ); /*ScintOut_K40      -> Sumw2()*/ ; ScintOut_K40      -> Scale( 0.604063 ); 
-	fdir = (TDirectory *) infile.Get("ScintPet_K40"  ); fdir->cd(); TH1D * ScintPet_K40      = (TH1D*) fdir->Get("ScintPet_K40_h_tot_e_energy"   ); /*ScintPet_K40      -> Sumw2()*/ ; ScintPet_K40      -> Scale( 1.00676  ); 
-	fdir = (TDirectory *) infile.Get("MuMetal_Pa234m"); fdir->cd(); TH1D * MuMetal_Pa234m    = (TH1D*) fdir->Get("MuMetal_Pa234m_h_tot_e_energy" ); /*MuMetal_Pa234m    -> Sumw2()*/ ; MuMetal_Pa234m    -> Scale( 0.664017 ); 
-	fdir = (TDirectory *) infile.Get("Cd116_2b2n_m14"); fdir->cd(); TH1D * Cd116_2b2n_m14    = (TH1D*) fdir->Get("Cd116_2b2n_m14_h_tot_e_energy" ); /*Cd116_2b2n_m14    -> Sumw2()*/ ; Cd116_2b2n_m14    -> Scale( 4913.49  ); 
+	//fdir = (TDirectory *) infile.Get("Cd116_Ac228"   ); fdir->cd(); TH1D * Cd116_Ac228       = (TH1D*) fdir->Get("Cd116_Ac228_h_tot_e_energy"    ); /*Cd116_Ac228       -> Sumw2()*/ ; Cd116_Ac228       -> Scale( 6.92654  ); 
+	//fdir = (TDirectory *) infile.Get("Cd116_Bi212"   ); fdir->cd(); TH1D * Cd116_Bi212       = (TH1D*) fdir->Get("Cd116_Bi212_h_tot_e_energy"    ); /*Cd116_Bi212       -> Sumw2()*/ ; Cd116_Bi212       -> Scale( 2.74751  ); 
+	//fdir = (TDirectory *) infile.Get("Cd116_Bi214"   ); fdir->cd(); TH1D * Cd116_Bi214       = (TH1D*) fdir->Get("Cd116_Bi214_h_tot_e_energy"    ); /*Cd116_Bi214       -> Sumw2()*/ ; Cd116_Bi214       -> Scale( 18.3589  ); 
+	//fdir = (TDirectory *) infile.Get("Cd116_Pb214_VT"); fdir->cd(); TH1D * Cd116_Pb214       = (TH1D*) fdir->Get("Cd116_Pb214_VT_h_tot_e_energy" ); /*Cd116_Pb214       -> Sumw2()*/ ; Cd116_Pb214       -> Scale( 0.187229 ); 
+	//fdir = (TDirectory *) infile.Get("Mylar_Bi214"   ); fdir->cd(); TH1D * Mylar_Bi214       = (TH1D*) fdir->Get("Mylar_Bi214_h_tot_e_energy"    ); /*Mylar_Bi214       -> Sumw2()*/ ; Mylar_Bi214       -> Scale( 11.1957  ); 
+	//fdir = (TDirectory *) infile.Get("Mylar_Pb214"   ); fdir->cd(); TH1D * Mylar_Pb214       = (TH1D*) fdir->Get("Mylar_Pb214_h_tot_e_energy"    ); /*Mylar_Pb214       -> Sumw2()*/ ; Mylar_Pb214       -> Scale( 0.49351  ); 
+	//fdir = (TDirectory *) infile.Get("Cd116_K40"     ); fdir->cd(); TH1D * Cd116_K40_cold    = (TH1D*) fdir->Get("Cd116_K40_h_tot_e_energy"      ); /*Cd116_K40_cold    -> Sumw2()*/ ; Cd116_K40_cold    -> Scale( 9.02821  ); 
+	//fdir = (TDirectory *) infile.Get("Cd116_K40"     ); fdir->cd(); TH1D * Cd116_K40_warm    = (TH1D*) fdir->Get("Cd116_K40_h_tot_e_energy"      ); /*Cd116_K40_warm    -> Sumw2()*/ ; Cd116_K40_warm    -> Scale( 25.9862  ); 
+	//fdir = (TDirectory *) infile.Get("Cd116_Pa234m"  ); fdir->cd(); TH1D * Cd116_Pa234m_cold = (TH1D*) fdir->Get("Cd116_Pa234m_h_tot_e_energy"   ); /*Cd116_Pa234m_cold -> Sumw2()*/ ; Cd116_Pa234m_cold -> Scale( 27.6202  ); 
+	//fdir = (TDirectory *) infile.Get("Cd116_Pa234m"  ); fdir->cd(); TH1D * Cd116_Pa234m_warm = (TH1D*) fdir->Get("Cd116_Pa234m_h_tot_e_energy"   ); /*Cd116_Pa234m_warm -> Sumw2()*/ ; Cd116_Pa234m_warm -> Scale( 72.5556  ); 
+	//fdir = (TDirectory *) infile.Get("SFoil_Bi210"   ); fdir->cd(); TH1D * SFoil_Bi210_cold  = (TH1D*) fdir->Get("SFoil_Bi210_h_tot_e_energy"    ); /*SFoil_Bi210_cold  -> Sumw2()*/ ; SFoil_Bi210_cold  -> Scale( 0.       ); 
+	//fdir = (TDirectory *) infile.Get("SFoil_Bi210"   ); fdir->cd(); TH1D * SFoil_Bi210_warm  = (TH1D*) fdir->Get("SFoil_Bi210_h_tot_e_energy"    ); /*SFoil_Bi210_warm  -> Sumw2()*/ ; SFoil_Bi210_warm  -> Scale( 23.2433  ); 
+	//fdir = (TDirectory *) infile.Get("SWire_Bi210"   ); fdir->cd(); TH1D * SWire_Bi210_P1    = (TH1D*) fdir->Get("SWire_Bi210_h_tot_e_energy"    ); /*SWire_Bi210_P1    -> Sumw2()*/ ; SWire_Bi210_P1    -> Scale( 0.136145 ); 
+	//fdir = (TDirectory *) infile.Get("SWire_Bi210"   ); fdir->cd(); TH1D * SWire_Bi210_P2    = (TH1D*) fdir->Get("SWire_Bi210_h_tot_e_energy"    ); /*SWire_Bi210_P2    -> Sumw2()*/ ; SWire_Bi210_P2    -> Scale( 0.624186 ); 
+	//fdir = (TDirectory *) infile.Get("SScin_Bi210"   ); fdir->cd(); TH1D * SScin_Bi210       = (TH1D*) fdir->Get("SScin_Bi210_h_tot_e_energy"    ); /*SScin_Bi210       -> Sumw2()*/ ; SScin_Bi210       -> Scale( 1.75763  ); 
+	//fdir = (TDirectory *) infile.Get("SScin_Bi214"   ); fdir->cd(); TH1D * SScin_Bi214       = (TH1D*) fdir->Get("SScin_Bi214_h_tot_e_energy"    ); /*SScin_Bi214       -> Sumw2()*/ ; SScin_Bi214       -> Scale( 0.0505381); 
+	//fdir = (TDirectory *) infile.Get("SWire_Tl208"   ); fdir->cd(); TH1D * SWire_Tl208_P1    = (TH1D*) fdir->Get("SWire_Tl208_h_tot_e_energy"    ); /*SWire_Tl208_P1    -> Sumw2()*/ ; SWire_Tl208_P1    -> Scale( 0.217615 ); 
+	//fdir = (TDirectory *) infile.Get("SWire_Tl208"   ); fdir->cd(); TH1D * SWire_Tl208_P2    = (TH1D*) fdir->Get("SWire_Tl208_h_tot_e_energy"    ); /*SWire_Tl208_P2    -> Sumw2()*/ ; SWire_Tl208_P2    -> Scale( 1.07721  ); 
+	//fdir = (TDirectory *) infile.Get("SWire_Bi214"   ); fdir->cd(); TH1D * SWire_Bi214_P1    = (TH1D*) fdir->Get("SWire_Bi214_h_tot_e_energy"    ); /*SWire_Bi214_P1    -> Sumw2()*/ ; SWire_Bi214_P1    -> Scale( 21.4388  ); 
+	//fdir = (TDirectory *) infile.Get("SWire_Bi214"   ); fdir->cd(); TH1D * SWire_Bi214_P2    = (TH1D*) fdir->Get("SWire_Bi214_h_tot_e_energy"    ); /*SWire_Bi214_P2    -> Sumw2()*/ ; SWire_Bi214_P2    -> Scale( 17.9663  ); 
+	//fdir = (TDirectory *) infile.Get("SFoil_Bi214"   ); fdir->cd(); TH1D * SFoil_Bi214_P1    = (TH1D*) fdir->Get("SFoil_Bi214_h_tot_e_energy"    ); /*SFoil_Bi214_P1    -> Sumw2()*/ ; SFoil_Bi214_P1    -> Scale( 5.7695   ); 
+	//fdir = (TDirectory *) infile.Get("SFoil_Bi214"   ); fdir->cd(); TH1D * SFoil_Bi214_P2    = (TH1D*) fdir->Get("SFoil_Bi214_h_tot_e_energy"    ); /*SFoil_Bi214_P2    -> Sumw2()*/ ; SFoil_Bi214_P2    -> Scale( 2.73967  ); 
+	//fdir = (TDirectory *) infile.Get("SWire_Pb214"   ); fdir->cd(); TH1D * SWire_Pb214_P1    = (TH1D*) fdir->Get("SWire_Pb214_h_tot_e_energy"    ); /*SWire_Pb214_P1    -> Sumw2()*/ ; SWire_Pb214_P1    -> Scale( 0.457038 ); 
+	//fdir = (TDirectory *) infile.Get("SWire_Pb214"   ); fdir->cd(); TH1D * SWire_Pb214_P2    = (TH1D*) fdir->Get("SWire_Pb214_h_tot_e_energy"    ); /*SWire_Pb214_P2    -> Sumw2()*/ ; SWire_Pb214_P2    -> Scale( 0.648715 ); 
+	//fdir = (TDirectory *) infile.Get("SFoil_Pb214"   ); fdir->cd(); TH1D * SFoil_Pb214_P1    = (TH1D*) fdir->Get("SFoil_Pb214_h_tot_e_energy"    ); /*SFoil_Pb214_P1    -> Sumw2()*/ ; SFoil_Pb214_P1    -> Scale( 0.215401 ); 
+	//fdir = (TDirectory *) infile.Get("SFoil_Pb214"   ); fdir->cd(); TH1D * SFoil_Pb214_P2    = (TH1D*) fdir->Get("SFoil_Pb214_h_tot_e_energy"    ); /*SFoil_Pb214_P2    -> Sumw2()*/ ; SFoil_Pb214_P2    -> Scale( 0.189179 ); 
+	//fdir = (TDirectory *) infile.Get("FeShield_Bi214"); fdir->cd(); TH1D * FeShield_Bi214    = (TH1D*) fdir->Get("FeShield_Bi214_h_tot_e_energy" ); /*FeShield_Bi214    -> Sumw2()*/ ; FeShield_Bi214    -> Scale( 50.1037  ); 
+	//fdir = (TDirectory *) infile.Get("FeShield_Tl208"); fdir->cd(); TH1D * FeShield_Tl208    = (TH1D*) fdir->Get("FeShield_Tl208_h_tot_e_energy" ); /*FeShield_Tl208    -> Sumw2()*/ ; FeShield_Tl208    -> Scale( 1.1935   ); 
+	//fdir = (TDirectory *) infile.Get("FeShield_Ac228"); fdir->cd(); TH1D * FeShield_Ac228    = (TH1D*) fdir->Get("FeShield_Ac228_h_tot_e_energy" ); /*FeShield_Ac228    -> Sumw2()*/ ; FeShield_Ac228    -> Scale( 0.176176 ); 
+	//fdir = (TDirectory *) infile.Get("CuTower_Co60"  ); fdir->cd(); TH1D * CuTower_Co60      = (TH1D*) fdir->Get("CuTower_Co60_h_tot_e_energy"   ); /*CuTower_Co60      -> Sumw2()*/ ; CuTower_Co60      -> Scale( 3.79642  ); 
+	//fdir = (TDirectory *) infile.Get("Air_Bi214"     ); fdir->cd(); TH1D * Air_Bi214_P1      = (TH1D*) fdir->Get("Air_Bi214_h_tot_e_energy"      ); /*Air_Bi214_P1      -> Sumw2()*/ ; Air_Bi214_P1      -> Scale( 4.19156  ); 
+	//fdir = (TDirectory *) infile.Get("PMT_Bi214"     ); fdir->cd(); TH1D * PMT_Bi214         = (TH1D*) fdir->Get("PMT_Bi214_h_tot_e_energy"      ); /*PMT_Bi214         -> Sumw2()*/ ; PMT_Bi214         -> Scale( 30.6795  ); 
+	//fdir = (TDirectory *) infile.Get("PMT_Tl208"     ); fdir->cd(); TH1D * PMT_Tl208         = (TH1D*) fdir->Get("PMT_Tl208_h_tot_e_energy"      ); /*PMT_Tl208         -> Sumw2()*/ ; PMT_Tl208         -> Scale( 23.2697  ); 
+	//fdir = (TDirectory *) infile.Get("PMT_Ac228"     ); fdir->cd(); TH1D * PMT_Ac228         = (TH1D*) fdir->Get("PMT_Ac228_h_tot_e_energy"      ); /*PMT_Ac228         -> Sumw2()*/ ; PMT_Ac228         -> Scale( 3.60937  ); 
+	//fdir = (TDirectory *) infile.Get("PMT_K40"       ); fdir->cd(); TH1D * PMT_K40           = (TH1D*) fdir->Get("PMT_K40_h_tot_e_energy"        ); /*PMT_K40           -> Sumw2()*/ ; PMT_K40           -> Scale( 16.792   ); 
+	//fdir = (TDirectory *) infile.Get("ScintInn_K40"  ); fdir->cd(); TH1D * ScintInn_K40      = (TH1D*) fdir->Get("ScintInn_K40_h_tot_e_energy"   ); /*ScintInn_K40      -> Sumw2()*/ ; ScintInn_K40      -> Scale( 0.33559  ); 
+	//fdir = (TDirectory *) infile.Get("ScintOut_K40"  ); fdir->cd(); TH1D * ScintOut_K40      = (TH1D*) fdir->Get("ScintOut_K40_h_tot_e_energy"   ); /*ScintOut_K40      -> Sumw2()*/ ; ScintOut_K40      -> Scale( 0.604063 ); 
+	//fdir = (TDirectory *) infile.Get("ScintPet_K40"  ); fdir->cd(); TH1D * ScintPet_K40      = (TH1D*) fdir->Get("ScintPet_K40_h_tot_e_energy"   ); /*ScintPet_K40      -> Sumw2()*/ ; ScintPet_K40      -> Scale( 1.00676  ); 
+	//fdir = (TDirectory *) infile.Get("MuMetal_Pa234m"); fdir->cd(); TH1D * MuMetal_Pa234m    = (TH1D*) fdir->Get("MuMetal_Pa234m_h_tot_e_energy" ); /*MuMetal_Pa234m    -> Sumw2()*/ ; MuMetal_Pa234m    -> Scale( 0.664017 ); 
+	//fdir = (TDirectory *) infile.Get("Cd116_2b2n_m14"); fdir->cd(); TH1D * Cd116_2b2n_m14    = (TH1D*) fdir->Get("Cd116_2b2n_m14_h_tot_e_energy" ); /*Cd116_2b2n_m14    -> Sumw2()*/ ; Cd116_2b2n_m14    -> Scale( 4913.49  ); 
 	
 
   TRandom r(1234);
@@ -258,46 +258,46 @@ int main(int argc, char* argv[]) {
     //Backgrounds are passed in via vector
     vector<TH1D*> vbkgd;
     vbkgd.push_back(Cd116_Tl208);      
-    vbkgd.push_back(Cd116_Ac228);      
-    vbkgd.push_back(Cd116_Bi212);      
-    vbkgd.push_back(Cd116_Bi214);      
-    vbkgd.push_back(Cd116_Pb214);      
-    vbkgd.push_back(Mylar_Bi214);      
-    vbkgd.push_back(Mylar_Pb214);      
-    vbkgd.push_back(Cd116_K40_cold); 
-    vbkgd.push_back(Cd116_K40_warm); 
-    vbkgd.push_back(Cd116_Pa234m_cold);
-    vbkgd.push_back(Cd116_Pa234m_warm);
-    vbkgd.push_back(SFoil_Bi210_cold);      
-    vbkgd.push_back(SFoil_Bi210_warm);      
-    vbkgd.push_back(SWire_Bi210_P1); 
-    vbkgd.push_back(SWire_Bi210_P2); 
-    vbkgd.push_back(SScin_Bi210);      
-    vbkgd.push_back(SScin_Bi214);      
-    vbkgd.push_back(SWire_Tl208_P1); 
-    vbkgd.push_back(SWire_Tl208_P2); 
-    vbkgd.push_back(SWire_Bi214_P1); 
-    vbkgd.push_back(SWire_Bi214_P2); 
-    vbkgd.push_back(SFoil_Bi214_P1); 
-    vbkgd.push_back(SFoil_Bi214_P2); 
-    vbkgd.push_back(SWire_Pb214_P1); 
-    vbkgd.push_back(SWire_Pb214_P2); 
-    vbkgd.push_back(SFoil_Pb214_P1); 
-    vbkgd.push_back(SFoil_Pb214_P2); 
-    vbkgd.push_back(FeShield_Bi214);   
-    vbkgd.push_back(FeShield_Tl208);   
-    vbkgd.push_back(FeShield_Ac228);   
-    vbkgd.push_back(CuTower_Co60);     
-    vbkgd.push_back(Air_Bi214_P1);     
-    vbkgd.push_back(PMT_Bi214);        
-    vbkgd.push_back(PMT_Tl208);        
-    vbkgd.push_back(PMT_Ac228);        
-    vbkgd.push_back(PMT_K40);          
-    vbkgd.push_back(ScintInn_K40);     
-    vbkgd.push_back(ScintOut_K40);     
-    vbkgd.push_back(ScintPet_K40);     
-    vbkgd.push_back(MuMetal_Pa234m);   
-    vbkgd.push_back(Cd116_2b2n_m14);   
+    //vbkgd.push_back(Cd116_Ac228);      
+    //vbkgd.push_back(Cd116_Bi212);      
+    //vbkgd.push_back(Cd116_Bi214);      
+    //vbkgd.push_back(Cd116_Pb214);      
+    //vbkgd.push_back(Mylar_Bi214);      
+    //vbkgd.push_back(Mylar_Pb214);      
+    //vbkgd.push_back(Cd116_K40_cold); 
+    //vbkgd.push_back(Cd116_K40_warm); 
+    //vbkgd.push_back(Cd116_Pa234m_cold);
+    //vbkgd.push_back(Cd116_Pa234m_warm);
+    //vbkgd.push_back(SFoil_Bi210_cold);      
+    //vbkgd.push_back(SFoil_Bi210_warm);      
+    //vbkgd.push_back(SWire_Bi210_P1); 
+    //vbkgd.push_back(SWire_Bi210_P2); 
+    //vbkgd.push_back(SScin_Bi210);      
+    //vbkgd.push_back(SScin_Bi214);      
+    //vbkgd.push_back(SWire_Tl208_P1); 
+    //vbkgd.push_back(SWire_Tl208_P2); 
+    //vbkgd.push_back(SWire_Bi214_P1); 
+    //vbkgd.push_back(SWire_Bi214_P2); 
+    //vbkgd.push_back(SFoil_Bi214_P1); 
+    //vbkgd.push_back(SFoil_Bi214_P2); 
+    //vbkgd.push_back(SWire_Pb214_P1); 
+    //vbkgd.push_back(SWire_Pb214_P2); 
+    //vbkgd.push_back(SFoil_Pb214_P1); 
+    //vbkgd.push_back(SFoil_Pb214_P2); 
+    //vbkgd.push_back(FeShield_Bi214);   
+    //vbkgd.push_back(FeShield_Tl208);   
+    //vbkgd.push_back(FeShield_Ac228);   
+    //vbkgd.push_back(CuTower_Co60);     
+    //vbkgd.push_back(Air_Bi214_P1);     
+    //vbkgd.push_back(PMT_Bi214);        
+    //vbkgd.push_back(PMT_Tl208);        
+    //vbkgd.push_back(PMT_Ac228);        
+    //vbkgd.push_back(PMT_K40);          
+    //vbkgd.push_back(ScintInn_K40);     
+    //vbkgd.push_back(ScintOut_K40);     
+    //vbkgd.push_back(ScintPet_K40);     
+    //vbkgd.push_back(MuMetal_Pa234m);   
+    //vbkgd.push_back(Cd116_2b2n_m14);   
     
     //Alpha parameters only matter when smoothing is utilized
     //  Input values don't matter if you're not smoothing.
