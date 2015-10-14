@@ -12,9 +12,9 @@ int main(int argc, char* argv[]) {
   cfile->initFile("/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/CollieIO.root", "BDT_Score");  
 
   // Define your input histograms
-  double Xmin = -0.8; 
-  double Xmax = +0.8;
-  int Nbins = 100;
+  double Xmin = 0.; 
+  double Xmax = 4.6;
+  int Nbins = 46;
   //
 
   cfile->setInputHist(Xmin,Xmax,Nbins);
