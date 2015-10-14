@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
   //Define backgrounds
   vector<string> bkgdNames;
 
-  bkgdNames.push_back("Cd116_Tl208");      
+  //bkgdNames.push_back("Cd116_Tl208");      
   //bkgdNames.push_back("Cd116_Ac228");      
   //bkgdNames.push_back("Cd116_Bi212");      
   //bkgdNames.push_back("Cd116_Bi214");      
@@ -170,7 +170,7 @@ int main(int argc, char* argv[]) {
 	TH1D* sig = (TH1D*)fdir->Get("Cd116_2b0n_m1_h_tot_e_energy"); 
 
 
-	fdir = (TDirectory *) infile.Get("Cd116_Tl208"   ); fdir->cd(); TH1D * Cd116_Tl208       = (TH1D*) fdir->Get("Cd116_Tl208_h_tot_e_energy"    ); /*Cd116_Tl208       -> Sumw2()*/ ; Cd116_Tl208       -> Scale( 5.93799  ); 
+	//fdir = (TDirectory *) infile.Get("Cd116_Tl208"   ); fdir->cd(); TH1D * Cd116_Tl208       = (TH1D*) fdir->Get("Cd116_Tl208_h_tot_e_energy"    ); /*Cd116_Tl208       -> Sumw2()*/ ; Cd116_Tl208       -> Scale( 5.93799  ); 
 	//fdir = (TDirectory *) infile.Get("Cd116_Ac228"   ); fdir->cd(); TH1D * Cd116_Ac228       = (TH1D*) fdir->Get("Cd116_Ac228_h_tot_e_energy"    ); /*Cd116_Ac228       -> Sumw2()*/ ; Cd116_Ac228       -> Scale( 6.92654  ); 
 	//fdir = (TDirectory *) infile.Get("Cd116_Bi212"   ); fdir->cd(); TH1D * Cd116_Bi212       = (TH1D*) fdir->Get("Cd116_Bi212_h_tot_e_energy"    ); /*Cd116_Bi212       -> Sumw2()*/ ; Cd116_Bi212       -> Scale( 2.74751  ); 
 	//fdir = (TDirectory *) infile.Get("Cd116_Bi214"   ); fdir->cd(); TH1D * Cd116_Bi214       = (TH1D*) fdir->Get("Cd116_Bi214_h_tot_e_energy"    ); /*Cd116_Bi214       -> Sumw2()*/ ; Cd116_Bi214       -> Scale( 18.3589  ); 
@@ -257,7 +257,7 @@ int main(int argc, char* argv[]) {
 
     //Backgrounds are passed in via vector
     vector<TH1D*> vbkgd;
-    vbkgd.push_back(Cd116_Tl208);      
+    //vbkgd.push_back(Cd116_Tl208);      
     //vbkgd.push_back(Cd116_Ac228);      
     //vbkgd.push_back(Cd116_Bi212);      
     //vbkgd.push_back(Cd116_Bi214);      
