@@ -163,10 +163,10 @@ int main(int argc, char* argv[]) {
 	TFile infile("/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/TwoElectronIntHistos.root");
   
 	TDirectory * fdir = 0;
-	fdir = (TDirectory *) infile.->Get("Data"); fdir->cd();
+	fdir = (TDirectory *) infile.Get("Data"); fdir->cd();
 	TH1D* data = (TH1D*)infile.Get("Data_h_tot_e_energy");
 
-	fdir = (TDirectory *) f->Get("d116_2b0n_m1"); fdir->cd();
+	fdir = (TDirectory *) infile.Get("d116_2b0n_m1"); fdir->cd();
 	TH1D* sig = (TH1D*)infile.Get("Cd116_2b0n_m1_h_tot_e_energy");
 
 
