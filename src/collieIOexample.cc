@@ -324,7 +324,7 @@ int main(int argc, char* argv[]) {
     
     //Each parameter point has a signal histo, data histo, and an array of backgrounds...
     //  Smoothing parameters are also passed in.
-    //cfile->createMassPoint(100, data, sig, -1, vbkgd,valpha);
+    cfile->createMassPoint(100, data, sig, -1, vbkgd,valpha);
 
 
     // If you have more than one mass point, you may choose to interpolate on some parameter grid
