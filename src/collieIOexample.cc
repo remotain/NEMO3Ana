@@ -217,7 +217,7 @@ int main(int argc, char* argv[]) {
   double niter = 5e5;
   
   //We'll make three mass points...
-  for(int m=100; m<=150; m+=25){
+  //for(int m=100; m<=150; m+=25){
     
     //bkgd1->Scale(0);
     //bkgd2->Scale(0);
@@ -322,7 +322,7 @@ int main(int argc, char* argv[]) {
     
     //Each parameter point has a signal histo, data histo, and an array of backgrounds...
     //  Smoothing parameters are also passed in.
-    cfile->createMassPoint(m, data, sig, -1, vbkgd,valpha);
+    cfile->createMassPoint(100, data, sig, -1, vbkgd,valpha);
 
 
     // If you have more than one mass point, you may choose to interpolate on some parameter grid
@@ -389,7 +389,7 @@ int main(int argc, char* argv[]) {
   //cfile->createFlatBkgdSystematic( 38 , "Externals"  , 0.0061 , 0.0129 ,m);	
   //cfile->createFlatBkgdSystematic( 39 , "Externals"  , 0.0061 , 0.0129 ,m);	
 
-  }
+  //}
   ///store and output channel information
   cfile->storeFile();
 }
