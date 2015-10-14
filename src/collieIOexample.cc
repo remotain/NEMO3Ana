@@ -211,9 +211,6 @@ int main(int argc, char* argv[]) {
 	fdir = (TDirectory *) infile.Get("ScintPet_K40"  ); fdir->cd(); TH1D * ScintPet_K40      = (TH1D*) fdir->Get("ScintPet_K40_h_tot_e_energy"   ); /*ScintPet_K40      -> Sumw2()*/ ; ScintPet_K40      -> Scale( 1.00676  ); 
 	fdir = (TDirectory *) infile.Get("MuMetal_Pa234m"); fdir->cd(); TH1D * MuMetal_Pa234m    = (TH1D*) fdir->Get("MuMetal_Pa234m_h_tot_e_energy" ); /*MuMetal_Pa234m    -> Sumw2()*/ ; MuMetal_Pa234m    -> Scale( 0.664017 ); 
 	fdir = (TDirectory *) infile.Get("Cd116_2b2n_m14"); fdir->cd(); TH1D * Cd116_2b2n_m14    = (TH1D*) fdir->Get("Cd116_2b2n_m14_h_tot_e_energy" ); /*Cd116_2b2n_m14    -> Sumw2()*/ ; Cd116_2b2n_m14    -> Scale( 4913.49  ); 
-	
-	fdir->Close();
-	infile.Close();
 
   TRandom r(1234);
   double niter = 5e5;
@@ -393,5 +390,9 @@ int main(int argc, char* argv[]) {
 
   //}
   ///store and output channel information
-  cfile->storeFile();
+	cfile->storeFile();
+  
+	fdir->Close();
+	infile.Close();
+  
 }
