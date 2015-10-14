@@ -301,6 +301,8 @@ int main(int argc, char* argv[]) {
     vbkgd.push_back(MuMetal_Pa234m);   
     vbkgd.push_back(Cd116_2b2n_m14);   
     
+	std::cout << Cd116_2b2n_m14 << std::endl;
+	
     //Alpha parameters only matter when smoothing is utilized
     //  Input values don't matter if you're not smoothing.
     //  Don't smooth unless you know what you're doing.
