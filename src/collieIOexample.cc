@@ -201,7 +201,7 @@ int main(int argc, char* argv[]) {
 	fdir = (TDirectory *) infile.Get("FeShield_Tl208"); fdir->cd(); TH1D * FeShield_Tl208    = (TH1D*) fdir->Get("FeShield_Tl208_h_tot_e_energy" ); FeShield_Tl208    -> Sumw2() ; FeShield_Tl208    -> Scale( 1.1935   ); 
 	fdir = (TDirectory *) infile.Get("FeShield_Ac228"); fdir->cd(); TH1D * FeShield_Ac228    = (TH1D*) fdir->Get("FeShield_Ac228_h_tot_e_energy" ); FeShield_Ac228    -> Sumw2() ; FeShield_Ac228    -> Scale( 0.176176 ); 
 	fdir = (TDirectory *) infile.Get("CuTower_Co60"  ); fdir->cd(); TH1D * CuTower_Co60      = (TH1D*) fdir->Get("CuTower_Co60_h_tot_e_energy"   ); CuTower_Co60      -> Sumw2() ; CuTower_Co60      -> Scale( 3.79642  ); 
-	fdir = (TDirectory *) infile.Get("Air_Bi214_P1"  ); fdir->cd(); TH1D * Air_Bi214_P1      = (TH1D*) fdir->Get("Air_Bi214_P1_h_tot_e_energy"   ); Air_Bi214_P1      -> Sumw2() ; Air_Bi214_P1      -> Scale( 4.19156  ); 
+	fdir = (TDirectory *) infile.Get("Air_Bi214"     ); fdir->cd(); TH1D * Air_Bi214_P1      = (TH1D*) fdir->Get("Air_Bi214_h_tot_e_energy"      ); Air_Bi214_P1      -> Sumw2() ; Air_Bi214_P1      -> Scale( 4.19156  ); 
 	fdir = (TDirectory *) infile.Get("PMT_Bi214"     ); fdir->cd(); TH1D * PMT_Bi214         = (TH1D*) fdir->Get("PMT_Bi214_h_tot_e_energy"      ); PMT_Bi214         -> Sumw2() ; PMT_Bi214         -> Scale( 30.6795  ); 
 	fdir = (TDirectory *) infile.Get("PMT_Tl208"     ); fdir->cd(); TH1D * PMT_Tl208         = (TH1D*) fdir->Get("PMT_Tl208_h_tot_e_energy"      ); PMT_Tl208         -> Sumw2() ; PMT_Tl208         -> Scale( 23.2697  ); 
 	fdir = (TDirectory *) infile.Get("PMT_Ac228"     ); fdir->cd(); TH1D * PMT_Ac228         = (TH1D*) fdir->Get("PMT_Ac228_h_tot_e_energy"      ); PMT_Ac228         -> Sumw2() ; PMT_Ac228         -> Scale( 3.60937  ); 
