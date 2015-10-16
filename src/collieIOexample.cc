@@ -41,46 +41,46 @@ int main(int argc, char* argv[]) {
   //Define backgrounds
   vector<string> bkgdNames;
 
-  bkgdNames.push_back("Cd116_Tl208");      
-  bkgdNames.push_back("Cd116_Ac228");      
-  bkgdNames.push_back("Cd116_Bi212");      
-  bkgdNames.push_back("Cd116_Bi214");      
-  bkgdNames.push_back("Cd116_Pb214");      
-  bkgdNames.push_back("Mylar_Bi214");      
-  bkgdNames.push_back("Mylar_Pb214");      
-  bkgdNames.push_back("Cd116_K40_cold"); 
-  bkgdNames.push_back("Cd116_K40_warm"); 
-  bkgdNames.push_back("Cd116_Pa234m_cold");
-  bkgdNames.push_back("Cd116_Pa234m_warm");
-  bkgdNames.push_back("SFoil_Bi210_cold");      
-  bkgdNames.push_back("SFoil_Bi210_warm");      
-  bkgdNames.push_back("SWire_Bi210_P1"); 
-  bkgdNames.push_back("SWire_Bi210_P2"); 
-  bkgdNames.push_back("SScin_Bi210");      
-  bkgdNames.push_back("SScin_Bi214");      
-  bkgdNames.push_back("SWire_Tl208_P1"); 
-  bkgdNames.push_back("SWire_Tl208_P2"); 
-  bkgdNames.push_back("SWire_Bi214_P1"); 
-  bkgdNames.push_back("SWire_Bi214_P2"); 
-  bkgdNames.push_back("SFoil_Bi214_P1"); 
-  bkgdNames.push_back("SFoil_Bi214_P2"); 
-  bkgdNames.push_back("SWire_Pb214_P1"); 
-  bkgdNames.push_back("SWire_Pb214_P2"); 
-  bkgdNames.push_back("SFoil_Pb214_P1"); 
-  bkgdNames.push_back("SFoil_Pb214_P2"); 
-  bkgdNames.push_back("FeShield_Bi214");   
-  bkgdNames.push_back("FeShield_Tl208");   
-  bkgdNames.push_back("FeShield_Ac228");   
-  bkgdNames.push_back("CuTower_Co60");     
-  bkgdNames.push_back("Air_Bi214_P1");     
-  bkgdNames.push_back("PMT_Bi214");        
-  bkgdNames.push_back("PMT_Tl208");        
-  bkgdNames.push_back("PMT_Ac228");        
-  bkgdNames.push_back("PMT_K40");          
-  bkgdNames.push_back("ScintInn_K40");     
-  bkgdNames.push_back("ScintOut_K40");     
-  bkgdNames.push_back("ScintPet_K40");     
-  bkgdNames.push_back("MuMetal_Pa234m");   
+  //bkgdNames.push_back("Cd116_Tl208");      
+  //bkgdNames.push_back("Cd116_Ac228");      
+  //bkgdNames.push_back("Cd116_Bi212");      
+  //bkgdNames.push_back("Cd116_Bi214");      
+  //bkgdNames.push_back("Cd116_Pb214");      
+  //bkgdNames.push_back("Mylar_Bi214");      
+  //bkgdNames.push_back("Mylar_Pb214");      
+  //bkgdNames.push_back("Cd116_K40_cold"); 
+  //bkgdNames.push_back("Cd116_K40_warm"); 
+  //bkgdNames.push_back("Cd116_Pa234m_cold");
+  //bkgdNames.push_back("Cd116_Pa234m_warm");
+  //bkgdNames.push_back("SFoil_Bi210_cold");      
+  //bkgdNames.push_back("SFoil_Bi210_warm");      
+  //bkgdNames.push_back("SWire_Bi210_P1"); 
+  //bkgdNames.push_back("SWire_Bi210_P2"); 
+  //bkgdNames.push_back("SScin_Bi210");      
+  //bkgdNames.push_back("SScin_Bi214");      
+  //bkgdNames.push_back("SWire_Tl208_P1"); 
+  //bkgdNames.push_back("SWire_Tl208_P2"); 
+  //bkgdNames.push_back("SWire_Bi214_P1"); 
+  //bkgdNames.push_back("SWire_Bi214_P2"); 
+  //bkgdNames.push_back("SFoil_Bi214_P1"); 
+  //bkgdNames.push_back("SFoil_Bi214_P2"); 
+  //bkgdNames.push_back("SWire_Pb214_P1"); 
+  //bkgdNames.push_back("SWire_Pb214_P2"); 
+  //bkgdNames.push_back("SFoil_Pb214_P1"); 
+  //bkgdNames.push_back("SFoil_Pb214_P2"); 
+  //bkgdNames.push_back("FeShield_Bi214");   
+  //bkgdNames.push_back("FeShield_Tl208");   
+  //bkgdNames.push_back("FeShield_Ac228");   
+  //bkgdNames.push_back("CuTower_Co60");     
+  //bkgdNames.push_back("Air_Bi214_P1");     
+  //bkgdNames.push_back("PMT_Bi214");        
+  //bkgdNames.push_back("PMT_Tl208");        
+  //bkgdNames.push_back("PMT_Ac228");        
+  //bkgdNames.push_back("PMT_K40");          
+  //bkgdNames.push_back("ScintInn_K40");     
+  //bkgdNames.push_back("ScintOut_K40");     
+  //bkgdNames.push_back("ScintPet_K40");     
+  //bkgdNames.push_back("MuMetal_Pa234m");   
   bkgdNames.push_back("Cd116_2b2n_m14");   
   
   cfile->createChannel(bkgdNames);
@@ -117,46 +117,46 @@ int main(int argc, char* argv[]) {
 
   TH1D* sig = (TH1D*)infile.Get("Cd116_2b0n_m1_MVA_BDT");
   
-  TH1D * Cd116_Tl208       = (TH1D*) infile.Get("Cd116_Tl208_MVA_BDT")    ; Cd116_Tl208       -> Sumw2() ; Cd116_Tl208       -> Scale( 5.93799  ); 
-  TH1D * Cd116_Ac228       = (TH1D*) infile.Get("Cd116_Ac228_MVA_BDT")    ; Cd116_Ac228       -> Sumw2() ; Cd116_Ac228       -> Scale( 6.92654  ); 
-  TH1D * Cd116_Bi212       = (TH1D*) infile.Get("Cd116_Bi212_MVA_BDT")    ; Cd116_Bi212       -> Sumw2() ; Cd116_Bi212       -> Scale( 2.74751  ); 
-  TH1D * Cd116_Bi214       = (TH1D*) infile.Get("Cd116_Bi214_MVA_BDT")    ; Cd116_Bi214       -> Sumw2() ; Cd116_Bi214       -> Scale( 18.3589  ); 
-  TH1D * Cd116_Pb214       = (TH1D*) infile.Get("Cd116_Pb214_VT_MVA_BDT") ; Cd116_Pb214       -> Sumw2() ; Cd116_Pb214       -> Scale( 0.187229 ); 
-  TH1D * Mylar_Bi214       = (TH1D*) infile.Get("Mylar_Bi214_MVA_BDT")    ; Mylar_Bi214       -> Sumw2() ; Mylar_Bi214       -> Scale( 11.1957  ); 
-  TH1D * Mylar_Pb214       = (TH1D*) infile.Get("Mylar_Pb214_MVA_BDT")    ; Mylar_Pb214       -> Sumw2() ; Mylar_Pb214       -> Scale( 0.49351  ); 
-  TH1D * Cd116_K40_cold    = (TH1D*) infile.Get("Cd116_K40_MVA_BDT")      ; Cd116_K40_cold    -> Sumw2() ; Cd116_K40_cold    -> Scale( 9.02821  ); 
-  TH1D * Cd116_K40_warm    = (TH1D*) infile.Get("Cd116_K40_MVA_BDT")      ; Cd116_K40_warm    -> Sumw2() ; Cd116_K40_warm    -> Scale( 25.9862  ); 
-  TH1D * Cd116_Pa234m_cold = (TH1D*) infile.Get("Cd116_Pa234m_MVA_BDT")   ; Cd116_Pa234m_cold -> Sumw2() ; Cd116_Pa234m_cold -> Scale( 27.6202  ); 
-  TH1D * Cd116_Pa234m_warm = (TH1D*) infile.Get("Cd116_Pa234m_MVA_BDT")   ; Cd116_Pa234m_warm -> Sumw2() ; Cd116_Pa234m_warm -> Scale( 72.5556  ); 
-  TH1D * SFoil_Bi210_cold  = (TH1D*) infile.Get("SFoil_Bi210_MVA_BDT")    ; SFoil_Bi210_cold  -> Sumw2() ; SFoil_Bi210_cold  -> Scale( 0.  ); 
-  TH1D * SFoil_Bi210_warm  = (TH1D*) infile.Get("SFoil_Bi210_MVA_BDT")    ; SFoil_Bi210_warm  -> Sumw2() ; SFoil_Bi210_warm  -> Scale( 23.2433  );   
-  TH1D * SWire_Bi210_P1    = (TH1D*) infile.Get("SWire_Bi210_MVA_BDT")    ; SWire_Bi210_P1    -> Sumw2() ; SWire_Bi210_P1    -> Scale( 0.136145 ); 
-  TH1D * SWire_Bi210_P2    = (TH1D*) infile.Get("SWire_Bi210_MVA_BDT")    ; SWire_Bi210_P2    -> Sumw2() ; SWire_Bi210_P2    -> Scale( 0.624186 ); 
-  TH1D * SScin_Bi210       = (TH1D*) infile.Get("SScin_Bi210_MVA_BDT")    ; SScin_Bi210       -> Sumw2() ; SScin_Bi210       -> Scale( 1.75763  ); 
-  TH1D * SScin_Bi214       = (TH1D*) infile.Get("SScin_Bi214_MVA_BDT")    ; SScin_Bi214       -> Sumw2() ; SScin_Bi214       -> Scale( 0.0505381); 
-  TH1D * SWire_Tl208_P1    = (TH1D*) infile.Get("SWire_Tl208_MVA_BDT")    ; SWire_Tl208_P1    -> Sumw2() ; SWire_Tl208_P1    -> Scale( 0.217615 ); 
-  TH1D * SWire_Tl208_P2    = (TH1D*) infile.Get("SWire_Tl208_MVA_BDT")    ; SWire_Tl208_P2    -> Sumw2() ; SWire_Tl208_P2    -> Scale( 1.07721  ); 
-  TH1D * SWire_Bi214_P1    = (TH1D*) infile.Get("SWire_Bi214_MVA_BDT")    ; SWire_Bi214_P1    -> Sumw2() ; SWire_Bi214_P1    -> Scale( 21.4388  ); 
-  TH1D * SWire_Bi214_P2    = (TH1D*) infile.Get("SWire_Bi214_MVA_BDT")    ; SWire_Bi214_P2    -> Sumw2() ; SWire_Bi214_P2    -> Scale( 17.9663  ); 
-  TH1D * SFoil_Bi214_P1    = (TH1D*) infile.Get("SFoil_Bi214_MVA_BDT")    ; SFoil_Bi214_P1    -> Sumw2() ; SFoil_Bi214_P1    -> Scale( 5.7695   ); 
-  TH1D * SFoil_Bi214_P2    = (TH1D*) infile.Get("SFoil_Bi214_MVA_BDT")    ; SFoil_Bi214_P2    -> Sumw2() ; SFoil_Bi214_P2    -> Scale( 2.73967  ); 
-  TH1D * SWire_Pb214_P1    = (TH1D*) infile.Get("SWire_Pb214_MVA_BDT")    ; SWire_Pb214_P1    -> Sumw2() ; SWire_Pb214_P1    -> Scale( 0.457038 ); 
-  TH1D * SWire_Pb214_P2    = (TH1D*) infile.Get("SWire_Pb214_MVA_BDT")    ; SWire_Pb214_P2    -> Sumw2() ; SWire_Pb214_P2    -> Scale( 0.648715 ); 
-  TH1D * SFoil_Pb214_P1    = (TH1D*) infile.Get("SFoil_Pb214_MVA_BDT")    ; SFoil_Pb214_P1    -> Sumw2() ; SFoil_Pb214_P1    -> Scale( 0.215401 ); 
-  TH1D * SFoil_Pb214_P2    = (TH1D*) infile.Get("SFoil_Pb214_MVA_BDT")    ; SFoil_Pb214_P2    -> Sumw2() ; SFoil_Pb214_P2    -> Scale( 0.189179 ); 
-  TH1D * FeShield_Bi214    = (TH1D*) infile.Get("FeShield_Bi214_MVA_BDT") ; FeShield_Bi214    -> Sumw2() ; FeShield_Bi214    -> Scale( 50.1037  ); 
-  TH1D * FeShield_Tl208    = (TH1D*) infile.Get("FeShield_Tl208_MVA_BDT") ; FeShield_Tl208    -> Sumw2() ; FeShield_Tl208    -> Scale( 1.1935   ); 
-  TH1D * FeShield_Ac228    = (TH1D*) infile.Get("FeShield_Ac228_MVA_BDT") ; FeShield_Ac228    -> Sumw2() ; FeShield_Ac228    -> Scale( 0.176176 ); 
-  TH1D * CuTower_Co60      = (TH1D*) infile.Get("CuTower_Co60_MVA_BDT")   ; CuTower_Co60      -> Sumw2() ; CuTower_Co60      -> Scale( 3.79642  ); 
-  TH1D * Air_Bi214_P1      = (TH1D*) infile.Get("Air_Bi214_MVA_BDT")      ; Air_Bi214_P1      -> Sumw2() ; Air_Bi214_P1      -> Scale( 4.19156  ); 
-  TH1D * PMT_Bi214         = (TH1D*) infile.Get("PMT_Bi214_MVA_BDT")      ; PMT_Bi214         -> Sumw2() ; PMT_Bi214         -> Scale( 30.6795  ); 
-  TH1D * PMT_Tl208         = (TH1D*) infile.Get("PMT_Tl208_MVA_BDT")      ; PMT_Tl208         -> Sumw2() ; PMT_Tl208         -> Scale( 23.2697  ); 
-  TH1D * PMT_Ac228         = (TH1D*) infile.Get("PMT_Ac228_MVA_BDT")      ; PMT_Ac228         -> Sumw2() ; PMT_Ac228         -> Scale( 3.60937  ); 
-  TH1D * PMT_K40           = (TH1D*) infile.Get("PMT_K40_MVA_BDT")        ; PMT_K40           -> Sumw2() ; PMT_K40           -> Scale( 16.792   ); 
-  TH1D * ScintInn_K40      = (TH1D*) infile.Get("ScintInn_K40_MVA_BDT")   ; ScintInn_K40      -> Sumw2() ; ScintInn_K40      -> Scale( 0.33559  ); 
-  TH1D * ScintOut_K40      = (TH1D*) infile.Get("ScintOut_K40_MVA_BDT")   ; ScintOut_K40      -> Sumw2() ; ScintOut_K40      -> Scale( 0.604063 ); 
-  TH1D * ScintPet_K40      = (TH1D*) infile.Get("ScintPet_K40_MVA_BDT")   ; ScintPet_K40      -> Sumw2() ; ScintPet_K40      -> Scale( 1.00676  ); 
-  TH1D * MuMetal_Pa234m    = (TH1D*) infile.Get("MuMetal_Pa234m_MVA_BDT") ; MuMetal_Pa234m    -> Sumw2() ; MuMetal_Pa234m    -> Scale( 0.664017 ); 
+  //TH1D * Cd116_Tl208       = (TH1D*) infile.Get("Cd116_Tl208_MVA_BDT")    ; Cd116_Tl208       -> Sumw2() ; Cd116_Tl208       -> Scale( 5.93799  ); 
+  //TH1D * Cd116_Ac228       = (TH1D*) infile.Get("Cd116_Ac228_MVA_BDT")    ; Cd116_Ac228       -> Sumw2() ; Cd116_Ac228       -> Scale( 6.92654  ); 
+  //TH1D * Cd116_Bi212       = (TH1D*) infile.Get("Cd116_Bi212_MVA_BDT")    ; Cd116_Bi212       -> Sumw2() ; Cd116_Bi212       -> Scale( 2.74751  ); 
+  //TH1D * Cd116_Bi214       = (TH1D*) infile.Get("Cd116_Bi214_MVA_BDT")    ; Cd116_Bi214       -> Sumw2() ; Cd116_Bi214       -> Scale( 18.3589  ); 
+  //TH1D * Cd116_Pb214       = (TH1D*) infile.Get("Cd116_Pb214_VT_MVA_BDT") ; Cd116_Pb214       -> Sumw2() ; Cd116_Pb214       -> Scale( 0.187229 ); 
+  //TH1D * Mylar_Bi214       = (TH1D*) infile.Get("Mylar_Bi214_MVA_BDT")    ; Mylar_Bi214       -> Sumw2() ; Mylar_Bi214       -> Scale( 11.1957  ); 
+  //TH1D * Mylar_Pb214       = (TH1D*) infile.Get("Mylar_Pb214_MVA_BDT")    ; Mylar_Pb214       -> Sumw2() ; Mylar_Pb214       -> Scale( 0.49351  ); 
+  //TH1D * Cd116_K40_cold    = (TH1D*) infile.Get("Cd116_K40_MVA_BDT")      ; Cd116_K40_cold    -> Sumw2() ; Cd116_K40_cold    -> Scale( 9.02821  ); 
+  //TH1D * Cd116_K40_warm    = (TH1D*) infile.Get("Cd116_K40_MVA_BDT")      ; Cd116_K40_warm    -> Sumw2() ; Cd116_K40_warm    -> Scale( 25.9862  ); 
+  //TH1D * Cd116_Pa234m_cold = (TH1D*) infile.Get("Cd116_Pa234m_MVA_BDT")   ; Cd116_Pa234m_cold -> Sumw2() ; Cd116_Pa234m_cold -> Scale( 27.6202  ); 
+  //TH1D * Cd116_Pa234m_warm = (TH1D*) infile.Get("Cd116_Pa234m_MVA_BDT")   ; Cd116_Pa234m_warm -> Sumw2() ; Cd116_Pa234m_warm -> Scale( 72.5556  ); 
+  //TH1D * SFoil_Bi210_cold  = (TH1D*) infile.Get("SFoil_Bi210_MVA_BDT")    ; SFoil_Bi210_cold  -> Sumw2() ; SFoil_Bi210_cold  -> Scale( 0.  ); 
+  //TH1D * SFoil_Bi210_warm  = (TH1D*) infile.Get("SFoil_Bi210_MVA_BDT")    ; SFoil_Bi210_warm  -> Sumw2() ; SFoil_Bi210_warm  -> Scale( 23.2433  );   
+  //TH1D * SWire_Bi210_P1    = (TH1D*) infile.Get("SWire_Bi210_MVA_BDT")    ; SWire_Bi210_P1    -> Sumw2() ; SWire_Bi210_P1    -> Scale( 0.136145 ); 
+  //TH1D * SWire_Bi210_P2    = (TH1D*) infile.Get("SWire_Bi210_MVA_BDT")    ; SWire_Bi210_P2    -> Sumw2() ; SWire_Bi210_P2    -> Scale( 0.624186 ); 
+  //TH1D * SScin_Bi210       = (TH1D*) infile.Get("SScin_Bi210_MVA_BDT")    ; SScin_Bi210       -> Sumw2() ; SScin_Bi210       -> Scale( 1.75763  ); 
+  //TH1D * SScin_Bi214       = (TH1D*) infile.Get("SScin_Bi214_MVA_BDT")    ; SScin_Bi214       -> Sumw2() ; SScin_Bi214       -> Scale( 0.0505381); 
+  //TH1D * SWire_Tl208_P1    = (TH1D*) infile.Get("SWire_Tl208_MVA_BDT")    ; SWire_Tl208_P1    -> Sumw2() ; SWire_Tl208_P1    -> Scale( 0.217615 ); 
+  //TH1D * SWire_Tl208_P2    = (TH1D*) infile.Get("SWire_Tl208_MVA_BDT")    ; SWire_Tl208_P2    -> Sumw2() ; SWire_Tl208_P2    -> Scale( 1.07721  ); 
+  //TH1D * SWire_Bi214_P1    = (TH1D*) infile.Get("SWire_Bi214_MVA_BDT")    ; SWire_Bi214_P1    -> Sumw2() ; SWire_Bi214_P1    -> Scale( 21.4388  ); 
+  //TH1D * SWire_Bi214_P2    = (TH1D*) infile.Get("SWire_Bi214_MVA_BDT")    ; SWire_Bi214_P2    -> Sumw2() ; SWire_Bi214_P2    -> Scale( 17.9663  ); 
+  //TH1D * SFoil_Bi214_P1    = (TH1D*) infile.Get("SFoil_Bi214_MVA_BDT")    ; SFoil_Bi214_P1    -> Sumw2() ; SFoil_Bi214_P1    -> Scale( 5.7695   ); 
+  //TH1D * SFoil_Bi214_P2    = (TH1D*) infile.Get("SFoil_Bi214_MVA_BDT")    ; SFoil_Bi214_P2    -> Sumw2() ; SFoil_Bi214_P2    -> Scale( 2.73967  ); 
+  //TH1D * SWire_Pb214_P1    = (TH1D*) infile.Get("SWire_Pb214_MVA_BDT")    ; SWire_Pb214_P1    -> Sumw2() ; SWire_Pb214_P1    -> Scale( 0.457038 ); 
+  //TH1D * SWire_Pb214_P2    = (TH1D*) infile.Get("SWire_Pb214_MVA_BDT")    ; SWire_Pb214_P2    -> Sumw2() ; SWire_Pb214_P2    -> Scale( 0.648715 ); 
+  //TH1D * SFoil_Pb214_P1    = (TH1D*) infile.Get("SFoil_Pb214_MVA_BDT")    ; SFoil_Pb214_P1    -> Sumw2() ; SFoil_Pb214_P1    -> Scale( 0.215401 ); 
+  //TH1D * SFoil_Pb214_P2    = (TH1D*) infile.Get("SFoil_Pb214_MVA_BDT")    ; SFoil_Pb214_P2    -> Sumw2() ; SFoil_Pb214_P2    -> Scale( 0.189179 ); 
+  //TH1D * FeShield_Bi214    = (TH1D*) infile.Get("FeShield_Bi214_MVA_BDT") ; FeShield_Bi214    -> Sumw2() ; FeShield_Bi214    -> Scale( 50.1037  ); 
+  //TH1D * FeShield_Tl208    = (TH1D*) infile.Get("FeShield_Tl208_MVA_BDT") ; FeShield_Tl208    -> Sumw2() ; FeShield_Tl208    -> Scale( 1.1935   ); 
+  //TH1D * FeShield_Ac228    = (TH1D*) infile.Get("FeShield_Ac228_MVA_BDT") ; FeShield_Ac228    -> Sumw2() ; FeShield_Ac228    -> Scale( 0.176176 ); 
+  //TH1D * CuTower_Co60      = (TH1D*) infile.Get("CuTower_Co60_MVA_BDT")   ; CuTower_Co60      -> Sumw2() ; CuTower_Co60      -> Scale( 3.79642  ); 
+  //TH1D * Air_Bi214_P1      = (TH1D*) infile.Get("Air_Bi214_MVA_BDT")      ; Air_Bi214_P1      -> Sumw2() ; Air_Bi214_P1      -> Scale( 4.19156  ); 
+  //TH1D * PMT_Bi214         = (TH1D*) infile.Get("PMT_Bi214_MVA_BDT")      ; PMT_Bi214         -> Sumw2() ; PMT_Bi214         -> Scale( 30.6795  ); 
+  //TH1D * PMT_Tl208         = (TH1D*) infile.Get("PMT_Tl208_MVA_BDT")      ; PMT_Tl208         -> Sumw2() ; PMT_Tl208         -> Scale( 23.2697  ); 
+  //TH1D * PMT_Ac228         = (TH1D*) infile.Get("PMT_Ac228_MVA_BDT")      ; PMT_Ac228         -> Sumw2() ; PMT_Ac228         -> Scale( 3.60937  ); 
+  //TH1D * PMT_K40           = (TH1D*) infile.Get("PMT_K40_MVA_BDT")        ; PMT_K40           -> Sumw2() ; PMT_K40           -> Scale( 16.792   ); 
+  //TH1D * ScintInn_K40      = (TH1D*) infile.Get("ScintInn_K40_MVA_BDT")   ; ScintInn_K40      -> Sumw2() ; ScintInn_K40      -> Scale( 0.33559  ); 
+  //TH1D * ScintOut_K40      = (TH1D*) infile.Get("ScintOut_K40_MVA_BDT")   ; ScintOut_K40      -> Sumw2() ; ScintOut_K40      -> Scale( 0.604063 ); 
+  //TH1D * ScintPet_K40      = (TH1D*) infile.Get("ScintPet_K40_MVA_BDT")   ; ScintPet_K40      -> Sumw2() ; ScintPet_K40      -> Scale( 1.00676  ); 
+  //TH1D * MuMetal_Pa234m    = (TH1D*) infile.Get("MuMetal_Pa234m_MVA_BDT") ; MuMetal_Pa234m    -> Sumw2() ; MuMetal_Pa234m    -> Scale( 0.664017 ); 
   TH1D * Cd116_2b2n_m14    = (TH1D*) infile.Get("Cd116_2b2n_m14_MVA_BDT") ; Cd116_2b2n_m14    -> Sumw2() ; Cd116_2b2n_m14    -> Scale( 4913.49  ); 
 
 
@@ -259,46 +259,46 @@ int main(int argc, char* argv[]) {
 
     //Backgrounds are passed in via vector
     vector<TH1D*> vbkgd;
-    vbkgd.push_back(Cd116_Tl208);      
-    vbkgd.push_back(Cd116_Ac228);      
-    vbkgd.push_back(Cd116_Bi212);      
-    vbkgd.push_back(Cd116_Bi214);      
-    vbkgd.push_back(Cd116_Pb214);      
-    vbkgd.push_back(Mylar_Bi214);      
-    vbkgd.push_back(Mylar_Pb214);      
-    vbkgd.push_back(Cd116_K40_cold); 
-    vbkgd.push_back(Cd116_K40_warm); 
-    vbkgd.push_back(Cd116_Pa234m_cold);
-    vbkgd.push_back(Cd116_Pa234m_warm);
-    vbkgd.push_back(SFoil_Bi210_cold);      
-    vbkgd.push_back(SFoil_Bi210_warm);      
-    vbkgd.push_back(SWire_Bi210_P1); 
-    vbkgd.push_back(SWire_Bi210_P2); 
-    vbkgd.push_back(SScin_Bi210);      
-    vbkgd.push_back(SScin_Bi214);      
-    vbkgd.push_back(SWire_Tl208_P1); 
-    vbkgd.push_back(SWire_Tl208_P2); 
-    vbkgd.push_back(SWire_Bi214_P1); 
-    vbkgd.push_back(SWire_Bi214_P2); 
-    vbkgd.push_back(SFoil_Bi214_P1); 
-    vbkgd.push_back(SFoil_Bi214_P2); 
-    vbkgd.push_back(SWire_Pb214_P1); 
-    vbkgd.push_back(SWire_Pb214_P2); 
-    vbkgd.push_back(SFoil_Pb214_P1); 
-    vbkgd.push_back(SFoil_Pb214_P2); 
-    vbkgd.push_back(FeShield_Bi214);   
-    vbkgd.push_back(FeShield_Tl208);   
-    vbkgd.push_back(FeShield_Ac228);   
-    vbkgd.push_back(CuTower_Co60);     
-    vbkgd.push_back(Air_Bi214_P1);     
-    vbkgd.push_back(PMT_Bi214);        
-    vbkgd.push_back(PMT_Tl208);        
-    vbkgd.push_back(PMT_Ac228);        
-    vbkgd.push_back(PMT_K40);          
-    vbkgd.push_back(ScintInn_K40);     
-    vbkgd.push_back(ScintOut_K40);     
-    vbkgd.push_back(ScintPet_K40);     
-    vbkgd.push_back(MuMetal_Pa234m);   
+    //vbkgd.push_back(Cd116_Tl208);      
+    //vbkgd.push_back(Cd116_Ac228);      
+    //vbkgd.push_back(Cd116_Bi212);      
+    //vbkgd.push_back(Cd116_Bi214);      
+    //vbkgd.push_back(Cd116_Pb214);      
+    //vbkgd.push_back(Mylar_Bi214);      
+    //vbkgd.push_back(Mylar_Pb214);      
+    //vbkgd.push_back(Cd116_K40_cold); 
+    //vbkgd.push_back(Cd116_K40_warm); 
+    //vbkgd.push_back(Cd116_Pa234m_cold);
+    //vbkgd.push_back(Cd116_Pa234m_warm);
+    //vbkgd.push_back(SFoil_Bi210_cold);      
+    //vbkgd.push_back(SFoil_Bi210_warm);      
+    //vbkgd.push_back(SWire_Bi210_P1); 
+    //vbkgd.push_back(SWire_Bi210_P2); 
+    //vbkgd.push_back(SScin_Bi210);      
+    //vbkgd.push_back(SScin_Bi214);      
+    //vbkgd.push_back(SWire_Tl208_P1); 
+    //vbkgd.push_back(SWire_Tl208_P2); 
+    //vbkgd.push_back(SWire_Bi214_P1); 
+    //vbkgd.push_back(SWire_Bi214_P2); 
+    //vbkgd.push_back(SFoil_Bi214_P1); 
+    //vbkgd.push_back(SFoil_Bi214_P2); 
+    //vbkgd.push_back(SWire_Pb214_P1); 
+    //vbkgd.push_back(SWire_Pb214_P2); 
+    //vbkgd.push_back(SFoil_Pb214_P1); 
+    //vbkgd.push_back(SFoil_Pb214_P2); 
+    //vbkgd.push_back(FeShield_Bi214);   
+    //vbkgd.push_back(FeShield_Tl208);   
+    //vbkgd.push_back(FeShield_Ac228);   
+    //vbkgd.push_back(CuTower_Co60);     
+    //vbkgd.push_back(Air_Bi214_P1);     
+    //vbkgd.push_back(PMT_Bi214);        
+    //vbkgd.push_back(PMT_Tl208);        
+    //vbkgd.push_back(PMT_Ac228);        
+    //vbkgd.push_back(PMT_K40);          
+    //vbkgd.push_back(ScintInn_K40);     
+    //vbkgd.push_back(ScintOut_K40);     
+    //vbkgd.push_back(ScintPet_K40);     
+    //vbkgd.push_back(MuMetal_Pa234m);   
     vbkgd.push_back(Cd116_2b2n_m14);   
 	
     //Alpha parameters only matter when smoothing is utilized
@@ -341,55 +341,55 @@ int main(int argc, char* argv[]) {
   cfile->createFlatSigSystematic("ThinFoil"       , 0.0073 , 0.0073 ,100);
   cfile->createFlatSigSystematic("EnCalib"        , 0.0025 , 0.0025 ,100);
   
-  // Tl-208 Systematics
-  cfile->createFlatBkgdSystematic(  0 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-  cfile->createFlatBkgdSystematic(  1 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-  cfile->createFlatBkgdSystematic(  2 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-  cfile->createFlatBkgdSystematic( 17 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-  cfile->createFlatBkgdSystematic( 18 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-  
-  // Bi-214 Systematic
-  cfile->createFlatBkgdSystematic(  3 , "Bi-214"     , 0.0007 , 0.0007 ,100);
-  cfile->createFlatBkgdSystematic(  4 , "Bi-214"     , 0.0007 , 0.0007 ,100);
-  cfile->createFlatBkgdSystematic(  5 , "Bi-214"     , 0.0007 , 0.0007 ,100);
-  cfile->createFlatBkgdSystematic(  6 , "Bi-214"     , 0.0007 , 0.0007 ,100);
-  
-  // Internal Systematic
-  cfile->createFlatBkgdSystematic(  7 , "Internal"   , 0.0140 , 0.0176 ,100);
-  cfile->createFlatBkgdSystematic(  8 , "Internal"   , 0.0140 , 0.0176 ,100);
-  cfile->createFlatBkgdSystematic(  9 , "Internal"   , 0.0140 , 0.0176 ,100);
-  cfile->createFlatBkgdSystematic( 10 , "Internal"   , 0.0140 , 0.0176 ,100);
-  cfile->createFlatBkgdSystematic( 11 , "Internal"   , 0.0140 , 0.0176 ,100);
-  cfile->createFlatBkgdSystematic( 12 , "Internal"   , 0.0140 , 0.0176 ,100);
-  cfile->createFlatBkgdSystematic( 13 , "Internal"   , 0.0140 , 0.0176 ,100);
-  cfile->createFlatBkgdSystematic( 14 , "Internal"   , 0.0140 , 0.0176 ,100);	
-  
-  // Radon Systematic
-  cfile->createFlatBkgdSystematic( 19 , "Radon"      , 0.0004 , 0.0004 ,100);	
-  cfile->createFlatBkgdSystematic( 20 , "Radon"      , 0.0004 , 0.0004 ,100);	
-  cfile->createFlatBkgdSystematic( 21 , "Radon"      , 0.0004 , 0.0004 ,100);	
-  cfile->createFlatBkgdSystematic( 22 , "Radon"      , 0.0004 , 0.0004 ,100);	
-  cfile->createFlatBkgdSystematic( 23 , "Radon"      , 0.0004 , 0.0004 ,100);	
-  cfile->createFlatBkgdSystematic( 24 , "Radon"      , 0.0004 , 0.0004 ,100);	
-  cfile->createFlatBkgdSystematic( 25 , "Radon"      , 0.0004 , 0.0004 ,100);           
-  cfile->createFlatBkgdSystematic( 26 , "Radon"      , 0.0004 , 0.0004 ,100);           
-  
-  // Externals Systematic
-  cfile->createFlatBkgdSystematic( 15 , "Externals"  , 0.0061 , 0.0129 ,100);	
-  cfile->createFlatBkgdSystematic( 16 , "Externals"  , 0.0061 , 0.0129 ,100);	
-  cfile->createFlatBkgdSystematic( 27 , "Externals"  , 0.0061 , 0.0129 ,100);	
-  cfile->createFlatBkgdSystematic( 28 , "Externals"  , 0.0061 , 0.0129 ,100);	
-  cfile->createFlatBkgdSystematic( 29 , "Externals"  , 0.0061 , 0.0129 ,100);	
-  cfile->createFlatBkgdSystematic( 30 , "Externals"  , 0.0061 , 0.0129 ,100);	
-  cfile->createFlatBkgdSystematic( 31 , "Externals"  , 0.0061 , 0.0129 ,100);	
-  cfile->createFlatBkgdSystematic( 32 , "Externals"  , 0.0061 , 0.0129 ,100);	
-  cfile->createFlatBkgdSystematic( 33 , "Externals"  , 0.0061 , 0.0129 ,100);	 
-  cfile->createFlatBkgdSystematic( 34 , "Externals"  , 0.0061 , 0.0129 ,100);	
-  cfile->createFlatBkgdSystematic( 35 , "Externals"  , 0.0061 , 0.0129 ,100);	
-  cfile->createFlatBkgdSystematic( 36 , "Externals"  , 0.0061 , 0.0129 ,100);	
-  cfile->createFlatBkgdSystematic( 37 , "Externals"  , 0.0061 , 0.0129 ,100);	
-  cfile->createFlatBkgdSystematic( 38 , "Externals"  , 0.0061 , 0.0129 ,100);	
-  cfile->createFlatBkgdSystematic( 39 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //// Tl-208 Systematics
+  //cfile->createFlatBkgdSystematic(  0 , "Tl-208"      , 0.0004 , 0.0004 ,100);
+  //cfile->createFlatBkgdSystematic(  1 , "Tl-208"      , 0.0004 , 0.0004 ,100);
+  //cfile->createFlatBkgdSystematic(  2 , "Tl-208"      , 0.0004 , 0.0004 ,100);
+  //cfile->createFlatBkgdSystematic( 17 , "Tl-208"      , 0.0004 , 0.0004 ,100);
+  //cfile->createFlatBkgdSystematic( 18 , "Tl-208"      , 0.0004 , 0.0004 ,100);
+  //
+  //// Bi-214 Systematic
+  //cfile->createFlatBkgdSystematic(  3 , "Bi-214"     , 0.0007 , 0.0007 ,100);
+  //cfile->createFlatBkgdSystematic(  4 , "Bi-214"     , 0.0007 , 0.0007 ,100);
+  //cfile->createFlatBkgdSystematic(  5 , "Bi-214"     , 0.0007 , 0.0007 ,100);
+  //cfile->createFlatBkgdSystematic(  6 , "Bi-214"     , 0.0007 , 0.0007 ,100);
+  //
+  //// Internal Systematic
+  //cfile->createFlatBkgdSystematic(  7 , "Internal"   , 0.0140 , 0.0176 ,100);
+  //cfile->createFlatBkgdSystematic(  8 , "Internal"   , 0.0140 , 0.0176 ,100);
+  //cfile->createFlatBkgdSystematic(  9 , "Internal"   , 0.0140 , 0.0176 ,100);
+  //cfile->createFlatBkgdSystematic( 10 , "Internal"   , 0.0140 , 0.0176 ,100);
+  //cfile->createFlatBkgdSystematic( 11 , "Internal"   , 0.0140 , 0.0176 ,100);
+  //cfile->createFlatBkgdSystematic( 12 , "Internal"   , 0.0140 , 0.0176 ,100);
+  //cfile->createFlatBkgdSystematic( 13 , "Internal"   , 0.0140 , 0.0176 ,100);
+  //cfile->createFlatBkgdSystematic( 14 , "Internal"   , 0.0140 , 0.0176 ,100);	
+  //
+  //// Radon Systematic
+  //cfile->createFlatBkgdSystematic( 19 , "Radon"      , 0.0004 , 0.0004 ,100);	
+  //cfile->createFlatBkgdSystematic( 20 , "Radon"      , 0.0004 , 0.0004 ,100);	
+  //cfile->createFlatBkgdSystematic( 21 , "Radon"      , 0.0004 , 0.0004 ,100);	
+  //cfile->createFlatBkgdSystematic( 22 , "Radon"      , 0.0004 , 0.0004 ,100);	
+  //cfile->createFlatBkgdSystematic( 23 , "Radon"      , 0.0004 , 0.0004 ,100);	
+  //cfile->createFlatBkgdSystematic( 24 , "Radon"      , 0.0004 , 0.0004 ,100);	
+  //cfile->createFlatBkgdSystematic( 25 , "Radon"      , 0.0004 , 0.0004 ,100);           
+  //cfile->createFlatBkgdSystematic( 26 , "Radon"      , 0.0004 , 0.0004 ,100);           
+  //
+  //// Externals Systematic
+  //cfile->createFlatBkgdSystematic( 15 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //cfile->createFlatBkgdSystematic( 16 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //cfile->createFlatBkgdSystematic( 27 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //cfile->createFlatBkgdSystematic( 28 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //cfile->createFlatBkgdSystematic( 29 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //cfile->createFlatBkgdSystematic( 30 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //cfile->createFlatBkgdSystematic( 31 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //cfile->createFlatBkgdSystematic( 32 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //cfile->createFlatBkgdSystematic( 33 , "Externals"  , 0.0061 , 0.0129 ,100);	 
+  //cfile->createFlatBkgdSystematic( 34 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //cfile->createFlatBkgdSystematic( 35 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //cfile->createFlatBkgdSystematic( 36 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //cfile->createFlatBkgdSystematic( 37 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //cfile->createFlatBkgdSystematic( 38 , "Externals"  , 0.0061 , 0.0129 ,100);	
+  //cfile->createFlatBkgdSystematic( 39 , "Externals"  , 0.0061 , 0.0129 ,100);	
 
   //}
   ///store and output channel information
