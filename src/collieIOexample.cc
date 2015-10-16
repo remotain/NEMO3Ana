@@ -11,13 +11,7 @@ int main(int argc, char* argv[]) {
   
   cfile->initFile("/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/CollieIO.root", "BDT_Score");  
 
-  // Define your input histograms
-  double Xmin = -0.8; 
-  double Xmax = 0.8;
-  int Nbins = 100;
-  //
-
-  cfile->setInputHist(Xmin,Xmax,Nbins);
+  //cfile->setInputHist(Xmin,Xmax,Nbins);
   
   // Option to define physical cutoffs where events should not exist (in terms of your historam range)
   //
@@ -304,7 +298,7 @@ int main(int argc, char* argv[]) {
     
     //Each parameter point has a signal histo, data histo, and an array of backgrounds...
     //  Smoothing parameters are also passed in.
-    cfile->createMassPoint(0, data, sig, -1, vbkgd,valpha);
+    cfile->createMassPoint(100, data, sig, -1, vbkgd,valpha);
 
     // If you have more than one mass point, you may choose to interpolate on some parameter grid
     //cfile->interpolateMassGrid(5,100,110);
