@@ -214,55 +214,55 @@ int main(int argc, char* argv[]) {
 	cfile->createFlatSigSystematic("ThinFoil"       , 0.0073 , 0.0073 ,100);
 	cfile->createFlatSigSystematic("EnCalib"        , 0.0025 , 0.0025 ,100);
 	
-	// Tl-208 Systematics
-	cfile->createFlatBkgdSystematic(  0 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-	cfile->createFlatBkgdSystematic(  1 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-	cfile->createFlatBkgdSystematic(  2 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-	cfile->createFlatBkgdSystematic( 17 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-	cfile->createFlatBkgdSystematic( 18 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-	
-	// Bi-214 Systematic
-	cfile->createFlatBkgdSystematic(  3 , "Bi-214"     , 0.0007 , 0.0007 ,100);
-	cfile->createFlatBkgdSystematic(  4 , "Bi-214"     , 0.0007 , 0.0007 ,100);
-	cfile->createFlatBkgdSystematic(  5 , "Bi-214"     , 0.0007 , 0.0007 ,100);
-	cfile->createFlatBkgdSystematic(  6 , "Bi-214"     , 0.0007 , 0.0007 ,100);
-	
-	// Internal Systematic
-	cfile->createFlatBkgdSystematic(  7 , "Internal"   , 0.0140 , 0.0176 ,100);
-	cfile->createFlatBkgdSystematic(  8 , "Internal"   , 0.0140 , 0.0176 ,100);
-	cfile->createFlatBkgdSystematic(  9 , "Internal"   , 0.0140 , 0.0176 ,100);
-	cfile->createFlatBkgdSystematic( 10 , "Internal"   , 0.0140 , 0.0176 ,100);
-	cfile->createFlatBkgdSystematic( 11 , "Internal"   , 0.0140 , 0.0176 ,100);
-	cfile->createFlatBkgdSystematic( 12 , "Internal"   , 0.0140 , 0.0176 ,100);
-	cfile->createFlatBkgdSystematic( 13 , "Internal"   , 0.0140 , 0.0176 ,100);
-	cfile->createFlatBkgdSystematic( 14 , "Internal"   , 0.0140 , 0.0176 ,100);	
-	
-	// Radon Systematic
-	cfile->createFlatBkgdSystematic( 19 , "Radon"      , 0.0004 , 0.0004 ,100);	
-	cfile->createFlatBkgdSystematic( 20 , "Radon"      , 0.0004 , 0.0004 ,100);	
-	cfile->createFlatBkgdSystematic( 21 , "Radon"      , 0.0004 , 0.0004 ,100);	
-	cfile->createFlatBkgdSystematic( 22 , "Radon"      , 0.0004 , 0.0004 ,100);	
-	cfile->createFlatBkgdSystematic( 23 , "Radon"      , 0.0004 , 0.0004 ,100);	
-	cfile->createFlatBkgdSystematic( 24 , "Radon"      , 0.0004 , 0.0004 ,100);	
-	cfile->createFlatBkgdSystematic( 25 , "Radon"      , 0.0004 , 0.0004 ,100);           
-	cfile->createFlatBkgdSystematic( 26 , "Radon"      , 0.0004 , 0.0004 ,100);           
-	
-	// Externals Systematic
-	cfile->createFlatBkgdSystematic( 15 , "Externals"  , 0.0061 , 0.0129 ,100);	
-	cfile->createFlatBkgdSystematic( 16 , "Externals"  , 0.0061 , 0.0129 ,100);	
-	cfile->createFlatBkgdSystematic( 27 , "Externals"  , 0.0061 , 0.0129 ,100);	
-	cfile->createFlatBkgdSystematic( 28 , "Externals"  , 0.0061 , 0.0129 ,100);	
-	cfile->createFlatBkgdSystematic( 29 , "Externals"  , 0.0061 , 0.0129 ,100);	
-	cfile->createFlatBkgdSystematic( 30 , "Externals"  , 0.0061 , 0.0129 ,100);	
-	cfile->createFlatBkgdSystematic( 31 , "Externals"  , 0.0061 , 0.0129 ,100);	
-	cfile->createFlatBkgdSystematic( 32 , "Externals"  , 0.0061 , 0.0129 ,100);	
-	cfile->createFlatBkgdSystematic( 33 , "Externals"  , 0.0061 , 0.0129 ,100);	 
-	cfile->createFlatBkgdSystematic( 34 , "Externals"  , 0.0061 , 0.0129 ,100);	
-	cfile->createFlatBkgdSystematic( 35 , "Externals"  , 0.0061 , 0.0129 ,100);	
-	cfile->createFlatBkgdSystematic( 36 , "Externals"  , 0.0061 , 0.0129 ,100);	
-	cfile->createFlatBkgdSystematic( 37 , "Externals"  , 0.0061 , 0.0129 ,100);	
-	cfile->createFlatBkgdSystematic( 38 , "Externals"  , 0.0061 , 0.0129 ,100);	
-	cfile->createFlatBkgdSystematic( 39 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//// Tl-208 Systematics
+	//cfile->createFlatBkgdSystematic(  0 , "Tl-208"      , 0.0004 , 0.0004 ,100);
+	//cfile->createFlatBkgdSystematic(  1 , "Tl-208"      , 0.0004 , 0.0004 ,100);
+	//cfile->createFlatBkgdSystematic(  2 , "Tl-208"      , 0.0004 , 0.0004 ,100);
+	//cfile->createFlatBkgdSystematic( 17 , "Tl-208"      , 0.0004 , 0.0004 ,100);
+	//cfile->createFlatBkgdSystematic( 18 , "Tl-208"      , 0.0004 , 0.0004 ,100);
+	//
+	//// Bi-214 Systematic
+	//cfile->createFlatBkgdSystematic(  3 , "Bi-214"     , 0.0007 , 0.0007 ,100);
+	//cfile->createFlatBkgdSystematic(  4 , "Bi-214"     , 0.0007 , 0.0007 ,100);
+	//cfile->createFlatBkgdSystematic(  5 , "Bi-214"     , 0.0007 , 0.0007 ,100);
+	//cfile->createFlatBkgdSystematic(  6 , "Bi-214"     , 0.0007 , 0.0007 ,100);
+	//
+	//// Internal Systematic
+	//cfile->createFlatBkgdSystematic(  7 , "Internal"   , 0.0140 , 0.0176 ,100);
+	//cfile->createFlatBkgdSystematic(  8 , "Internal"   , 0.0140 , 0.0176 ,100);
+	//cfile->createFlatBkgdSystematic(  9 , "Internal"   , 0.0140 , 0.0176 ,100);
+	//cfile->createFlatBkgdSystematic( 10 , "Internal"   , 0.0140 , 0.0176 ,100);
+	//cfile->createFlatBkgdSystematic( 11 , "Internal"   , 0.0140 , 0.0176 ,100);
+	//cfile->createFlatBkgdSystematic( 12 , "Internal"   , 0.0140 , 0.0176 ,100);
+	//cfile->createFlatBkgdSystematic( 13 , "Internal"   , 0.0140 , 0.0176 ,100);
+	//cfile->createFlatBkgdSystematic( 14 , "Internal"   , 0.0140 , 0.0176 ,100);	
+	//
+	//// Radon Systematic
+	//cfile->createFlatBkgdSystematic( 19 , "Radon"      , 0.0004 , 0.0004 ,100);	
+	//cfile->createFlatBkgdSystematic( 20 , "Radon"      , 0.0004 , 0.0004 ,100);	
+	//cfile->createFlatBkgdSystematic( 21 , "Radon"      , 0.0004 , 0.0004 ,100);	
+	//cfile->createFlatBkgdSystematic( 22 , "Radon"      , 0.0004 , 0.0004 ,100);	
+	//cfile->createFlatBkgdSystematic( 23 , "Radon"      , 0.0004 , 0.0004 ,100);	
+	//cfile->createFlatBkgdSystematic( 24 , "Radon"      , 0.0004 , 0.0004 ,100);	
+	//cfile->createFlatBkgdSystematic( 25 , "Radon"      , 0.0004 , 0.0004 ,100);           
+	//cfile->createFlatBkgdSystematic( 26 , "Radon"      , 0.0004 , 0.0004 ,100);           
+	//
+	//// Externals Systematic
+	//cfile->createFlatBkgdSystematic( 15 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//cfile->createFlatBkgdSystematic( 16 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//cfile->createFlatBkgdSystematic( 27 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//cfile->createFlatBkgdSystematic( 28 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//cfile->createFlatBkgdSystematic( 29 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//cfile->createFlatBkgdSystematic( 30 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//cfile->createFlatBkgdSystematic( 31 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//cfile->createFlatBkgdSystematic( 32 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//cfile->createFlatBkgdSystematic( 33 , "Externals"  , 0.0061 , 0.0129 ,100);	 
+	//cfile->createFlatBkgdSystematic( 34 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//cfile->createFlatBkgdSystematic( 35 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//cfile->createFlatBkgdSystematic( 36 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//cfile->createFlatBkgdSystematic( 37 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//cfile->createFlatBkgdSystematic( 38 , "Externals"  , 0.0061 , 0.0129 ,100);	
+	//cfile->createFlatBkgdSystematic( 39 , "Externals"  , 0.0061 , 0.0129 ,100);	
 	
 	///store and output channel information
 	cfile->storeFile();
