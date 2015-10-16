@@ -302,7 +302,8 @@ int main(int argc, char* argv[]) {
     //         cfile->generateBinMap(btotal,sig,"MVA");
     //         delete btotal; btotal = NULL;
     
-    
+    cout << data->GetBinContent(1) << endl;
+    cout << sig->GetBinContent(1) << endl;
     //Each parameter point has a signal histo, data histo, and an array of backgrounds...
     //  Smoothing parameters are also passed in.
     cfile->createMassPoint(100, data, sig, -1, vbkgd,valpha);
