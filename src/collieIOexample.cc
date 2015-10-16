@@ -87,7 +87,7 @@ int main(int argc, char* argv[]) {
   
   //Otherwise, get your input histograms from an external file
   
-  TFile * infile = new TFile("/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/TMVApp.root", 'READ');
+  TFile * infile = new TFile("/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/TMVApp.root", "READ");
   
   if (!infile) {
 	  cout << "Error opening file" << endl;
