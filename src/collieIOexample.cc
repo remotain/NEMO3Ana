@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
   
   // Option to define physical cutoffs where events should not exist (in terms of your historam range)
   //
-  //  cfile->setCutoffs(0.0,1.0);   
+  cfile->setCutoffs(-0.8,0.8);   
   
   // Option to rebin histograms to a coarser binning
   // Eg, rebinning by 2 reduces to 10 bins
@@ -83,31 +83,7 @@ int main(int argc, char* argv[]) {
   //bkgdNames.push_back("MuMetal_Pa234m");   
   bkgdNames.push_back("Cd116_2b2n_m14");   
   
-  cfile->createChannel(bkgdNames);
-  
-  
-  //// For this example, generate backgrounds, signal, data, and systematics
-  //TH1D* bkgd1 = new TH1D("bkgd1","bkgd1",Nbins,Xmin,Xmax);
-  //TH1D* bkgd2 = new TH1D("bkgd2","bkgd2",Nbins,Xmin,Xmax);
-  //
-  //TH1D* bkgd2SystP = new TH1D("bkgd2systP","bkgd2systP",Nbins,Xmin,Xmax);
-  //TH1D* bkgd2SystN = new TH1D("bkgd2systN","bkgd2systN",Nbins,Xmin,Xmax);
-  //
-  //TH1D* sig = new TH1D("sig","sig",Nbins,Xmin,Xmax);
-  //TH1D* sigSystP = new TH1D("sig_systP","sig_systP",Nbins,Xmin,Xmax);
-  //TH1D* sigSystN = new TH1D("sig_systN","sig_systN",Nbins,Xmin,Xmax);
-  //TH1D* data = new TH1D("data","data",Nbins,Xmin,Xmax);
-  //
-  //// Make sure you keep track of statistical uncertainties in histograms correctly
-  //bkgd1->Sumw2();
-  //bkgd2->Sumw2();
-  //bkgd2SystP->Sumw2();
-  //bkgd2SystN->Sumw2();
-  //sig->Sumw2();
-  //sigSystP->Sumw2();
-  //sigSystN->Sumw2();
-  //data->Sumw2();
-  
+  cfile->createChannel(bkgdNames);  
   
   //Otherwise, get your input histograms from an external file
   
