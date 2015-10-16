@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
   
   // Option to define physical cutoffs where events should not exist (in terms of your historam range)
   //
-  cfile->setCutoffs(-0.8,0.8);   
+  //cfile->setCutoffs(-0.8,0.8);   
   
   // Option to rebin histograms to a coarser binning
   // Eg, rebinning by 2 reduces to 10 bins
@@ -87,7 +87,12 @@ int main(int argc, char* argv[]) {
   
   //Otherwise, get your input histograms from an external file
   
-  TFile infile("/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/TMVApp.root");
+  TFile * infile = new TFile("/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/TMVApp.root");
+  
+  if (infile) {
+	  cout << "Error opening file" << endl;
+	  return 1;
+  }
   
   TH1D* data = (TH1D*)infile.Get("Data_MVA_BDT");
 
