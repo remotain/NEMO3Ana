@@ -128,9 +128,9 @@ IF (ISCOLLIE)
 	include_directories(/afs/in2p3.fr/throng/nemo/users/remoto/work/collie/io/include)
 	include_directories(/afs/in2p3.fr/throng/nemo/users/remoto/work/collie/limit/include)
 	
-	add_executable(collieIO_EXAMPLE ${CMAKE_CURRENT_SOURCE_DIR}/src/collieIOexample.cc)
+	add_executable(collieIO_EXAMPLE ${CMAKE_CURRENT_SOURCE_DIR}/src/collieIO_EXAMPLE.cc)
 	target_link_libraries(collieIO_EXAMPLE CollieCLHEP CollieIO CollieLimit ${ROOT_LIBRARIES})
-	add_executable(collieIO_BDT ${CMAKE_CURRENT_SOURCE_DIR}/src/collieIOexample.cc)
+	add_executable(collieIO_BDT ${CMAKE_CURRENT_SOURCE_DIR}/src/collieIO_BDT.cc)
 	target_link_libraries(collieIO_BDT CollieCLHEP CollieIO CollieLimit ${ROOT_LIBRARIES})
 
 	#install_files(${EXECUTABLE_OUTPUT_PATH} FILES collieIOexample)
