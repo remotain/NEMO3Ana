@@ -173,7 +173,9 @@ int main(int argc, char* argv[]) {
   
     cfile->initFile("/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/CollieIO.root", "BDT_Score");  
 
-    cfile->setInputHist(Xmin,Xmax,Nbins);
+	cout << data->GetXaxis()->GetBinLowEdge(1) << " " << data->GetXaxis()->GetBinLowEdge(data->GetNbinsX()) << " " << data->GetNbinsX() << endl;
+
+    cfile->setInputHist(data->GetXaxis()->GetBinLowEdge(1),data->GetXaxis()->GetBinLowEdge(data->GetNbinsX()),data->GetNbinsX());
   
     // Option to define physical cutoffs where events should not exist (in terms of your historam range)
     //
