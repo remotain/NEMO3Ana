@@ -57,7 +57,7 @@ int main(int argc, char* argv[]) {
     //TH1D * MuMetal_Pa234m    = (TH1D*) infile->Get("MuMetal_Pa234m_MVA_BDT") ; MuMetal_Pa234m    -> Sumw2() ; MuMetal_Pa234m    -> Scale( 0.664017 ); 
     TH1D * Cd116_2b2n_m14    = (TH1D*) infile->Get("Cd116_2b2n_m14_MVA_BDT") ; Cd116_2b2n_m14    -> Sumw2() ; Cd116_2b2n_m14    -> Scale( 4913.49  ); 
   
-  	infile->Close();
+  	//infile->Close();
   
 	//Define backgrounds                            //Backgrounds are passed in via vector
 	vector<string> bkgdNames;                       vector<TH1D*> vbkgd;
