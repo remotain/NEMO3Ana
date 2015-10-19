@@ -9,7 +9,6 @@
 #include <CLfit2.hh>
 #include <sys/time.h>
 
-#include <string>
 
 void calcLimit(char* outFile, char* inList, char* m){
 
@@ -31,21 +30,20 @@ void calcLimit(char* outFile, char* inList, char* m){
   } 
   
   bool ok = true;
-  string fname;  
+  char fname[1024];  
   char options[1024];
-  //while(!streamIn.eof()){
-  while(std::getline(streamIn,fname)){
-    //if(!(streamIn >> fname)) continue;
+  while(!streamIn.eof()){
+    if(!(streamIn >> fname)) continue;
     cout << "Reading: " << fname << endl;
     
-    TFile* ftest = new TFile(fname.c_str());
+    TFile* ftest = new TFile(fname);
     TList* aList = ftest->GetListOfKeys();
     if(aList->GetEntries()!=1){
-      printf("Incorrect key length for %s\n",fname.c_str());
+      printf("Incorrect key length for %s\n",fname);
       return;
     }
     chanNames[nld] = aList->At(0)->GetName();
-    TString name(fname.c_str());
+    TString name(fname);
     fileNames[nld] = name.Data();
     aList->Delete();
     ftest->Close();
@@ -53,8 +51,8 @@ void calcLimit(char* outFile, char* inList, char* m){
     
     
     sprintf(options,"name='%s'",chanNames[nld].c_str());
-    if (!loaders[nld].open(fname.c_str(),options)) {
-      std::cout << "Failed to open " << fname.c_str() << " using " << options << "!\n";
+    if (!loaders[nld].open(fname,options)) {
+      std::cout << "Failed to open " << fname << " using " << options << "!\n";
       ok = false;
     }
     
