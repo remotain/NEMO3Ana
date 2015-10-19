@@ -119,8 +119,8 @@ void calcLimit(char* outFile, char* inList, char* m){
   **/
 
   
-  clcompute->setNoviceFlag(false);  // deactivate novice flag if you want to use stat uncertainties
-  clcompute->useHistoStats(false);  // statistics is turned off by default, only has meaning for CLsyst, CLfit, CLfit2
+  clcompute.setNoviceFlag(false);  // deactivate novice flag if you want to use stat uncertainties
+  clcompute.useHistoStats(false);  // statistics is turned off by default, only has meaning for CLsyst, CLfit, CLfit2
 
 
   // This is the class for computing cross section limits
