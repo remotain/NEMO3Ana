@@ -66,14 +66,13 @@ void calcLimit(char* outFile, char* inList, char* m){
     printf("Incorrect key length for %s\n",inList);
     return;
   }
+
   chanNames[nld] = aList->At(0)->GetName();
   TString name(inList);
   fileNames[nld] = name.Data();
   aList->Delete();
   ftest->Close();
   ftest->Delete();
-  
-  nld++;
 
   sprintf(options,"name='%s'",chanNames[nld].c_str());
   if (!loaders[nld].open(inList,options)) {
@@ -81,6 +80,7 @@ void calcLimit(char* outFile, char* inList, char* m){
     ok = false;
   }
  
+   nld++;
  	 
   printf("\n************************************************\n");
   printf("Collie Example Limit Calculation\n");
