@@ -30,21 +30,21 @@ void calcLimit(char* outFile, char* inList, char* m){
   } 
   
   bool ok = true;
-  char fname[1024];  
+  std::string fname;  
   char options[1024];
   //while(!streamIn.eof()){
   while(std::getline(streamIn,fname)){
     //if(!(streamIn >> fname)) continue;
     cout << "Reading: " << fname << endl;
     
-    TFile* ftest = new TFile(fname);
+    TFile* ftest = new TFile(fname.c_str());
     TList* aList = ftest->GetListOfKeys();
     if(aList->GetEntries()!=1){
-      printf("Incorrect key length for %s\n",fname);
+      printf("Incorrect key length for %s\n",fname.c_str());
       return;
     }
     chanNames[nld] = aList->At(0)->GetName();
-    TString name(fname);
+    TString name(fname.c_str());
     fileNames[nld] = name.Data();
     aList->Delete();
     ftest->Close();
@@ -52,8 +52,8 @@ void calcLimit(char* outFile, char* inList, char* m){
     
     
     sprintf(options,"name='%s'",chanNames[nld].c_str());
-    if (!loaders[nld].open(fname,options)) {
-      std::cout << "Failed to open " << fname << " using " << options << "!\n";
+    if (!loaders[nld].open(fname.c_str(),options)) {
+      std::cout << "Failed to open " << fname.c_str() << " using " << options << "!\n";
       ok = false;
     }
     
