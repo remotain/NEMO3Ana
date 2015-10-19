@@ -124,7 +124,9 @@ IF (ISCOLLIE)
 	add_library(CollieLimit SHARED IMPORTED)
 	set_property(TARGET CollieLimit PROPERTY IMPORTED_LOCATION /afs/in2p3.fr/throng/nemo/users/remoto/work/collie/lib/libCollieLimit.so)
 	
-	include_directories(/afs/in2p3.fr/throng/nemo/users/remoto/work/collie/CLHEP/Units)
+	include_directories(/afs/in2p3.fr/throng/nemo/users/remoto/work/collie/)
+	#include_directories(/afs/in2p3.fr/throng/nemo/users/remoto/work/collie/CLHEP/Units)
+	#include_directories(/afs/in2p3.fr/throng/nemo/users/remoto/work/collie/CLHEP/Random)
 	include_directories(/afs/in2p3.fr/throng/nemo/users/remoto/work/collie/io/include)
 	include_directories(/afs/in2p3.fr/throng/nemo/users/remoto/work/collie/limit/include)
 	
@@ -133,7 +135,7 @@ IF (ISCOLLIE)
 	add_executable(collieIO_BDT ${CMAKE_CURRENT_SOURCE_DIR}/src/collieIO_BDT.cc)
 	target_link_libraries(collieIO_BDT CollieCLHEP CollieIO CollieLimit ${ROOT_LIBRARIES})
 
-	add_executable(collieLC_BDT ${CMAKE_CURRENT_SOURCE_DIR}/src/collieCL_BDT.cc)
+	add_executable(collieLC_BDT ${CMAKE_CURRENT_SOURCE_DIR}/src/collieLC_BDT.cc)
 	target_link_libraries(collieLC_BDT CollieCLHEP CollieIO CollieLimit ${ROOT_LIBRARIES})
 
 ENDIF (ISCOLLIE)
