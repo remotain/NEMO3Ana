@@ -19,57 +19,7 @@ int main(int argc, char* argv[]) {
 	
 	//Backgrounds are passed in via vector
 	vector<TH1D*> vbkgd;
-	
-	
-	std::cout << "Cd116_Tl208"       << std::endl;
-	std::cout << "Cd116_Ac228"       << std::endl;
-	std::cout << "Cd116_Bi212"       << std::endl;
-	std::cout << "Cd116_Bi214"       << std::endl;
-	std::cout << "Cd116_Pb214"       << std::endl;
-	std::cout << "Mylar_Bi214"       << std::endl;
-	std::cout << "Mylar_Pb214"       << std::endl;
-	std::cout << "Cd116_K40_cold"    << std::endl;
-	std::cout << "Cd116_K40_warm"    << std::endl;
-	std::cout << "Cd116_Pa234m_cold" << std::endl;
-	std::cout << "Cd116_Pa234m_warm" << std::endl;
-	std::cout << "SFoil_Bi210_warm"  << std::endl;
-	std::cout << "SWire_Bi210_P1"    << std::endl;
-	std::cout << "SWire_Bi210_P2"    << std::endl;
-	std::cout << "SScin_Bi210"       << std::endl;
-	std::cout << "SScin_Bi214"       << std::endl;
-	std::cout << "SWire_Tl208_P1"    << std::endl;
-	std::cout << "SWire_Tl208_P2"    << std::endl;
-	std::cout << "SWire_Bi214_P1"    << std::endl;
-	std::cout << "SWire_Bi214_P2"    << std::endl;
-	std::cout << "SFoil_Bi214_P1"    << std::endl;
-	std::cout << "SFoil_Bi214_P2"    << std::endl;
-	std::cout << "SWire_Pb214_P1"    << std::endl;
-	std::cout << "SWire_Pb214_P2"    << std::endl;
-	std::cout << "SFoil_Pb214_P1"    << std::endl;
-	std::cout << "SFoil_Pb214_P2"    << std::endl;
-	std::cout << "FeShield_Bi214"    << std::endl;
-	std::cout << "FeShield_Tl208"    << std::endl;
-	std::cout << "FeShield_Ac228"    << std::endl;
-	std::cout << "CuTower_Co60"      << std::endl;
-	std::cout << "Air_Bi214_P1"      << std::endl;
-	std::cout << "PMT_Bi214"         << std::endl;
-	std::cout << "PMT_Tl208"         << std::endl;
-	std::cout << "PMT_Ac228"         << std::endl;
-	std::cout << "PMT_K40"           << std::endl;
-	std::cout << "ScintInn_K40"      << std::endl;
-	std::cout << "ScintOut_K40"      << std::endl;
-	std::cout << "ScintPet_K40"      << std::endl;
-	std::cout << "MuMetal_Pa234m"    << std::endl;
-	std::cout << "Cd116_2b2n_m14"    << std::endl;
-	
-	
-	
-	
-	
-	
-	
-	
-	
+		
     //Otherwise, get your input histograms from an external file
     TH1D * Cd116_Tl208       = (TH1D*) infile->Get( "Cd116_Tl208_MVA_BDT"    ) -> Clone( "Cd116_Tl208"       ) ; Cd116_Tl208       -> Sumw2() ; Cd116_Tl208       -> Scale( 5.93799   / Cd116_Tl208       -> Integral() ); bkgdNames.push_back( "Cd116_Tl208"       ); vbkgd.push_back( Cd116_Tl208       );      
     TH1D * Cd116_Ac228       = (TH1D*) infile->Get( "Cd116_Ac228_MVA_BDT"    ) -> Clone( "Cd116_Ac228"       ) ; Cd116_Ac228       -> Sumw2() ; Cd116_Ac228       -> Scale( 6.92654   / Cd116_Ac228       -> Integral() ); bkgdNames.push_back( "Cd116_Ac228"       ); vbkgd.push_back( Cd116_Ac228       );      
@@ -80,9 +30,9 @@ int main(int argc, char* argv[]) {
     TH1D * Mylar_Pb214       = (TH1D*) infile->Get( "Mylar_Pb214_MVA_BDT"    ) -> Clone( "Mylar_Pb214"       ) ; Mylar_Pb214       -> Sumw2() ; Mylar_Pb214       -> Scale( 0.49351   / Mylar_Pb214       -> Integral() ); bkgdNames.push_back( "Mylar_Pb214"       ); vbkgd.push_back( Mylar_Pb214       );      
     TH1D * Cd116_K40_cold    = (TH1D*) infile->Get( "Cd116_K40_MVA_BDT"      ) -> Clone( "Cd116_K40_cold"    ) ; Cd116_K40_cold    -> Sumw2() ; Cd116_K40_cold    -> Scale( 9.02821   / Cd116_K40_cold    -> Integral() ); bkgdNames.push_back( "Cd116_K40_cold"    ); vbkgd.push_back( Cd116_K40_cold    ); 
     TH1D * Cd116_K40_warm    = (TH1D*) infile->Get( "Cd116_K40_MVA_BDT"      ) -> Clone( "Cd116_K40_warm"    ) ; Cd116_K40_warm    -> Sumw2() ; Cd116_K40_warm    -> Scale( 25.9862   / Cd116_K40_warm    -> Integral() ); bkgdNames.push_back( "Cd116_K40_warm"    ); vbkgd.push_back( Cd116_K40_warm    ); 
-    TH1D * Cd116_Pa234m_cold = (TH1D*) infile->Get( "Cd116_Pa234m_MVA_BDT"   ) -> Clone( "Cd116_Pa234m_cold" ) ; Cd116_Pa234m_cold -> Sumw2() ; Cd116_Pa234m_cold -> Scale( 27.6202   / Cd116_Pa234m_cold -> Integral() ); bkgdNames.push_back( "Cd116_Pa234m_cold" ); vbkgd.push_back( Cd116_Pa234m_cold );
-    TH1D * Cd116_Pa234m_warm = (TH1D*) infile->Get( "Cd116_Pa234m_MVA_BDT"   ) -> Clone( "Cd116_Pa234m_warm" ) ; Cd116_Pa234m_warm -> Sumw2() ; Cd116_Pa234m_warm -> Scale( 72.5556   / Cd116_Pa234m_warm -> Integral() ); bkgdNames.push_back( "Cd116_Pa234m_warm" ); vbkgd.push_back( Cd116_Pa234m_warm );
-    TH1D * SFoil_Bi210_warm  = (TH1D*) infile->Get( "SFoil_Bi210_MVA_BDT"    ) -> Clone( "SFoil_Bi210_warm"  ) ; SFoil_Bi210_warm  -> Sumw2() ; SFoil_Bi210_warm  -> Scale( 23.2433   / SFoil_Bi210_warm  -> Integral() ); bkgdNames.push_back( "SFoil_Bi210_warm"  ); vbkgd.push_back( SFoil_Bi210_warm  );    
+    TH1D * Cd116_Pa234m_cold = (TH1D*) infile->Get( "Cd116_Pa234m_MVA_BDT"   ) -> Clone( "Cd116_Pa234m_cold" ) ; Cd116_Pa234m_cold -> Sumw2() ; Cd116_Pa_234m_cold -> Scale( 27.6202   / Cd116_Pa234m_cold -> Integral() ); bkgdNames.push_back( "Cd116_Pa234m_cold" ); vbkgd.push_back( Cd116_Pa234m_cold );
+    TH1D * Cd116_Pa234m_warm = (TH1D*) infile->Get( "Cd116_Pa234m_MVA_BDT"   ) -> Clone( "Cd116_Pa234m_warm" ) ; Cd116_Pa234m_warm -> Sumw2() ; Cd116_Pa_234m_warm -> Scale( 72.5556   / Cd116_Pa234m_warm -> Integral() ); bkgdNames.push_back( "Cd116_Pa234m_warm" ); vbkgd.push_back( Cd116_Pa234m_warm );
+    TH1D * SFoil_Bi210_warm  = (TH1D*) infile->Get( "SFoil_Bi210_MVA_BDT"    ) -> Clone( "SFoil_Bi210_warm"  ) ; SFoil_Bi210_warm  -> Sumw2() ; SFoil_Bi_210_warm  -> Scale( 23.2433   / SFoil_Bi210_warm  -> Integral() ); bkgdNames.push_back( "SFoil_Bi210_warm"  ); vbkgd.push_back( SFoil_Bi210_warm  );    
     TH1D * SWire_Bi210_P1    = (TH1D*) infile->Get( "SWire_Bi210_MVA_BDT"    ) -> Clone( "SWire_Bi210_P1"    ) ; SWire_Bi210_P1    -> Sumw2() ; SWire_Bi210_P1    -> Scale( 0.136145  / SWire_Bi210_P1    -> Integral() ); bkgdNames.push_back( "SWire_Bi210_P1"    ); vbkgd.push_back( SWire_Bi210_P1    ); 
     TH1D * SWire_Bi210_P2    = (TH1D*) infile->Get( "SWire_Bi210_MVA_BDT"    ) -> Clone( "SWire_Bi210_P2"    ) ; SWire_Bi210_P2    -> Sumw2() ; SWire_Bi210_P2    -> Scale( 0.624186  / SWire_Bi210_P2    -> Integral() ); bkgdNames.push_back( "SWire_Bi210_P2"    ); vbkgd.push_back( SWire_Bi210_P2    ); 
     TH1D * SScin_Bi210       = (TH1D*) infile->Get( "SScin_Bi210_MVA_BDT"    ) -> Clone( "SScin_Bi210"       ) ; SScin_Bi210       -> Sumw2() ; SScin_Bi210       -> Scale( 1.75763   / SScin_Bi210       -> Integral() ); bkgdNames.push_back( "SScin_Bi210"       ); vbkgd.push_back( SScin_Bi210       );      
@@ -226,17 +176,17 @@ int main(int argc, char* argv[]) {
 	cfile->createFlatSigSystematic("EnCalib"        , 0.0025 , 0.0025 ,100);
 	
 	// Tl-208 Systematics
-	cfile->createFlatBkgdSystematic(  0 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-	cfile->createFlatBkgdSystematic(  1 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-	cfile->createFlatBkgdSystematic(  2 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-	cfile->createFlatBkgdSystematic( 16 , "Tl-208"      , 0.0004 , 0.0004 ,100);
-	cfile->createFlatBkgdSystematic( 17 , "Tl-208"      , 0.0004 , 0.0004 ,100);
+	cfile->createFlatBkgdSystematic(  0 , "Tl208"      , 0.0004 , 0.0004 ,100);
+	cfile->createFlatBkgdSystematic(  1 , "Tl208"      , 0.0004 , 0.0004 ,100);
+	cfile->createFlatBkgdSystematic(  2 , "Tl208"      , 0.0004 , 0.0004 ,100);
+	cfile->createFlatBkgdSystematic( 16 , "Tl208"      , 0.0004 , 0.0004 ,100);
+	cfile->createFlatBkgdSystematic( 17 , "Tl208"      , 0.0004 , 0.0004 ,100);
 	
 	// Bi-214 Systematic
-	cfile->createFlatBkgdSystematic(  3 , "Bi-214"     , 0.0007 , 0.0007 ,100);
-	cfile->createFlatBkgdSystematic(  4 , "Bi-214"     , 0.0007 , 0.0007 ,100);
-	cfile->createFlatBkgdSystematic(  5 , "Bi-214"     , 0.0007 , 0.0007 ,100);
-	cfile->createFlatBkgdSystematic(  6 , "Bi-214"     , 0.0007 , 0.0007 ,100);
+	cfile->createFlatBkgdSystematic(  3 , "Bi214"     , 0.0007 , 0.0007 ,100);
+	cfile->createFlatBkgdSystematic(  4 , "Bi214"     , 0.0007 , 0.0007 ,100);
+	cfile->createFlatBkgdSystematic(  5 , "Bi214"     , 0.0007 , 0.0007 ,100);
+	cfile->createFlatBkgdSystematic(  6 , "Bi214"     , 0.0007 , 0.0007 ,100);
 	
 	// Internal Systematic
 	cfile->createFlatBkgdSystematic(  7 , "Internal"   , 0.0140 , 0.0176 ,100);
