@@ -11,8 +11,10 @@ int main(int argc, char* argv[]) {
     }
   
     TH1D* data = (TH1D*)infile->Get("Data_MVA_BDT");
-
+	
     TH1D* sig = (TH1D*)infile->Get("Cd116_2b0n_m1_MVA_BDT");
+ 	sig -> Sumw2() ; 
+	sig -> Scale( 1 / 5000000. );
   
 	//Define backgrounds     
 	vector<string> bkgdNames;
