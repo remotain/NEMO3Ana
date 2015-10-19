@@ -20,6 +20,56 @@ int main(int argc, char* argv[]) {
 	//Backgrounds are passed in via vector
 	vector<TH1D*> vbkgd;
 	
+	
+	std::cout << "Cd116_Tl208"       << std::endl;
+	std::cout << "Cd116_Ac228"       << std::endl;
+	std::cout << "Cd116_Bi212"       << std::endl;
+	std::cout << "Cd116_Bi214"       << std::endl;
+	std::cout << "Cd116_Pb214"       << std::endl;
+	std::cout << "Mylar_Bi214"       << std::endl;
+	std::cout << "Mylar_Pb214"       << std::endl;
+	std::cout << "Cd116_K40_cold"    << std::endl;
+	std::cout << "Cd116_K40_warm"    << std::endl;
+	std::cout << "Cd116_Pa234m_cold" << std::endl;
+	std::cout << "Cd116_Pa234m_warm" << std::endl;
+	std::cout << "SFoil_Bi210_warm"  << std::endl;
+	std::cout << "SWire_Bi210_P1"    << std::endl;
+	std::cout << "SWire_Bi210_P2"    << std::endl;
+	std::cout << "SScin_Bi210"       << std::endl;
+	std::cout << "SScin_Bi214"       << std::endl;
+	std::cout << "SWire_Tl208_P1"    << std::endl;
+	std::cout << "SWire_Tl208_P2"    << std::endl;
+	std::cout << "SWire_Bi214_P1"    << std::endl;
+	std::cout << "SWire_Bi214_P2"    << std::endl;
+	std::cout << "SFoil_Bi214_P1"    << std::endl;
+	std::cout << "SFoil_Bi214_P2"    << std::endl;
+	std::cout << "SWire_Pb214_P1"    << std::endl;
+	std::cout << "SWire_Pb214_P2"    << std::endl;
+	std::cout << "SFoil_Pb214_P1"    << std::endl;
+	std::cout << "SFoil_Pb214_P2"    << std::endl;
+	std::cout << "FeShield_Bi214"    << std::endl;
+	std::cout << "FeShield_Tl208"    << std::endl;
+	std::cout << "FeShield_Ac228"    << std::endl;
+	std::cout << "CuTower_Co60"      << std::endl;
+	std::cout << "Air_Bi214_P1"      << std::endl;
+	std::cout << "PMT_Bi214"         << std::endl;
+	std::cout << "PMT_Tl208"         << std::endl;
+	std::cout << "PMT_Ac228"         << std::endl;
+	std::cout << "PMT_K40"           << std::endl;
+	std::cout << "ScintInn_K40"      << std::endl;
+	std::cout << "ScintOut_K40"      << std::endl;
+	std::cout << "ScintPet_K40"      << std::endl;
+	std::cout << "MuMetal_Pa234m"    << std::endl;
+	std::cout << "Cd116_2b2n_m14"    << std::endl;
+	
+	
+	
+	
+	
+	
+	
+	
+	
     //Otherwise, get your input histograms from an external file
     TH1D * Cd116_Tl208       = (TH1D*) infile->Get( "Cd116_Tl208_MVA_BDT"    ) -> Clone( "Cd116_Tl208"       ) ; Cd116_Tl208       -> Sumw2() ; Cd116_Tl208       -> Scale( 5.93799   / Cd116_Tl208       -> Integral() ); bkgdNames.push_back( "Cd116_Tl208"       ); vbkgd.push_back( Cd116_Tl208       );      
     TH1D * Cd116_Ac228       = (TH1D*) infile->Get( "Cd116_Ac228_MVA_BDT"    ) -> Clone( "Cd116_Ac228"       ) ; Cd116_Ac228       -> Sumw2() ; Cd116_Ac228       -> Scale( 6.92654   / Cd116_Ac228       -> Integral() ); bkgdNames.push_back( "Cd116_Ac228"       ); vbkgd.push_back( Cd116_Ac228       );      
