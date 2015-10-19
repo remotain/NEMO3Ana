@@ -9,6 +9,7 @@
 #include <CLfit2.hh>
 #include <sys/time.h>
 
+#include <string>
 
 void calcLimit(char* outFile, char* inList, char* m){
 
@@ -30,7 +31,7 @@ void calcLimit(char* outFile, char* inList, char* m){
   } 
   
   bool ok = true;
-  std::string fname;  
+  string fname[1024];  
   char options[1024];
   //while(!streamIn.eof()){
   while(std::getline(streamIn,fname)){
