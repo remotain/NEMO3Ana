@@ -98,10 +98,10 @@ void calcLimit(char* outFile, char* inList, char* m){
 
   // Choose a systematics treatment...
   // The CLfast computation uses no systematics.  This class should only be used for testing purposes.
-  CLfast clcompute;  
+  //  CLfast clcompute;  
 
   // The CLsyst computation applies all systematics via Gaussian distribution
-  //  CLsyst clcompute;  
+  CLsyst clcompute;  
   
   // Use CLfit2 for profileLH fitting of systematics-smeared distributions using two fits per pseudoexperiement
   //  CLfit2 clcompute;  
