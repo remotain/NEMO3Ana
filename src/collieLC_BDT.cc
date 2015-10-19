@@ -73,6 +73,7 @@ void calcLimit(char* outFile, char* inList, char* m){
   ftest->Close();
   ftest->Delete();
   
+  nld++;
 
   sprintf(options,"name='%s'",chanNames[nld].c_str());
   if (!loaders[nld].open(inList,options)) {
@@ -94,9 +95,6 @@ void calcLimit(char* outFile, char* inList, char* m){
   TTree t("SCAN","SCAN");
   CLpoint clresults;
   clresults.branch(&t);
-
-
-
 
   // Choose a systematics treatment...
   // The CLfast computation uses no systematics.  This class should only be used for testing purposes.
@@ -126,31 +124,29 @@ void calcLimit(char* outFile, char* inList, char* m){
 
 
   /// This is the class for computing cross section limits
-  CrossSectionLimit csLim;
-  csLim.setup(&clcompute); 
-  csLim.setVerbose(false); 
-  
-  //95% CL is the default value
-  csLim.setCLlevel(0.95); 
-
-  //The range of CL values that will satisfy the algorithm: -0.001 < (CL-0.95) < 0.001
-  csLim.setAccuracy(0.001); 
-
-  //Toggle the number of pseudo-experiments used to find the limit 0 is lowest(fastest), 4 is highest(slowest)
-  csLim.setPrecision(0); 
-  
-  //Toggle expected/observed to speed things up if you wish
-  csLim.calculateExpected(true);  
-  csLim.calculateObserved(true);
-  
-  //Calculate the expected limit in the case of -2,-1,0,1, or 2-sigma variations of the data relative to bkgd
-  csLim.setNSigma(0);
-
-  //Start the cross section limit search at a cross section of 1.0 times the nominal input value
-  //  Use this to shorten your calculation if you know roughly where the limit will be.
-  csLim.setSearchSeed(1.0);
-
-
+  //CrossSectionLimit csLim;
+  //csLim.setup(&clcompute); 
+  //csLim.setVerbose(false); 
+  //
+  ////95% CL is the default value
+  //csLim.setCLlevel(0.95); 
+  //
+  ////The range of CL values that will satisfy the algorithm: -0.001 < (CL-0.95) < 0.001
+  //csLim.setAccuracy(0.001); 
+  //
+  ////Toggle the number of pseudo-experiments used to find the limit 0 is lowest(fastest), 4 is highest(slowest)
+  //csLim.setPrecision(0); 
+  //
+  ////Toggle expected/observed to speed things up if you wish
+  //csLim.calculateExpected(true);  
+  //csLim.calculateObserved(true);
+  //
+  ////Calculate the expected limit in the case of -2,-1,0,1, or 2-sigma variations of the data relative to bkgd
+  //csLim.setNSigma(0);
+  //
+  ////Start the cross section limit search at a cross section of 1.0 times the nominal input value
+  ////  Use this to shorten your calculation if you know roughly where the limit will be.
+  //csLim.setSearchSeed(1.0);
 
   // This class is used to test the fit used by the CLfit and CLfit2 classes
   //  Use this to determine the quality of your fit model.
@@ -207,15 +203,15 @@ void calcLimit(char* outFile, char* inList, char* m){
       clresults.print();
 
 
-      //Calculate a cross section limit...
-      //These results are reported in the factor by which you must
-      //multiply your nominal signal cross section to obtain a 95% CL
-      //upper limit for this model... IE, multiply this factor by
-      //your model xsec to get your limit in barns
-      
-      csLim.calculate(*sbd,clresults);
-      //report your results for interested observers
-      csLim.print();
+      ////Calculate a cross section limit...
+      ////These results are reported in the factor by which you must
+      ////multiply your nominal signal cross section to obtain a 95% CL
+      ////upper limit for this model... IE, multiply this factor by
+      ////your model xsec to get your limit in barns
+      //
+      //csLim.calculate(*sbd,clresults);
+      ////report your results for interested observers
+      //csLim.print();
 
       
       t.Fill();
