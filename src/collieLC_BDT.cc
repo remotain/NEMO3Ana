@@ -60,14 +60,14 @@ void calcLimit(char* outFile, char* inList, char* m){
   //  nld++;
   //}
  
-  TFile* ftest = new TFile(fname);
+  TFile* ftest = new TFile(inList);
   TList* aList = ftest->GetListOfKeys();
   if(aList->GetEntries()!=1){
-    printf("Incorrect key length for %s\n",fname);
+    printf("Incorrect key length for %s\n",inList);
     return;
   }
   chanNames[nld] = aList->At(0)->GetName();
-  TString name(fname);
+  TString name(inList);
   fileNames[nld] = name.Data();
   aList->Delete();
   ftest->Close();
@@ -75,8 +75,8 @@ void calcLimit(char* outFile, char* inList, char* m){
   
 
   sprintf(options,"name='%s'",chanNames[nld].c_str());
-  if (!loaders[nld].open(fname,options)) {
-    std::cout << "Failed to open " << fname << " using " << options << "!\n";
+  if (!loaders[nld].open(inList,options)) {
+    std::cout << "Failed to open " << inList << " using " << options << "!\n";
     ok = false;
   }
  
