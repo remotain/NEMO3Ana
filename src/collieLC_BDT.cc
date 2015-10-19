@@ -32,33 +32,55 @@ void calcLimit(char* outFile, char* inList, char* m){
   bool ok = true;
   char fname[1024];  
   char options[1024];
-  while(!streamIn.eof()){
-    if(!(streamIn >> fname)) continue;
-    cout << "Reading: " << fname << endl;
-    
-    TFile* ftest = new TFile(fname);
-    TList* aList = ftest->GetListOfKeys();
-    if(aList->GetEntries()!=1){
-      printf("Incorrect key length for %s\n",fname);
-      return;
-    }
-    chanNames[nld] = aList->At(0)->GetName();
-    TString name(fname);
-    fileNames[nld] = name.Data();
-    aList->Delete();
-    ftest->Close();
-    ftest->Delete();
-    
-    
-    sprintf(options,"name='%s'",chanNames[nld].c_str());
-    if (!loaders[nld].open(fname,options)) {
-      std::cout << "Failed to open " << fname << " using " << options << "!\n";
-      ok = false;
-    }
-    
-    nld++;
-  }
   
+  //while(!streamIn.eof()){
+  //  if(!(streamIn >> fname)) continue;
+  //  cout << "Reading: " << fname << endl;
+  //  
+  //  TFile* ftest = new TFile(fname);
+  //  TList* aList = ftest->GetListOfKeys();
+  //  if(aList->GetEntries()!=1){
+  //    printf("Incorrect key length for %s\n",fname);
+  //    return;
+  //  }
+  //  chanNames[nld] = aList->At(0)->GetName();
+  //  TString name(fname);
+  //  fileNames[nld] = name.Data();
+  //  aList->Delete();
+  //  ftest->Close();
+  //  ftest->Delete();
+  //  
+  //  
+  //  sprintf(options,"name='%s'",chanNames[nld].c_str());
+  //  if (!loaders[nld].open(fname,options)) {
+  //    std::cout << "Failed to open " << fname << " using " << options << "!\n";
+  //    ok = false;
+  //  }
+  //  
+  //  nld++;
+  //}
+ 
+  TFile* ftest = new TFile(fname);
+  TList* aList = ftest->GetListOfKeys();
+  if(aList->GetEntries()!=1){
+    printf("Incorrect key length for %s\n",fname);
+    return;
+  }
+  chanNames[nld] = aList->At(0)->GetName();
+  TString name(fname);
+  fileNames[nld] = name.Data();
+  aList->Delete();
+  ftest->Close();
+  ftest->Delete();
+  
+
+  sprintf(options,"name='%s'",chanNames[nld].c_str());
+  if (!loaders[nld].open(fname,options)) {
+    std::cout << "Failed to open " << fname << " using " << options << "!\n";
+    ok = false;
+  }
+ 
+ 	 
   printf("\n************************************************\n");
   printf("Collie Example Limit Calculation\n");
   printf("%d channel(s) available\n",nld);
