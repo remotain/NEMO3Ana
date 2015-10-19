@@ -31,7 +31,7 @@ void calcLimit(char* outFile, char* inList, char* m){
   } 
   
   bool ok = true;
-  string fname[1024];  
+  string fname;  
   char options[1024];
   //while(!streamIn.eof()){
   while(std::getline(streamIn,fname)){
