@@ -33,7 +33,7 @@ void calcLimit(char* outFile, char* inList, char* m){
   char fname[1024];  
   char options[1024];
   //while(!streamIn.eof()){
-  while(std::get_line(streamIn,fname)){
+  while(std::getline(streamIn,fname)){
     //if(!(streamIn >> fname)) continue;
     cout << "Reading: " << fname << endl;
     
