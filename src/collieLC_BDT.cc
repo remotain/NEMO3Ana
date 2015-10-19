@@ -32,8 +32,9 @@ void calcLimit(char* outFile, char* inList, char* m){
   bool ok = true;
   char fname[1024];  
   char options[1024];
-  while(!streamIn.eof()){
-    if(!(streamIn >> fname)) continue;
+  //while(!streamIn.eof()){
+  while(std::get_line(streamIn,fname)){
+    //if(!(streamIn >> fname)) continue;
     cout << "Reading: " << fname << endl;
     
     TFile* ftest = new TFile(fname);
