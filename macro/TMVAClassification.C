@@ -47,7 +47,7 @@
 #include "TMVA/Tools.h"
 #endif
 
-void TMVAClassification( TString myMethodList = "" )
+void TMVAClassification( TString myMethodList = "" , TString myModel = "")
 {
    // The explicit loading of the shared libTMVA is done in TMVAlogon.C, defined in .rootrc
    // if you use your private .rootrc, or run from a different directory, please copy the
@@ -138,6 +138,17 @@ void TMVAClassification( TString myMethodList = "" )
    Use["RuleFit"]         = 0;
    // ---------------------------------------------------------------
 
+   // Default model to be trained + tested
+   std::map<std::string,int> Model;
+
+   // --- Cut optimisation
+   Model[ "MM"  ]  = 0; // Mass mechanism
+   Model[ "RHC" ]  = 0; // Right Handed Current
+   Model[ "M1"  ]  = 0; // Majoron
+   Model[ "M2"  ]  = 0; // Majoron
+   Model[ "M3"  ]  = 0; // Majoron
+   Model[ "M7"  ]  = 0; // Majoron
+
    std::cout << std::endl;
    std::cout << "==> Start TMVAClassification" << std::endl;
 
@@ -159,14 +170,36 @@ void TMVAClassification( TString myMethodList = "" )
       }
    }
 
-   // --------------------------------------------------------------------------------------------------
+   if(myModel != "") {
+  	
+		std::string regModel(myModel);
+		
+		if( Model.find(regModel) == Model.end() ){
+			std::cout << "Model \"" << myModel << "\" not known in under this name. Choose among the following:" << std::endl;
+			for (std::map<std::string,int>::iterator it = Model.begin(); it != Model.end(); it++) std::cout << it->first << " ";
+			std::cout << std::endl;
+			return;
+		}
+	   
+		Model[regModel] = 1;
+	
+   } else {
+   	
+	   std::cout << "No signal model as been specified. You must choose one among the following:" << std::endl;
+       for (std::map<std::string,int>::iterator it = Model.begin(); it != Model.end(); it++) std::cout << it->first << " ";
+       std::cout << std::endl;
+       return;
+   }
 
-   // --- Here the preparation phase begins
+    // --------------------------------------------------------------------------------------------------
 
-   // Create a ROOT output file where TMVA will store ntuples, histograms, etc.
-   TString outfileName( "TMVA.root" );
-   TString outfileDir( "./" );
-   TFile* outputFile = TFile::Open( outfileDir + outfileName, "RECREATE" );
+    // --- Here the preparation phase begins
+
+    // Create a ROOT output file where TMVA will store ntuples, histograms, etc.
+    TString outfileName;
+	outfileName.Form( "TMVA_%s.root", myModel.Data() );
+	TString outfileDir( "/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_FINAL_TECHNOTE_20150921/TMVA/" );
+	TFile* outputFile = TFile::Open( outfileDir + outfileName , "RECREATE" );
    
    // Create the factory object. Later you can choose the methods
    // whose performance you'd like to investigate. The factory is 
@@ -178,7 +211,9 @@ void TMVAClassification( TString myMethodList = "" )
    // The second argument is the output file for the training results
    // All TMVA output can be suppressed by removing the "!" (not) in
    // front of the "Silent" argument in the option string
-   TMVA::Factory *factory = new TMVA::Factory( "TMVAClassification", outputFile,
+	TString weightBaseName;
+	weightBaseName.Form("TMVAClassification_%s", myModel.Data());	
+   TMVA::Factory *factory = new TMVA::Factory( weightBaseName , outputFile,
                                                "!V:!Silent:Color:DrawProgressBar:Transformations=I;D;P;G,D:AnalysisType=Classification" );
 
    // If you wish to modify default settings
@@ -197,7 +232,7 @@ void TMVAClassification( TString myMethodList = "" )
    factory->AddVariable( "min_el_en"                                                 , 'F' );  
    factory->AddVariable( "max_el_en"                                                 , 'F' );  
    factory->AddVariable( "el_en_asym := (max_el_en-min_el_en)/(min_el_en+max_el_en)" , 'F' );  
-   factory->AddVariable( "el_en_sum := min_el_en+max_el_en" , 'F' );  
+   factory->AddVariable( "el_en_sum := min_el_en+max_el_en"                          , 'F' );  
    factory->AddVariable( "cos_theta"                                                 , 'F' );
    factory->AddVariable( "prob_int"                                                  , 'F' );
    factory->AddVariable( "min_el_track_len"                                          , 'F' );       
@@ -219,61 +254,54 @@ void TMVAClassification( TString myMethodList = "" )
    
    std::cout << "--- TMVAClassification       : Using input file: " << input->GetName() << std::endl;
    
-   // --- Register the training and test trees
-   //TTree *signal     = (TTree*)input->Get("TreeS");
-   //TTree *background = (TTree*)input->Get("TreeB");
+   TTree *  sig_tree    = 0;
+   Double_t sig_weight  = 1.; 
    
-   Double_t Cd116_2b0n_m1_weight     = 1.         ; TTree *  Cd116_2b0n_m1_tree    = (TTree*) input->Get("Cd116_2b0n_m1_tree"  ) ; factory->AddSignalTree( Cd116_2b0n_m1_tree          , Cd116_2b0n_m1_weight     );     
+   if ( Model[ "MM"  ] ) sig_tree = (TTree*) input->Get( "Cd116_2b0n_m1_tree"  ) ; 
+   if ( Model[ "RHC" ] ) sig_tree = (TTree*) input->Get( "Cd116_2b0n_m2_tree"  ) ; 
+   if ( Model[ "M1"  ] ) sig_tree = (TTree*) input->Get( "Cd116_2b0n_m5_tree"  ) ; 
+   if ( Model[ "M2"  ] ) sig_tree = (TTree*) input->Get( "Cd116_2b0n_m15_tree" ) ; 
+   if ( Model[ "M3"  ] ) sig_tree = (TTree*) input->Get( "Cd116_2b0n_m6_tree"  ) ; 
+   if ( Model[ "M7"  ] ) sig_tree = (TTree*) input->Get( "Cd116_2b0n_m7_tree"  ) ; 
+
+   factory->AddSignalTree( sig_tree , sig_weight );     
+
+   //Double_t Cd116_2b0n_m1_weight  = 1.; 
+   //TTree *  Cd116_2b0n_m1_tree    = (TTree*) input->Get("Cd116_2b0n_m1_tree"  ) ; 
+   //factory->AddSignalTree( Cd116_2b0n_m1_tree , Cd116_2b0n_m1_weight     );     
    
-   
-   Double_t Cd116_Tl208_weight       = 1. /*5.93799   */ ; TTree *  Cd116_Tl208_tree       = (TTree*) input->Get("Cd116_Tl208_tree"    ) ; factory->AddBackgroundTree( Cd116_Tl208_tree       , Cd116_Tl208_weight       );
-   Double_t Cd116_Ac228_weight       = 1. /*6.92654   */ ; TTree *  Cd116_Ac228_tree       = (TTree*) input->Get("Cd116_Ac228_tree"    ) ; factory->AddBackgroundTree( Cd116_Ac228_tree       , Cd116_Ac228_weight       );
-   Double_t Cd116_Bi212_weight       = 1. /*2.74751   */ ; TTree *  Cd116_Bi212_tree       = (TTree*) input->Get("Cd116_Bi212_tree"    ) ; factory->AddBackgroundTree( Cd116_Bi212_tree       , Cd116_Bi212_weight       );
-   Double_t Cd116_Bi214_weight       = 1. /*18.3589   */ ; TTree *  Cd116_Bi214_tree       = (TTree*) input->Get("Cd116_Bi214_tree"    ) ; factory->AddBackgroundTree( Cd116_Bi214_tree       , Cd116_Bi214_weight       );
-   Double_t Cd116_Pb214_weight       = 1. /*0.187229  */ ; TTree *  Cd116_Pb214_tree       = (TTree*) input->Get("Cd116_Pb214_VT_tree" ) ; factory->AddBackgroundTree( Cd116_Pb214_tree       , Cd116_Pb214_weight       );
-   Double_t Mylar_Bi214_weight       = 1. /*11.1957   */ ; TTree *  Mylar_Bi214_tree       = (TTree*) input->Get("Mylar_Bi214_tree"    ) ; factory->AddBackgroundTree( Mylar_Bi214_tree       , Mylar_Bi214_weight       );
-   Double_t Mylar_Pb214_weight       = 1. /*0.49351   */ ; TTree *  Mylar_Pb214_tree       = (TTree*) input->Get("Mylar_Pb214_tree"    ) ; factory->AddBackgroundTree( Mylar_Pb214_tree       , Mylar_Pb214_weight       );
-   Double_t Cd116_K40_weight         = 1. /*9.02821   */ ; TTree *  Cd116_K40_tree         = (TTree*) input->Get("Cd116_K40_tree"      ) ; factory->AddBackgroundTree( Cd116_K40_tree         , Cd116_K40_weight         );
-   //Double_t Cd116_K40_cold_weight    = 1. /*9.02821   */ ; TTree *  Cd116_K40_cold_tree    = (TTree*) input->Get("Cd116_K40_tree"      ) ; factory->AddBackgroundTree( Cd116_K40_cold_tree    , Cd116_K40_cold_weight    );
-   //Double_t Cd116_K40_warm_weight    = 1. /*25.9862   */ ; TTree *  Cd116_K40_warm_tree    = (TTree*) input->Get("Cd116_K40_tree"      ) ; factory->AddBackgroundTree( Cd116_K40_warm_tree    , Cd116_K40_warm_weight    );
-   Double_t Cd116_Pa234m_weight      = 1. /*27.6202   */ ; TTree *  Cd116_Pa234m_tree      = (TTree*) input->Get("Cd116_Pa234m_tree"   ) ; factory->AddBackgroundTree( Cd116_Pa234m_tree      , Cd116_Pa234m_weight      );
-   //Double_t Cd116_Pa234m_cold_weight = 1. /*27.6202   */ ; TTree *  Cd116_Pa234m_cold_tree = (TTree*) input->Get("Cd116_Pa234m_tree"   ) ; factory->AddBackgroundTree( Cd116_Pa234m_cold_tree , Cd116_Pa234m_cold_weight );
-   //Double_t Cd116_Pa234m_warm_weight = 1. /*72.5556   */ ; TTree *  Cd116_Pa234m_warm_tree = (TTree*) input->Get("Cd116_Pa234m_tree"   ) ; factory->AddBackgroundTree( Cd116_Pa234m_warm_tree , Cd116_Pa234m_warm_weight );
-   Double_t SFoil_Bi210_weight       = 1. /*23.2433   */ ; TTree *  SFoil_Bi210_tree       = (TTree*) input->Get("SFoil_Bi210_tree"    ) ; factory->AddBackgroundTree( SFoil_Bi210_tree       , SFoil_Bi210_weight       );
-   Double_t SWire_Bi210_weight       = 1. /*0.136145  */ ; TTree *  SWire_Bi210_tree       = (TTree*) input->Get("SWire_Bi210_tree"    ) ; factory->AddBackgroundTree( SWire_Bi210_tree       , SWire_Bi210_weight       );
-   //Double_t SWire_Bi210_P1_weight    = 1. /*0.136145  */ ; TTree *  SWire_Bi210_P1_tree    = (TTree*) input->Get("SWire_Bi210_tree"    ) ; factory->AddBackgroundTree( SWire_Bi210_P1_tree    , SWire_Bi210_P1_weight    );
-   //Double_t SWire_Bi210_P2_weight    = 1. /*0.624186  */ ; TTree *  SWire_Bi210_P2_tree    = (TTree*) input->Get("SWire_Bi210_tree"    ) ; factory->AddBackgroundTree( SWire_Bi210_P2_tree    , SWire_Bi210_P2_weight    );
-   Double_t SScin_Bi210_weight       = 1. /*1.75763   */ ; TTree *  SScin_Bi210_tree       = (TTree*) input->Get("SScin_Bi210_tree"    ) ; factory->AddBackgroundTree( SScin_Bi210_tree       , SScin_Bi210_weight       );
-   Double_t SScin_Bi214_weight       = 1. /*0.0505381 */ ; TTree *  SScin_Bi214_tree       = (TTree*) input->Get("SScin_Bi214_tree"    ) ; factory->AddBackgroundTree( SScin_Bi214_tree       , SScin_Bi214_weight       );
-   Double_t SWire_Tl208_weight       = 1. /*0.217615  */ ; TTree *  SWire_Tl208_tree       = (TTree*) input->Get("SWire_Tl208_tree"    ) ; factory->AddBackgroundTree( SWire_Tl208_tree       , SWire_Tl208_weight       );
-   //Double_t SWire_Tl208_P1_weight    = 1. /*0.217615  */ ; TTree *  SWire_Tl208_P1_tree    = (TTree*) input->Get("SWire_Tl208_tree"    ) ; factory->AddBackgroundTree( SWire_Tl208_P1_tree    , SWire_Tl208_P1_weight    );
-   //Double_t SWire_Tl208_P2_weight    = 1. /*1.07721   */ ; TTree *  SWire_Tl208_P2_tree    = (TTree*) input->Get("SWire_Tl208_tree"    ) ; factory->AddBackgroundTree( SWire_Tl208_P2_tree    , SWire_Tl208_P2_weight    );
-   Double_t SWire_Bi214_weight        = 1. /*21.4388   */ ; TTree *  SWire_Bi214_P1_tree    = (TTree*) input->Get("SWire_Bi214_tree"    ) ; factory->AddBackgroundTree( SWire_Bi214_tree      , SWire_Bi214_weight      );
-   //Double_t SWire_Bi214_P1_weight    = 1. /*21.4388   */ ; TTree *  SWire_Bi214_P1_tree    = (TTree*) input->Get("SWire_Bi214_tree"    ) ; factory->AddBackgroundTree( SWire_Bi214_P1_tree    , SWire_Bi214_P1_weight    );
-   //Double_t SWire_Bi214_P2_weight    = 1. /*17.9663   */ ; TTree *  SWire_Bi214_P2_tree    = (TTree*) input->Get("SWire_Bi214_tree"    ) ; factory->AddBackgroundTree( SWire_Bi214_P2_tree    , SWire_Bi214_P2_weight    );
-   Double_t SFoil_Bi214_weight        = 1. /*5.7695    */ ; TTree *  SFoil_Bi214_tree      = (TTree*) input->Get("SFoil_Bi214_tree"    ) ; factory->AddBackgroundTree( SFoil_Bi214_tree      , SFoil_Bi214_weight       );   
-   //Double_t SFoil_Bi214_P1_weight    = 1. /*5.7695    */ ; TTree *  SFoil_Bi214_P1_tree    = (TTree*) input->Get("SFoil_Bi214_tree"    ) ; factory->AddBackgroundTree( SFoil_Bi214_P1_tree    , SFoil_Bi214_P1_weight    );
-   //Double_t SFoil_Bi214_P2_weight    = 1. /*2.73967   */ ; TTree *  SFoil_Bi214_P2_tree    = (TTree*) input->Get("SFoil_Bi214_tree"    ) ; factory->AddBackgroundTree( SFoil_Bi214_P2_tree    , SFoil_Bi214_P2_weight    );
-   Double_t SWire_Pb214_weight       = 1. /*0.457038  */ ; TTree *  SWire_Pb214_tree        = (TTree*) input->Get("SWire_Pb214_tree"    ) ; factory->AddBackgroundTree( SWire_Pb214_tree      , SWire_Pb214_weight       );   
-   //Double_t SWire_Pb214_P1_weight    = 1. /*0.457038  */ ; TTree *  SWire_Pb214_P1_tree    = (TTree*) input->Get("SWire_Pb214_tree"    ) ; factory->AddBackgroundTree( SWire_Pb214_P1_tree    , SWire_Pb214_P1_weight    );
-   //Double_t SWire_Pb214_P2_weight    = 1. /*0.648715  */ ; TTree *  SWire_Pb214_P2_tree    = (TTree*) input->Get("SWire_Pb214_tree"    ) ; factory->AddBackgroundTree( SWire_Pb214_P2_tree    , SWire_Pb214_P2_weight    );
-   Double_t SFoil_Pb214_weight       = 1. /*0.215401  */ ; TTree *  SFoil_Pb214_tree        = (TTree*) input->Get("SFoil_Pb214_tree"    ) ; factory->AddBackgroundTree( SFoil_Pb214_tree      , SFoil_Pb214_weight       );   
-   //Double_t SFoil_Pb214_P1_weight    = 1. /*0.215401  */ ; TTree *  SFoil_Pb214_P1_tree    = (TTree*) input->Get("SFoil_Pb214_tree"    ) ; factory->AddBackgroundTree( SFoil_Pb214_P1_tree    , SFoil_Pb214_P1_weight    );
-   //Double_t SFoil_Pb214_P2_weight    = 1. /*0.189179  */ ; TTree *  SFoil_Pb214_P2_tree    = (TTree*) input->Get("SFoil_Pb214_tree"    ) ; factory->AddBackgroundTree( SFoil_Pb214_P2_tree    , SFoil_Pb214_P2_weight    ); 
-   Double_t FeShield_Bi214_weight    = 1. /*50.1037   */ ; TTree *  FeShield_Bi214_tree    = (TTree*) input->Get("FeShield_Bi214_tree" ) ; factory->AddBackgroundTree( FeShield_Bi214_tree    , FeShield_Bi214_weight    );
-   Double_t FeShield_Tl208_weight    = 1. /*1.1935    */ ; TTree *  FeShield_Tl208_tree    = (TTree*) input->Get("FeShield_Tl208_tree" ) ; factory->AddBackgroundTree( FeShield_Tl208_tree    , FeShield_Tl208_weight    );
-   Double_t FeShield_Ac228_weight    = 1. /*0.176176  */ ; TTree *  FeShield_Ac228_tree    = (TTree*) input->Get("FeShield_Ac228_tree" ) ; factory->AddBackgroundTree( FeShield_Ac228_tree    , FeShield_Ac228_weight    );
-   Double_t CuTower_Co60_weight      = 1. /*3.79642   */ ; TTree *  CuTower_Co60_tree      = (TTree*) input->Get("CuTower_Co60_tree"   ) ; factory->AddBackgroundTree( CuTower_Co60_tree      , CuTower_Co60_weight      );
-   Double_t Air_Bi214_P1_weight      = 1. /*4.19156   */ ; TTree *  Air_Bi214_P1_tree      = (TTree*) input->Get("Air_Bi214_tree"      ) ; factory->AddBackgroundTree( Air_Bi214_P1_tree      , Air_Bi214_P1_weight      );
-   Double_t PMT_Bi214_weight         = 1. /*30.6795   */ ; TTree *  PMT_Bi214_tree         = (TTree*) input->Get("PMT_Bi214_tree"      ) ; factory->AddBackgroundTree( PMT_Bi214_tree         , PMT_Bi214_weight         );
-   Double_t PMT_Tl208_weight         = 1. /*23.2697   */ ; TTree *  PMT_Tl208_tree         = (TTree*) input->Get("PMT_Tl208_tree"      ) ; factory->AddBackgroundTree( PMT_Tl208_tree         , PMT_Tl208_weight         );
-   Double_t PMT_Ac228_weight         = 1. /*3.60937   */ ; TTree *  PMT_Ac228_tree         = (TTree*) input->Get("PMT_Ac228_tree"      ) ; factory->AddBackgroundTree( PMT_Ac228_tree         , PMT_Ac228_weight         );
-   Double_t PMT_K40_weight           = 1. /*16.792    */ ; TTree *  PMT_K40_tree           = (TTree*) input->Get("PMT_K40_tree"        ) ; factory->AddBackgroundTree( PMT_K40_tree           , PMT_K40_weight           );
-   Double_t ScintInn_K40_weight      = 1. /*0.33559   */ ; TTree *  ScintInn_K40_tree      = (TTree*) input->Get("ScintInn_K40_tree"   ) ; factory->AddBackgroundTree( ScintInn_K40_tree      , ScintInn_K40_weight      );
-   Double_t ScintOut_K40_weight      = 1. /*0.604063  */ ; TTree *  ScintOut_K40_tree      = (TTree*) input->Get("ScintOut_K40_tree"   ) ; factory->AddBackgroundTree( ScintOut_K40_tree      , ScintOut_K40_weight      );
-   Double_t ScintPet_K40_weight      = 1. /*1.00676   */ ; TTree *  ScintPet_K40_tree      = (TTree*) input->Get("ScintPet_K40_tree"   ) ; factory->AddBackgroundTree( ScintPet_K40_tree      , ScintPet_K40_weight      );
-   Double_t MuMetal_Pa234m_weight    = 1. /*0.664017  */ ; TTree *  MuMetal_Pa234m_tree    = (TTree*) input->Get("MuMetal_Pa234m_tree" ) ; factory->AddBackgroundTree( MuMetal_Pa234m_tree    , MuMetal_Pa234m_weight    );
-   Double_t Cd116_2b2n_m14_weight    = 1. /*4913.49   */ ; TTree *  Cd116_2b2n_m14_tree    = (TTree*) input->Get("Cd116_2b2n_m14_tree" ) ; factory->AddBackgroundTree( Cd116_2b2n_m14_tree    , Cd116_2b2n_m14_weight    );
+   Double_t Cd116_Tl208_weight       = 1. ; TTree *  Cd116_Tl208_tree       = (TTree*) input->Get("Cd116_Tl208_tree"    ) ; factory->AddBackgroundTree( Cd116_Tl208_tree       , Cd116_Tl208_weight       );
+   Double_t Cd116_Ac228_weight       = 1. ; TTree *  Cd116_Ac228_tree       = (TTree*) input->Get("Cd116_Ac228_tree"    ) ; factory->AddBackgroundTree( Cd116_Ac228_tree       , Cd116_Ac228_weight       );
+   Double_t Cd116_Bi212_weight       = 1. ; TTree *  Cd116_Bi212_tree       = (TTree*) input->Get("Cd116_Bi212_tree"    ) ; factory->AddBackgroundTree( Cd116_Bi212_tree       , Cd116_Bi212_weight       );
+   Double_t Cd116_Bi214_weight       = 1. ; TTree *  Cd116_Bi214_tree       = (TTree*) input->Get("Cd116_Bi214_tree"    ) ; factory->AddBackgroundTree( Cd116_Bi214_tree       , Cd116_Bi214_weight       );
+   Double_t Cd116_Pb214_weight       = 1. ; TTree *  Cd116_Pb214_tree       = (TTree*) input->Get("Cd116_Pb214_VT_tree" ) ; factory->AddBackgroundTree( Cd116_Pb214_tree       , Cd116_Pb214_weight       );
+   Double_t Mylar_Bi214_weight       = 1. ; TTree *  Mylar_Bi214_tree       = (TTree*) input->Get("Mylar_Bi214_tree"    ) ; factory->AddBackgroundTree( Mylar_Bi214_tree       , Mylar_Bi214_weight       );
+   Double_t Mylar_Pb214_weight       = 1. ; TTree *  Mylar_Pb214_tree       = (TTree*) input->Get("Mylar_Pb214_tree"    ) ; factory->AddBackgroundTree( Mylar_Pb214_tree       , Mylar_Pb214_weight       );
+   Double_t Cd116_K40_weight         = 1. ; TTree *  Cd116_K40_tree         = (TTree*) input->Get("Cd116_K40_tree"      ) ; factory->AddBackgroundTree( Cd116_K40_tree         , Cd116_K40_weight         );
+   Double_t Cd116_Pa234m_weight      = 1. ; TTree *  Cd116_Pa234m_tree      = (TTree*) input->Get("Cd116_Pa234m_tree"   ) ; factory->AddBackgroundTree( Cd116_Pa234m_tree      , Cd116_Pa234m_weight      );
+   Double_t SFoil_Bi210_weight       = 1. ; TTree *  SFoil_Bi210_tree       = (TTree*) input->Get("SFoil_Bi210_tree"    ) ; factory->AddBackgroundTree( SFoil_Bi210_tree       , SFoil_Bi210_weight       );
+   Double_t SWire_Bi210_weight       = 1. ; TTree *  SWire_Bi210_tree       = (TTree*) input->Get("SWire_Bi210_tree"    ) ; factory->AddBackgroundTree( SWire_Bi210_tree       , SWire_Bi210_weight       );
+   Double_t SScin_Bi210_weight       = 1. ; TTree *  SScin_Bi210_tree       = (TTree*) input->Get("SScin_Bi210_tree"    ) ; factory->AddBackgroundTree( SScin_Bi210_tree       , SScin_Bi210_weight       );
+   Double_t SScin_Bi214_weight       = 1. ; TTree *  SScin_Bi214_tree       = (TTree*) input->Get("SScin_Bi214_tree"    ) ; factory->AddBackgroundTree( SScin_Bi214_tree       , SScin_Bi214_weight       );
+   Double_t SWire_Tl208_weight       = 1. ; TTree *  SWire_Tl208_tree       = (TTree*) input->Get("SWire_Tl208_tree"    ) ; factory->AddBackgroundTree( SWire_Tl208_tree       , SWire_Tl208_weight       );
+   Double_t SWire_Bi214_weight       = 1. ; TTree *  SWire_Bi214_P1_tree    = (TTree*) input->Get("SWire_Bi214_tree"    ) ; factory->AddBackgroundTree( SWire_Bi214_tree       , SWire_Bi214_weight       );
+   Double_t SFoil_Bi214_weight       = 1. ; TTree *  SFoil_Bi214_tree       = (TTree*) input->Get("SFoil_Bi214_tree"    ) ; factory->AddBackgroundTree( SFoil_Bi214_tree       , SFoil_Bi214_weight       );   
+   Double_t SWire_Pb214_weight       = 1. ; TTree *  SWire_Pb214_tree       = (TTree*) input->Get("SWire_Pb214_tree"    ) ; factory->AddBackgroundTree( SWire_Pb214_tree       , SWire_Pb214_weight       );   
+   Double_t SFoil_Pb214_weight       = 1. ; TTree *  SFoil_Pb214_tree       = (TTree*) input->Get("SFoil_Pb214_tree"    ) ; factory->AddBackgroundTree( SFoil_Pb214_tree       , SFoil_Pb214_weight       );   
+   Double_t FeShield_Bi214_weight    = 1. ; TTree *  FeShield_Bi214_tree    = (TTree*) input->Get("FeShield_Bi214_tree" ) ; factory->AddBackgroundTree( FeShield_Bi214_tree    , FeShield_Bi214_weight    );
+   Double_t FeShield_Tl208_weight    = 1. ; TTree *  FeShield_Tl208_tree    = (TTree*) input->Get("FeShield_Tl208_tree" ) ; factory->AddBackgroundTree( FeShield_Tl208_tree    , FeShield_Tl208_weight    );
+   Double_t FeShield_Ac228_weight    = 1. ; TTree *  FeShield_Ac228_tree    = (TTree*) input->Get("FeShield_Ac228_tree" ) ; factory->AddBackgroundTree( FeShield_Ac228_tree    , FeShield_Ac228_weight    );
+   Double_t CuTower_Co60_weight      = 1. ; TTree *  CuTower_Co60_tree      = (TTree*) input->Get("CuTower_Co60_tree"   ) ; factory->AddBackgroundTree( CuTower_Co60_tree      , CuTower_Co60_weight      );
+   Double_t Air_Bi214_P1_weight      = 1. ; TTree *  Air_Bi214_P1_tree      = (TTree*) input->Get("Air_Bi214_tree"      ) ; factory->AddBackgroundTree( Air_Bi214_P1_tree      , Air_Bi214_P1_weight      );
+   Double_t PMT_Bi214_weight         = 1. ; TTree *  PMT_Bi214_tree         = (TTree*) input->Get("PMT_Bi214_tree"      ) ; factory->AddBackgroundTree( PMT_Bi214_tree         , PMT_Bi214_weight         );
+   Double_t PMT_Tl208_weight         = 1. ; TTree *  PMT_Tl208_tree         = (TTree*) input->Get("PMT_Tl208_tree"      ) ; factory->AddBackgroundTree( PMT_Tl208_tree         , PMT_Tl208_weight         );
+   Double_t PMT_Ac228_weight         = 1. ; TTree *  PMT_Ac228_tree         = (TTree*) input->Get("PMT_Ac228_tree"      ) ; factory->AddBackgroundTree( PMT_Ac228_tree         , PMT_Ac228_weight         );
+   Double_t PMT_K40_weight           = 1. ; TTree *  PMT_K40_tree           = (TTree*) input->Get("PMT_K40_tree"        ) ; factory->AddBackgroundTree( PMT_K40_tree           , PMT_K40_weight           );
+   Double_t ScintInn_K40_weight      = 1. ; TTree *  ScintInn_K40_tree      = (TTree*) input->Get("ScintInn_K40_tree"   ) ; factory->AddBackgroundTree( ScintInn_K40_tree      , ScintInn_K40_weight      );
+   Double_t ScintOut_K40_weight      = 1. ; TTree *  ScintOut_K40_tree      = (TTree*) input->Get("ScintOut_K40_tree"   ) ; factory->AddBackgroundTree( ScintOut_K40_tree      , ScintOut_K40_weight      );
+   Double_t ScintPet_K40_weight      = 1. ; TTree *  ScintPet_K40_tree      = (TTree*) input->Get("ScintPet_K40_tree"   ) ; factory->AddBackgroundTree( ScintPet_K40_tree      , ScintPet_K40_weight      );
+   Double_t MuMetal_Pa234m_weight    = 1. ; TTree *  MuMetal_Pa234m_tree    = (TTree*) input->Get("MuMetal_Pa234m_tree" ) ; factory->AddBackgroundTree( MuMetal_Pa234m_tree    , MuMetal_Pa234m_weight    );
+   Double_t Cd116_2b2n_m14_weight    = 1. ; TTree *  Cd116_2b2n_m14_tree    = (TTree*) input->Get("Cd116_2b2n_m14_tree" ) ; factory->AddBackgroundTree( Cd116_2b2n_m14_tree    , Cd116_2b2n_m14_weight    );
    
    
    // global event weights per tree (see below for setting event-wise weights)
@@ -554,5 +582,5 @@ void TMVAClassification( TString myMethodList = "" )
    delete factory;
 
    // Launch the GUI for the root macros
-   if (!gROOT->IsBatch()) TMVAGui( outfileName );
+   if (!gROOT->IsBatch()) TMVAGui( outfileDir + outfileName );
 }

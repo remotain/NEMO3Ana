@@ -28,19 +28,19 @@
 
 using namespace TMVA;
 
-void TMVAClassificationApplication( TString myMethodList = "", Int_t idx = -1 ) 
+void TMVAClassificationApplication( TString myMethodList = "", TString myModel = "") 
 {   
 #ifdef __CINT__
    gROOT->ProcessLine( ".O0" ); // turn off optimization in CINT
 #endif
    
 	// Input/Output file path
-	//TString fdir = "/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
-	TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
+   //TString fdir = "/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
+   TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
 
 	// Weights file path
-	//TString wdir    = "/Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/weights/";	
-	TString wdir    = "/afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/weights/";	
+   //TString wdir    = "/Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/weights/";	
+   TString wdir    = "/afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/weights/";	
 
    //---------------------------------------------------------------
 
@@ -112,6 +112,18 @@ void TMVAClassificationApplication( TString myMethodList = "", Int_t idx = -1 )
    Use["SVM_Poly"]        = 0;
    Use["SVM_Lin"]         = 0;
 
+   // Default model
+   std::map<std::string,int> Model;
+
+   // --- Cut optimisation
+   Model[ "MM"  ]  = 0; // Mass mechanism
+   Model[ "RHC" ]  = 0; // Right Handed Current
+   Model[ "M1"  ]  = 0; // Majoron
+   Model[ "M2"  ]  = 0; // Majoron
+   Model[ "M3"  ]  = 0; // Majoron
+   Model[ "M7"  ]  = 0; // Majoron
+
+
    std::cout << std::endl;
    std::cout << "==> Start TMVAClassificationApplication" << std::endl;
 
@@ -135,6 +147,28 @@ void TMVAClassificationApplication( TString myMethodList = "", Int_t idx = -1 )
          Use[regMethod] = 1;
       }
    }
+
+   if(myModel != "") {
+  	
+		std::string regModel(myModel);
+		
+		if( Model.find(regModel) == Model.end() ){
+			std::cout << "Model \"" << myModel << "\" not known in under this name. Choose among the following:" << std::endl;
+			for (std::map<std::string,int>::iterator it = Model.begin(); it != Model.end(); it++) std::cout << it->first << " ";
+			std::cout << std::endl;
+			return;
+		}
+	   
+		Model[regModel] = 1;
+	
+   } else {
+   	
+	   std::cout << "No signal model as been specified. You must choose one among the following:" << std::endl;
+       for (std::map<std::string,int>::iterator it = Model.begin(); it != Model.end(); it++) std::cout << it->first << " ";
+       std::cout << std::endl;
+       return;
+   }
+
 
    // --------------------------------------------------------------------------------------------------
 
@@ -184,8 +218,7 @@ void TMVAClassificationApplication( TString myMethodList = "", Int_t idx = -1 )
 
    // List of three to consider
    std::vector<std::string> samples;
-   samples.push_back("Data");
-   samples.push_back("Cd116_2b0n_m1");
+   samples.push_back("Data");                   // 1
    samples.push_back("Cd116_Tl208");
    samples.push_back("Cd116_Ac228");
    samples.push_back("Cd116_Bi212");
@@ -219,10 +252,18 @@ void TMVAClassificationApplication( TString myMethodList = "", Int_t idx = -1 )
    samples.push_back("MuMetal_Pa234m");
    samples.push_back("Cd116_2b2n_m14");
    
+   
+   if ( Model[ "MM"  ] ) samples.push_back( "Cd116_2b0n_m1"  ) ; // 34
+   if ( Model[ "RHC" ] ) samples.push_back( "Cd116_2b0n_m2"  ) ; // 34
+   if ( Model[ "M1"  ] ) samples.push_back( "Cd116_2b0n_m5"  ) ; // 34
+   if ( Model[ "M2"  ] ) samples.push_back( "Cd116_2b0n_m15" ) ; // 34
+   if ( Model[ "M3"  ] ) samples.push_back( "Cd116_2b0n_m6"  ) ; // 34
+   if ( Model[ "M7"  ] ) samples.push_back( "Cd116_2b0n_m7"  ) ; // 34
+
 
    // --- Book the MVA methods
-
-   TString prefix = "TMVAClassification";
+	TString prefix;
+	prefix.Form("TMVAClassification_%s", myModel.Data());
 
    // Book method(s)
    for (std::map<std::string,int>::iterator it = Use.begin(); it != Use.end(); it++) {
@@ -235,8 +276,6 @@ void TMVAClassificationApplication( TString myMethodList = "", Int_t idx = -1 )
    
    for(std::vector<std::string>::iterator spit = samples.begin(); spit !=samples.end(); spit++) { 
 
-   	   if( idx != -1 && *spit != samples[idx-1] ) continue;
-		   
    	   // Book output histograms
 	   UInt_t nbin = 100;
 	   TH1F   *histLk(0), *histLkD(0), *histLkPCA(0), *histLkKDE(0), *histLkMIX(0), *histPD(0), *histPDD(0);
@@ -428,7 +467,8 @@ void TMVAClassificationApplication( TString myMethodList = "", Int_t idx = -1 )
 
        // --- Write histograms
        
-       TFile *target  = new TFile( fdir + "TMVApp_" + TString(*spit) + ".root","UPDATE" );
+       TFile *target  = new TFile( fdir + "TMVApp/" + "TMVApp_" + myModel + ".root","UPDATE" );
+	   
        if (Use["Likelihood"   ])   histLk     ->Write( TString(*spit) + "_" + "MVA_Likelihood"    );
        if (Use["LikelihoodD"  ])   histLkD    ->Write( TString(*spit) + "_" + "MVA_LikelihoodD"   );
        if (Use["LikelihoodPCA"])   histLkPCA  ->Write( TString(*spit) + "_" + "MVA_LikelihoodPCA" );
@@ -467,7 +507,7 @@ void TMVAClassificationApplication( TString myMethodList = "", Int_t idx = -1 )
        if (Use["Fisher"]) { if (probHistFi != 0) probHistFi->Write(); if (rarityHistFi != 0) rarityHistFi->Write(); }
        target->Close();
        
-       std::cout << "--- Created root file: \"TMVApp_"<< *spit << ".root\" containing the MVA output histograms" << std::endl;
+       std::cout << "--- Created root file: \"TMVApp_"<< myModel << ".root\" containing the MVA output histograms" << std::endl;
        
        if (Use["Likelihood"])    delete histLk     ;
        if (Use["LikelihoodD"])   delete histLkD    ;
