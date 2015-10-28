@@ -173,6 +173,9 @@ int main(int argc, char* argv[]) {
 	cfile->createFlatBkgdSystematic( 36 , "Externals"  , 0.0061 , 0.0129 ,100);	
 	cfile->createFlatBkgdSystematic( 37 , "Externals"  , 0.0061 , 0.0129 ,100);	
 	cfile->createFlatBkgdSystematic( 38 , "Externals"  , 0.0061 , 0.0129 ,100);	
+
+	// bb2nu
+	cfile->createFlatBkgdSystematic( 39 , "bb2nu"      , 0.0220 , 0.0220 ,100);	
 	
 	///store and output channel information
 	cfile->storeFile();
