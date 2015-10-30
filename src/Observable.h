@@ -46,6 +46,7 @@ public:
 			_MarkerSize  = 0.5;
 			_DrawGroup   = kFALSE;
 			_LogScale    = kFALSE;
+			_ForceNorm   = kFALSE;
 
 			_chi2  =  0.0 ;
 			_ndf   = -1   ;
@@ -111,6 +112,9 @@ public:
 	double GetKS     () { return _ks;   };
 	double GetNDF    () { return _ndf;  };
 	
+	void ForceNorm( bool is ){ _ForceNorm = is; };
+	bool IsForceNorm(){ return _ForceNorm; };
+	
 private:
 
 	TH1 * _Data;
@@ -127,7 +131,8 @@ private:
 	Size_t  _MarkerSize;
 	Bool_t  _LogScale;
 	Bool_t  _DrawGroup;
-		
+	Bool_t _ForceNorm;
+			
 	// for chi2
 	Double_t _chi2;
 	Double_t _pval; // chi2 pvalue
