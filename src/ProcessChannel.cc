@@ -741,9 +741,14 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy_P2_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz_P2_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr_P2_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300,   0, 60                                ) );
-
-
-
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//
+		// MINIMAL/MAXIMAL TRACK LENGTH
+		//
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength"      , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200       ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength"      , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200        ) );
+		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//
 		// MINIMAL ELECTRON ENERGY
@@ -1139,16 +1144,18 @@ namespace ProcessChannel {
 			histo_collection->Find( TString::Format("%s_h_vtx_z_vs_sect"    , d->GetName()) ) -> Fill(vertexSector, eVertex->z()); 
 			 
 		    double tot_e = el_energy_[0] + el_energy_[1];
+
+			histo_collection->Find(TString::Format("%s_h_min_e_trackLength" , d->GetName()) ) -> Fill(el_track_len_min , weight);
+			histo_collection->Find(TString::Format("%s_h_max_e_trackLength" , d->GetName()) ) -> Fill(el_track_len_max , weight);			
+			histo_collection->Find(TString::Format("%s_h_min_e_energy"      , d->GetName()) ) -> Fill(el_energy_min , weight);
+			histo_collection->Find(TString::Format("%s_h_max_e_energy"      , d->GetName()) ) -> Fill(el_energy_max , weight);
+			histo_collection->Find(TString::Format("%s_h_cosTheta"          , d->GetName()) ) -> Fill(cosTheta      , weight);
+	        histo_collection->Find(TString::Format("%s_h_tot_e_energy"      , d->GetName()) ) -> Fill(tot_e         , weight);
 			
-			histo_collection->Find(TString::Format("%s_h_min_e_energy" , d->GetName()) ) -> Fill(el_energy_min , weight);
-			histo_collection->Find(TString::Format("%s_h_max_e_energy" , d->GetName()) ) -> Fill(el_energy_max , weight);
-			histo_collection->Find(TString::Format("%s_h_cosTheta"     , d->GetName()) ) -> Fill(cosTheta      , weight);
-	        histo_collection->Find(TString::Format("%s_h_tot_e_energy" , d->GetName()) ) -> Fill(tot_e         , weight);
-			
-		    histo_collection->Find(TString::Format("%s_h_vtx_dx"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
-		    histo_collection->Find(TString::Format("%s_h_vtx_dy"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
-		    histo_collection->Find(TString::Format("%s_h_vtx_dz"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
-		    histo_collection->Find(TString::Format("%s_h_vtx_dr"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
+		    histo_collection->Find(TString::Format("%s_h_vtx_dx"            , d->GetName()) ) -> Fill(delta_v.x()    , weight);
+		    histo_collection->Find(TString::Format("%s_h_vtx_dy"            , d->GetName()) ) -> Fill(delta_v.y()    , weight);
+		    histo_collection->Find(TString::Format("%s_h_vtx_dz"            , d->GetName()) ) -> Fill(delta_v.z()    , weight);
+		    histo_collection->Find(TString::Format("%s_h_vtx_dr"            , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 			
 			
 			// Start P1
