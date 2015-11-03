@@ -671,7 +671,6 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vertexSector"           , d->GetName()) , "; Sector Number; No.Events", 100, 18, 19                           ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_trueVertexZ"            , d->GetName()) , "; True - Z_{vertex} / cm ; No.Events / cm", 260, -130, 130          ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_trueVertexSector"       , d->GetName()) , "; True - Sector Number; No.Events", 200, 0, 20                      ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt"                , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1                           ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_probExt_1_to_0"         , d->GetName()) , "; Last to First - External Prob.; No.Events", 100, 0, 0.1           ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_probExt_0_to_1"         , d->GetName()) , "; First to Last - External Prob.; No.Events", 100, 0, 1.1           ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_chisqInt"               , d->GetName()) , "; Internal #Chi^{2}; No.Events", 100, 0, 8000                       ) );
@@ -741,13 +740,47 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dy_P2_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz_P2_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300, -30, 30                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr_P2_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 300,   0, 60                                ) );
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//
+		// INTERNAL PROBABILITY
+		//
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt"         , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P1"      , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P1_cold" , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P1_warm" , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P1_hot"  , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P2"      , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P2_cold" , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P2_warm" , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P2_hot"  , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
+
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//
 		// MINIMAL/MAXIMAL TRACK LENGTH
 		//
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength"      , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200       ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength"      , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200        ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength"         , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P1"      , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P1_cold" , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P1_warm" , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P1_hot"  , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P2"      , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P2_cold" , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P2_warm" , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P2_hot"  , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength"         , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P1"      , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P1_cold" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P1_warm" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P1_hot"  , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2"      , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2_cold" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2_warm" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2_hot"  , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//
@@ -1115,7 +1148,6 @@ namespace ProcessChannel {
 		    histo_collection->Find(TString::Format("%s_h_vertexZ"                , d->GetName()) ) -> Fill(eVertex->z()           , weight);
 		    histo_collection->Find(TString::Format("%s_h_vertexSector"           , d->GetName()) ) -> Fill(vertexSector           , weight);
 		    histo_collection->Find(TString::Format("%s_h_trueVertexZ"            , d->GetName()) ) -> Fill(trueVertex->z()        , weight);
-		    histo_collection->Find(TString::Format("%s_h_probInt"                , d->GetName()) ) -> Fill(probInt                , weight);
 		    histo_collection->Find(TString::Format("%s_h_probExt_1_to_0"         , d->GetName()) ) -> Fill(probExt_1_to_0         , weight);
 		    histo_collection->Find(TString::Format("%s_h_probExt_0_to_1"         , d->GetName()) ) -> Fill(probExt_0_to_1         , weight);
 		    histo_collection->Find(TString::Format("%s_h_chisqInt"               , d->GetName()) ) -> Fill(chisqInt               , weight);
@@ -1145,6 +1177,9 @@ namespace ProcessChannel {
 			 
 		    double tot_e = el_energy_[0] + el_energy_[1];
 
+		    histo_collection->Find(TString::Format("%s_h_probInt"           , d->GetName()) ) -> Fill(probInt          , weight);
+			histo_collection->Find(TString::Format("%s_h_min_e_trackLength" , d->GetName()) ) -> Fill(el_track_len_min , weight);
+			histo_collection->Find(TString::Format("%s_h_max_e_trackLength" , d->GetName()) ) -> Fill(el_track_len_max , weight);
 			histo_collection->Find(TString::Format("%s_h_min_e_trackLength" , d->GetName()) ) -> Fill(el_track_len_min , weight);
 			histo_collection->Find(TString::Format("%s_h_max_e_trackLength" , d->GetName()) ) -> Fill(el_track_len_max , weight);			
 			histo_collection->Find(TString::Format("%s_h_min_e_energy"      , d->GetName()) ) -> Fill(el_energy_min , weight);
@@ -1161,44 +1196,60 @@ namespace ProcessChannel {
 			// Start P1
 		    if (run < 3396) {
 
-		      	
-				histo_collection->Find(TString::Format("%s_h_min_e_energy_P1" , d->GetName()) ) -> Fill(el_energy_min , weight);
-				histo_collection->Find(TString::Format("%s_h_max_e_energy_P1" , d->GetName()) ) -> Fill(el_energy_max , weight);
-				histo_collection->Find(TString::Format("%s_h_cosTheta_P1"     , d->GetName()) ) -> Fill(cosTheta      , weight);
-		        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1" , d->GetName()) ) -> Fill(tot_e         , weight);
+   			    histo_collection->Find(TString::Format("%s_h_probInt_P1"           , d->GetName()) ) -> Fill(probInt          , weight);
+				histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P1" , d->GetName()) ) -> Fill(el_track_len_min , weight);
+				histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P1" , d->GetName()) ) -> Fill(el_track_len_max , weight);
+				histo_collection->Find(TString::Format("%s_h_min_e_energy_P1"      , d->GetName()) ) -> Fill(el_energy_min , weight);
+				histo_collection->Find(TString::Format("%s_h_max_e_energy_P1"      , d->GetName()) ) -> Fill(el_energy_max , weight);
+				histo_collection->Find(TString::Format("%s_h_cosTheta_P1"          , d->GetName()) ) -> Fill(cosTheta      , weight);
+		        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1"      , d->GetName()) ) -> Fill(tot_e         , weight);
 
-			    histo_collection->Find(TString::Format("%s_h_vtx_dx_P1"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
-			    histo_collection->Find(TString::Format("%s_h_vtx_dy_P1"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
-			    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
-			    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
+			    histo_collection->Find(TString::Format("%s_h_vtx_dx_P1"            , d->GetName()) ) -> Fill(delta_v.x()    , weight);
+			    histo_collection->Find(TString::Format("%s_h_vtx_dy_P1"            , d->GetName()) ) -> Fill(delta_v.y()    , weight);
+			    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1"            , d->GetName()) ) -> Fill(delta_v.z()    , weight);
+			    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1"            , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 
 
 				// P1 Hot/Cold/Warm
 				if( IsHotSpot(el_vtx_z_mean_, vertexSector) ) {
-					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_hot" , d->GetName()) ) -> Fill(el_energy_min , weight);
-					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_hot" , d->GetName()) ) -> Fill(el_energy_max , weight);
-					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_hot"     , d->GetName()) ) -> Fill(cosTheta      , weight);
-			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_hot" , d->GetName()) ) -> Fill(tot_e         , weight);
 					
-				    histo_collection->Find(TString::Format("%s_h_vtx_dx_P1_hot"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_vtx_dy_P1_hot"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1_hot"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1_hot"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);	
+				    histo_collection->Find(TString::Format("%s_h_probInt_P1_hot"           , d->GetName()) ) -> Fill(probInt       , weight);
+					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P1_hot" , d->GetName()) ) -> Fill(el_track_len_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P1_hot" , d->GetName()) ) -> Fill(el_track_len_max , weight);					
+					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_hot"      , d->GetName()) ) -> Fill(el_energy_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_hot"      , d->GetName()) ) -> Fill(el_energy_max , weight);
+					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_hot"          , d->GetName()) ) -> Fill(cosTheta      , weight);
+			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_hot"      , d->GetName()) ) -> Fill(tot_e         , weight);
+					
+				    histo_collection->Find(TString::Format("%s_h_vtx_dx_P1_hot"            , d->GetName()) ) -> Fill(delta_v.x()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dy_P1_hot"            , d->GetName()) ) -> Fill(delta_v.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1_hot"            , d->GetName()) ) -> Fill(delta_v.z()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1_hot"            , d->GetName()) ) -> Fill(delta_v.Perp() , weight);	
+
 				} else if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
-					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
-					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_warm" , d->GetName()) ) -> Fill(el_energy_max , weight);
-					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_warm"     , d->GetName()) ) -> Fill(cosTheta      , weight);
-			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_warm" , d->GetName()) ) -> Fill(tot_e         , weight);
 					
-				    histo_collection->Find(TString::Format("%s_h_vtx_dx_P1_warm"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_vtx_dy_P1_warm"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1_warm"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1_warm"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);	
+				    histo_collection->Find(TString::Format("%s_h_probInt_P1_warm"           , d->GetName()) ) -> Fill(probInt       , weight);
+					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P1_warm" , d->GetName()) ) -> Fill(el_track_len_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P1_warm" , d->GetName()) ) -> Fill(el_track_len_max , weight);					
+					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_warm"      , d->GetName()) ) -> Fill(el_energy_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_warm"      , d->GetName()) ) -> Fill(el_energy_max , weight);
+					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_warm"          , d->GetName()) ) -> Fill(cosTheta      , weight);
+			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_warm"      , d->GetName()) ) -> Fill(tot_e         , weight);
+					
+				    histo_collection->Find(TString::Format("%s_h_vtx_dx_P1_warm"            , d->GetName()) ) -> Fill(delta_v.x()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dy_P1_warm"            , d->GetName()) ) -> Fill(delta_v.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1_warm"            , d->GetName()) ) -> Fill(delta_v.z()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1_warm"            , d->GetName()) ) -> Fill(delta_v.Perp() , weight);	
+
 				} else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
-					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_cold" , d->GetName()) ) -> Fill(el_energy_min , weight);
-					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_cold" , d->GetName()) ) -> Fill(el_energy_max , weight);
-					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_cold"     , d->GetName()) ) -> Fill(cosTheta      , weight);
-			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_cold" , d->GetName()) ) -> Fill(tot_e         , weight);
+
+				    histo_collection->Find(TString::Format("%s_h_probInt_P1_cold"           , d->GetName()) ) -> Fill(probInt       , weight);
+					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P1_cold" , d->GetName()) ) -> Fill(el_track_len_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P1_cold" , d->GetName()) ) -> Fill(el_track_len_max , weight);					
+					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_cold"      , d->GetName()) ) -> Fill(el_energy_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_cold"      , d->GetName()) ) -> Fill(el_energy_max , weight);
+					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_cold"          , d->GetName()) ) -> Fill(cosTheta      , weight);
+			        histo_collection->Find(TString::Format("%s_h_tot_e_energy_P1_cold"      , d->GetName()) ) -> Fill(tot_e         , weight);
 					
 				    histo_collection->Find(TString::Format("%s_h_vtx_dx_P1_cold"       , d->GetName()) ) -> Fill(delta_v.x()    , weight);
 				    histo_collection->Find(TString::Format("%s_h_vtx_dy_P1_cold"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
@@ -1278,6 +1329,9 @@ namespace ProcessChannel {
 
 		    } else { 
 				
+   			    histo_collection->Find(TString::Format("%s_h_probInt_P2"           , d->GetName()) ) -> Fill(probInt          , weight);
+				histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P2" , d->GetName()) ) -> Fill(el_track_len_min , weight);
+				histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P2" , d->GetName()) ) -> Fill(el_track_len_max , weight);
 				histo_collection->Find(TString::Format("%s_h_min_e_energy_P2" , d->GetName()) ) -> Fill(el_energy_min , weight);
 				histo_collection->Find(TString::Format("%s_h_max_e_energy_P2" , d->GetName()) ) -> Fill(el_energy_max , weight);
 				histo_collection->Find(TString::Format("%s_h_cosTheta_P2"     , d->GetName()) ) -> Fill(cosTheta      , weight);
@@ -1291,6 +1345,11 @@ namespace ProcessChannel {
 
 				// P2 Hot/Cold/Warm
 				if( IsHotSpot(el_vtx_z_mean_, vertexSector) ) {
+					
+	   			    histo_collection->Find(TString::Format("%s_h_probInt_P2_hot"           , d->GetName()) ) -> Fill(probInt          , weight);
+					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P2_hot" , d->GetName()) ) -> Fill(el_track_len_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P2_hot" , d->GetName()) ) -> Fill(el_track_len_max , weight);
+					
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_hot" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_hot" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P2_hot"    , d->GetName()) ) -> Fill(cosTheta      , weight);
@@ -1301,6 +1360,11 @@ namespace ProcessChannel {
 					histo_collection->Find(TString::Format("%s_h_vtx_dz_P2_hot"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
 					histo_collection->Find(TString::Format("%s_h_vtx_dr_P2_hot"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 				} else if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
+					
+	   			    histo_collection->Find(TString::Format("%s_h_probInt_P2_warm"           , d->GetName()) ) -> Fill(probInt          , weight);
+					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P2_warm" , d->GetName()) ) -> Fill(el_track_len_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P2_warm" , d->GetName()) ) -> Fill(el_track_len_max , weight);
+					
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_warm" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P2_warm"     , d->GetName()) ) -> Fill(cosTheta      , weight);
@@ -1310,7 +1374,13 @@ namespace ProcessChannel {
 				    histo_collection->Find(TString::Format("%s_h_vtx_dy_P2_warm"       , d->GetName()) ) -> Fill(delta_v.y()    , weight);
 				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P2_warm"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
 				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P2_warm"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
+					
 				} else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
+					
+	   			    histo_collection->Find(TString::Format("%s_h_probInt_P2_cold"           , d->GetName()) ) -> Fill(probInt          , weight);
+					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P2_cold" , d->GetName()) ) -> Fill(el_track_len_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P2_cold" , d->GetName()) ) -> Fill(el_track_len_max , weight);
+					
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_cold" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_cold" , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P2_cold"     , d->GetName()) ) -> Fill(cosTheta      , weight);
