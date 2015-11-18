@@ -748,65 +748,65 @@ namespace ProcessChannel {
 		// INTERNAL PROBABILITY
 		//
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt"         , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P1"      , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P1_cold" , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P1_warm" , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P1_hot"  , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P2"      , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P2_cold" , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P2_warm" , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P2_hot"  , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1.1 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt"         , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1. ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P1"      , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1. ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P1_cold" , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1. ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P1_warm" , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1. ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P1_hot"  , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1. ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P2"      , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1. ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P2_cold" , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1. ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P2_warm" , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1. ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_probInt_P2_hot"  , d->GetName()) , "; Internal Prob.; No.Events", 100, 0, 1. ) );
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//
 		// MINIMAL/MAXIMAL TRACK LENGTH
 		//
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength"         , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P1"      , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P1_cold" , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P1_warm" , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P1_hot"  , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P2"      , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P2_cold" , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P2_warm" , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P2_hot"  , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength"         , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P1"      , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P1_cold" , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P1_warm" , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P1_hot"  , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P2"      , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P2_cold" , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P2_warm" , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackLength_P2_hot"  , d->GetName()) , "; Min el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
 
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength"         , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P1"      , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P1_cold" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P1_warm" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P1_hot"  , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2"      , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2_cold" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2_warm" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2_hot"  , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength"         , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P1"      , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P1_cold" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P1_warm" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P1_hot"  , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2"      , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2_cold" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2_warm" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2_hot"  , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 250, 0, 500 ) );
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		//
 		// MINIMAL/MAXIMAL TRACK CURVATURE
 		//
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature"         , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P1"      , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P1_cold" , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P1_warm" , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P1_hot"  , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P2"      , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P2_cold" , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P2_warm" , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P2_hot"  , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature"         , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P1"      , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P1_cold" , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P1_warm" , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P1_hot"  , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P2"      , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P2_cold" , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P2_warm" , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P2_hot"  , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
 
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature"         , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P1"      , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P1_cold" , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P1_warm" , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P1_hot"  , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P2"      , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P2_cold" , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P2_warm" , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P2_hot"  , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature"         , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P1"      , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P1_cold" , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P1_warm" , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P1_hot"  , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P2"      , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P2_cold" , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P2_warm" , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P2_hot"  , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 200, -2000, 2000 ) );
 		
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
