@@ -1238,8 +1238,8 @@ namespace ProcessChannel {
    			    histo_collection->Find(TString::Format("%s_h_probInt_P1"           , d->GetName()) ) -> Fill(probInt          , weight);
 				histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P1" , d->GetName()) ) -> Fill(el_track_len_min , weight);
 				histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P1" , d->GetName()) ) -> Fill(el_track_len_max , weight);
-				histo_collection->Find(TString::Format("%s_h_min_e_trackCurvatureP1" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
-				histo_collection->Find(TString::Format("%s_h_max_e_trackCurvatureP1" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
+				histo_collection->Find(TString::Format("%s_h_min_e_trackCurvature_P1" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
+				histo_collection->Find(TString::Format("%s_h_max_e_trackCurvature_P1" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
 				histo_collection->Find(TString::Format("%s_h_min_e_energy_P1"      , d->GetName()) ) -> Fill(el_energy_min , weight);
 				histo_collection->Find(TString::Format("%s_h_max_e_energy_P1"      , d->GetName()) ) -> Fill(el_energy_max , weight);
 				histo_collection->Find(TString::Format("%s_h_cosTheta_P1"          , d->GetName()) ) -> Fill(cosTheta      , weight);
@@ -1257,8 +1257,8 @@ namespace ProcessChannel {
 				    histo_collection->Find(TString::Format("%s_h_probInt_P1_hot"           , d->GetName()) ) -> Fill(probInt       , weight);
 					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P1_hot" , d->GetName()) ) -> Fill(el_track_len_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P1_hot" , d->GetName()) ) -> Fill(el_track_len_max , weight);					
-					histo_collection->Find(TString::Format("%s_h_min_e_trackCurvatureP1_hot" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
-					histo_collection->Find(TString::Format("%s_h_max_e_trackCurvatureP1_hot" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
+					histo_collection->Find(TString::Format("%s_h_min_e_trackCurvature_P1_hot" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackCurvature_P1_hot" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_hot"      , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_hot"      , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_hot"          , d->GetName()) ) -> Fill(cosTheta      , weight);
@@ -1274,8 +1274,8 @@ namespace ProcessChannel {
 				    histo_collection->Find(TString::Format("%s_h_probInt_P1_warm"           , d->GetName()) ) -> Fill(probInt       , weight);
 					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P1_warm" , d->GetName()) ) -> Fill(el_track_len_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P1_warm" , d->GetName()) ) -> Fill(el_track_len_max , weight);					
-					histo_collection->Find(TString::Format("%s_h_min_e_trackCurvatureP1_warm" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
-					histo_collection->Find(TString::Format("%s_h_max_e_trackCurvatureP1_warm" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
+					histo_collection->Find(TString::Format("%s_h_min_e_trackCurvature_P1_warm" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackCurvature_P1_warm" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
 
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_warm"      , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_warm"      , d->GetName()) ) -> Fill(el_energy_max , weight);
@@ -1292,8 +1292,8 @@ namespace ProcessChannel {
 				    histo_collection->Find(TString::Format("%s_h_probInt_P1_cold"           , d->GetName()) ) -> Fill(probInt       , weight);
 					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P1_cold" , d->GetName()) ) -> Fill(el_track_len_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P1_cold" , d->GetName()) ) -> Fill(el_track_len_max , weight);					
-					histo_collection->Find(TString::Format("%s_h_min_e_trackCurvatureP1_cold" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
-					histo_collection->Find(TString::Format("%s_h_max_e_trackCurvatureP1_cold" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
+					histo_collection->Find(TString::Format("%s_h_min_e_trackCurvature_P1_cold" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackCurvature_P1_cold" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
 
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_cold"      , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_cold"      , d->GetName()) ) -> Fill(el_energy_max , weight);
