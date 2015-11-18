@@ -584,6 +584,8 @@ namespace ProcessChannel {
 	    Double_t output_max_el_en        ; output_tree->Branch("max_el_en"        , &output_max_el_en        );
 	    Double_t output_min_el_track_len ; output_tree->Branch("min_el_track_len" , &output_min_el_track_len );
 	    Double_t output_max_el_track_len ; output_tree->Branch("max_el_track_len" , &output_max_el_track_len );
+	    Double_t output_min_el_track_r   ; output_tree->Branch("min_el_track_r"   , &output_min_el_track_r   );
+	    Double_t output_max_el_track_r   ; output_tree->Branch("max_el_track_r"   , &output_max_el_track_r   );
 	    Double_t output_min_el_sign      ; output_tree->Branch("min_el_sign"      , &output_min_el_sign      );
 	    Double_t output_max_el_sign      ; output_tree->Branch("max_el_sign"      , &output_max_el_sign      );
 	    Double_t output_cos_theta        ; output_tree->Branch("cos_theta"        , &output_cos_theta        );
@@ -603,7 +605,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("All events ");
 		cutNames->push_back("Run status = 1 (GOOD RUN) ");
 		cutNames->push_back("Cd-116 sector (18) ");
-		cutNames->push_back("Negative track sign");
+		//cutNames->push_back("Negative track sign");
 	    cutNames->push_back("Energy of the electron > 300 keV ");
 		cutNames->push_back("Track lengths > 30 cm ");
 		cutNames->push_back("Track fires gg hit in first (0) layers of cells");
@@ -780,6 +782,31 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2_cold" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2_warm" , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackLength_P2_hot"  , d->GetName()) , "; Max el. - Track Length / cm; No.Events / cm", 200, 0, 200 ) );
+
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		//
+		// MINIMAL/MAXIMAL TRACK CURVATURE
+		//
+		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature"         , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P1"      , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P1_cold" , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P1_warm" , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P1_hot"  , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P2"      , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P2_cold" , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P2_warm" , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_trackCurvature_P2_hot"  , d->GetName()) , "; Min el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature"         , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P1"      , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P1_cold" , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P1_warm" , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P1_hot"  , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P2"      , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P2_cold" , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P2_warm" , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_trackCurvature_P2_hot"  , d->GetName()) , "; Max el. - Track Curvature / cm; No.Events / cm", 400, -2000, 2000 ) );
 		
 		
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -968,6 +995,7 @@ namespace ProcessChannel {
 	    Int_t     el_calofcll[2]              ; tree->SetBranchAddress("el_calofcll"                 , el_calofcll                  );
 	    Int_t     el_caloHsFlag[2]            ; tree->SetBranchAddress("el_caloHsFlag_"              , el_caloHsFlag                );
 	    Double_t  el_trkSign[2]               ; tree->SetBranchAddress("el_trkSign"                  , el_trkSign                   );
+	    Double_t  el_trkCurvature[2]          ; tree->SetBranchAddress("el_trkCurvature"             , el_trkCurvature              );		
 	    Double_t  el_min_xy_dist[2]           ; tree->SetBranchAddress("el_min_xy_dist_"             , el_min_xy_dist               );
 	    Double_t  el_min_z_dist[2]            ; tree->SetBranchAddress("el_min_z_dist_"              , el_min_z_dist                );
 	    Double_t  el_vtx_x_[2]                ; tree->SetBranchAddress("el_vtx_x_"                   , el_vtx_x_                    );
@@ -1013,7 +1041,7 @@ namespace ProcessChannel {
 		    if ( !CheckRunNumber(run) )                                         continue;
 			if ( !CheckRunStatus(runType) )                                     continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
 			if (sectorId != 18 || IsExcludedSpot(el_vtx_z_mean_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
-		    if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					    continue; hAnaCutFlow -> Fill(currentcut++);
+		    //if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					    continue; hAnaCutFlow -> Fill(currentcut++);
 			if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3 )       			    continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_pathLength_[0] < 30 or el_pathLength_[1] < 30)        	    continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( el_first_hit_layer_[0] > 0 or el_first_hit_layer_[1] > 0 )     continue; hAnaCutFlow -> Fill(currentcut++);
@@ -1027,43 +1055,50 @@ namespace ProcessChannel {
 		        (el_caloiobt[1] > 1 and (el_calofcll[1] == 1 or el_calofcll[1] == 2))) continue; hAnaCutFlow->Fill(currentcut++);
 
 			// Set min and max variables
-		    double el_energy_min    , el_energy_max   ;
-		    double el_dEnergy_min   , el_dEnergy_max  ; 
-		    double el_beta_min      , el_beta_max     ;
-		    double el_dBeta_min     , el_dBeta_max    ;
-		    double el_dMeasTime_min , el_dMeasTime_max;
-		    double el_dThTof_min    , el_dThTof_max   ;
-		    double el_track_len_min , el_track_len_max;
-			double el_trkSign_min   , el_trkSign_max  ;
+		    double el_energy_min       , el_energy_max       ;
+		    double el_dEnergy_min      , el_dEnergy_max      ; 
+		    double el_beta_min         , el_beta_max         ;
+		    double el_dBeta_min        , el_dBeta_max        ;
+		    double el_dMeasTime_min    , el_dMeasTime_max    ;
+		    double el_dThTof_min       , el_dThTof_max       ;
+		    double el_track_len_min    , el_track_len_max    ;
+			double el_trkSign_min      , el_trkSign_max      ;
+			double el_trkRadius_min    , el_trkRadius_max    ;
+			double el_trkCurvature_min , el_trkCurvature_max ;
 
 		    TVector3 el_vtx_min, el_vtx_max, el_ip_min, el_ip_max;
 		    if (el_energy_[0] < el_energy_[1]) {
-		      el_energy_min    = el_energy_[0]    ; el_energy_max    = el_energy_[1]    ;
-		      el_dEnergy_min   = el_dEnergy_[0]   ; el_dEnergy_max   = el_dEnergy_[1]   ;
-		      el_beta_min      = el_beta_[0]      ; el_beta_max      = el_beta_[1]      ;
-		      el_dBeta_min     = el_dBeta_[0]     ; el_dBeta_max     = el_dBeta_[1]     ;
-		      el_dMeasTime_min = el_dMeasTime_[0] ; el_dMeasTime_max = el_dMeasTime_[1] ;
-		      el_dThTof_min    = el_dThTof_[0]    ; el_dThTof_max    = el_dThTof_[1]    ;      
-		      el_track_len_min = el_pathLength_[0]; el_track_len_max = el_pathLength_[1];
-		      el_trkSign_min   = el_trkSign[0]    ; el_trkSign_max   = el_trkSign[1]    ;
+		      el_energy_min        = el_energy_[0]      ; el_energy_max       = el_energy_[1]      ;
+		      el_dEnergy_min       = el_dEnergy_[0]     ; el_dEnergy_max      = el_dEnergy_[1]     ;
+		      el_beta_min          = el_beta_[0]        ; el_beta_max         = el_beta_[1]        ;
+		      el_dBeta_min         = el_dBeta_[0]       ; el_dBeta_max        = el_dBeta_[1]       ;
+		      el_dMeasTime_min     = el_dMeasTime_[0]   ; el_dMeasTime_max    = el_dMeasTime_[1]   ;
+		      el_dThTof_min        = el_dThTof_[0]      ; el_dThTof_max       = el_dThTof_[1]      ;      
+		      el_track_len_min     = el_pathLength_[0]  ; el_track_len_max    = el_pathLength_[1]  ;
+		      el_trkSign_min       = el_trkSign[0]      ; el_trkSign_max      = el_trkSign[1]      ;
+  		      el_trkRadius_min  = el_trkCurvature[0] ; el_trkRadius_max = el_trkCurvature[1] ;
 		      el_vtx_min.SetXYZ(el_vtx_x_[0], el_vtx_y_[0], el_vtx_z_[0]);
 		      el_vtx_max.SetXYZ(el_vtx_x_[1], el_vtx_y_[1], el_vtx_z_[1]);
 		      el_ip_min .SetXYZ(el_ip_x_[0] , el_ip_y_[0] , el_ip_z_[0] ); 
 		      el_ip_max .SetXYZ(el_ip_x_[1] , el_ip_y_[1] , el_ip_z_[1] );
 		    } else {
-		      el_energy_min    = el_energy_[1]   ; el_energy_max    = el_energy_[0]     ;
-		      el_dEnergy_min   = el_dEnergy_[1]  ; el_dEnergy_max   = el_dEnergy_[0]    ;
-		      el_beta_min      = el_beta_[1]     ; el_beta_max      = el_beta_[0]       ;
-		      el_dBeta_min     = el_dBeta_[1]    ; el_dBeta_max     = el_dBeta_[0]      ;
-		      el_dMeasTime_min = el_dMeasTime_[1]; el_dMeasTime_max = el_dMeasTime_[0]  ;
-		      el_dThTof_min    = el_dThTof_[1]   ; el_dThTof_max    = el_dThTof_[0]     ;      
-		      el_track_len_min = el_pathLength_[1]; el_track_len_max = el_pathLength_[0];
-		      el_trkSign_min   = el_trkSign[1]    ; el_trkSign_max   = el_trkSign[0]    ;
+		      el_energy_min        = el_energy_[1]      ; el_energy_max       = el_energy_[0]      ;
+		      el_dEnergy_min       = el_dEnergy_[1]     ; el_dEnergy_max      = el_dEnergy_[0]     ;
+		      el_beta_min          = el_beta_[1]        ; el_beta_max         = el_beta_[0]        ;
+		      el_dBeta_min         = el_dBeta_[1]       ; el_dBeta_max        = el_dBeta_[0]       ;
+		      el_dMeasTime_min     = el_dMeasTime_[1]   ; el_dMeasTime_max    = el_dMeasTime_[0]   ;
+		      el_dThTof_min        = el_dThTof_[1]      ; el_dThTof_max       = el_dThTof_[0]      ;      
+		      el_track_len_min     = el_pathLength_[1]  ; el_track_len_max    = el_pathLength_[0]  ;
+		      el_trkSign_min       = el_trkSign[1]      ; el_trkSign_max      = el_trkSign[0]      ;
+  		      el_trkRadius_min  = el_trkCurvature[1] ; el_trkRadius_max = el_trkCurvature[0] ;			  
 		      el_vtx_min.SetXYZ(el_vtx_x_[1], el_vtx_y_[1], el_vtx_z_[1]);
 		      el_vtx_max.SetXYZ(el_vtx_x_[0], el_vtx_y_[0], el_vtx_z_[0]);
 		      el_ip_min .SetXYZ(el_ip_x_[1] , el_ip_y_[1] , el_ip_z_[1] );
 		      el_ip_max .SetXYZ(el_ip_x_[0] , el_ip_y_[0] , el_ip_z_[0] ); 
 		    }
+
+			el_trkCurvature_min = el_trkRadius_min * el_trkSign_min;
+			el_trkCurvature_max = el_trkRadius_max * el_trkSign_max;
 
 			// Last cut on vertex position on foil
 		    TVector3 delta_v = el_vtx_min - el_vtx_max; // BOOKMARKS
@@ -1090,15 +1125,17 @@ namespace ProcessChannel {
 						
 			
 			// Fill output tree
-			output_min_el_en        = el_energy_min    ; 
-			output_max_el_en        = el_energy_max    ;
-			output_min_el_track_len = el_track_len_min ;
-			output_max_el_track_len = el_track_len_max ;
-			output_min_el_sign      = el_trkSign_min   ;
-			output_max_el_sign      = el_trkSign_max   ;
-			output_cos_theta        = cosTheta         ;
-			output_prob_int         = probInt          ;
-			output_weight           = weight           ;
+			output_min_el_en        = el_energy_min       ; 
+			output_max_el_en        = el_energy_max       ;
+			output_min_el_track_len = el_track_len_min    ;
+			output_max_el_track_len = el_track_len_max    ;
+			output_min_el_track_r   = el_trkRadius_min ;
+			output_max_el_track_r   = el_trkRadius_max ;
+			output_min_el_sign      = el_trkSign_min      ;
+			output_max_el_sign      = el_trkSign_max      ;
+			output_cos_theta        = cosTheta            ;
+			output_prob_int         = probInt             ;
+			output_weight           = weight              ;
 		
 			output_tree->Fill();
 		
@@ -1177,15 +1214,17 @@ namespace ProcessChannel {
 			 
 		    double tot_e = el_energy_[0] + el_energy_[1];
 
-		    histo_collection->Find(TString::Format("%s_h_probInt"           , d->GetName()) ) -> Fill(probInt          , weight);
-			histo_collection->Find(TString::Format("%s_h_min_e_trackLength" , d->GetName()) ) -> Fill(el_track_len_min , weight);
-			histo_collection->Find(TString::Format("%s_h_max_e_trackLength" , d->GetName()) ) -> Fill(el_track_len_max , weight);
-			histo_collection->Find(TString::Format("%s_h_min_e_trackLength" , d->GetName()) ) -> Fill(el_track_len_min , weight);
-			histo_collection->Find(TString::Format("%s_h_max_e_trackLength" , d->GetName()) ) -> Fill(el_track_len_max , weight);			
-			histo_collection->Find(TString::Format("%s_h_min_e_energy"      , d->GetName()) ) -> Fill(el_energy_min , weight);
-			histo_collection->Find(TString::Format("%s_h_max_e_energy"      , d->GetName()) ) -> Fill(el_energy_max , weight);
-			histo_collection->Find(TString::Format("%s_h_cosTheta"          , d->GetName()) ) -> Fill(cosTheta      , weight);
-	        histo_collection->Find(TString::Format("%s_h_tot_e_energy"      , d->GetName()) ) -> Fill(tot_e         , weight);
+		    histo_collection->Find(TString::Format("%s_h_probInt"              , d->GetName()) ) -> Fill(probInt          , weight);
+			histo_collection->Find(TString::Format("%s_h_min_e_trackLength"    , d->GetName()) ) -> Fill(el_track_len_min , weight);
+			histo_collection->Find(TString::Format("%s_h_max_e_trackLength"    , d->GetName()) ) -> Fill(el_track_len_max , weight);
+			histo_collection->Find(TString::Format("%s_h_min_e_trackLength"    , d->GetName()) ) -> Fill(el_track_len_min , weight);
+			histo_collection->Find(TString::Format("%s_h_max_e_trackLength"    , d->GetName()) ) -> Fill(el_track_len_max , weight);			
+			histo_collection->Find(TString::Format("%s_h_min_e_trackCurvature" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
+			histo_collection->Find(TString::Format("%s_h_max_e_trackCurvature" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
+			histo_collection->Find(TString::Format("%s_h_min_e_energy"         , d->GetName()) ) -> Fill(el_energy_min , weight);
+			histo_collection->Find(TString::Format("%s_h_max_e_energy"         , d->GetName()) ) -> Fill(el_energy_max , weight);
+			histo_collection->Find(TString::Format("%s_h_cosTheta"             , d->GetName()) ) -> Fill(cosTheta      , weight);
+	        histo_collection->Find(TString::Format("%s_h_tot_e_energy"         , d->GetName()) ) -> Fill(tot_e         , weight);
 			
 		    histo_collection->Find(TString::Format("%s_h_vtx_dx"            , d->GetName()) ) -> Fill(delta_v.x()    , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_dy"            , d->GetName()) ) -> Fill(delta_v.y()    , weight);
@@ -1199,6 +1238,8 @@ namespace ProcessChannel {
    			    histo_collection->Find(TString::Format("%s_h_probInt_P1"           , d->GetName()) ) -> Fill(probInt          , weight);
 				histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P1" , d->GetName()) ) -> Fill(el_track_len_min , weight);
 				histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P1" , d->GetName()) ) -> Fill(el_track_len_max , weight);
+				histo_collection->Find(TString::Format("%s_h_min_e_trackCurvatureP1" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
+				histo_collection->Find(TString::Format("%s_h_max_e_trackCurvatureP1" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
 				histo_collection->Find(TString::Format("%s_h_min_e_energy_P1"      , d->GetName()) ) -> Fill(el_energy_min , weight);
 				histo_collection->Find(TString::Format("%s_h_max_e_energy_P1"      , d->GetName()) ) -> Fill(el_energy_max , weight);
 				histo_collection->Find(TString::Format("%s_h_cosTheta_P1"          , d->GetName()) ) -> Fill(cosTheta      , weight);
@@ -1216,6 +1257,8 @@ namespace ProcessChannel {
 				    histo_collection->Find(TString::Format("%s_h_probInt_P1_hot"           , d->GetName()) ) -> Fill(probInt       , weight);
 					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P1_hot" , d->GetName()) ) -> Fill(el_track_len_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P1_hot" , d->GetName()) ) -> Fill(el_track_len_max , weight);					
+					histo_collection->Find(TString::Format("%s_h_min_e_trackCurvatureP1_hot" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackCurvatureP1_hot" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_hot"      , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_hot"      , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_hot"          , d->GetName()) ) -> Fill(cosTheta      , weight);
@@ -1231,6 +1274,9 @@ namespace ProcessChannel {
 				    histo_collection->Find(TString::Format("%s_h_probInt_P1_warm"           , d->GetName()) ) -> Fill(probInt       , weight);
 					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P1_warm" , d->GetName()) ) -> Fill(el_track_len_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P1_warm" , d->GetName()) ) -> Fill(el_track_len_max , weight);					
+					histo_collection->Find(TString::Format("%s_h_min_e_trackCurvatureP1_warm" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackCurvatureP1_warm" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
+
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_warm"      , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_warm"      , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_warm"          , d->GetName()) ) -> Fill(cosTheta      , weight);
@@ -1246,6 +1292,9 @@ namespace ProcessChannel {
 				    histo_collection->Find(TString::Format("%s_h_probInt_P1_cold"           , d->GetName()) ) -> Fill(probInt       , weight);
 					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P1_cold" , d->GetName()) ) -> Fill(el_track_len_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P1_cold" , d->GetName()) ) -> Fill(el_track_len_max , weight);					
+					histo_collection->Find(TString::Format("%s_h_min_e_trackCurvatureP1_cold" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackCurvatureP1_cold" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
+
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P1_cold"      , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P1_cold"      , d->GetName()) ) -> Fill(el_energy_max , weight);
 					histo_collection->Find(TString::Format("%s_h_cosTheta_P1_cold"          , d->GetName()) ) -> Fill(cosTheta      , weight);
@@ -1332,6 +1381,8 @@ namespace ProcessChannel {
    			    histo_collection->Find(TString::Format("%s_h_probInt_P2"           , d->GetName()) ) -> Fill(probInt          , weight);
 				histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P2" , d->GetName()) ) -> Fill(el_track_len_min , weight);
 				histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P2" , d->GetName()) ) -> Fill(el_track_len_max , weight);
+				histo_collection->Find(TString::Format("%s_h_min_e_trackCurvature_P2" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
+				histo_collection->Find(TString::Format("%s_h_max_e_trackCurvature_P2" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
 				histo_collection->Find(TString::Format("%s_h_min_e_energy_P2" , d->GetName()) ) -> Fill(el_energy_min , weight);
 				histo_collection->Find(TString::Format("%s_h_max_e_energy_P2" , d->GetName()) ) -> Fill(el_energy_max , weight);
 				histo_collection->Find(TString::Format("%s_h_cosTheta_P2"     , d->GetName()) ) -> Fill(cosTheta      , weight);
@@ -1349,6 +1400,8 @@ namespace ProcessChannel {
 	   			    histo_collection->Find(TString::Format("%s_h_probInt_P2_hot"           , d->GetName()) ) -> Fill(probInt          , weight);
 					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P2_hot" , d->GetName()) ) -> Fill(el_track_len_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P2_hot" , d->GetName()) ) -> Fill(el_track_len_max , weight);
+					histo_collection->Find(TString::Format("%s_h_min_e_trackCurvature_P2_hot" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackCurvature_P2_hot" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
 					
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_hot" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_hot" , d->GetName()) ) -> Fill(el_energy_max , weight);
@@ -1364,6 +1417,9 @@ namespace ProcessChannel {
 	   			    histo_collection->Find(TString::Format("%s_h_probInt_P2_warm"           , d->GetName()) ) -> Fill(probInt          , weight);
 					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P2_warm" , d->GetName()) ) -> Fill(el_track_len_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P2_warm" , d->GetName()) ) -> Fill(el_track_len_max , weight);
+					histo_collection->Find(TString::Format("%s_h_min_e_trackCurvature_P2_warm" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackCurvature_P2_warm" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
+
 					
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_warm" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_warm" , d->GetName()) ) -> Fill(el_energy_max , weight);
@@ -1380,6 +1436,9 @@ namespace ProcessChannel {
 	   			    histo_collection->Find(TString::Format("%s_h_probInt_P2_cold"           , d->GetName()) ) -> Fill(probInt          , weight);
 					histo_collection->Find(TString::Format("%s_h_min_e_trackLength_P2_cold" , d->GetName()) ) -> Fill(el_track_len_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_trackLength_P2_cold" , d->GetName()) ) -> Fill(el_track_len_max , weight);
+					histo_collection->Find(TString::Format("%s_h_min_e_trackCurvature_P2_cold" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
+					histo_collection->Find(TString::Format("%s_h_max_e_trackCurvature_P2_cold" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
+
 					
 					histo_collection->Find(TString::Format("%s_h_min_e_energy_P2_cold" , d->GetName()) ) -> Fill(el_energy_min , weight);
 					histo_collection->Find(TString::Format("%s_h_max_e_energy_P2_cold" , d->GetName()) ) -> Fill(el_energy_max , weight);
