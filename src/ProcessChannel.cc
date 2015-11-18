@@ -1217,8 +1217,6 @@ namespace ProcessChannel {
 		    histo_collection->Find(TString::Format("%s_h_probInt"              , d->GetName()) ) -> Fill(probInt          , weight);
 			histo_collection->Find(TString::Format("%s_h_min_e_trackLength"    , d->GetName()) ) -> Fill(el_track_len_min , weight);
 			histo_collection->Find(TString::Format("%s_h_max_e_trackLength"    , d->GetName()) ) -> Fill(el_track_len_max , weight);
-			histo_collection->Find(TString::Format("%s_h_min_e_trackLength"    , d->GetName()) ) -> Fill(el_track_len_min , weight);
-			histo_collection->Find(TString::Format("%s_h_max_e_trackLength"    , d->GetName()) ) -> Fill(el_track_len_max , weight);			
 			histo_collection->Find(TString::Format("%s_h_min_e_trackCurvature" , d->GetName()) ) -> Fill(el_trkCurvature_min , weight);
 			histo_collection->Find(TString::Format("%s_h_max_e_trackCurvature" , d->GetName()) ) -> Fill(el_trkCurvature_max , weight);			
 			histo_collection->Find(TString::Format("%s_h_min_e_energy"         , d->GetName()) ) -> Fill(el_energy_min , weight);
