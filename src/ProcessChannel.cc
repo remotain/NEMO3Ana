@@ -590,6 +590,8 @@ namespace ProcessChannel {
 	    Double_t output_max_el_sign      ; output_tree->Branch("max_el_sign"      , &output_max_el_sign      );
 	    Double_t output_cos_theta        ; output_tree->Branch("cos_theta"        , &output_cos_theta        );
 	    Double_t output_prob_int         ; output_tree->Branch("prob_int"         , &output_prob_int         );
+		Double_t output_vertex_dz        ; output_tree->Branch("vertex_dz"        , &output_vertex_dz        );
+		Double_t output_vertex_dr        ; output_tree->Branch("vertex_dr"        , &output_vertex_dr        );
 		Double_t output_weight           ; output_tree->Branch("weight"           , &output_weight           );
 		
 		output_tree->Write();
@@ -614,7 +616,7 @@ namespace ProcessChannel {
 		//cutNames->push_back("Hits not associated to the track <= 2");
 		cutNames->push_back("No unassociated hits opposite to the electrons");
 		cutNames->push_back("No electron hits petal near the foil");
-		cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4 cm"); // BOOKMARK	    
+		//cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4 cm"); // BOOKMARK	    
 		cutNames->push_back("Not an hot spot");
 		
 	    unsigned int nCuts = cutNames->size();
@@ -1102,7 +1104,7 @@ namespace ProcessChannel {
 
 			// Last cut on vertex position on foil
 		    TVector3 delta_v = el_vtx_min - el_vtx_max; // BOOKMARKS
-		    if (TMath::Abs(delta_v.z()) > 8 or delta_v.Perp() > 4) continue; hAnaCutFlow -> Fill(currentcut++);
+		    //if (TMath::Abs(delta_v.z()) > 8 or delta_v.Perp() > 4) continue; hAnaCutFlow -> Fill(currentcut++);
 		    
 			if ( IsHotSpot(eVertex->z(), vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++);
 			
@@ -1135,6 +1137,8 @@ namespace ProcessChannel {
 			output_max_el_sign      = el_trkSign_max      ;
 			output_cos_theta        = cosTheta            ;
 			output_prob_int         = probInt             ;
+			output_vertex_dz        = delta_v.z();
+			output_vertex_dr        = delta_v.Perp();
 			output_weight           = weight              ;
 		
 			output_tree->Fill();
