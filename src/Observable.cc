@@ -223,7 +223,7 @@ void Observable::Draw(Option_t* option){
 	hratio->GetYaxis()->SetNdivisions(505) ; 	
 	hratio->GetYaxis()->SetTitle("Data/MC") ; 
 	hratio->GetYaxis()->CenterTitle(kTRUE);
-	hratio->GetYaxis()->SetRangeUser(0.5,1.5);
+	hratio->GetYaxis()->SetRangeUser(0.0,4.0);
 	hratio->Draw();
 	
 	canvas->cd();	

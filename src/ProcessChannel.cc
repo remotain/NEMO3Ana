@@ -590,8 +590,12 @@ namespace ProcessChannel {
 	    Double_t output_max_el_sign      ; output_tree->Branch("max_el_sign"      , &output_max_el_sign      );
 	    Double_t output_cos_theta        ; output_tree->Branch("cos_theta"        , &output_cos_theta        );
 	    Double_t output_prob_int         ; output_tree->Branch("prob_int"         , &output_prob_int         );
-		Double_t output_vertex_dz        ; output_tree->Branch("vertex_dz"        , &output_vertex_dz        );
-		Double_t output_vertex_dr        ; output_tree->Branch("vertex_dr"        , &output_vertex_dr        );
+		Double_t output_min_vertex_x     ; output_tree->Branch("vertex_min_x"     , &output_min_vertex_x     );
+		Double_t output_min_vertex_y     ; output_tree->Branch("vertex_min_y"     , &output_min_vertex_y     );
+		Double_t output_min_vertex_z     ; output_tree->Branch("vertex_min_z"     , &output_min_vertex_z     );		
+		Double_t output_max_vertex_x     ; output_tree->Branch("vertex_max_x"     , &output_max_vertex_x     );
+		Double_t output_max_vertex_y     ; output_tree->Branch("vertex_max_y"     , &output_max_vertex_y     );
+		Double_t output_max_vertex_z     ; output_tree->Branch("vertex_max_z"     , &output_max_vertex_z     );		
 		Double_t output_weight           ; output_tree->Branch("weight"           , &output_weight           );
 		
 		output_tree->Write();
@@ -1137,9 +1141,13 @@ namespace ProcessChannel {
 			output_max_el_sign      = el_trkSign_max      ;
 			output_cos_theta        = cosTheta            ;
 			output_prob_int         = probInt             ;
-			output_vertex_dz        = delta_v.z();
-			output_vertex_dr        = delta_v.Perp();
 			output_weight           = weight              ;
+			output_min_vertex_x     = el_vtx_min.x();
+			output_min_vertex_y     = el_vtx_min.y();
+			output_min_vertex_z     = el_vtx_min.z();
+			output_max_vertex_x     = el_vtx_max.x();
+			output_max_vertex_y     = el_vtx_max.y();
+			output_max_vertex_z     = el_vtx_max.z();
 		
 			output_tree->Fill();
 		
