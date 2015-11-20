@@ -590,12 +590,12 @@ namespace ProcessChannel {
 	    Double_t output_max_el_sign      ; output_tree->Branch("max_el_sign"      , &output_max_el_sign      );
 	    Double_t output_cos_theta        ; output_tree->Branch("cos_theta"        , &output_cos_theta        );
 	    Double_t output_prob_int         ; output_tree->Branch("prob_int"         , &output_prob_int         );
-		Double_t output_min_vertex_x     ; output_tree->Branch("vertex_min_x"     , &output_min_vertex_x     );
-		Double_t output_min_vertex_y     ; output_tree->Branch("vertex_min_y"     , &output_min_vertex_y     );
-		Double_t output_min_vertex_z     ; output_tree->Branch("vertex_min_z"     , &output_min_vertex_z     );		
-		Double_t output_max_vertex_x     ; output_tree->Branch("vertex_max_x"     , &output_max_vertex_x     );
-		Double_t output_max_vertex_y     ; output_tree->Branch("vertex_max_y"     , &output_max_vertex_y     );
-		Double_t output_max_vertex_z     ; output_tree->Branch("vertex_max_z"     , &output_max_vertex_z     );		
+		Double_t output_min_vertex_x     ; output_tree->Branch("min_vertex_x"     , &output_min_vertex_x     );
+		Double_t output_min_vertex_y     ; output_tree->Branch("min_vertex_y"     , &output_min_vertex_y     );
+		Double_t output_min_vertex_z     ; output_tree->Branch("min_vertex_z"     , &output_min_vertex_z     );		
+		Double_t output_max_vertex_x     ; output_tree->Branch("max_vertex_x"     , &output_max_vertex_x     );
+		Double_t output_max_vertex_y     ; output_tree->Branch("max_vertex_y"     , &output_max_vertex_y     );
+		Double_t output_max_vertex_z     ; output_tree->Branch("max_vertex_z"     , &output_max_vertex_z     );		
 		Double_t output_weight           ; output_tree->Branch("weight"           , &output_weight           );
 		
 		output_tree->Write();
