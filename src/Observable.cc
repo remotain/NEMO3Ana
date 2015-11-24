@@ -34,8 +34,8 @@ double Observable::GetComponentNumEvent(Component * c, double &err) {
 void Observable::Draw(Option_t* option){
 	
 	THStack * stack = new THStack( TString::Format("stack_%s",GetName()), GetTitle() );
-	TH1D * hsum = (TH1D*) _Data->Clone(TString::Format("hadd_%s",_Data->GetName())); 
-	hsum->Reset();
+	_hsum = (TH1D*) _Data->Clone(TString::Format("hadd_%s",_Data->GetName())); 
+	_hsum->Reset();
 	
 	TLegend * leg = new TLegend(0.05, 0.6, 0.95, .90);	
 	
@@ -103,7 +103,7 @@ void Observable::Draw(Option_t* option){
 			}			
 				
 			stack->Add(gsum);
-			hsum->Add(gsum,1);
+			_hsum->Add(gsum,1);
 				
 			g_tot_err = TMath::Sqrt(g_tot_err);	
 							
@@ -139,7 +139,7 @@ void Observable::Draw(Option_t* option){
 			}
 				
 			stack->Add(tmp);
-			hsum->Add(tmp);
+			_hsum->Add(tmp);
 			
 			double err = 0.;
 		
@@ -162,19 +162,14 @@ void Observable::Draw(Option_t* option){
 	leg->AddEntry((TObject*) 0, TString::Format("Total MC (%0.f #pm %0.f evt.)", tot_evt_mc, tot_evt_mc_err), "");
 
 	
-	//std::cout << "--------------------------------------------------" << std::endl;
-	std::cout << GetName() << std::endl;
 	_chi2 = 0; _ndf = 0;
-	_pval = _Data->Chi2TestX(hsum, _chi2, _ndf, _igood, "UW") ;
-	//std::cout << TString::Format("#chi^2/dof (%.1f/%d), p-value %.3f", _chi2, _ndf, _pval) << std::endl;
-	_ks = _Data-> KolmogorovTest(hsum) ;
-	std::cout << TString::Format("KS %.3f", _ks) << std::endl;
-	//std::cout << "--------------------------------------------------" << std::endl;
-
+	_pval = _Data->Chi2TestX(_hsum, _chi2, _ndf, _igood, "UW") ;
+	_ks = _Data-> KolmogorovTest(_hsum) ;
+	
 	//leg->AddEntry((TObject*) 0, TString::Format("#chi^2/dof (%.1f/%d)", _chi2, _ndf), "");
 
 	// My own chi2 calculation
-	//Chi2Test(_Data, hsum, _chi2, _ndf);
+	//Chi2Test(_Data, _hsum, _chi2, _ndf);
 	//leg->AddEntry((TObject*) 0, TString::Format("#chi^2/dof (%.1f/%d)", _chi2, _ndf), "");
 
 	TCanvas * canvas = new TCanvas(GetName(), GetTitle(), 500, 500);
@@ -218,7 +213,7 @@ void Observable::Draw(Option_t* option){
 	
 	TH1D * hratio = (TH1D*) _Data->Clone( TString::Format("ratio_%s", _Data->GetName()) );
 	hratio->SetTitle("");
-	hratio->Divide(hsum);
+	hratio->Divide(_hsum);
 		
 	hratio->GetYaxis()->SetNdivisions(505) ; 	
 	hratio->GetYaxis()->SetTitle("Data/MC") ; 
@@ -238,7 +233,7 @@ void Observable::Draw(Option_t* option){
 	
 	TH1D * hres = (TH1D*) _Data->Clone( TString::Format("residuals_%s", _Data->GetName()) );
 	hres->SetTitle("");
-	hres->Add(hsum, -1);
+	hres->Add(_hsum, -1);
 	
 	for (unsigned int i = 1; i <= hratio->GetNbinsX(); i++){
 	
@@ -257,6 +252,16 @@ void Observable::Draw(Option_t* option){
 	hres->Draw();
 	
 };
+
+void Observable::PrintQuality(){
+	
+	std::cout << "--------------------------------------------------" << std::endl;
+	std::cout << GetName() << std::endl;	
+	std::cout << TString::Format("#chi^2/dof (%.1f/%d), p-value %.3f", _chi2, _ndf, _pval) << std::endl;
+	std::cout << TString::Format("KS = %.3f", _ks) << std::endl;
+	std::cout << "--------------------------------------------------" << std::endl;
+
+}
 
 void Observable::PrintDetails(){
 	
@@ -338,7 +343,7 @@ void Observable::DrawDetails(Option_t* option){
 	heff  ->GetYaxis()->SetTitleOffset(4.);
 	hevt  ->GetYaxis()->SetTitleOffset(4.);
 		
-	std::cout << "Fit components" << " & " << "Efficiency" << " & " << "Activity [Bq]" << " & " << "Num. of events" << std::endl;	
+	//std::cout << "Fit components" << " & " << "Efficiency" << " & " << "Activity [Bq]" << " & " << "Num. of events" << std::endl;	
 			
 	// Loop Over Component collection
 	int counter = 0;
@@ -370,7 +375,7 @@ void Observable::DrawDetails(Option_t* option){
 			hevt  -> SetBinError(counter+1 , err);
 		}
 		
-		std::cout << comp->GetName() << " & " << eff << "\\pm" << eff_e << " & " << comp->GetNorm() << "\\pm" << comp->GetNormErr() << " & " << numevt << "\\pm" << err << std::endl;
+	//	std::cout << comp->GetName() << " & " << eff << "\\pm" << eff_e << " & " << comp->GetNorm() << "\\pm" << comp->GetNormErr() << " & " << numevt << "\\pm" << err << std::endl;
 				
 		counter++;
 				

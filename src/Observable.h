@@ -32,7 +32,9 @@ public:
 		TH1 * data
 		) : TNamed(name, title) {
 			
+
 			_Data = data;
+			_hsum = 0;
 			_PhaseType = phase;
 			_ComponentMap  = new TMap(50);
 			_ComponentList = new TList();
@@ -104,6 +106,8 @@ public:
 	virtual void Draw(Option_t* option = "");
 	virtual void DrawDetails(Option_t* option = "");
 	virtual void PrintDetails();
+	virtual void PrintQuality();
+	
 	virtual void Chi2Test(TH1 * hData, TH1 * hModel, double & chi2, int & ndf);
 	
 	// chi2 and ks test
@@ -118,6 +122,8 @@ public:
 private:
 
 	TH1 * _Data;
+	TH1D * _hsum;
+	
 	PhaseType_t _PhaseType;
 	TMap  * _ComponentMap;
 	TList * _ComponentList;
