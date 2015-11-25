@@ -199,7 +199,7 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
 	Float_t max_vertex_z;
 	Float_t min_vertex_s;
 	Float_t min_vertex_z;
-
+	
    reader->AddVariable( "min_el_en"                                                 , &min_el_en        );
    reader->AddVariable( "max_el_en"                                                 , &max_el_en        );
    reader->AddVariable( "el_en_asym := (max_el_en-min_el_en)/(min_el_en+max_el_en)" , &el_en_asym       );
@@ -436,16 +436,12 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
        		prob_int         = b_prob_int;        
        		min_el_track_len = b_min_el_track_len;
        		max_el_track_len = b_max_el_track_len;
-       		min_el_track_r   = b_min_el_track_r;
-       		max_el_track_r   = b_max_el_track_r;
-       		min_el_sign      = b_min_el_sign;
-       		max_el_sign      = b_max_el_sign;
        
        		el_en_asym = (max_el_en-min_el_en)/(min_el_en+max_el_en);
        		el_en_sum = min_el_en+max_el_en;                        
        	 	
-			min_el_curv = min_el_sign * min_el_track_r;
-			max_el_curv = max_el_sign * max_el_track_r;
+			min_el_curv = b_min_el_sign * b_min_el_track_r;
+			max_el_curv = b_max_el_sign * b_max_el_track_r;
 	   
 			max_vertex_s = b_max_vertex_s; 
 			max_vertex_z = b_max_vertex_z; 
