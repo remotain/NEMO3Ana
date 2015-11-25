@@ -41,13 +41,13 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
    
    
 	// Input/Output file path
-   TString fdir = "/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/";
+   //TString fdir = "/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/";
    //TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
-   //TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/";
+   TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/";
 
 	// Weights file path
-   TString wdir    = "/Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/weights/";	
-   //TString wdir    = "/afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/weights/";	
+   //TString wdir    = "/Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/weights/";	
+   TString wdir    = "/afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/weights/";	
 
    //---------------------------------------------------------------
 
