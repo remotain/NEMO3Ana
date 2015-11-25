@@ -3,6 +3,8 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Print cut flow on terminal')
 parser.add_argument('file_path', metavar='file_path', type=str, help='file containing cut flow histogram')
+parser.add_argument('sample', choices=["2NU" , "MM" , "RHC" , "M1" , "M2" , "M3" , "M7" ])
+
 args = parser.parse_args()
 
 from ROOT import *
@@ -12,7 +14,7 @@ gSystem.Load("/Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/build/lib/li
 
 gROOT.ProcessLine(".x /Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/macro/LoadAllDataSample.C+");
 
-#Load one sample only for test
+#Load one sample_dict[args.sample] only for test
 DataManagement.AddDataSet ( DataSet ( "Data" , 0, 0, 0 ) );
 
 hdata = HistoCollection("Data", "Data");
@@ -21,7 +23,21 @@ hbb = HistoCollection("Bb", "Bb");
 #f = TFile.Open("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20141115/OneElectronHistos.root")
 f = TFile.Open(args.file_path)
 fdata = f.Get("Data"); fdata.cd()
-fbb   = f.Get("Cd116_2b2n_m14"); fbb.cd() 
+
+
+sample_dict  = {
+    
+    "2NU" : "Cd116_2b2n_m14",
+    "MM"  : "Cd116_2b0n_m1", 
+    "RHC" : "Cd116_2b0n_m2", 
+    "M1"  : "Cd116_2b0n_m5", 
+    "M2"  : "Cd116_2b0n_m15",
+    "M3"  : "Cd116_2b0n_m6", 
+    "M7"  : "Cd116_2b0n_m7"
+    
+}
+
+fbb   = f.Get(sample_dict[args.sample]); fbb.cd() 
  
 hdata.Load(fdata);
 hdata.GetCollection().Print()
@@ -33,8 +49,12 @@ hbb.Load(fbb);
 hbb.GetCollection().Print()
 
 
-b_RecoCutFlow = hbb.Find("Cd116_2b2n_m14_h_RecoCutFlow")
-b_AnaCutFlow  = hbb.Find("Cd116_2b2n_m14_h_AnaCutFlow")
+b_RecoCutFlow = hbb.Find(sample_dict[args.sample] + "_h_RecoCutFlow")
+b_AnaCutFlow  = hbb.Find(sample_dict[args.sample] + "_h_AnaCutFlow")
+
+#Cd116_2b2n_m14_tot_gen_evt = 20000000.
+Cd116_2b2n_m14_tot_gen_evt = DataManagement.FindDataSet( sample_dict[args.sample] ).GetGeneratedEvents();
+
 
 print ""
 print "Selection requirement".rjust(70), "|", "Data".rjust(10) ,"|"
@@ -54,12 +74,14 @@ print ""
 print "Selection requirement".rjust(70), "|", "Data".rjust(10) , "|", "MC bb2nu".rjust(10), "|", "Eff bb2nu".rjust(10), "|"
 print "-"*70 , "|", "-"*10, "|", "-"*10, "|", "-"*10, "|"
 for i in range(1,h_RecoCutFlow.GetNbinsX()+1):
-    print h_RecoCutFlow.GetXaxis().GetBinLabel(i).rjust(70), "|", "{0:10.0f}".format(h_RecoCutFlow.GetBinContent(i)), "|", "{0:10.0f}".format(b_RecoCutFlow.GetBinContent(i)), "|", "{0:10.5f}".format(b_RecoCutFlow.GetBinContent(i)/b_RecoCutFlow.GetBinContent(1)), "|"
+    print h_RecoCutFlow.GetXaxis().GetBinLabel(i).rjust(70), "|", "{0:10.0f}".format(h_RecoCutFlow.GetBinContent(i)), "|", "{0:10.0f}".format(b_RecoCutFlow.GetBinContent(i)), "|", "{0:10.3f}".format(100*b_RecoCutFlow.GetBinContent(i)/Cd116_2b2n_m14_tot_gen_evt), "|"
+    #print h_RecoCutFlow.GetXaxis().GetBinLabel(i).rjust(70), "|", "{0:10.0f}".format(h_RecoCutFlow.GetBinContent(i)), "|", "{0:10.0f}".format(b_RecoCutFlow.GetBinContent(i)), "|", "{0:10.5f}".format(b_RecoCutFlow.GetBinContent(i)/b_RecoCutFlow.GetBinContent(1)), "|"    
 
 
 print "-"*70 , "|", "-"*10, "|", "-"*10, "|", "-"*10, "|"
 for i in range(1,b_AnaCutFlow.GetNbinsX()):
-    print h_AnaCutFlow.GetXaxis().GetBinLabel(i).rjust(70), "|", "{0:10.0f}".format(h_AnaCutFlow.GetBinContent(i)), "|", "{0:10.0f}".format(b_AnaCutFlow.GetBinContent(i)), "|", "{0:10.5f}".format(b_AnaCutFlow.GetBinContent(i)/b_RecoCutFlow.GetBinContent(1)), "|"
+    print h_AnaCutFlow.GetXaxis().GetBinLabel(i).rjust(70), "|", "{0:10.0f}".format(h_AnaCutFlow.GetBinContent(i)), "|", "{0:10.0f}".format(b_AnaCutFlow.GetBinContent(i)), "|", "{0:10.3f}".format(100*b_AnaCutFlow.GetBinContent(i)/Cd116_2b2n_m14_tot_gen_evt), "|"
+    #print h_AnaCutFlow.GetXaxis().GetBinLabel(i).rjust(70), "|", "{0:10.0f}".format(h_AnaCutFlow.GetBinContent(i)), "|", "{0:10.0f}".format(b_AnaCutFlow.GetBinContent(i)), "|", "{0:10.5f}".format(b_AnaCutFlow.GetBinContent(i)/b_RecoCutFlow.GetBinContent(1)), "|"    
 print "-"*70 , "|", "-"*10, "|", "-"*10, "|", "-"*10, "|"
 print ""    
 

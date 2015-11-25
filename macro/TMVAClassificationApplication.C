@@ -35,8 +35,9 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
 #endif
    
 	// Input/Output file path
-   //TString fdir = "/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
-   TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
+   //TString fdir = "/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/";
+   //TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
+   TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/";
 
 	// Weights file path
    //TString wdir    = "/Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/weights/";	
@@ -178,9 +179,21 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
 
    // Create a set of variables and declare them to the reader
    // - the variable names MUST corresponds in name and type to those given in the weight file(s) used
-   Float_t min_el_en, max_el_en, el_en_asym, el_en_sum;
-   Float_t cos_theta, prob_int, min_el_track_len, max_el_track_len;
-   
+	Float_t min_el_en;
+	Float_t max_el_en;
+	Float_t el_en_asym;
+	Float_t el_en_sum;
+	Float_t cos_theta;
+	Float_t prob_int;
+	Float_t min_el_track_len;
+	Float_t max_el_track_len;
+	Float_t min_el_curv;
+	Float_t max_el_curv;
+	Float_t max_vertex_s;
+	Float_t max_vertex_z;
+	Float_t min_vertex_s;
+	Float_t min_vertex_z;
+
    reader->AddVariable( "min_el_en"                                                 , &min_el_en        );
    reader->AddVariable( "max_el_en"                                                 , &max_el_en        );
    reader->AddVariable( "el_en_asym := (max_el_en-min_el_en)/(min_el_en+max_el_en)" , &el_en_asym       );
@@ -189,7 +202,13 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
    reader->AddVariable( "prob_int"                                                  , &prob_int         );
    reader->AddVariable( "min_el_track_len"                                          , &min_el_track_len );
    reader->AddVariable( "max_el_track_len"                                          , &max_el_track_len );
-
+   reader->AddVariable( "min_el_curv := min_el_track_r*min_el_sign"                 , &min_el_curv      );
+   reader->AddVariable( "max_el_curv := max_el_track_r*max_el_sign"                 , &max_el_curv      );
+   reader->AddVariable( "max_vertex_s"                                              , &max_vertex_s     );
+   reader->AddVariable( "max_vertex_z"                                              , &max_vertex_z     );
+   reader->AddVariable( "min_vertex_s"                                              , &min_vertex_s     );
+   reader->AddVariable( "min_vertex_z"                                              , &min_vertex_z     );
+   
    //// Spectator variables declared in the training have to be added to the reader, too
    //Float_t spec1,spec2;
    //reader->AddSpectator( "spec1 := var1*2",   &spec1 );
@@ -203,7 +222,7 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
    //   reader->AddSpectator( "Category_cat3 := (var3>0)&&(var4>=0)", &Category_cat3 );
    //}
 
-   TString fname = "TwoElectronIntTree.root";	
+   TString fname = "TwoElectronIntTree_NO_CHARGE_NO_VERTEX_CUT.root";	
    TFile *input = TFile::Open( fdir + fname , "READ");
    
    if (!input) {
@@ -341,9 +360,14 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
 	   //
    	   std::cout << "--- Select " << TString(*spit) << " sample" << std::endl;
    	   TTree* theTree = (TTree*)input->Get(TString(*spit) + "_tree");
-	   
-	   Double_t b_min_el_en, b_max_el_en;
-	   Double_t b_cos_theta, b_prob_int, b_min_el_track_len, b_max_el_track_len;
+
+		Double_t b_min_el_en, b_max_el_en;
+		Double_t b_cos_theta, b_prob_int;
+		Double_t b_min_el_track_len, b_max_el_track_len;
+		Double_t b_min_el_track_r, b_max_el_track_r;
+		Double_t b_min_el_sign, b_max_el_sign;
+		Double_t b_max_vertex_s, b_max_vertex_z, b_min_vertex_s, b_min_vertex_z;
+
    
    	   theTree->SetBranchAddress( "min_el_en"        , &b_min_el_en        );
    	   theTree->SetBranchAddress( "max_el_en"        , &b_max_el_en        );
@@ -351,6 +375,17 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
    	   theTree->SetBranchAddress( "prob_int"         , &b_prob_int         );
    	   theTree->SetBranchAddress( "min_el_track_len" , &b_min_el_track_len );
    	   theTree->SetBranchAddress( "max_el_track_len" , &b_max_el_track_len );
+   	   theTree->SetBranchAddress( "min_el_track_r"   , &b_min_el_track_r   );
+   	   theTree->SetBranchAddress( "max_el_track_r"   , &b_max_el_track_r   );
+   	   theTree->SetBranchAddress( "min_el_sign"      , &b_min_el_sign      );
+   	   theTree->SetBranchAddress( "max_el_sign"      , &b_max_el_sign      );
+   	   theTree->SetBranchAddress( "min_el_sign"      , &b_min_el_sign      );
+   	   theTree->SetBranchAddress( "max_el_sign"      , &b_max_el_sign      );
+   	   theTree->SetBranchAddress( "max_vertex_s"     , &b_max_vertex_s     );
+   	   theTree->SetBranchAddress( "max_vertex_z"     , &b_max_vertex_z     );
+   	   theTree->SetBranchAddress( "min_vertex_s"     , &b_min_vertex_s     );
+   	   theTree->SetBranchAddress( "min_vertex_z"     , &b_min_vertex_z     );
+
                                                  
        // Efficiency calculator for cut method
        Int_t    nSelCutsGA = 0;
@@ -374,10 +409,22 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
        		prob_int         = b_prob_int;        
        		min_el_track_len = b_min_el_track_len;
        		max_el_track_len = b_max_el_track_len;
+       		min_el_track_r   = b_min_el_track_r;
+       		max_el_track_r   = b_max_el_track_r;
+       		min_el_sign      = b_min_el_sign;
+       		max_el_sign      = b_max_el_sign;
        
        		el_en_asym = (max_el_en-min_el_en)/(min_el_en+max_el_en);
        		el_en_sum = min_el_en+max_el_en;                        
-       
+       	 	
+			min_el_curv = min_el_sign * min_el_track_r;
+			max_el_curv = max_el_sign * max_el_track_r;
+	   
+			max_vertex_s = b_max_vertex_s; 
+			max_vertex_z = b_max_vertex_z; 
+			min_vertex_s = b_min_vertex_s; 
+			min_vertex_z = b_min_vertex_z;
+	   
           // --- Return the MVA outputs and fill into histograms
        
           if (Use["CutsGA"]) {
