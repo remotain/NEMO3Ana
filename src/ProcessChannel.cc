@@ -114,7 +114,7 @@ namespace ProcessChannel {
 	//////////////////////////////////////////////////////////////////////////////
 	double getSectorNumber( double x, double y){
 		
-		double phi = atan2(y, x);
+		double phi = TMath::ATan2(y, x);
 	    phi = (phi < 0) ? phi+2*TMath::Pi() : phi;
 		
 		return phi * 20 / ( 2*TMath::Pi() );
