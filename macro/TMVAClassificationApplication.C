@@ -28,20 +28,26 @@
 
 using namespace TMVA;
 
-void TMVAClassificationApplication( TString myMethodList = "", TString myModel = "") 
+void TMVAClassificationApplication( TString myMethodList = "", TString myModel = "", int job = 1, int njob = 1) 
 {   
 #ifdef __CINT__
    gROOT->ProcessLine( ".O0" ); // turn off optimization in CINT
 #endif
    
+   if (job > njob ) {
+	   str::cout<< "Job index must be < total number of jobs" << std::endl; 
+	   return;
+   }
+   
+   
 	// Input/Output file path
-   //TString fdir = "/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/";
+   TString fdir = "/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/";
    //TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_FINAL_TECHNOTE_20150921/";
-   TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/";
+   //TString fdir = "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/";
 
 	// Weights file path
-   //TString wdir    = "/Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/weights/";	
-   TString wdir    = "/afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/weights/";	
+   TString wdir    = "/Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/weights/";	
+   //TString wdir    = "/afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/weights/";	
 
    //---------------------------------------------------------------
 
@@ -393,10 +399,31 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
 
        std::vector<Float_t> vecVar(4); // vector for EvaluateMVA tests
 
-       std::cout << "--- Processing: " << theTree->GetEntries() << " events" << std::endl;
        TStopwatch sw;
        sw.Start();
-       for (Long64_t ievt=0; ievt<theTree->GetEntries();ievt++) {
+	   
+	   int step = (int) theTree->GetEntries() / njob;
+	   int mod = (int) theTree->GetEntries() % njob;
+
+	   int istart = step * (job - 1);
+	   int istop = step * job;
+
+	   // Short trees are processed in one shot at first iteration. 
+	   // Following iteration skip them.
+	   if ( step == 0 && job == 1 ){
+		   int istart = 0;
+		   int istop = theTree->GetEntries();
+	   } else if ( step ==0 && job > 1) {
+		   std::cout<<"--- Skip..."<<std::endl; 
+		   continue;
+	   }	   
+	
+	   // last job take care of the rest
+	   if ( job == njob ) istop += mod;
+	   	   
+       std::cout << "--- Processing: " << theTree->GetEntries() << " events from " << istart << " to " << istop << std::endl;	   
+	   
+       for (Long64_t ievt=istart; ievt<istop;ievt++) {
        //for (Long64_t ievt=0; ievt<1000;ievt++) {
        
           if (ievt%1000 == 0) std::cout << "--- ... Processing event: " << ievt << std::endl;
@@ -514,7 +541,11 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
 
        // --- Write histograms
        
-       TFile *target  = new TFile( fdir + "TMVApp/" + "TMVApp_" + myModel + ".root","UPDATE" );
+   		TString fname;
+		fname.Form("TMVApp_%s_%i.root", myModel.Data(), job);
+	   
+	   TFile *target  = new TFile( fdir + "TMVApp/" + fname ,"UPDATE" );
+       //TFile *target  = new TFile( fdir + "TMVApp/" + "TMVApp_" + myModel + "_" + job + ".root","UPDATE" );
 	   
        if (Use["Likelihood"   ])   histLk     ->Write( TString(*spit) + "_" + "MVA_Likelihood"    );
        if (Use["LikelihoodD"  ])   histLkD    ->Write( TString(*spit) + "_" + "MVA_LikelihoodD"   );
@@ -554,7 +585,7 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
        if (Use["Fisher"]) { if (probHistFi != 0) probHistFi->Write(); if (rarityHistFi != 0) rarityHistFi->Write(); }
        target->Close();
        
-       std::cout << "--- Created root file: \"TMVApp_"<< myModel << ".root\" containing the MVA output histograms" << std::endl;
+       std::cout << "--- Created root file: \"TMVApp_"<< myModel << "_" <<  job << ".root\" containing the MVA output histograms" << std::endl;
        
        if (Use["Likelihood"])    delete histLk     ;
        if (Use["LikelihoodD"])   delete histLkD    ;
