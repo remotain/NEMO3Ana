@@ -38,7 +38,8 @@ namespace ProcessChannel {
 	
 	void SetChannelToProcess(ChannelType_t c);
 	TString GetChannelToProcess( );	
-		
+	
+	double getSectorNumber( double x, double y);	
 	
 	bool IsHotSpot  (double z, double s);
 	bool IsHotSpot  (double z, double s);

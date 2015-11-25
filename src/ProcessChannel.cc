@@ -109,6 +109,20 @@ namespace ProcessChannel {
 
 	//////////////////////////////////////////////////////////////////////////////
 	//
+	// Retrieve sector number
+	//		
+	//////////////////////////////////////////////////////////////////////////////
+	double getSectorNumber( double x, double y){
+		
+		double phi = atan2(y, x);
+	    phi = (phi < 0) ? phi+2*TMath::Pi() : phi;
+		
+		return phi * 20 / ( 2*TMath::Pi() );
+		
+	}	
+
+	//////////////////////////////////////////////////////////////////////////////
+	//
 	// Excluded spot definition
 	//		
 	//////////////////////////////////////////////////////////////////////////////
@@ -590,11 +604,9 @@ namespace ProcessChannel {
 	    Double_t output_max_el_sign      ; output_tree->Branch("max_el_sign"      , &output_max_el_sign      );
 	    Double_t output_cos_theta        ; output_tree->Branch("cos_theta"        , &output_cos_theta        );
 	    Double_t output_prob_int         ; output_tree->Branch("prob_int"         , &output_prob_int         );
-		Double_t output_min_vertex_x     ; output_tree->Branch("min_vertex_x"     , &output_min_vertex_x     );
-		Double_t output_min_vertex_y     ; output_tree->Branch("min_vertex_y"     , &output_min_vertex_y     );
+		Double_t output_min_vertex_s     ; output_tree->Branch("min_vertex_s"     , &output_min_vertex_s     );
 		Double_t output_min_vertex_z     ; output_tree->Branch("min_vertex_z"     , &output_min_vertex_z     );		
-		Double_t output_max_vertex_x     ; output_tree->Branch("max_vertex_x"     , &output_max_vertex_x     );
-		Double_t output_max_vertex_y     ; output_tree->Branch("max_vertex_y"     , &output_max_vertex_y     );
+		Double_t output_max_vertex_s     ; output_tree->Branch("max_vertex_s"     , &output_max_vertex_s     );
 		Double_t output_max_vertex_z     ; output_tree->Branch("max_vertex_z"     , &output_max_vertex_z     );		
 		Double_t output_weight           ; output_tree->Branch("weight"           , &output_weight           );
 		
@@ -749,86 +761,50 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dz_P2_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 150, -30, 30                                ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_vtx_dr_P2_hot"          , d->GetName()) , "; cm; No.Events / 1mm", 150,   0, 60                                ) );
 
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_x"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_y"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_z"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_r"             , d->GetName()) , "; cm; No.Events / 1mm", 200, 0, 10000                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_x"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_y"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_s"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_z"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_r"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 0, 250                              ) );		
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_s"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );		
 
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_x_P1"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_y_P1"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_z_P1"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_r_P1"             , d->GetName()) , "; cm; No.Events / 1mm", 200, 0, 10000                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_x_P1"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_y_P1"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_s_P1"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_z_P1"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_r_P1"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 0, 250                              ) );		
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_s_P1"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );		
 
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_x_P2"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_y_P2"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_z_P2"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_r_P2"             , d->GetName()) , "; cm; No.Events / 1mm", 200, 0, 10000                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_x_P2"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_y_P2"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_s_P2"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_z_P2"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_r_P2"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 0, 250                              ) );		
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_s_P2"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );		
 
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_x_P1_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_y_P1_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_z_P1_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_r_P1_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 200, 0, 10000                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_x_P1_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_y_P1_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_s_P1_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_z_P1_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_r_P1_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 0, 250                              ) );		
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_s_P1_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );		
 
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_x_P2_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_y_P2_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_z_P2_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_r_P2_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 200, 0, 10000                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_x_P2_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_y_P2_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_s_P2_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_z_P2_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_r_P2_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 0, 250                              ) );		
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_s_P2_hot"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );		
 
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_x_P1_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_y_P1_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_z_P1_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_r_P1_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 200, 0, 10000                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_x_P1_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_y_P1_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_z_P1_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_r_P1_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 0, 250                              ) );		
-
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_x_P2_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_y_P2_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_z_P2_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_r_P2_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 200, 0, 10000                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_x_P2_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_y_P2_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_z_P2_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_r_P2_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 0, 250                              ) );		
-
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_x_P1_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_y_P1_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_z_P1_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_r_P1_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 200, 0, 10000                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_x_P1_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_y_P1_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_s_P1_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_z_P1_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_r_P1_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 0, 250                              ) );		
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_s_P1_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );		
 
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_x_P2_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_y_P2_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_z_P2_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_r_P2_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 200, 0, 10000                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_x_P2_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_y_P2_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_s_P2_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );
 		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_z_P2_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
-		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_r_P2_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 0, 250                              ) );		
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_s_P2_warm"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );		
+
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_z_P1_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_s_P1_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_z_P1_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_s_P1_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );		
+
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_z_P2_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_min_e_vtx_s_P2_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_z_P2_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 150, -150, 150                              ) );
+		histo_collection->Add( new TH1D( TString::Format("%s_h_max_e_vtx_s_P2_cold"             , d->GetName()) , "; cm; No.Events / 1mm", 100, 18, 19                             ) );		
 
 
 		//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1153,6 +1129,7 @@ namespace ProcessChannel {
 			double el_trkSign_min      , el_trkSign_max      ;
 			double el_trkRadius_min    , el_trkRadius_max    ;
 			double el_trkCurvature_min , el_trkCurvature_max ;
+			double el_vtx_s_min        , el_vtx_s_max        ;
 
 		    TVector3 el_vtx_min, el_vtx_max, el_ip_min, el_ip_max;
 		    if (el_energy_[0] < el_energy_[1]) {
@@ -1164,8 +1141,8 @@ namespace ProcessChannel {
 		      el_dThTof_min        = el_dThTof_[0]      ; el_dThTof_max       = el_dThTof_[1]      ;      
 		      el_track_len_min     = el_pathLength_[0]  ; el_track_len_max    = el_pathLength_[1]  ;
 		      el_trkSign_min       = el_trkSign[0]      ; el_trkSign_max      = el_trkSign[1]      ;
-  		      el_trkRadius_min  = el_trkCurvature[0] ; el_trkRadius_max = el_trkCurvature[1] ;
-		      el_vtx_min.SetXYZ(el_vtx_x_[0], el_vtx_y_[0], el_vtx_z_[0]);
+  		      el_trkRadius_min     = el_trkCurvature[0] ; el_trkRadius_max    = el_trkCurvature[1] ;
+			  el_vtx_min.SetXYZ(el_vtx_x_[0], el_vtx_y_[0], el_vtx_z_[0]);
 		      el_vtx_max.SetXYZ(el_vtx_x_[1], el_vtx_y_[1], el_vtx_z_[1]);
 		      el_ip_min .SetXYZ(el_ip_x_[0] , el_ip_y_[0] , el_ip_z_[0] ); 
 		      el_ip_max .SetXYZ(el_ip_x_[1] , el_ip_y_[1] , el_ip_z_[1] );
@@ -1185,6 +1162,9 @@ namespace ProcessChannel {
 		      el_ip_max .SetXYZ(el_ip_x_[0] , el_ip_y_[0] , el_ip_z_[0] ); 
 		    }
 
+			el_vtx_s_min = getSectorNumber( el_vtx_min.x(), el_vtx_min.y() );
+			el_vtx_s_max = getSectorNumber( el_vtx_max.x(), el_vtx_max.y() );
+			
 			el_trkCurvature_min = el_trkRadius_min * el_trkSign_min;
 			el_trkCurvature_max = el_trkRadius_max * el_trkSign_max;
 
@@ -1213,23 +1193,21 @@ namespace ProcessChannel {
 						
 			
 			// Fill output tree
-			output_min_el_en        = el_energy_min       ; 
-			output_max_el_en        = el_energy_max       ;
-			output_min_el_track_len = el_track_len_min    ;
-			output_max_el_track_len = el_track_len_max    ;
+			output_min_el_en        = el_energy_min    ; 
+			output_max_el_en        = el_energy_max    ;
+			output_min_el_track_len = el_track_len_min ;
+			output_max_el_track_len = el_track_len_max ;
 			output_min_el_track_r   = el_trkRadius_min ;
 			output_max_el_track_r   = el_trkRadius_max ;
-			output_min_el_sign      = el_trkSign_min      ;
-			output_max_el_sign      = el_trkSign_max      ;
-			output_cos_theta        = cosTheta            ;
-			output_prob_int         = probInt             ;
-			output_weight           = weight              ;
-			output_min_vertex_x     = el_vtx_min.x();
-			output_min_vertex_y     = el_vtx_min.y();
-			output_min_vertex_z     = el_vtx_min.z();
-			output_max_vertex_x     = el_vtx_max.x();
-			output_max_vertex_y     = el_vtx_max.y();
-			output_max_vertex_z     = el_vtx_max.z();
+			output_min_el_sign      = el_trkSign_min   ;
+			output_max_el_sign      = el_trkSign_max   ;
+			output_cos_theta        = cosTheta         ;
+			output_prob_int         = probInt          ;
+			output_weight           = weight           ;
+			output_min_vertex_s     = el_vtx_s_min     ;
+			output_min_vertex_z     = el_vtx_min.z()   ;
+			output_max_vertex_s     = el_vtx_s_max     ;
+			output_max_vertex_z     = el_vtx_max.z()   ;
 		
 			output_tree->Fill();
 		
@@ -1323,15 +1301,11 @@ namespace ProcessChannel {
 		    histo_collection->Find(TString::Format("%s_h_vtx_dz"            , d->GetName()) ) -> Fill(delta_v.z()    , weight);
 		    histo_collection->Find(TString::Format("%s_h_vtx_dr"            , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 
-		    histo_collection->Find(TString::Format("%s_h_min_e_vtx_x"       , d->GetName()) ) -> Fill(el_vtx_min.x()    , weight);
-		    histo_collection->Find(TString::Format("%s_h_min_e_vtx_y"       , d->GetName()) ) -> Fill(el_vtx_min.y()    , weight);
+		    histo_collection->Find(TString::Format("%s_h_min_e_vtx_s"       , d->GetName()) ) -> Fill(el_vtx_s_min      , weight);
 		    histo_collection->Find(TString::Format("%s_h_min_e_vtx_z"       , d->GetName()) ) -> Fill(el_vtx_min.z()    , weight);
-		    histo_collection->Find(TString::Format("%s_h_min_e_vtx_r"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_min.x()*el_vtx_min.x() + el_vtx_min.y()*el_vtx_min.y())  , weight);
-		    histo_collection->Find(TString::Format("%s_h_max_e_vtx_x"       , d->GetName()) ) -> Fill(el_vtx_max.x()    , weight);
-		    histo_collection->Find(TString::Format("%s_h_max_e_vtx_y"       , d->GetName()) ) -> Fill(el_vtx_max.y()    , weight);
+
+		    histo_collection->Find(TString::Format("%s_h_max_e_vtx_s"       , d->GetName()) ) -> Fill(el_vtx_s_max      , weight);
 		    histo_collection->Find(TString::Format("%s_h_max_e_vtx_z"       , d->GetName()) ) -> Fill(el_vtx_max.z()    , weight);
-		    histo_collection->Find(TString::Format("%s_h_max_e_vtx_r"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_max.x()*el_vtx_max.x() + el_vtx_max.y()*el_vtx_max.y())  , weight);
-			
 			
 			// Start P1
 		    if (run < 3396) {
@@ -1351,14 +1325,10 @@ namespace ProcessChannel {
 			    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1"            , d->GetName()) ) -> Fill(delta_v.z()    , weight);
 			    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1"            , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 
-			    histo_collection->Find(TString::Format("%s_h_min_e_vtx_x_P1"       , d->GetName()) ) -> Fill(el_vtx_min.x()    , weight);
-			    histo_collection->Find(TString::Format("%s_h_min_e_vtx_y_P1"       , d->GetName()) ) -> Fill(el_vtx_min.y()    , weight);
+			    histo_collection->Find(TString::Format("%s_h_min_e_vtx_s_P1"       , d->GetName()) ) -> Fill(el_vtx_s_min      , weight);
 			    histo_collection->Find(TString::Format("%s_h_min_e_vtx_z_P1"       , d->GetName()) ) -> Fill(el_vtx_min.z()    , weight);
-			    histo_collection->Find(TString::Format("%s_h_min_e_vtx_r_P1"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_min.x()*el_vtx_min.x() + el_vtx_min.y()*el_vtx_min.y()) , weight);
-			    histo_collection->Find(TString::Format("%s_h_max_e_vtx_x_P1"       , d->GetName()) ) -> Fill(el_vtx_max.x()    , weight);
-			    histo_collection->Find(TString::Format("%s_h_max_e_vtx_y_P1"       , d->GetName()) ) -> Fill(el_vtx_max.y()    , weight);
+			    histo_collection->Find(TString::Format("%s_h_max_e_vtx_s_P1"       , d->GetName()) ) -> Fill(el_vtx_s_max      , weight);
 			    histo_collection->Find(TString::Format("%s_h_max_e_vtx_z_P1"       , d->GetName()) ) -> Fill(el_vtx_max.z()    , weight);
-			    histo_collection->Find(TString::Format("%s_h_max_e_vtx_r_P1"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_max.x()*el_vtx_max.x() + el_vtx_max.y()*el_vtx_max.y())  , weight);
 
 
 				// P1 Hot/Cold/Warm
@@ -1379,14 +1349,10 @@ namespace ProcessChannel {
 				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1_hot"            , d->GetName()) ) -> Fill(delta_v.z()    , weight);
 				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1_hot"            , d->GetName()) ) -> Fill(delta_v.Perp() , weight);	
 
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_x_P1_hot"       , d->GetName()) ) -> Fill(el_vtx_min.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_y_P1_hot"       , d->GetName()) ) -> Fill(el_vtx_min.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_s_P1_hot"       , d->GetName()) ) -> Fill(el_vtx_s_min      , weight);
 				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_z_P1_hot"       , d->GetName()) ) -> Fill(el_vtx_min.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_r_P1_hot"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_min.x()*el_vtx_min.x() + el_vtx_min.y()*el_vtx_min.y()) , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_x_P1_hot"       , d->GetName()) ) -> Fill(el_vtx_max.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_y_P1_hot"       , d->GetName()) ) -> Fill(el_vtx_max.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_s_P1_hot"       , d->GetName()) ) -> Fill(el_vtx_s_max      , weight);
 				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_z_P1_hot"       , d->GetName()) ) -> Fill(el_vtx_max.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_r_P1_hot"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_max.x()*el_vtx_max.x() + el_vtx_max.y()*el_vtx_max.y())  , weight);
 
 
 				} else if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
@@ -1407,14 +1373,10 @@ namespace ProcessChannel {
 				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1_warm"            , d->GetName()) ) -> Fill(delta_v.z()    , weight);
 				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1_warm"            , d->GetName()) ) -> Fill(delta_v.Perp() , weight);	
 
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_x_P1_warm"       , d->GetName()) ) -> Fill(el_vtx_min.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_y_P1_warm"       , d->GetName()) ) -> Fill(el_vtx_min.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_s_P1_warm"       , d->GetName()) ) -> Fill(el_vtx_s_min      , weight);
 				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_z_P1_warm"       , d->GetName()) ) -> Fill(el_vtx_min.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_r_P1_warm"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_min.x()*el_vtx_min.x() + el_vtx_min.y()*el_vtx_min.y()) , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_x_P1_warm"       , d->GetName()) ) -> Fill(el_vtx_max.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_y_P1_warm"       , d->GetName()) ) -> Fill(el_vtx_max.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_s_P1_warm"       , d->GetName()) ) -> Fill(el_vtx_s_max      , weight);
 				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_z_P1_warm"       , d->GetName()) ) -> Fill(el_vtx_max.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_r_P1_warm"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_max.x()*el_vtx_max.x() + el_vtx_max.y()*el_vtx_max.y())  , weight);
 
 
 				} else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
@@ -1435,14 +1397,10 @@ namespace ProcessChannel {
 				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P1_cold"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
 				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P1_cold"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_x_P1_cold"       , d->GetName()) ) -> Fill(el_vtx_min.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_y_P1_cold"       , d->GetName()) ) -> Fill(el_vtx_min.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_s_P1_cold"       , d->GetName()) ) -> Fill(el_vtx_s_min      , weight);
 				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_z_P1_cold"       , d->GetName()) ) -> Fill(el_vtx_min.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_r_P1_cold"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_min.x()*el_vtx_min.x() + el_vtx_min.y()*el_vtx_min.y()) , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_x_P1_cold"       , d->GetName()) ) -> Fill(el_vtx_max.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_y_P1_cold"       , d->GetName()) ) -> Fill(el_vtx_max.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_s_P1_cold"       , d->GetName()) ) -> Fill(el_vtx_s_max      , weight);
 				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_z_P1_cold"       , d->GetName()) ) -> Fill(el_vtx_max.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_r_P1_cold"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_max.x()*el_vtx_max.x() + el_vtx_max.y()*el_vtx_max.y())  , weight);
 
 
 				}
@@ -1534,14 +1492,10 @@ namespace ProcessChannel {
 			    histo_collection->Find(TString::Format("%s_h_vtx_dz_P2"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
 			    histo_collection->Find(TString::Format("%s_h_vtx_dr_P2"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 
-			    histo_collection->Find(TString::Format("%s_h_min_e_vtx_x_P2"       , d->GetName()) ) -> Fill(el_vtx_min.x()    , weight);
-			    histo_collection->Find(TString::Format("%s_h_min_e_vtx_y_P2"       , d->GetName()) ) -> Fill(el_vtx_min.y()    , weight);
+			    histo_collection->Find(TString::Format("%s_h_min_e_vtx_s_P2"       , d->GetName()) ) -> Fill(el_vtx_s_min      , weight);
 			    histo_collection->Find(TString::Format("%s_h_min_e_vtx_z_P2"       , d->GetName()) ) -> Fill(el_vtx_min.z()    , weight);
-			    histo_collection->Find(TString::Format("%s_h_min_e_vtx_r_P2"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_min.x()*el_vtx_min.x() + el_vtx_min.y()*el_vtx_min.y()) , weight);
-			    histo_collection->Find(TString::Format("%s_h_max_e_vtx_x_P2"       , d->GetName()) ) -> Fill(el_vtx_max.x()    , weight);
-			    histo_collection->Find(TString::Format("%s_h_max_e_vtx_y_P2"       , d->GetName()) ) -> Fill(el_vtx_max.y()    , weight);
+			    histo_collection->Find(TString::Format("%s_h_max_e_vtx_s_P2"       , d->GetName()) ) -> Fill(el_vtx_s_max      , weight);
 			    histo_collection->Find(TString::Format("%s_h_max_e_vtx_z_P2"       , d->GetName()) ) -> Fill(el_vtx_max.z()    , weight);
-			    histo_collection->Find(TString::Format("%s_h_max_e_vtx_r_P2"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_max.x()*el_vtx_max.x() + el_vtx_max.y()*el_vtx_max.y())  , weight);
 
 
 				// P2 Hot/Cold/Warm
@@ -1563,14 +1517,10 @@ namespace ProcessChannel {
 					histo_collection->Find(TString::Format("%s_h_vtx_dz_P2_hot"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
 					histo_collection->Find(TString::Format("%s_h_vtx_dr_P2_hot"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 					
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_x_P2_hot"       , d->GetName()) ) -> Fill(el_vtx_min.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_y_P2_hot"       , d->GetName()) ) -> Fill(el_vtx_min.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_s_P2_hot"       , d->GetName()) ) -> Fill(el_vtx_s_min      , weight);
 				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_z_P2_hot"       , d->GetName()) ) -> Fill(el_vtx_min.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_r_P2_hot"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_min.x()*el_vtx_min.x() + el_vtx_min.y()*el_vtx_min.y()) , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_x_P2_hot"       , d->GetName()) ) -> Fill(el_vtx_max.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_y_P2_hot"       , d->GetName()) ) -> Fill(el_vtx_max.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_s_P2_hot"       , d->GetName()) ) -> Fill(el_vtx_s_max      , weight);
 				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_z_P2_hot"       , d->GetName()) ) -> Fill(el_vtx_max.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_r_P2_hot"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_max.x()*el_vtx_max.x() + el_vtx_max.y()*el_vtx_max.y())  , weight);
 
 
 				} else if( IsWarmSpot(el_vtx_z_mean_, vertexSector) ) {
@@ -1592,14 +1542,10 @@ namespace ProcessChannel {
 				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P2_warm"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
 				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P2_warm"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 					
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_x_P2_warm"       , d->GetName()) ) -> Fill(el_vtx_min.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_y_P2_warm"       , d->GetName()) ) -> Fill(el_vtx_min.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_s_P2_warm"       , d->GetName()) ) -> Fill(el_vtx_s_min      , weight);
 				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_z_P2_warm"       , d->GetName()) ) -> Fill(el_vtx_min.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_r_P2_warm"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_min.x()*el_vtx_min.x() + el_vtx_min.y()*el_vtx_min.y()) , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_x_P2_warm"       , d->GetName()) ) -> Fill(el_vtx_max.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_y_P2_warm"       , d->GetName()) ) -> Fill(el_vtx_max.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_s_P2_warm"       , d->GetName()) ) -> Fill(el_vtx_s_max      , weight);
 				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_z_P2_warm"       , d->GetName()) ) -> Fill(el_vtx_max.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_r_P2_warm"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_max.x()*el_vtx_max.x() + el_vtx_max.y()*el_vtx_max.y())  , weight);
 					
 					
 				} else if( IsColdSpot(el_vtx_z_mean_, vertexSector) ) {
@@ -1621,14 +1567,10 @@ namespace ProcessChannel {
 				    histo_collection->Find(TString::Format("%s_h_vtx_dz_P2_cold"       , d->GetName()) ) -> Fill(delta_v.z()    , weight);
 				    histo_collection->Find(TString::Format("%s_h_vtx_dr_P2_cold"       , d->GetName()) ) -> Fill(delta_v.Perp() , weight);
 					
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_x_P2_cold"       , d->GetName()) ) -> Fill(el_vtx_min.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_y_P2_cold"       , d->GetName()) ) -> Fill(el_vtx_min.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_s_P2_cold"       , d->GetName()) ) -> Fill(el_vtx_s_min      , weight);
 				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_z_P2_cold"       , d->GetName()) ) -> Fill(el_vtx_min.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_min_e_vtx_r_P2_cold"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_min.x()*el_vtx_min.x() + el_vtx_min.y()*el_vtx_min.y()) , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_x_P2_cold"       , d->GetName()) ) -> Fill(el_vtx_max.x()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_y_P2_cold"       , d->GetName()) ) -> Fill(el_vtx_max.y()    , weight);
+				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_s_P2_cold"       , d->GetName()) ) -> Fill(el_vtx_s_max      , weight);
 				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_z_P2_cold"       , d->GetName()) ) -> Fill(el_vtx_max.z()    , weight);
-				    histo_collection->Find(TString::Format("%s_h_max_e_vtx_r_P2_cold"       , d->GetName()) ) -> Fill(TMath::Sqrt(el_vtx_max.x()*el_vtx_max.x() + el_vtx_max.y()*el_vtx_max.y()) , weight);
 					
 				}
 				
