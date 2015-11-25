@@ -411,8 +411,8 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
 	   // Short trees are processed in one shot at first iteration. 
 	   // Following iteration skip them.
 	   if ( step == 0 && job == 1 ){
-		   int istart = 0;
-		   int istop = theTree->GetEntries();
+		   istart = 0;
+		   istop = theTree->GetEntries();
 	   } else if ( step ==0 && job > 1) {
 		   std::cout<<"--- Skip..."<<std::endl; 
 		   continue;
