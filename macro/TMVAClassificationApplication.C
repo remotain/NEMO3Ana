@@ -257,6 +257,7 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
    samples.push_back("SWire_Bi210");
    samples.push_back("SScin_Bi210");
    samples.push_back("SScin_Bi214");
+   samples.push_back("SScin_Pb214");
    samples.push_back("SWire_Tl208");
    samples.push_back("SWire_Bi214");
    samples.push_back("SFoil_Bi214");
@@ -267,6 +268,7 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
    samples.push_back("FeShield_Ac228");
    samples.push_back("CuTower_Co60");
    samples.push_back("Air_Bi214");
+   samples.push_back("Air_Tl208");
    samples.push_back("PMT_Bi214");
    samples.push_back("PMT_Tl208");
    samples.push_back("PMT_Ac228");
