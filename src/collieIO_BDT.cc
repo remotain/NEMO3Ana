@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
 	//Backgrounds are passed in via vector
 	vector<TH1D*> vbkgd;
 	
-	TH1F * data = (TH1D*) infile->Get( "Data_MVA_BDT" ); 
+	TH1D * data = (TH1D*) infile->Get( "Data_MVA_BDT" ); 
 	data->Sumw2();	
 
     //Otherwise, get your input histograms from an external file
