@@ -47,9 +47,8 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-	TString infileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/TwoElectronIntHistos.root" );
-    TString infileName;
-	infileName.Form( "TMVApp_%s.root", myModel.Data() );	
+	TString infileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/" );
+    TString infileName("TwoElectronIntHistos.root");
 
     TFile * infile = new TFile( infileDir + infileName , "READ");
   
@@ -58,14 +57,16 @@ int main(int argc, char* argv[]) {
   	  return 1;
     }
 	
+	TDirectory * fdir = 0;
+	
 	TH1D * sig = 0;
 	
-    if ( Model[ "MM"  ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m1_h_tot_e_energy"  ) ; 
-    if ( Model[ "RHC" ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m2_h_tot_e_energy"  ) ; 
-    if ( Model[ "M1"  ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m5_h_tot_e_energy"  ) ; 
-    if ( Model[ "M2"  ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m15_h_tot_e_energy" ) ; 
-    if ( Model[ "M3"  ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m6_h_tot_e_energy"  ) ; 
-    if ( Model[ "M7"  ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m7_h_tot_e_energy"  ) ; 
+    if ( Model[ "MM"  ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m1" ); fdir->cd(); sig = (TH1D*) infile->Get( "Cd116_2b0n_m1_h_tot_e_energy"  ); };
+    if ( Model[ "RHC" ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m2" ); fdir->cd(); sig = (TH1D*) infile->Get( "Cd116_2b0n_m2_h_tot_e_energy"  ); };
+    if ( Model[ "M1"  ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m5" ); fdir->cd(); sig = (TH1D*) infile->Get( "Cd116_2b0n_m5_h_tot_e_energy"  ); };
+    if ( Model[ "M2"  ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m15"); fdir->cd(); sig = (TH1D*) infile->Get( "Cd116_2b0n_m15_h_tot_e_energy" ); };
+    if ( Model[ "M3"  ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m6" ); fdir->cd(); sig = (TH1D*) infile->Get( "Cd116_2b0n_m6_h_tot_e_energy"  ); };
+    if ( Model[ "M7"  ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m7" ); fdir->cd(); sig = (TH1D*) infile->Get( "Cd116_2b0n_m7_h_tot_e_energy"  ); };
 	
  	sig -> Sumw2() ; 
 	
@@ -82,7 +83,6 @@ int main(int argc, char* argv[]) {
 	//Backgrounds are passed in via vector
 	vector<TH1D*> vbkgd;
 	
-	TDirectory * fdir = 0;
 	fdir = (TDirectory *) infile->Get("Data"); fdir->cd(); 
 	
 	TH1D * data = (TH1D*) infile->Get( "Data_h_tot_e_energy" ); 
