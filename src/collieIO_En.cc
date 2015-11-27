@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
-	std::cout << "Process model \"" << myModel << std::endl;
+  	std::cout << "Process model \"" << myModel << "\""<< std::endl;
 
 	TString infileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/" );
     TString infileName("TwoElectronIntHistos_NO_CHARGE_NO_VERTEX_CUT.root");
@@ -69,6 +69,8 @@ int main(int argc, char* argv[]) {
     if ( Model[ "M2"  ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m15"); fdir->cd(); sig = (TH1D*) infile->Get( "Cd116_2b0n_m15_h_tot_e_energy" ); };
     if ( Model[ "M3"  ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m6" ); fdir->cd(); sig = (TH1D*) infile->Get( "Cd116_2b0n_m6_h_tot_e_energy"  ); };
     if ( Model[ "M7"  ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m7" ); fdir->cd(); sig = (TH1D*) infile->Get( "Cd116_2b0n_m7_h_tot_e_energy"  ); };
+	
+	std::cout << sig << std::endl;
 	
  	sig -> Sumw2() ; 
 	

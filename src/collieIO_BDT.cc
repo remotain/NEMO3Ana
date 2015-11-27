@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
   
-  	std::cout << "Process model \"" << myModel << std::endl;
+  	std::cout << "Process model \"" << myModel << "\""<< std::endl;
   
 	TString infileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/TMVApp/" );
     TString infileName;
