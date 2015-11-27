@@ -7,7 +7,16 @@
 #include "TRandom.h"
 #include "TString.h"
 
-int main(TString myModel = "") {
+int main(int argc, char* argv[]) {
+  
+  	TString myModel;
+  
+  	if ( argc = 1 ) {
+		myModel = argv[1];
+	} else {
+		std::cout << "Argument required!" << std::endl;
+		return;
+	}
   
     // Default model to be trained + tested
     std::map<std::string,int> Model;
