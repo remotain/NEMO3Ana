@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
     }
 
 	TString infileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/" );
-    TString infileName("TwoElectronIntHistos.root");
+    TString infileName("TwoElectronIntTree_NO_CHARGE_NO_VERTEX_CUT.root");
 
     TFile * infile = new TFile( infileDir + infileName , "READ");
   
