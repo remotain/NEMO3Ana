@@ -51,22 +51,24 @@ int main(int argc, char* argv[]) {
     }
   
 	TString infileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/TMVApp/" );
-    TString outfileName;
-	outfileName.Form( "TMVApp_%s.root", myModel.Data() );	
+    TString infileName;
+	infileName.Form( "TMVApp_%s.root", myModel.Data() );	
 
-    TFile * infile = new TFile( outfileDir + outfileName , "READ");
+    TFile * infile = new TFile( infileDir + infileName , "READ");
   
     if (!infile) {
   	  cout << "Error opening file" << endl;
   	  return 1;
     }
 	
-    if ( Model[ "MM"  ] ) TH1D * sig = (TH1D*) input->Get( "Cd116_2b0n_m1_MVA_BDT"  ) ; 
-    if ( Model[ "RHC" ] ) TH1D * sig = (TH1D*) input->Get( "Cd116_2b0n_m2_MVA_BDT"  ) ; 
-    if ( Model[ "M1"  ] ) TH1D * sig = (TH1D*) input->Get( "Cd116_2b0n_m5_MVA_BDT"  ) ; 
-    if ( Model[ "M2"  ] ) TH1D * sig = (TH1D*) input->Get( "Cd116_2b0n_m15_MVA_BDT" ) ; 
-    if ( Model[ "M3"  ] ) TH1D * sig = (TH1D*) input->Get( "Cd116_2b0n_m6_MVA_BDT"  ) ; 
-    if ( Model[ "M7"  ] ) TH1D * sig = (TH1D*) input->Get( "Cd116_2b0n_m7_MVA_BDT"  ) ; 
+	TH1D * sig = 0;
+	
+    if ( Model[ "MM"  ] ) sig = (TH1D*) input->Get( "Cd116_2b0n_m1_MVA_BDT"  ) ; 
+    if ( Model[ "RHC" ] ) sig = (TH1D*) input->Get( "Cd116_2b0n_m2_MVA_BDT"  ) ; 
+    if ( Model[ "M1"  ] ) sig = (TH1D*) input->Get( "Cd116_2b0n_m5_MVA_BDT"  ) ; 
+    if ( Model[ "M2"  ] ) sig = (TH1D*) input->Get( "Cd116_2b0n_m15_MVA_BDT" ) ; 
+    if ( Model[ "M3"  ] ) sig = (TH1D*) input->Get( "Cd116_2b0n_m6_MVA_BDT"  ) ; 
+    if ( Model[ "M7"  ] ) sig = (TH1D*) input->Get( "Cd116_2b0n_m7_MVA_BDT"  ) ; 
 	
  	sig -> Sumw2() ; 
 	
@@ -140,7 +142,7 @@ int main(int argc, char* argv[]) {
 	outfileName.Form( "CollieIO_BDT_%s.root", myModel.Data() );	
   	outfileName = outfileDir + outfileName;
   
-    cfile->initFile( outfileName.data() , "BDT_Score");  
+    cfile->initFile( outfileName.Data() , "BDT_Score");  
 
     cfile->setInputHist(data->GetXaxis()->GetBinLowEdge(1),data->GetXaxis()->GetBinUpEdge(data->GetNbinsX()),data->GetNbinsX());
   
