@@ -147,7 +147,7 @@ int main(int argc, char* argv[]) {
   
     // Option to define physical cutoffs where events should not exist (in terms of your historam range)
     //
-    //cfile->setCutoffs(-0.8,0.8);   
+    if ( Model[ "MM"  ] ) cfile->setCutoffs(0.0, 0.4);   
   
     // Option to rebin histograms to a coarser binning
     // Eg, rebinning by 2 reduces to 10 bins
