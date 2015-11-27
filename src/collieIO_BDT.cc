@@ -11,11 +11,8 @@ int main(int argc, char* argv[]) {
   
   	TString myModel;
   
-  	if ( argc = 1 ) {
+  	if ( argc <= 2 ) {
 		myModel = argv[1];
-	} else {
-		std::cout << "Argument required!" << std::endl;
-		return 1;
 	}
   
     // Default model to be trained + tested
