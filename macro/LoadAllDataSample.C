@@ -47,6 +47,7 @@
 	DataManagement::AddDataSet ( new DataSet ( "Cd116_2b0n_m5"     ,      5000100 	  ,    4613385*Phase1Fraction ,    4613385*Phase2Fraction ) );               
 	DataManagement::AddDataSet ( new DataSet ( "Cd116_2b0n_m6"     ,      4999900 	  ,    4224320*Phase1Fraction ,    4224320*Phase2Fraction ) );               
 	DataManagement::AddDataSet ( new DataSet ( "Cd116_2b0n_m7"     ,      5000000 	  ,    3150923*Phase1Fraction ,    3150923*Phase2Fraction ) );               
+	DataManagement::AddDataSet ( new DataSet ( "Cd116_2b0n_m18"    ,      3999900 	  ,    3845627*Phase1Fraction ,    3845627*Phase2Fraction ) );               
 	DataManagement::AddDataSet ( new DataSet ( "Cd116_2b2n_139_m4" ,      2000000 	  ,    1487483*Phase1Fraction ,    1487483*Phase2Fraction ) );               
 	DataManagement::AddDataSet ( new DataSet ( "Cd116_2b2n_l1_m9"  ,     10000000 	  ,    7283035*Phase1Fraction ,    7283035*Phase2Fraction ) );               
 	DataManagement::AddDataSet ( new DataSet ( "Cd116_2b2n_l2_m14" ,     10000000 	  ,    4009792*Phase1Fraction ,    4009792*Phase2Fraction ) );               
