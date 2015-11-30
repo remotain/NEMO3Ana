@@ -632,7 +632,7 @@ namespace ProcessChannel {
 		//cutNames->push_back("Hits not associated to the track <= 2");
 		cutNames->push_back("No unassociated hits opposite to the electrons");
 		cutNames->push_back("No electron hits petal near the foil");
-		//cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4 cm"); // BOOKMARK	    
+		cutNames->push_back("|dz_vtx| < 8 cm and radial distance < 4 cm"); // BOOKMARK	    
 		cutNames->push_back("Not an hot spot");
 		
 	    unsigned int nCuts = cutNames->size();
@@ -1170,7 +1170,7 @@ namespace ProcessChannel {
 
 			// Last cut on vertex position on foil
 		    TVector3 delta_v = el_vtx_min - el_vtx_max; // BOOKMARKS
-		    //if (TMath::Abs(delta_v.z()) > 8 or delta_v.Perp() > 4) continue; hAnaCutFlow -> Fill(currentcut++);
+		    if (TMath::Abs(delta_v.z()) > 8 or delta_v.Perp() > 4) continue; hAnaCutFlow -> Fill(currentcut++);
 		    
 			if ( IsHotSpot(eVertex->z(), vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++);
 			
