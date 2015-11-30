@@ -135,7 +135,7 @@ void calcLimit(char* outFile, char* inList, char* m){
   csLim.setAccuracy(0.001); 
   
   //Toggle the number of pseudo-experiments used to find the limit 0 is lowest(fastest), 4 is highest(slowest)
-  csLim.setPrecision(0); 
+  csLim.setPrecision(2); 
   
   //Toggle expected/observed to speed things up if you wish
   csLim.calculateExpected(true);  

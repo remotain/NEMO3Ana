@@ -123,12 +123,13 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
    std::map<std::string,int> Model;
 
    // --- Cut optimisation
-   Model[ "MM"  ]  = 0; // Mass mechanism
-   Model[ "RHC" ]  = 0; // Right Handed Current
-   Model[ "M1"  ]  = 0; // Majoron
-   Model[ "M2"  ]  = 0; // Majoron
-   Model[ "M3"  ]  = 0; // Majoron
-   Model[ "M7"  ]  = 0; // Majoron
+   Model[ "MM"  ]   = 0; // Mass mechanism
+   Model[ "RHC_L" ] = 0; // Right Handed Current
+   Model[ "RHC_E" ] = 0; // Right Handed Current
+   Model[ "M1"  ]   = 0; // Majoron
+   Model[ "M2"  ]   = 0; // Majoron
+   Model[ "M3"  ]   = 0; // Majoron
+   Model[ "M7"  ]   = 0; // Majoron
 
 
    std::cout << std::endl;
@@ -228,7 +229,7 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
    //   reader->AddSpectator( "Category_cat3 := (var3>0)&&(var4>=0)", &Category_cat3 );
    //}
 
-   TString fname = "TwoElectronIntTree_NO_CHARGE_NO_VERTEX_CUT.root";	
+   TString fname = "TwoElectronIntTree.root";	
    TFile *input = TFile::Open( fdir + fname , "READ");
    
    if (!input) {
@@ -243,49 +244,55 @@ void TMVAClassificationApplication( TString myMethodList = "", TString myModel =
 
    // List of three to consider
    std::vector<std::string> samples;
-   samples.push_back("Data");                   // 1
-   samples.push_back("Cd116_Tl208");
-   samples.push_back("Cd116_Ac228");
-   samples.push_back("Cd116_Bi212");
-   samples.push_back("Cd116_Bi214");
-   samples.push_back("Cd116_Pb214_VT");
-   samples.push_back("Mylar_Bi214");
-   samples.push_back("Mylar_Pb214");
-   samples.push_back("Cd116_K40");
-   samples.push_back("Cd116_Pa234m");
-   samples.push_back("SFoil_Bi210");
-   samples.push_back("SWire_Bi210");
-   samples.push_back("SScin_Bi210");
-   samples.push_back("SScin_Bi214");
-   samples.push_back("SScin_Pb214");
-   samples.push_back("SWire_Tl208");
-   samples.push_back("SWire_Bi214");
-   samples.push_back("SFoil_Bi214");
-   samples.push_back("SWire_Pb214");
-   samples.push_back("SFoil_Pb214");
-   samples.push_back("FeShield_Bi214");
-   samples.push_back("FeShield_Tl208");
-   samples.push_back("FeShield_Ac228");
-   samples.push_back("CuTower_Co60");
-   samples.push_back("Air_Bi214");
-   samples.push_back("Air_Tl208");
-   samples.push_back("PMT_Bi214");
-   samples.push_back("PMT_Tl208");
-   samples.push_back("PMT_Ac228");
-   samples.push_back("PMT_K40");
-   samples.push_back("ScintInn_K40");
-   samples.push_back("ScintOut_K40");
-   samples.push_back("ScintPet_K40");
-   samples.push_back("MuMetal_Pa234m");
-   samples.push_back("Cd116_2b2n_m14");
    
+   // Set the data tree
+   samples.push_back("Data");
+
+   // The wights are used to check which tree has been trained and which three 
+   // should then be processed. Only tree with weights != 0 are considered.
+   Double_t Cd116_Tl208_weight    = 5.93241           ; if ( Cd116_Tl208_weight    != 0 ) { samples.push_back( "Cd116_Tl208"    ); };      
+   Double_t Cd116_Ac228_weight    = 6.92004           ; if ( Cd116_Ac228_weight    != 0 ) { samples.push_back( "Cd116_Ac228"    ); };      
+   Double_t Cd116_Bi212_weight    = 2.74493           ; if ( Cd116_Bi212_weight    != 0 ) { samples.push_back( "Cd116_Bi212"    ); };      
+   Double_t Cd116_Bi214_weight    = 18.2853           ; if ( Cd116_Bi214_weight    != 0 ) { samples.push_back( "Cd116_Bi214"    ); };      
+   Double_t Cd116_Pb214_weight    = 0.186478          ; if ( Cd116_Pb214_weight    != 0 ) { samples.push_back( "Cd116_Pb214_VT" ); };         
+   Double_t Mylar_Bi214_weight    = 11.1896           ; if ( Mylar_Bi214_weight    != 0 ) { samples.push_back( "Mylar_Bi214"    ); };      
+   Double_t Mylar_Pb214_weight    = 0.493241          ; if ( Mylar_Pb214_weight    != 0 ) { samples.push_back( "Mylar_Pb214"    ); };      
+   Double_t Cd116_K40_weight      = 25.9835+9.02952   ; if ( Cd116_K40_weight      != 0 ) { samples.push_back( "Cd116_K40"      ); };    
+   Double_t Cd116_Pa234m_weight   = 27.7433+72.4378   ; if ( Cd116_Pa234m_weight   != 0 ) { samples.push_back( "Cd116_Pa234m"   ); };       
+   Double_t SFoil_Bi210_weight    = 23.243            ; if ( SFoil_Bi210_weight    != 0 ) { samples.push_back( "SFoil_Bi210"    ); };      
+   Double_t SWire_Bi210_weight    = 0.136147+0.624186 ; if ( SWire_Bi210_weight    != 0 ) { samples.push_back( "SWire_Bi210"    ); };      
+   Double_t SScin_Bi210_weight    = 1.756             ; if ( SScin_Bi210_weight    != 0 ) { samples.push_back( "SScin_Bi210"    ); };      
+   Double_t SScin_Bi214_weight    = 0.050538          ; if ( SScin_Bi214_weight    != 0 ) { samples.push_back( "SScin_Bi214"    ); };      
+   Double_t SScin_Pb214_weight    = 0.                ; if ( SScin_Pb214_weight    != 0 ) { samples.push_back( "SScin_Pb214"    ); };      
+   Double_t SWire_Tl208_weight    = 0.217623+1.07644  ; if ( SWire_Tl208_weight    != 0 ) { samples.push_back( "SWire_Tl208"    ); };      
+   Double_t SWire_Bi214_weight    = 21.4626+17.9578   ; if ( SWire_Bi214_weight    != 0 ) { samples.push_back( "SWire_Bi214"    ); };      
+   Double_t SFoil_Bi214_weight    = 5.77558+2.73528   ; if ( SFoil_Bi214_weight    != 0 ) { samples.push_back( "SFoil_Bi214"    ); };      
+   Double_t SWire_Pb214_weight    = 0.457546+0.648406 ; if ( SWire_Pb214_weight    != 0 ) { samples.push_back( "SWire_Pb214"    ); };      
+   Double_t SFoil_Pb214_weight    = 0.215627+0.188876 ; if ( SFoil_Pb214_weight    != 0 ) { samples.push_back( "SFoil_Pb214"    ); };      
+   Double_t FeShield_Bi214_weight = 49.1846           ; if ( FeShield_Bi214_weight != 0 ) { samples.push_back( "FeShield_Bi214" ); };         
+   Double_t FeShield_Tl208_weight = 1.19312           ; if ( FeShield_Tl208_weight != 0 ) { samples.push_back( "FeShield_Tl208" ); };         
+   Double_t FeShield_Ac228_weight = 0.17612           ; if ( FeShield_Ac228_weight != 0 ) { samples.push_back( "FeShield_Ac228" ); };         
+   Double_t CuTower_Co60_weight   = 3.77603           ; if ( CuTower_Co60_weight   != 0 ) { samples.push_back( "CuTower_Co60"   ); };       
+   Double_t Air_Bi214_P1_weight   = 4.19271           ; if ( Air_Bi214_P1_weight   != 0 ) { samples.push_back( "Air_Bi214"      ); };    
+   Double_t Air_Tl208_P1_weight   = 0.                ; if ( Air_Tl208_P1_weight   != 0 ) { samples.push_back( "Air_Tl208"      ); };    
+   Double_t PMT_Bi214_weight      = 30.7385           ; if ( PMT_Bi214_weight      != 0 ) { samples.push_back( "PMT_Bi214"      ); };    
+   Double_t PMT_Tl208_weight      = 23.2701           ; if ( PMT_Tl208_weight      != 0 ) { samples.push_back( "PMT_Tl208"      ); };    
+   Double_t PMT_Ac228_weight      = 3.60944           ; if ( PMT_Ac228_weight      != 0 ) { samples.push_back( "PMT_Ac228"      ); };    
+   Double_t PMT_K40_weight        = 16.7905           ; if ( PMT_K40_weight        != 0 ) { samples.push_back( "PMT_K40"        ); };  
+   Double_t ScintInn_K40_weight   = 0.335557          ; if ( ScintInn_K40_weight   != 0 ) { samples.push_back( "ScintInn_K40"   ); };       
+   Double_t ScintOut_K40_weight   = 0.604003          ; if ( ScintOut_K40_weight   != 0 ) { samples.push_back( "ScintOut_K40"   ); };       
+   Double_t ScintPet_K40_weight   = 1.00666           ; if ( ScintPet_K40_weight   != 0 ) { samples.push_back( "ScintPet_K40"   ); };       
+   Double_t MuMetal_Pa234m_weight = 0.66462           ; if ( MuMetal_Pa234m_weight != 0 ) { samples.push_back( "MuMetal_Pa234m" ); };         
+   Double_t Cd116_2b2n_m14_weight = 5022.22           ; if ( Cd116_2b2n_m14_weight != 0 ) { samples.push_back( "Cd116_2b2n_m14" ); };         
    
-   if ( Model[ "MM"  ] ) samples.push_back( "Cd116_2b0n_m1"  ) ; // 34
-   if ( Model[ "RHC" ] ) samples.push_back( "Cd116_2b0n_m2"  ) ; // 34
-   if ( Model[ "M1"  ] ) samples.push_back( "Cd116_2b0n_m5"  ) ; // 34
-   if ( Model[ "M2"  ] ) samples.push_back( "Cd116_2b0n_m15" ) ; // 34
-   if ( Model[ "M3"  ] ) samples.push_back( "Cd116_2b0n_m6"  ) ; // 34
-   if ( Model[ "M7"  ] ) samples.push_back( "Cd116_2b0n_m7"  ) ; // 34
+   // Set the signal tree
+   if ( Model[ "MM"    ] ) samples.push_back( "Cd116_2b0n_m1"  ) ; // 34
+   if ( Model[ "RHC_L" ] ) samples.push_back( "Cd116_2b0n_m2"  ) ; // 34
+   if ( Model[ "RHC_E" ] ) samples.push_back( "Cd116_2b0n_m18" ) ; // 34   
+   if ( Model[ "M1"    ] ) samples.push_back( "Cd116_2b0n_m5"  ) ; // 34
+   if ( Model[ "M2"    ] ) samples.push_back( "Cd116_2b0n_m15" ) ; // 34
+   if ( Model[ "M3"    ] ) samples.push_back( "Cd116_2b0n_m6"  ) ; // 34
+   if ( Model[ "M7"    ] ) samples.push_back( "Cd116_2b0n_m7"  ) ; // 34
 
 
    // --- Book the MVA methods

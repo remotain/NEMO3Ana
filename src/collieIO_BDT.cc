@@ -19,12 +19,13 @@ int main(int argc, char* argv[]) {
     std::map<std::string,int> Model;
 
     // --- Cut optimisation
-    Model[ "MM"  ]  = 0; // Mass mechanism
-    Model[ "RHC" ]  = 0; // Right Handed Current
-    Model[ "M1"  ]  = 0; // Majoron
-    Model[ "M2"  ]  = 0; // Majoron
-    Model[ "M3"  ]  = 0; // Majoron
-    Model[ "M7"  ]  = 0; // Majoron
+    Model[ "MM"    ]  = 0; // Mass mechanism
+    Model[ "RHC_L" ]  = 0; // Right Handed Current
+    Model[ "RHC_E" ]  = 0; // Right Handed Current	
+    Model[ "M1"    ]  = 0; // Majoron
+    Model[ "M2"    ]  = 0; // Majoron
+    Model[ "M3"    ]  = 0; // Majoron
+    Model[ "M7"    ]  = 0; // Majoron
 	
     if(myModel != "") {
   	
@@ -62,21 +63,23 @@ int main(int argc, char* argv[]) {
 	
 	TH1D * sig = 0;
 	
-    if ( Model[ "MM"  ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m1_MVA_BDT"  ) ; 
-    if ( Model[ "RHC" ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m2_MVA_BDT"  ) ; 
-    if ( Model[ "M1"  ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m5_MVA_BDT"  ) ; 
-    if ( Model[ "M2"  ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m15_MVA_BDT" ) ; 
-    if ( Model[ "M3"  ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m6_MVA_BDT"  ) ; 
-    if ( Model[ "M7"  ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m7_MVA_BDT"  ) ; 
+    if ( Model[ "MM"    ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m1_MVA_BDT"  ) ; 
+    if ( Model[ "RHC_L" ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m2_MVA_BDT"  ) ; 
+    if ( Model[ "RHC_E" ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m18_MVA_BDT" ) ; 	
+    if ( Model[ "M1"    ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m5_MVA_BDT"  ) ; 
+    if ( Model[ "M2"    ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m15_MVA_BDT" ) ; 
+    if ( Model[ "M3"    ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m6_MVA_BDT"  ) ; 
+    if ( Model[ "M7"    ] ) sig = (TH1D*) infile->Get( "Cd116_2b0n_m7_MVA_BDT"  ) ; 
 	
  	sig -> Sumw2() ; 
 	
-	if ( Model[ "MM"  ] ) sig -> Scale( 1 / 5000000. );
-	if ( Model[ "RHC" ] ) sig -> Scale( 1 / 4999900. );
-	if ( Model[ "M1"  ] ) sig -> Scale( 1 / 5000100. );
-	if ( Model[ "M2"  ] ) sig -> Scale( 1 / 5000000. );
-	if ( Model[ "M3"  ] ) sig -> Scale( 1 / 4999900. );
-	if ( Model[ "M7"  ] ) sig -> Scale( 1 / 5000000. );
+	if ( Model[ "MM"    ] ) sig -> Scale( 1 / 5000000. );
+	if ( Model[ "RHC_L" ] ) sig -> Scale( 1 / 4999900. );
+	if ( Model[ "RHC_E" ] ) sig -> Scale( 1 / 3999900. );	
+	if ( Model[ "M1"    ] ) sig -> Scale( 1 / 5000100. );
+	if ( Model[ "M2"    ] ) sig -> Scale( 1 / 5000000. );
+	if ( Model[ "M3"    ] ) sig -> Scale( 1 / 4999900. );
+	if ( Model[ "M7"    ] ) sig -> Scale( 1 / 5000000. );
 	
 	//Define backgrounds     
 	vector<string> bkgdNames;

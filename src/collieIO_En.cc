@@ -19,13 +19,14 @@ int main(int argc, char* argv[]) {
     std::map<std::string,int> Model;
 
     // --- Cut optimisation
-    Model[ "MM"  ]  = 0; // Mass mechanism
-    Model[ "RHC" ]  = 0; // Right Handed Current
-    Model[ "M1"  ]  = 0; // Majoron
-    Model[ "M2"  ]  = 0; // Majoron
-    Model[ "M3"  ]  = 0; // Majoron
-    Model[ "M7"  ]  = 0; // Majoron
-	
+    Model[ "MM"  ]   = 0; // Mass mechanism
+    Model[ "RHC_L" ] = 0; // Right Handed Current
+    Model[ "RHC_E" ] = 0; // Right Handed Current
+    Model[ "M1"  ]   = 0; // Majoron
+    Model[ "M2"  ]   = 0; // Majoron
+    Model[ "M3"  ]   = 0; // Majoron
+    Model[ "M7"  ]   = 0; // Majoron
+		
     if(myModel != "") {
   	
  		std::string regModel(myModel);
@@ -63,21 +64,23 @@ int main(int argc, char* argv[]) {
 	
 	TH1D * sig = 0;
 	
-    if ( Model[ "MM"  ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m1" ); fdir->cd(); sig = (TH1D*) fdir->Get( "Cd116_2b0n_m1_h_tot_e_energy"  ); };
-    if ( Model[ "RHC" ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m2" ); fdir->cd(); sig = (TH1D*) fdir->Get( "Cd116_2b0n_m2_h_tot_e_energy"  ); };
-    if ( Model[ "M1"  ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m5" ); fdir->cd(); sig = (TH1D*) fdir->Get( "Cd116_2b0n_m5_h_tot_e_energy"  ); };
-    if ( Model[ "M2"  ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m15"); fdir->cd(); sig = (TH1D*) fdir->Get( "Cd116_2b0n_m15_h_tot_e_energy" ); };
-    if ( Model[ "M3"  ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m6" ); fdir->cd(); sig = (TH1D*) fdir->Get( "Cd116_2b0n_m6_h_tot_e_energy"  ); };
-    if ( Model[ "M7"  ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m7" ); fdir->cd(); sig = (TH1D*) fdir->Get( "Cd116_2b0n_m7_h_tot_e_energy"  ); };
+    if ( Model[ "MM"    ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m1" ); fdir->cd(); sig = (TH1D*) fdir->Get( "Cd116_2b0n_m1_h_tot_e_energy"  ); };
+    if ( Model[ "RHC_L" ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m2" ); fdir->cd(); sig = (TH1D*) fdir->Get( "Cd116_2b0n_m2_h_tot_e_energy"  ); };
+    if ( Model[ "RHC_E" ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m18" ); fdir->cd(); sig = (TH1D*) fdir->Get( "Cd116_2b0n_m18_h_tot_e_energy" ); };	
+    if ( Model[ "M1"    ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m5" ); fdir->cd(); sig = (TH1D*) fdir->Get( "Cd116_2b0n_m5_h_tot_e_energy"  ); };
+    if ( Model[ "M2"    ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m15"); fdir->cd(); sig = (TH1D*) fdir->Get( "Cd116_2b0n_m15_h_tot_e_energy" ); };
+    if ( Model[ "M3"    ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m6" ); fdir->cd(); sig = (TH1D*) fdir->Get( "Cd116_2b0n_m6_h_tot_e_energy"  ); };
+    if ( Model[ "M7"    ] ) {fdir = (TDirectory *) infile->Get("Cd116_2b0n_m7" ); fdir->cd(); sig = (TH1D*) fdir->Get( "Cd116_2b0n_m7_h_tot_e_energy"  ); };
 	
  	sig -> Sumw2() ; 
 	
-	if ( Model[ "MM"  ] ) sig -> Scale( 1 / 5000000. );
-	if ( Model[ "RHC" ] ) sig -> Scale( 1 / 4999900. );
-	if ( Model[ "M1"  ] ) sig -> Scale( 1 / 5000100. );
-	if ( Model[ "M2"  ] ) sig -> Scale( 1 / 5000000. );
-	if ( Model[ "M3"  ] ) sig -> Scale( 1 / 4999900. );
-	if ( Model[ "M7"  ] ) sig -> Scale( 1 / 5000000. );
+	if ( Model[ "MM"    ] ) sig -> Scale( 1 / 5000000. );
+	if ( Model[ "RHC_L" ] ) sig -> Scale( 1 / 4999900. );
+	if ( Model[ "RHC_E" ] ) sig -> Scale( 1 / 3999900. );	
+	if ( Model[ "M1"    ] ) sig -> Scale( 1 / 5000100. );
+	if ( Model[ "M2"    ] ) sig -> Scale( 1 / 5000000. );
+	if ( Model[ "M3"    ] ) sig -> Scale( 1 / 4999900. );
+	if ( Model[ "M7"    ] ) sig -> Scale( 1 / 5000000. );
 	
 	//Define backgrounds     
 	vector<string> bkgdNames;
@@ -153,7 +156,7 @@ int main(int argc, char* argv[]) {
   
     // Option to define physical cutoffs where events should not exist (in terms of your historam range)
     //
-    if ( Model[ "MM"  ] ) cfile->setCutoffs(2.0, 3.5);   
+    //if ( Model[ "MM"  ] ) cfile->setCutoffs(2.0, 3.5);   
   
     // Option to rebin histograms to a coarser binning
     // Eg, rebinning by 2 reduces to 10 bins
