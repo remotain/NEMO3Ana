@@ -134,6 +134,22 @@ void calcLimit(char* outFile, char* inList, char* m){
   //The range of CL values that will satisfy the algorithm: -0.001 < (CL-0.95) < 0.001
   csLim.setAccuracy(0.001); 
   
+  int bins = 500;
+  double min = -15;
+  double max = 15;
+  TH1D* sigLLR = clcompute.getLLRdist_sb("LLR_SB",bins,min,max);
+  TH1D* bkgLLR = clcompute.getLLRdist_b("LLR_B",bins,min,max);
+  TH1D* LLRd = new TH1D("LLR_D","LLR_D",bins,min,max);
+  TH1D* LLRsigma1 = new TH1D("LLR_B_1sigmas","LLR_B_1sigmas",bins,min,max);
+  TH1D* LLRsigma2 = new TH1D("LLR_B_2sigmas","LLR_B_2sigmas",bins,min,max);
+   
+  LLRd->Fill(clresults.llrobs);
+  LLRsigma2->Fill(clresults.llrb_m2s);
+  LLRsigma1->Fill(clresults.llrb_m1s);
+  LLRsigma1->Fill(clresults.llrb_p1s);
+  LLRsigma2->Fill(clresults.llrb_p2s);
+  
+  
   //Toggle the number of pseudo-experiments used to find the limit 0 is lowest(fastest), 4 is highest(slowest)
   csLim.setPrecision(2); 
   
