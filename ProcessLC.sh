@@ -8,7 +8,6 @@
 #$ -V
 #$ -j y
 #$ -o /sps/nemo/scratch/remoto/nemo3/plot/
-#$ -t 1-10
 
 source /usr/local/root/v5.34.18/bin/thisroot.sh
 
