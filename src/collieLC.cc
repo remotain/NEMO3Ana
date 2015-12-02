@@ -101,10 +101,10 @@ void calcLimit(char* outFile, char* inList, char* m){
   //  CLfast clcompute;  
 
   // The CLsyst computation applies all systematics via Gaussian distribution
-  CLsyst clcompute;  
+  //CLsyst clcompute;  
   
   // Use CLfit2 for profileLH fitting of systematics-smeared distributions using two fits per pseudoexperiement
-  //  CLfit2 clcompute;  
+  CLfit2 clcompute;  
   
   //Use CLfit for profileLH fitting of systematics-smeared distributions using just one fit per pseudoexperiment
   //  CLfit clcompute;  
