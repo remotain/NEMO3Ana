@@ -13,12 +13,12 @@
 # Submit channel selection jobs
 ################################################################################
 #
-#source /afs/in2p3.fr/throng/nemo/users/remoto/setup.sh 
+source /afs/in2p3.fr/throng/nemo/users/remoto/setup.sh 
 #root -b -q /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/ProcessOneElectron.C+ 
 #root -b -q /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/ProcessOneElectronOneGammaExt.C+ 
 #root -b -q /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/ProcessOneElectronOneGammaInt.C+ 
 #root -b -q /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/ProcessOneElectronTwoGammaInt.C+
 #root -b -q /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/ProcessOneElectronThreeGammaInt.C+
 #root -b -q /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/ProcessTwoElectronExt.C+ 
-#root -b -q /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/ProcessTwoElectronInt.C+ 
+root -b -q /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/ProcessTwoElectronInt.C+ 
 #root -b -q /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/ProcessOneElectronOneAlpha.C+ 
