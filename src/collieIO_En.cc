@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
   	std::cout << "Process model \"" << myModel << "\""<< std::endl;
 
 	TString infileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/" );
-    TString infileName("TwoElectronIntHistos_NO_CHARGE_NO_VERTEX_CUT.root");
+    TString infileName("TwoElectronIntHistos.root");
 
     TFile * infile = new TFile( infileDir + infileName , "READ");
   
