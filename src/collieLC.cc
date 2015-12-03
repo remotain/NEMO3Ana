@@ -206,8 +206,7 @@ void calcLimit(char* outFile, char* inList, char* m){
       int bins = 500;
        double min = -15;
        double max = 15;
-       TH1D* sbLLR = clcompute.getLLRdist_sb("LLR_SB",bins,min,max);
-       TH1D* sigLLR = clcompute.getLLRdist_s("LLR_S",bins,min,max);	   
+       TH1D* sigLLR = clcompute.getLLRdist_sb("LLR_SB",bins,min,max);
        TH1D* bkgLLR = clcompute.getLLRdist_b("LLR_B",bins,min,max);
        TH1D* LLRd = new TH1D("LLR_D","LLR_D",bins,min,max);
        TH1D* LLRsigma1 = new TH1D("LLR_B_1sigmas","LLR_B_1sigmas",bins,min,max);
