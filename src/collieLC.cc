@@ -150,7 +150,8 @@ void calcLimit(char* outFile, char* inList, char* m){
 
   // This class is used to test the fit used by the CLfit and CLfit2 classes
   //  Use this to determine the quality of your fit model.
-  FitTest fitTest;
+  FitTest fitTest;  
+  
   // Set the number of pseudo-experiments to fit
   fitTest.setIterations(2000);
   // Determine if you want fitted pseudo-experiments in the tests
@@ -202,21 +203,23 @@ void calcLimit(char* outFile, char* inList, char* m){
       //report your results for interested observers
       clresults.print();
 
-	  int bins = 500;
-	  double min = -15;
-	  double max = 15;
-	  TH1D* sigLLR = clcompute.getLLRdist_sb("LLR_SB",bins,min,max);
-	  TH1D* bkgLLR = clcompute.getLLRdist_b("LLR_B",bins,min,max);
-	  TH1D* LLRd = new TH1D("LLR_D","LLR_D",bins,min,max);
-	  TH1D* LLRsigma1 = new TH1D("LLR_B_1sigmas","LLR_B_1sigmas",bins,min,max);
-	  TH1D* LLRsigma2 = new TH1D("LLR_B_2sigmas","LLR_B_2sigmas",bins,min,max);
-   
-	  LLRd->Fill(clresults.llrobs);
-	  LLRsigma2->Fill(clresults.llrb_m2s);
-	  LLRsigma1->Fill(clresults.llrb_m1s);
-	  LLRsigma1->Fill(clresults.llrb_p1s);
-	  LLRsigma2->Fill(clresults.llrb_p2s);
+      int bins = 500;
+       double min = -15;
+       double max = 15;
+       TH1D* sbLLR = clcompute.getLLRdist_sb("LLR_SB",bins,min,max);
+       TH1D* sigLLR = clcompute.getLLRdist_s("LLR_S",bins,min,max);	   
+       TH1D* bkgLLR = clcompute.getLLRdist_b("LLR_B",bins,min,max);
+       TH1D* LLRd = new TH1D("LLR_D","LLR_D",bins,min,max);
+       TH1D* LLRsigma1 = new TH1D("LLR_B_1sigmas","LLR_B_1sigmas",bins,min,max);
+       TH1D* LLRsigma2 = new TH1D("LLR_B_2sigmas","LLR_B_2sigmas",bins,min,max);
+    
+       LLRd->Fill(clresults.llrobs);
+       LLRsigma2->Fill(clresults.llrb_m2s);
+       LLRsigma1->Fill(clresults.llrb_m1s);
+       LLRsigma1->Fill(clresults.llrb_p1s);
+       LLRsigma2->Fill(clresults.llrb_p2s);
 
+	  
       //Calculate a cross section limit...
       //These results are reported in the factor by which you must
       //multiply your nominal signal cross section to obtain a 95% CL
