@@ -139,10 +139,10 @@ void calcLimit(char* outFile, char* inList, char* m){
   
   //Toggle expected/observed to speed things up if you wish
   csLim.calculateExpected(true);  
-  csLim.calculateObserved(true);
+  //csLim.calculateObserved(true);
   
   //Calculate the expected limit in the case of -2,-1,0,1, or 2-sigma variations of the data relative to bkgd
-  csLim.setNSigma(0);
+  csLim.setNSigma(-1);
   
   //Start the cross section limit search at a cross section of 1.0 times the nominal input value
   //  Use this to shorten your calculation if you know roughly where the limit will be.
