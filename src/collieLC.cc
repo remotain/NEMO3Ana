@@ -194,8 +194,8 @@ void calcLimit(char* outFile, char* inList, char* m){
       printf("Sig: %f, Bkgd: %f, Data: %f\n",sbd->totSignal(),sbd->totBkgd(),sbd->totData());	
       
       //If you wish to run the fit test, uncomment the next two lines
-      //      fitTest.runTest(sbd,1e6);
-      //      continue;
+      fitTest.runTest(sbd,1e6);
+      continue;
 
       //calculate CLs
       clcompute.calculateCLs(*sbd,clresults,CLcompute::LEVEL_VERYFAST);
