@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
     Model[ "M7"  ]   = 0; // Majoron
 
     // Default model to be trained + tested
-    std::map<std::string,int> CutOff;
+    std::map<std::string,double> CutOff;
 
     // --- Cut optimisation
     CutOff[ "100" ] = 1.00; 
@@ -81,7 +81,7 @@ int main(int argc, char* argv[]) {
 		
  		if( CutOff.find(regEcut) == CutOff.end() ){
  			std::cout << "Cut value \"" << myEcut << "\" not known in under this name. Choose among the following:" << std::endl;
- 			for (std::map<std::string,int>::iterator it = CutOff.begin(); it != CutOff.end(); it++) std::cout << it->first << " ";
+ 			for (std::map<std::string,double>::iterator it = CutOff.begin(); it != CutOff.end(); it++) std::cout << it->first << " ";
  			std::cout << std::endl;
  			return 1;
  		}
