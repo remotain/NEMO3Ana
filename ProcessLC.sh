@@ -89,11 +89,7 @@ if [ "${SGE_TASK_ID}" -eq "49" ]; then ${PATH_EXE}/collieLC_m1s ${PATH_OUT}/Coll
 if [ "${SGE_TASK_ID}" -eq "40" ]; then ${PATH_EXE}/collieLC_m1s ${PATH_OUT}/CollieLC_BDT_RHC_L_m1s.root ${PATH_OUT}/CollieIO_BDT_RHC_L.root ; fi 
 if [ "${SGE_TASK_ID}" -eq "51" ]; then ${PATH_EXE}/collieLC_m1s ${PATH_OUT}/CollieLC_BDT_RHC_E_m1s.root ${PATH_OUT}/CollieIO_BDT_RHC_E.root ; fi 
 
-if [ "${SGE_TASK_ID}" -eq "52" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_En_MM_p1s.root     ${PATH_OUT}/CollieIO_En_MM.root     ; fi
-if [ "${SGE_TASK_ID}" -eq "53" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_En_RHC_L_p1s.root  ${PATH_OUT}/CollieIO_En_RHC_L.root  ; fi
-if [ "${SGE_TASK_ID}" -eq "54" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_En_RHC_E_p1s.root  ${PATH_OUT}/CollieIO_En_RHC_E.root  ; fi
-
-if [ "${SGE_TASK_ID}" -eq "55" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_BDT_MM_p1s.root    ${PATH_OUT}/CollieIO_BDT_MM.root    ; fi
-if [ "${SGE_TASK_ID}" -eq "56" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_BDT_RHC_L_p1s.root ${PATH_OUT}/CollieIO_BDT_RHC_L.root ; fi 
-if [ "${SGE_TASK_ID}" -eq "57" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_BDT_RHC_E_p1s.root ${PATH_OUT}/CollieIO_BDT_RHC_E.root ; fi 
+if [ "${SGE_TASK_ID}" -eq "52" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_BDT_MM_p1s.root    ${PATH_OUT}/CollieIO_BDT_MM.root    ; fi
+if [ "${SGE_TASK_ID}" -eq "53" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_BDT_RHC_L_p1s.root ${PATH_OUT}/CollieIO_BDT_RHC_L.root ; fi 
+if [ "${SGE_TASK_ID}" -eq "54" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_BDT_RHC_E_p1s.root ${PATH_OUT}/CollieIO_BDT_RHC_E.root ; fi 
 
