@@ -8,7 +8,7 @@
 #$ -V
 #$ -j y
 #$ -o /sps/nemo/scratch/remoto/nemo3/plot/
-#$ -t 1-57
+#$ -t 1-54
 
 source /afs/in2p3.fr/throng/nemo/users/remoto/setup.sh
 
