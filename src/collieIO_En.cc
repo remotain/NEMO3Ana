@@ -12,10 +12,17 @@
 int main(int argc, char* argv[]) {
   
   	TString myModel;
-  
+  	TString myEcut;
+  	  
   	if ( argc <= 2 ) {
 		myModel = argv[1];
 	}
+	
+	else if ( argc <= 3 ){
+		myModel = argv[1];
+		myEcut    = argv[2];
+	}
+  
   
     // Default model to be trained + tested
     std::map<std::string,int> Model;
@@ -28,6 +35,22 @@ int main(int argc, char* argv[]) {
     Model[ "M2"  ]   = 0; // Majoron
     Model[ "M3"  ]   = 0; // Majoron
     Model[ "M7"  ]   = 0; // Majoron
+
+    // Default model to be trained + tested
+    std::map<std::string,int> CutOff;
+
+    // --- Cut optimisation
+    CutOff[ "100" ] = 1.00; 
+    CutOff[ "150" ] = 1.50; 
+    CutOff[ "200" ] = 2.00; 
+    CutOff[ "210" ] = 2.10; 
+    CutOff[ "220" ] = 2.20; 
+    CutOff[ "230" ] = 2.30; 
+    CutOff[ "240" ] = 2.40; 
+    CutOff[ "250" ] = 2.50; 
+
+	double minEcut = 0.0;
+	double maxEcut = 3.5;
 		
     if(myModel != "") {
   	
@@ -51,6 +74,28 @@ int main(int argc, char* argv[]) {
     }
 
   	std::cout << "Process model \"" << myModel << "\""<< std::endl;
+
+    if(myEcut != "") {
+  	
+ 		std::string regEcut(myEcut);
+		
+ 		if( CutOff.find(regEcut) == CutOff.end() ){
+ 			std::cout << "Cut value \"" << myEcut << "\" not known in under this name. Choose among the following:" << std::endl;
+ 			for (std::map<std::string,int>::iterator it = CutOff.begin(); it != CutOff.end(); it++) std::cout << it->first << " ";
+ 			std::cout << std::endl;
+ 			return 1;
+ 		}
+	   
+ 		minEcut = CutOff[regEcut];
+	
+    } else {
+		
+		std::cout << "No cut off as been specified. Use default value" << std::endl;
+		myEcut = "000";
+		minEcut = 0.0;
+		
+	}
+
 
 	TString infileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/" );
     TString infileName("TwoElectronIntHistos.root");
@@ -151,7 +196,7 @@ int main(int argc, char* argv[]) {
   
 	TString outfileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/Collie/" );
     TString outfileName;
-	outfileName.Form( "CollieIO_En_%s.root", myModel.Data() );	
+	outfileName.Form( "CollieIO_En_%s_%s.root", myModel.Data(), myEcut.Data() );	
   	outfileName = outfileDir + outfileName;
   
     cfile->initFile( outfileName.Data() , "Energy");  
@@ -160,7 +205,7 @@ int main(int argc, char* argv[]) {
   
     // Option to define physical cutoffs where events should not exist (in terms of your historam range)
     //
-    //if ( Model[ "MM"  ] ) cfile->setCutoffs(2.0, 3.5);   
+    cfile->setCutoffs(minEcut, maxEcut);   
   
     // Option to rebin histograms to a coarser binning
     // Eg, rebinning by 2 reduces to 10 bins
