@@ -269,6 +269,11 @@ int main(int argc, char* argv[]) {
 	/* 32 */ if( MuMetal_Pa234m  ) {cfile->createFlatBkgdSystematic( MuMetal_Pa234m_i , "Externals"  , 0.0061 , 0.0129 ,100);};
 	/* 33 */ if( Cd116_2b2n_m14  ) {cfile->createFlatBkgdSystematic( Cd116_2b2n_m14_i , "bb2nu"      , 0.0220 , 0.0220 ,100);};
 	
+	if ( Model[ "M1"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
+	if ( Model[ "M2"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
+	if ( Model[ "M3"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
+	if ( Model[ "M7"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
+	
 	///store and output channel information
 	cfile->storeFile();
   
