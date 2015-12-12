@@ -91,7 +91,7 @@ int main(int argc, char* argv[]) {
     } else {
 		
 		std::cout << "No cut off as been specified. Use default value" << std::endl;
-		myEcut = "000";
+		myEcut = "DEF";
 		minEcut = 0.0;
 		
 	}
