@@ -195,7 +195,7 @@ void calcLimit(char* outFile, char* inList, char* m){
       
       //If you wish to run the fit test, uncomment the next two lines
       fitTest.runTest(sbd,1e6);
-      continue;
+      //continue;
 
       //calculate CLs
       clcompute.calculateCLs(*sbd,clresults,CLcompute::LEVEL_VERYFAST);
