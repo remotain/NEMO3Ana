@@ -6,12 +6,13 @@
 
 namespace ProcessChannel {
 	
-	void SetInputFilePath  (TString & s);
-	void SetInputFileName  (TString & s);
-	void SetInputDirName   (TString & s);
-	void SetInputTreeName  (TString & s);
-	void SetOutputFilePath (TString & s);
-	void SetOutputFileName (TString & s);
+	void SetInputFilePath      (TString & s);
+	void SetInputFileName      (TString & s);
+	void SetInputDirName       (TString & s);
+	void SetInputTreeName      (TString & s);
+	void SetOutputFilePath     (TString & s);
+	void SetOutputFileName     (TString & s);
+	void SetOutputTreeFileName (TString & s);
 		
 	TString GetInputFilePath  ();
 	TString GetInputFileName  ();

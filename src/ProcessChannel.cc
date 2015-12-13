@@ -16,26 +16,30 @@
 
 namespace ProcessChannel {
 
-	TString _InputFilePath  = "";
-	TString _InputFileName  = "";
-	TString _InputDirName   = "";
-	TString _InputTreeName  = "";
-	TString _OutputFilePath = "";
-	TString _OutputFileName = "";
+	TString _InputFilePath      = "";
+	TString _InputFileName      = "";
+	TString _InputDirName       = "";
+	TString _InputTreeName      = "";
+	TString _OutputFilePath     = "";
+	TString _OutputFileName     = "";
+	TString _OutputTreeFileName = "";
 	
-	void SetInputFilePath (TString & s) { _InputFilePath  = s; };
-	void SetInputFileName (TString & s) { _InputFileName  = s; };
-	void SetInputDirName  (TString & s) { _InputDirName   = s; };
-	void SetInputTreeName (TString & s) { _InputTreeName  = s; };
-	void SetOutputFilePath(TString & s) { _OutputFilePath = s; };
-	void SetOutputFileName(TString & s) { _OutputFileName = s; };
+	void SetInputFilePath     (TString & s) { _InputFilePath      = s; };
+	void SetInputFileName     (TString & s) { _InputFileName      = s; };
+	void SetInputDirName      (TString & s) { _InputDirName       = s; };
+	void SetInputTreeName     (TString & s) { _InputTreeName      = s; };
+	void SetOutputFilePath    (TString & s) { _OutputFilePath     = s; };
+	void SetOutputFileName    (TString & s) { _OutputFileName     = s; };
+	void SetOutputTreeFileName(TString & s) { _OutputTreeFileName = s; };
+	
 			
-	TString GetInputFilePath () { return _InputFilePath;  };
-	TString GetInputFileName () { return _InputFileName;  };
-	TString GetInputDirName  () { return _InputDirName;   };
-	TString GetInputTreeName () { return _InputTreeName;  };
-	TString GetOutputFilePath() { return _OutputFilePath; };
-	TString GetOutputFileName() { return _OutputFileName; };
+	TString GetInputFilePath     () { return _InputFilePath;      };
+	TString GetInputFileName     () { return _InputFileName;      };
+	TString GetInputDirName      () { return _InputDirName;       };
+	TString GetInputTreeName     () { return _InputTreeName;      };
+	TString GetOutputFilePath    () { return _OutputFilePath;     };
+	TString GetOutputFileName    () { return _OutputFileName;     };
+	TString GetOutputTreeFileName() { return _OutputTreeFileName; };
 
 	// Set/Get channel to process
 	ChannelType_t _ChannelToProcess;
@@ -591,7 +595,7 @@ namespace ProcessChannel {
 		TH1D::SetDefaultSumw2(kTRUE);
 
 		// Output tree
-		TFile * _OutputFile_tree = new TFile(_OutputFilePath + "TwoElectronIntTree.root", "UPDATE");
+		TFile * _OutputFile_tree = new TFile(_OutputFilePath + _OutputTreeFileName, "UPDATE");
 		TString tmp_tree_name = "_tree";
 		TTree * output_tree = new TTree(d->GetName() + tmp_tree_name, "");		
 	    Double_t output_min_el_en        ; output_tree->Branch("min_el_en"        , &output_min_el_en        );
@@ -624,7 +628,7 @@ namespace ProcessChannel {
 		cutNames->push_back("Run status = 1 (GOOD RUN) ");
 		cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign");
-	    cutNames->push_back("Energy of the electron > 300 keV ");
+	    cutNames->push_back("Energy of the electron > 200 keV ");
 		cutNames->push_back("Track lengths > 30 cm ");
 		cutNames->push_back("Track fires gg hit in first (0) layers of cells");
 		cutNames->push_back("Internal probability > 0.01");
@@ -1106,7 +1110,7 @@ namespace ProcessChannel {
 			if ( !CheckRunStatus(runType) )                                     continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
 			if (sectorId != 18 || IsExcludedSpot(el_vtx_z_mean_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					    continue; hAnaCutFlow -> Fill(currentcut++);
-			if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3 )       			    continue; hAnaCutFlow -> Fill(currentcut++);
+			if (el_energy_[0] < 0.2 or el_energy_[1] < 0.2 )       			    continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_pathLength_[0] < 30 or el_pathLength_[1] < 30)        	    continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( el_first_hit_layer_[0] > 0 or el_first_hit_layer_[1] > 0 )     continue; hAnaCutFlow -> Fill(currentcut++);
 			if (probInt < 0.01)                                    			    continue; hAnaCutFlow -> Fill(currentcut++);
