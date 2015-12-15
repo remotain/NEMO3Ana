@@ -46,8 +46,8 @@ int main(int argc, char* argv[]) {
     CutOff[ "015" ] = 0.15; 
     CutOff[ "020" ] = 0.20; 
 
-	double minEcut = -0.40;
-	double maxEcut = 0.04;
+	double minEcut = -0.80;
+	double maxEcut = 0.80;
 
 	
     if(myModel != "") {
