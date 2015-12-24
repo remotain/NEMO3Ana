@@ -141,4 +141,10 @@ IF (ISCOLLIE)
 	add_executable(collieLC ${CMAKE_CURRENT_SOURCE_DIR}/src/collieLC.cc)
 	target_link_libraries(collieLC CollieCLHEP CollieIO CollieLimit ${ROOT_LIBRARIES})
 
+	add_executable(collieLC_m1s ${CMAKE_CURRENT_SOURCE_DIR}/src/collieLC_m1s.cc)
+	target_link_libraries(collieLC_m1s CollieCLHEP CollieIO CollieLimit ${ROOT_LIBRARIES})
+
+	add_executable(collieLC_p1s ${CMAKE_CURRENT_SOURCE_DIR}/src/collieLC_p1s.cc)
+	target_link_libraries(collieLC_p1s CollieCLHEP CollieIO CollieLimit ${ROOT_LIBRARIES})
+
 ENDIF (ISCOLLIE)
