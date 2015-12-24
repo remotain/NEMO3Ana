@@ -240,8 +240,56 @@ int main(int argc, char* argv[]) {
 	cfile->createFlatSigSystematic("Efficiency"      , 0.0550 , 0.0550 ,100);
 	cfile->createFlatSigSystematic("Bremsstrahlung"  , 0.0050 , 0.0012 ,100);
 	cfile->createFlatSigSystematic("ThinFoil"        , 0.0073 , 0.0073 ,100);
-	cfile->createFlatSigSystematic("EnCalib"         , 0.0025 , 0.0025 ,100);
+	//cfile->createFlatSigSystematic("EnCalib"         , 0.0025 , 0.0025 ,100);
 	
+	// Calibration uncertainy
+    TString infileName("SystShape.root");
+    TFile * syst_shape_infile = new TFile( infileDir + infileName , "READ");
+
+	if ( Model[ "MM"    ] ) {cfile->createShapeSigSystematic("SigSystShape" , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m1_h_syst_p"  ) , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m1_h_syst_m"  ) , 100 );}; 
+	if ( Model[ "RHC_L" ] ) {cfile->createShapeSigSystematic("SigSystShape" , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m2_h_syst_p"  ) , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m2_h_syst_m"  ) , 100 );}; 
+	if ( Model[ "RHC_E" ] ) {cfile->createShapeSigSystematic("SigSystShape" , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m18_h_syst_p" ) , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m18_h_syst_m" ) , 100 );};
+	if ( Model[ "M1"    ] ) {cfile->createShapeSigSystematic("SigSystShape" , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m5_h_syst_p"  ) , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m5_h_syst_m"  ) , 100 );}; 
+	if ( Model[ "M2"    ] ) {cfile->createShapeSigSystematic("SigSystShape" , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m15_h_syst_p" ) , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m15_h_syst_m" ) , 100 );}; 
+	if ( Model[ "M3"    ] ) {cfile->createShapeSigSystematic("SigSystShape" , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m6_h_syst_p"  ) , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m6_h_syst_m"  ) , 100 );}; 
+	if ( Model[ "M7"    ] ) {cfile->createShapeSigSystematic("SigSystShape" , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m7_h_syst_p"  ) , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m7_h_syst_m"  ) , 100 );}; 
+
+	/*  0 */ if( Cd116_Tl208     ) {cfile->createShapeBkgdSystematic( Cd116_Tl208_i    , "Tl208SystShape"      , (TH1D*)syst_shape_infile->Get( "Cd116_Tl208_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "Cd116_Tl208_h_syst_m"     ) ,100);};
+	/*  1 */ if( Cd116_Ac228     ) {cfile->createShapeBkgdSystematic( Cd116_Ac228_i    , "Tl208SystShape"      , (TH1D*)syst_shape_infile->Get( "Cd116_Ac228_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "Cd116_Ac228_h_syst_m"     ) ,100);};
+	/*  2 */ if( Cd116_Bi212     ) {cfile->createShapeBkgdSystematic( Cd116_Bi212_i    , "Tl208SystShape"      , (TH1D*)syst_shape_infile->Get( "Cd116_Bi212_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "Cd116_Bi212_h_syst_m"     ) ,100);};
+	/*  3 */ if( Cd116_Bi214     ) {cfile->createShapeBkgdSystematic( Cd116_Bi214_i    , "Bi214SystShape"      , (TH1D*)syst_shape_infile->Get( "Cd116_Bi214_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "Cd116_Bi214_h_syst_m"     ) ,100);};
+	/*  4 */ if( Cd116_Pb214     ) {cfile->createShapeBkgdSystematic( Cd116_Pb214_i    , "Bi214SystShape"      , (TH1D*)syst_shape_infile->Get( "Cd116_Pb214_VT_h_syst_p" ) , (TH1D*)syst_shape_infile->Get( "Cd116_Pb214_VT_h_systmp"  ) ,100);};
+	/*  5 */ if( Mylar_Bi214     ) {cfile->createShapeBkgdSystematic( Mylar_Bi214_i    , "Bi214SystShape"      , (TH1D*)syst_shape_infile->Get( "Mylar_Bi214_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "Mylar_Bi214_h_syst_m"     ) ,100);};
+	/*  6 */ if( Mylar_Pb214     ) {cfile->createShapeBkgdSystematic( Mylar_Pb214_i    , "Bi214SystShape"      , (TH1D*)syst_shape_infile->Get( "Mylar_Pb214_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "Mylar_Pb214_h_syst_m"     ) ,100);};
+	/*  7 */ if( Cd116_K40       ) {cfile->createShapeBkgdSystematic( Cd116_K40_i      , "InternalSystShape"   , (TH1D*)syst_shape_infile->Get( "Cd116_K40_h_syst_p"      ) , (TH1D*)syst_shape_infile->Get( "Cd116_K40_h_syst_m"       ) ,100);};
+	/*  8 */ if( Cd116_Pa234m    ) {cfile->createShapeBkgdSystematic( Cd116_Pa234m_i   , "InternalSystShape"   , (TH1D*)syst_shape_infile->Get( "Cd116_Pa234m_h_syst_p"   ) , (TH1D*)syst_shape_infile->Get( "Cd116_Pa234m_h_syst_m"    ) ,100);};
+	/*  9 */ if( SFoil_Bi210     ) {cfile->createShapeBkgdSystematic( SFoil_Bi210_i    , "InternalSystShape"   , (TH1D*)syst_shape_infile->Get( "SFoil_Bi210_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "SFoil_Bi210_h_syst_m"     ) ,100);};
+	/* 10 */ if( SWire_Bi210     ) {cfile->createShapeBkgdSystematic( SWire_Bi210_i    , "InternalSystShape"   , (TH1D*)syst_shape_infile->Get( "SWire_Bi210_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "SWire_Bi210_h_syst_m"     ) ,100);};
+	/* 11 */ if( SScin_Bi210     ) {cfile->createShapeBkgdSystematic( SScin_Bi210_i    , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "SScin_Bi210_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "SScin_Bi210_h_syst_m"     ) ,100);};
+	/* 12 */ if( SScin_Bi214     ) {cfile->createShapeBkgdSystematic( SScin_Bi214_i    , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "SScin_Bi214_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "SScin_Bi214_h_syst_m"     ) ,100);};
+	/* 13 */ if( SScin_Pb214     ) {cfile->createShapeBkgdSystematic( SScin_Pb214_i    , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "SScin_Pb214_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "SScin_Pb214_h_syst_m"     ) ,100);};
+	/* 14 */ if( SWire_Tl208     ) {cfile->createShapeBkgdSystematic( SWire_Tl208_i    , "RadonSystShape"      , (TH1D*)syst_shape_infile->Get( "SWire_Tl208_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "SWire_Tl208_h_syst_m"     ) ,100);};
+	/* 15 */ if( SWire_Bi214_P1  ) {cfile->createShapeBkgdSystematic( SWire_Bi214_P1_i , "RadonSystShape"      , (TH1D*)syst_shape_infile->Get( "SWire_Bi214_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "SWire_Bi214_h_syst_m"     ) ,100);};
+	/* 16 */ if( SFoil_Bi214     ) {cfile->createShapeBkgdSystematic( SFoil_Bi214_i    , "RadonSystShape"      , (TH1D*)syst_shape_infile->Get( "SFoil_Bi214_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "SFoil_Bi214_h_syst_m"     ) ,100);};
+	/* 17 */ if( SWire_Pb214     ) {cfile->createShapeBkgdSystematic( SWire_Pb214_i    , "RadonSystShape"      , (TH1D*)syst_shape_infile->Get( "SWire_Pb214_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "SWire_Pb214_h_syst_m"     ) ,100);};
+	/* 18 */ if( SFoil_Pb214     ) {cfile->createShapeBkgdSystematic( SFoil_Pb214_i    , "RadonSystShape"      , (TH1D*)syst_shape_infile->Get( "SFoil_Pb214_h_syst_p"    ) , (TH1D*)syst_shape_infile->Get( "SFoil_Pb214_h_syst_m"     ) ,100);};
+	/* 19 */ if( FeShield_Bi214  ) {cfile->createShapeBkgdSystematic( FeShield_Bi214_i , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "FeShield_Bi214_h_syst_p" ) , (TH1D*)syst_shape_infile->Get( "FeShield_Bi214_h_systmp"  ) ,100);};
+	/* 20 */ if( FeShield_Tl208  ) {cfile->createShapeBkgdSystematic( FeShield_Tl208_i , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "FeShield_Tl208_h_syst_p" ) , (TH1D*)syst_shape_infile->Get( "FeShield_Tl208_h_systmp"  ) ,100);};
+	/* 21 */ if( FeShield_Ac228  ) {cfile->createShapeBkgdSystematic( FeShield_Ac228_i , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "FeShield_Ac228_h_syst_p" ) , (TH1D*)syst_shape_infile->Get( "FeShield_Ac228_h_systmp"  ) ,100);};
+	/* 22 */ if( CuTower_Co60    ) {cfile->createShapeBkgdSystematic( CuTower_Co60_i   , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "CuTower_Co60_h_syst_p"   ) , (TH1D*)syst_shape_infile->Get( "CuTower_Co60_h_syst_m"    ) ,100);};
+	/* 23 */ if( Air_Bi214_P1    ) {cfile->createShapeBkgdSystematic( Air_Bi214_P1_i   , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "Air_Bi214_h_syst_p"      ) , (TH1D*)syst_shape_infile->Get( "Air_Bi214_h_syst_m"       ) ,100);};
+	/* 24 */ if( Air_Tl208_P1    ) {cfile->createShapeBkgdSystematic( Air_Tl208_P1_i   , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "Air_Tl208_h_syst_p"      ) , (TH1D*)syst_shape_infile->Get( "Air_Tl208_h_syst_m"       ) ,100);};
+	/* 25 */ if( PMT_Bi214       ) {cfile->createShapeBkgdSystematic( PMT_Bi214_i      , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "PMT_Bi214_h_syst_p"      ) , (TH1D*)syst_shape_infile->Get( "PMT_Bi214_h_syst_m"       ) ,100);};
+	/* 26 */ if( PMT_Tl208       ) {cfile->createShapeBkgdSystematic( PMT_Tl208_i      , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "PMT_Tl208_h_syst_p"      ) , (TH1D*)syst_shape_infile->Get( "PMT_Tl208_h_syst_m"       ) ,100);};
+	/* 27 */ if( PMT_Ac228       ) {cfile->createShapeBkgdSystematic( PMT_Ac228_i      , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "PMT_Ac228_h_syst_p"      ) , (TH1D*)syst_shape_infile->Get( "PMT_Ac228_h_syst_m"       ) ,100);};
+	/* 28 */ if( PMT_K40         ) {cfile->createShapeBkgdSystematic( PMT_K40_i        , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "PMT_K40_h_syst_p"        ) , (TH1D*)syst_shape_infile->Get( "PMT_K40_h_syst_m"         ) ,100);};
+	/* 29 */ if( ScintInn_K40    ) {cfile->createShapeBkgdSystematic( ScintInn_K40_i   , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "ScintInn_K40_h_syst_p"   ) , (TH1D*)syst_shape_infile->Get( "ScintInn_K40_h_syst_m"    ) ,100);};
+	/* 30 */ if( ScintOut_K40    ) {cfile->createShapeBkgdSystematic( ScintOut_K40_i   , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "ScintOut_K40_h_syst_p"   ) , (TH1D*)syst_shape_infile->Get( "ScintOut_K40_h_syst_m"    ) ,100);};
+	/* 31 */ if( ScintPet_K40    ) {cfile->createShapeBkgdSystematic( ScintPet_K40_i   , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "ScintPet_K40_h_syst_p"   ) , (TH1D*)syst_shape_infile->Get( "ScintPet_K40_h_syst_m"    ) ,100);};
+	/* 32 */ if( MuMetal_Pa234m  ) {cfile->createShapeBkgdSystematic( MuMetal_Pa234m_i , "ExternalsSystShape"  , (TH1D*)syst_shape_infile->Get( "MuMetal_Pa234m_h_syst_p" ) , (TH1D*)syst_shape_infile->Get( "MuMetal_Pa234m_h_systmp"  ) ,100);};
+	/* 33 */ if( Cd116_2b2n_m14  ) {cfile->createShapeBkgdSystematic( Cd116_2b2n_m14_i , "bb2nuSystShape"      , (TH1D*)syst_shape_infile->Get( "Cd116_2b2n_m14_h_syst_p" ) , (TH1D*)syst_shape_infile->Get( "Cd116_2b2n_m14_h_systmp"  ) ,100);};
+	
+	// Background uncertainty
 	/*  0 */ if( Cd116_Tl208     ) {cfile->createFlatBkgdSystematic( Cd116_Tl208_i    , "Tl208"      , 0.0004 , 0.0004 ,100);};
 	/*  1 */ if( Cd116_Ac228     ) {cfile->createFlatBkgdSystematic( Cd116_Ac228_i    , "Tl208"      , 0.0004 , 0.0004 ,100);};
 	/*  2 */ if( Cd116_Bi212     ) {cfile->createFlatBkgdSystematic( Cd116_Bi212_i    , "Tl208"      , 0.0004 , 0.0004 ,100);};
