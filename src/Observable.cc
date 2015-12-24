@@ -327,105 +327,107 @@ void Observable::PrintDetails(){
 
 void Observable::DrawDetails(Option_t* option){
 	
-	TH1D * hnorm = new TH1D("hnorm", "; ;Adjustement", _ComponentList->GetEntries(), 0, _ComponentList->GetEntries() );
-	TH1D * heff  = new TH1D("heff" , "; ;Efficiency", _ComponentList->GetEntries(), 0, _ComponentList->GetEntries() );
-	TH1D * hevt  = new TH1D("hevt" , "; ;Num. of evts", _ComponentList->GetEntries(), 0, _ComponentList->GetEntries() );
-	
-	hnorm -> SetMarkerStyle(20); hnorm -> SetMarkerSize(0.80);
-	heff  -> SetMarkerStyle(20); heff  -> SetMarkerSize(0.80);
-	hevt  -> SetMarkerStyle(20); hevt  -> SetMarkerSize(0.80);
-	
-	hnorm -> SetStats(kFALSE);
-	heff  -> SetStats(kFALSE);
-	hevt  -> SetStats(kFALSE);
-	
-	hnorm ->GetYaxis()->SetTitleOffset(4.);
-	heff  ->GetYaxis()->SetTitleOffset(4.);
-	hevt  ->GetYaxis()->SetTitleOffset(4.);
-		
-	//std::cout << "Fit components" << " & " << "Efficiency" << " & " << "Activity [Bq]" << " & " << "Num. of events" << std::endl;	
-			
 	// Loop Over Component collection
-	int counter = 0;
 	//TMapIter next( _ComponentMap,  kIterForward);
+	
+	TH1D * hevt_all = new TH1D("hevt" , "; ;  Num. of evts", _ComponentList->GetEntries(), 0, _ComponentList->GetEntries() );
+	TH1D * hevt_grp = new TH1D("hevt" , "; ;  Num. of evts", _GroupList->GetEntries(), 0, _GroupList->GetEntries() );	
+
+	hevt_all->SetStats(kFALSE);
+	hevt_grp->SetStats(kFALSE);
+	
+	hevt_all->GetYaxis()->SetTitleOffset(2.);
+	hevt_grp->GetYaxis()->SetTitleOffset(2.);	
+	hevt_all->GetXaxis()->SetTitleOffset(2.);
+	hevt_grp->GetXaxis()->SetTitleOffset(2.);	
+
+	hevt_all->SetBarWidth(0.8);
+	hevt_grp->SetBarWidth(0.8);
+	
+	hevt_all->SetBarOffset(0.1);
+	hevt_grp->SetBarOffset(0.1);
+
+	hevt_all->SetFillColor(kBlue);
+	hevt_grp->SetFillColor(kBlue);
+
+	int counter = 0;	
+
 	TIter next( _ComponentList,  kIterForward);
 	while ( Component * comp = (Component *) next() ){ 
 		
-		TH1D * h_comp = (TH1D*) _ComponentMap->GetValue(comp);
-		double err = 0; double numevt = GetComponentNumEvent(comp,err);
-		double eff = h_comp->GetEntries() / comp->GetDataSet()->GetGeneratedEvents();
-		double eff_e = sqrt(eff*(1-eff)/comp->GetDataSet()->GetGeneratedEvents());
+		double err = 0.;
+		double n = 0.;
 		
-		hnorm ->GetXaxis()->SetBinLabel(counter+1, comp->GetName());
-		heff  ->GetXaxis()->SetBinLabel(counter+1, comp->GetName());
-		hevt  ->GetXaxis()->SetBinLabel(counter+1, comp->GetName());	
+		if ( GetComponentNumEvent(comp,err) != 0 ) n = GetComponentNumEvent(comp,err);
+		else err = 0. ;
+			
+		hevt_all->GetXaxis()->SetBinLabel(counter+1, comp->GetTitle());	
+		hevt_all->GetXaxis()->LabelsOption("v");
+		hevt_all->SetBinContent(counter+1, n); 
 		
-		hevt -> GetXaxis() -> LabelsOption("v");
-		
-		if( comp->GetNorm() != 0 ) {
-			hnorm -> SetBinContent(counter+1, comp->GetNorm()) ; 
-			hnorm -> SetBinError(counter+1 , comp->GetNormErr());
-		} 
-		if( eff != 0 ) { 
-			heff  -> SetBinContent(counter+1, eff); 
-			heff  -> SetBinError(counter+1 , eff_e);
-		} 
-		if( numevt != 0 ) {
-			hevt  -> SetBinContent(counter+1, numevt); 
-			hevt  -> SetBinError(counter+1 , err);
-		}
-		
-	//	std::cout << comp->GetName() << " & " << eff << "\\pm" << eff_e << " & " << comp->GetNorm() << "\\pm" << comp->GetNormErr() << " & " << numevt << "\\pm" << err << std::endl;
-				
 		counter++;
+		
+	}
+
+	if( _GroupList && _DrawGroup){
+
+		counter = 0;
+				
+		TIter next1( _GroupList,  kIterForward);
+		while ( Group * group = (Group *) next1() ){ 
+
+			double tot_err = 0.;
+			double tot_n = 0.;
+			
+			hevt_grp->GetXaxis()->SetBinLabel(counter+1, group->GetTitle());	
+			hevt_grp->GetXaxis()->LabelsOption("v");
+				
+			TIter next2( group->GetComponentList(),  kIterForward);
+			while ( Component * comp = (Component *) next2() ){ 
+
+				if ( ! (TH1D*) _ComponentMap->GetValue(comp->GetName()) ) {
+					//Warning("Draw()", "Don't find component histogram for %s", comp->GetName() ); 
+					continue;
+    			}	
+
+				double err = 0.;
+				
+				if ( GetComponentNumEvent(comp,err) != 0 ) tot_n += GetComponentNumEvent(comp,err);
+				else err = 0. ;
+				
+				tot_err += err*err;
+				
+			}
+			
+			hevt_grp->SetBinContent(counter+1, tot_n); 
+		
+			counter++;
+	
+		}
 				
 	}
 	
 	TCanvas * canvas = new TCanvas(TString::Format("%s_fit_details", GetName()), TString::Format("%s Fit Details", GetTitle()), 700, 1000);
 
-	// Upper plot will be in pad1                                               
-	canvas->cd();	
-    TPad *pad1 = new TPad("pad1", "pad1", 0, 0.75, 1, 0.999);
-	pad1->SetLogy(kTRUE);
+    TPad *pad1 = new TPad("pad1", "pad1", 0, 0, 1, 1);
+	pad1->SetLogx(kTRUE);
 	pad1->SetGridx(kFALSE);
 	pad1->SetGridy(kFALSE);
 	pad1->SetTickx();
 	pad1->SetTicky();
-	pad1->SetTopMargin(0.1) ;
-	pad1->SetBottomMargin(0.005) ;
-	pad1->SetRightMargin(0.05) ;
+	pad1->SetTopMargin(0.01) ;
+	pad1->SetBottomMargin(0.1) ;
+	pad1->SetLeftMargin(0.5) ;
 	pad1->Draw();
 	pad1->cd();
-	heff->Draw();
-	
-	canvas->cd();
-	TPad *pad2 = new TPad("pad2", "pad2", 0, 0.5, 1, 0.75);
-	pad2->SetLogy(kTRUE);
-	pad2->SetGridx(kFALSE);
-	pad2->SetGridy(kFALSE);	
-    pad2->SetTopMargin(0.01);
-    pad2->SetBottomMargin(0.005);
-	pad2->SetRightMargin(0.05) ;
-	pad2->SetTickx();
-	pad2->SetTicky();
-	pad2->Draw();
-	pad2->cd();
-	hnorm->Draw();
-		
-	canvas->cd();
-	TPad *pad3 = new TPad("pad3", "pad3", 0, 0.05, 1, 0.5);
-	pad3->SetLogy(kTRUE);
-	pad3->SetGridx(kFALSE);
-	pad3->SetGridy(kFALSE);
-    pad3->SetTopMargin(0.01);
-    pad3->SetBottomMargin(0.50);
-	pad3->SetRightMargin(0.05) ;
-	pad3->SetTickx();
-	pad3->SetTicky();
-    pad3->Draw();
-	pad3->cd();
-	hevt->Draw();
 
+	if( _GroupList && _DrawGroup){
+		hevt_grp->LabelsOption(">", "X");	
+		hevt_grp->Draw("hbar0");
+	} else {
+		hevt_all->LabelsOption(">", "X");
+		hevt_all->Draw("hbar0");
+	}
 	
 };
 

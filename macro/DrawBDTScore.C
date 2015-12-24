@@ -63,15 +63,15 @@ void DrawBDTScore( TString myModel = "" ){
 	// Arbitrary normalisation
 	//
 	//////////////////////////////////////////////////////////////////////////////		
-    TH1D* Signal = 0;
+    TH1F* Signal = 0;
 	
-	if ( Model[ "MM"    ] ) Signal = (TH1D*) f->Get( "Cd116_2b0n_m1_MVA_BDT"   ) ; 
-    if ( Model[ "RHC_L" ] ) Signal = (TH1D*) f->Get( "Cd116_2b0n_m2_MVA_BDT"   ) ; 
-    if ( Model[ "RHC_E" ] ) Signal = (TH1D*) f->Get( "Cd116_2b0n_m18_MVA_BDT"  ) ; 	
-    if ( Model[ "M1"    ] ) Signal = (TH1D*) f->Get( "Cd116_2b0n_m5_MVA_BDT"   ) ; 
-    if ( Model[ "M2"    ] ) Signal = (TH1D*) f->Get( "Cd116_2b0n_m15_MVA_BDT"  ) ; 
-    if ( Model[ "M3"    ] ) Signal = (TH1D*) f->Get( "Cd116_2b0n_m6_MVA_BDT"   ) ; 
-    if ( Model[ "M7"    ] ) Signal = (TH1D*) f->Get( "Cd116_2b0n_m7_MVA_BDT"   ) ; 
+	if ( Model[ "MM"    ] ) Signal = (TH1F*) f->Get( "Cd116_2b0n_m1_MVA_BDT"   ) ; 
+    if ( Model[ "RHC_L" ] ) Signal = (TH1F*) f->Get( "Cd116_2b0n_m2_MVA_BDT"   ) ; 
+    if ( Model[ "RHC_E" ] ) Signal = (TH1F*) f->Get( "Cd116_2b0n_m18_MVA_BDT"  ) ; 	
+    if ( Model[ "M1"    ] ) Signal = (TH1F*) f->Get( "Cd116_2b0n_m5_MVA_BDT"   ) ; 
+    if ( Model[ "M2"    ] ) Signal = (TH1F*) f->Get( "Cd116_2b0n_m15_MVA_BDT"  ) ; 
+    if ( Model[ "M3"    ] ) Signal = (TH1F*) f->Get( "Cd116_2b0n_m6_MVA_BDT"   ) ; 
+    if ( Model[ "M7"    ] ) Signal = (TH1F*) f->Get( "Cd116_2b0n_m7_MVA_BDT"   ) ; 
 	
 	Signal->Scale( ( 100 ) / Signal ->Integral() );
 	
@@ -312,5 +312,63 @@ void DrawBDTScore( TString myModel = "" ){
 	pn.Form( "plots/BDTScore_%s.pdf", myModel.Data() );
 	(TPad*)gROOT->GetSelectedPad()->Print(pn);
 
+	DrawCutEff(Signal, hsum);
+	
+}
+
+void DrawCutEff(TH1F * sig, TH1F* bkg){
+	
+	sig->Scale( 1000. / sig->Integral() );
+	bkg->Scale( 1000. / bkg->Integral() );
+		
+	Double_t x[100], sig_eff[100], bkg_eff[100], sig_sig[100];
+	
+    std::map<double,bool> Treshold;
+
+    Treshold[ 0.20 ] = false;
+    Treshold[ 0.50 ] = false;
+    Treshold[ 0.80 ] = false;		
+    Treshold[ 0.90 ] = false;		
+	Treshold[ 0.95 ] = false;		
+	Treshold[ 0.99 ] = false;		
+
+	std::map<double,bool>::iterator iter;
+	for (iter = Treshold.begin(); iter != Treshold.end(); iter++){
+		std::cout << iter->first << " " << iter->second << std::endl;
+	}
+
+				
+	for(int i = 0; i < sig->GetNbinsX(); i++) {
+		
+		x[i] = sig->GetBinCenter(i+1);
+		
+		sig_eff[i] = sig->Integral(i+1, sig->GetNbinsX()) / sig->Integral(1, sig->GetNbinsX());
+		bkg_eff[i] = bkg->Integral(i+1, sig->GetNbinsX()) / bkg->Integral(1, sig->GetNbinsX());
+		
+		if ( sig->Integral(i+1, sig->GetNbinsX()) + bkg->Integral(i+1, sig->GetNbinsX()) != 0 ) {
+			sig_sig[i] = sig->Integral(i+1, sig->GetNbinsX()) / TMath::Sqrt(sig->Integral(i+1, sig->GetNbinsX()) + bkg->Integral(i+1, sig->GetNbinsX()));
+		}
+		
+		
+		
+		
+	}
+	
+	TGraph * g_sig_eff = new TGraph(sig->GetNbinsX(), x, sig_eff); g_sig_eff->SetLineWidth(3); g_sig_eff->SetLineColor(kBlue);
+	TGraph * g_bkg_eff = new TGraph(sig->GetNbinsX(), x, bkg_eff); g_bkg_eff->SetLineWidth(3); g_bkg_eff->SetLineColor(kRed);
+	
+	TCanvas * c_eff = new TCanvas();
+	g_sig_eff->Draw("AL");
+	g_bkg_eff->Draw("Lsame");
+
+	TGraph * g_sig_sig = new TGraph(sig->GetNbinsX(), x, sig_sig); g_sig_sig->SetLineWidth(3); g_sig_sig->SetLineColor(kGreen+1);
+	
+	TCanvas * c_sig = new TCanvas();
+	g_sig_sig->Draw("AL");
+
+	TGraph * g_eff = new TGraph(sig->GetNbinsX(), sig_eff, bkg_eff); g_eff->SetLineWidth(3); //g_eff->SetLineColor(kGreen+1);
+	
+	TCanvas * c_ = new TCanvas();
+	g_eff->Draw("AL");
 	
 }

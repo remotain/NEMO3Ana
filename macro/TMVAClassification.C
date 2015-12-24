@@ -81,7 +81,7 @@ void TMVAClassification( TString myMethodList = "" , TString myModel = "")
    std::map<std::string,int> Use;
 
    // --- Cut optimisation
-   Use["Cuts"]            = 0;
+   Use["Cuts"]            = 1;
    Use["CutsD"]           = 0;
    Use["CutsPCA"]         = 0;
    Use["CutsGA"]          = 0;
@@ -128,7 +128,7 @@ void TMVAClassification( TString myMethodList = "" , TString myModel = "")
    Use["SVM"]             = 0;
    // 
    // --- Boosted Decision Trees
-   Use["BDT"]             = 1; // uses Adaptive Boost
+   Use["BDT"]             = 0; // uses Adaptive Boost
    Use["BDTG"]            = 0; // uses Gradient Boost
    Use["BDTB"]            = 0; // uses Bagging
    Use["BDTD"]            = 0; // decorrelation + Adaptive Boost
@@ -234,17 +234,17 @@ void TMVAClassification( TString myMethodList = "" , TString myModel = "")
 	factory->AddVariable( "min_el_en"                                                                   , 'F' );  
 	factory->AddVariable( "max_el_en"                                                                   , 'F' );  
     factory->AddVariable( "el_en_asym := (max_el_en-min_el_en)/(min_el_en+max_el_en)"                   , 'F' );  
-	factory->AddVariable( "el_en_sum := min_el_en+max_el_en"                                            , 'F' );  
+    factory->AddVariable( "el_en_sum := min_el_en+max_el_en"                                            , 'F' );  
 	factory->AddVariable( "cos_theta"                                                                   , 'F' );
 	factory->AddVariable( "prob_int"                                                                    , 'F' );
 	factory->AddVariable( "min_el_track_len"                                                            , 'F' );       
 	factory->AddVariable( "max_el_track_len"                                                            , 'F' );       
-	factory->AddVariable( "min_el_curv := min_el_track_r*min_el_sign"                                   , 'F' );       
-	factory->AddVariable( "max_el_curv := max_el_track_r*max_el_sign"                                   , 'F' );       
-	factory->AddVariable( "max_vertex_s"                                                                , 'F' );       
-	factory->AddVariable( "max_vertex_z"                                                                , 'F' );                 
-	factory->AddVariable( "min_vertex_s"                                                                , 'F' );       
-	factory->AddVariable( "min_vertex_z"                                                                , 'F' );                 
+	//factory->AddVariable( "min_el_curv := min_el_track_r*min_el_sign"                                   , 'F' );       
+	//factory->AddVariable( "max_el_curv := max_el_track_r*max_el_sign"                                   , 'F' );       
+	//factory->AddVariable( "max_vertex_s"                                                                , 'F' );       
+	//factory->AddVariable( "max_vertex_z"                                                                , 'F' );                 
+	//factory->AddVariable( "min_vertex_s"                                                                , 'F' );       
+	//factory->AddVariable( "min_vertex_z"                                                                , 'F' );                 
  
    // You can add so-called "Spectator variables", which are not used in the MVA training,
    // but will appear in the final "TestTree" produced by TMVA. This TestTree will contain the
@@ -557,5 +557,5 @@ void TMVAClassification( TString myMethodList = "" , TString myModel = "")
    delete factory;
 
    // Launch the GUI for the root macros
-   //if (!gROOT->IsBatch()) TMVAGui( outfileDir + outfileName );
+   if (!gROOT->IsBatch()) TMVAGui( outfileDir + outfileName );
 }
