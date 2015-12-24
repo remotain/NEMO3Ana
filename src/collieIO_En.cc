@@ -243,8 +243,8 @@ int main(int argc, char* argv[]) {
 	//cfile->createFlatSigSystematic("EnCalib"         , 0.0025 , 0.0025 ,100);
 	
 	// Calibration uncertainy
-    TString infileName("SystShape.root");
-    TFile * syst_shape_infile = new TFile( infileDir + infileName , "READ");
+    TString syst_shape_infile_name("SystShape.root");
+    TFile * syst_shape_infile = new TFile( infileDir + syst_shape_infile_name , "READ");
 
 	if ( Model[ "MM"    ] ) {cfile->createShapeSigSystematic("SigSystShape" , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m1_h_syst_p"  ) , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m1_h_syst_m"  ) , 100 );}; 
 	if ( Model[ "RHC_L" ] ) {cfile->createShapeSigSystematic("SigSystShape" , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m2_h_syst_p"  ) , (TH1D*)syst_shape_infile->Get( "Cd116_2b0n_m2_h_syst_m"  ) , 100 );}; 
