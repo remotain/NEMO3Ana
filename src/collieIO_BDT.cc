@@ -228,11 +228,10 @@ int main(int argc, char* argv[]) {
 	//   if by shape, must supply a histogram of the values in percent(%) fluctuations...
 	//   Signal requires no index, but backgrounds must be specifically indexed (0->N bkgds)    
 	//   Read the instructions in collie/io/include/CollieIOFile.hh if you're in doubt
-	cfile->createFlatSigSystematic("IsotopeMass"     , 0.0025 , 0.0025 ,100);
 	cfile->createFlatSigSystematic("Efficiency"      , 0.0550 , 0.0550 ,100);
-	cfile->createFlatSigSystematic("Bremsstrahlung"  , 0.0050 , 0.0012 ,100);
-	cfile->createFlatSigSystematic("ThinFoil"        , 0.0073 , 0.0073 ,100);
-	cfile->createFlatSigSystematic("EnCalib"         , 0.0025 , 0.0025 ,100);
+	cfile->createFlatSigSystematic("Foil"            , 0.0220 , 0.0324 ,100);
+	cfile->createFlatSigSystematic("EnCalib"         , 0.0120 , 0.0125 ,100);
+	cfile->createFlatSigSystematic("IsotopeMass"     , 0.0025 , 0.0025 ,100);
 	
 	/*  0 */ if( Cd116_Tl208     ) {cfile->createFlatBkgdSystematic( Cd116_Tl208_i    , "Tl208"      , 0.0004 , 0.0004 ,100);};
 	/*  1 */ if( Cd116_Ac228     ) {cfile->createFlatBkgdSystematic( Cd116_Ac228_i    , "Tl208"      , 0.0004 , 0.0004 ,100);};
@@ -269,10 +268,10 @@ int main(int argc, char* argv[]) {
 	/* 32 */ if( MuMetal_Pa234m  ) {cfile->createFlatBkgdSystematic( MuMetal_Pa234m_i , "Externals"  , 0.0061 , 0.0129 ,100);};
 	/* 33 */ if( Cd116_2b2n_m14  ) {cfile->createFlatBkgdSystematic( Cd116_2b2n_m14_i , "bb2nu"      , 0.0220 , 0.0220 ,100);};
 	
-	if ( Model[ "M1"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
-	if ( Model[ "M2"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
-	if ( Model[ "M3"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
-	if ( Model[ "M7"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
+	//if ( Model[ "M1"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
+	//if ( Model[ "M2"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
+	//if ( Model[ "M3"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
+	//if ( Model[ "M7"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
 	
 	///store and output channel information
 	cfile->storeFile();
