@@ -11,13 +11,10 @@
 	ProcessChannel::SetInputFileName ("TwoElectronNtuplizerExe_Int_output.root");
 	ProcessChannel::SetInputDirName  ("TwoElectronNtuplizer");
 	ProcessChannel::SetInputTreeName ("TwoElectronNtuplizer");	
-	ProcessChannel::SetOutputFilePath("/sps/nemo/scratch/remoto/nemo3/plot/");
-	ProcessChannel::SetOutputFileName("TwoElectronIntHistos.root");
+	ProcessChannel::SetOutputFilePath("/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/");
+	ProcessChannel::SetOutputFileName("TwoElectronIntHistos_LOOSE_EMINCUT.root");
+	ProcessChannel::SetOutputTreeFileName("TwoElectronIntTree_LOOSE_EMINCUT.root");
 
-	//ProcessChannel::SetOutputFileName("TwoElectronIntHistos_run_1872_7920.root");
-	//ProcessChannel::SetFirstRunNumber(1872);
-	//ProcessChannel::SetLastRunNumber(7920);
-		
 	// Run
 	TBenchmark * benchmark = new TBenchmark();
 	benchmark->Start("Run");
