@@ -15,9 +15,9 @@ gROOT.ProcessLine(".x /Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/macr
 ###########################################################################                
 Norm90CLEn = {
     'MM'    : 78.5  * 0.09208,
-    'RHC_E' : 87.0  * 0.04758,
-    'RHC_L' : 156.0 * 0.07510,        
-    'M1'    : 900.7* 0.06308,
+    'RHC_E' : 87.0  * 0.07510,
+    'RHC_L' : 156.0 * 0.04758,       
+    'M1'    : 900.7 * 0.06308,
     'M2'    : None,
     'M3'    : None,
     'M7'    : None                                
@@ -25,8 +25,8 @@ Norm90CLEn = {
 
 Norm90CLBDT = {
     'MM'    : 71.2  * 0.09208,
-    'RHC_E' : 56.8  * 0.04758,
-    'RHC_L' : 130.7 * 0.07510,        
+    'RHC_E' : 56.8  * 0.07510,
+    'RHC_L' : 130.7 * 0.04758,          
     'M1'    : 878.2 * 0.06308,
     'M2'    : None,
     'M3'    : None,
@@ -516,11 +516,11 @@ def DrawObservable( model, obs, norm = None, min = None, max = None, zoom = Fals
     	
     Externals = FeShield_Bi214.Clone("Externals") 
     if FeShield_Bi214:
-        FeShield_Bi214.Add( FeShield_Bi214 )
+        Externals.Add( FeShield_Bi214 )
     if FeShield_Tl208:
-        FeShield_Tl208.Add( FeShield_Tl208 )
+        Externals.Add( FeShield_Tl208 )
     if FeShield_Ac228:
-        FeShield_Ac228.Add( FeShield_Ac228 )
+        Externals.Add( FeShield_Ac228 )
     if CuTower_Co60:
         Externals.Add( CuTower_Co60   )
     if Air_Bi214_P1:
@@ -548,7 +548,7 @@ def DrawObservable( model, obs, norm = None, min = None, max = None, zoom = Fals
     if SScin_Pb214:
         Externals.Add( SScin_Pb214    )
     if MuMetal_Pa234m:
-        MuMetal_Pa234m.Add( MuMetal_Pa234m )
+        Externals.Add( MuMetal_Pa234m )
     
     
     Tl208         .SetFillColor( kOrange + 10 ) 
