@@ -275,7 +275,7 @@ int main(int argc, char* argv[]) {
 	/* 30 */ if( ScintOut_K40    ) {cfile->createFlatBkgdSystematic( ScintOut_K40_i   , "Externals"  , 0.0131 , 0.0061 ,100);};
 	/* 31 */ if( ScintPet_K40    ) {cfile->createFlatBkgdSystematic( ScintPet_K40_i   , "Externals"  , 0.0131 , 0.0061 ,100);};
 	/* 32 */ if( MuMetal_Pa234m  ) {cfile->createFlatBkgdSystematic( MuMetal_Pa234m_i , "Externals"  , 0.0131 , 0.0061 ,100);};
-	/* 33 */ if( Cd116_2b2n_m14  ) {cfile->createFlatBkgdSystematic( Cd116_2b2n_m14_i , "bb2nu"      , 0.0220 , 0.0220 ,100);};
+	/* 33 */ if( Cd116_2b2n_m14  ) {cfile->createFlatBkgdSystematic( Cd116_2b2n_m14_i , "bb2nu"      , 0.0190 , 0.0200 ,100);};
 	
 	//if ( Model[ "M1"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
 	//if ( Model[ "M2"    ] ) cfile->setBkgdFloatFlag(Cd116_2b2n_m14_i, "bb2nu", true, 100);
