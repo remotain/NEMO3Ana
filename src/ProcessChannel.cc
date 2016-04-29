@@ -628,7 +628,7 @@ namespace ProcessChannel {
 		cutNames->push_back("Run status = 1 (GOOD RUN) ");
 		cutNames->push_back("Cd-116 sector (18) ");
 		cutNames->push_back("Negative track sign");
-	    cutNames->push_back("Energy of the electron > 200 keV ");
+	    cutNames->push_back("Energy of the electron > 300 keV ");
 		cutNames->push_back("Track lengths > 50 cm ");
 		cutNames->push_back("Track fires gg hit in first (0) layers of cells");
 		cutNames->push_back("Internal probability > 0.01");
@@ -1141,7 +1141,7 @@ namespace ProcessChannel {
 			if ( !CheckRunStatus(runType) )                                     continue; hAnaCutFlow -> Fill(currentcut++); // Check the run status
 			if (sectorId != 18 || IsExcludedSpot(el_vtx_z_mean_, vertexSector)) continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_trkSign[0] >=0 or el_trkSign[1] >=0 )					    continue; hAnaCutFlow -> Fill(currentcut++);
-			if (el_energy_[0] < 0.2 or el_energy_[1] < 0.2 )       			    continue; hAnaCutFlow -> Fill(currentcut++);
+			if (el_energy_[0] < 0.3 or el_energy_[1] < 0.3 )       			    continue; hAnaCutFlow -> Fill(currentcut++);
 		    if (el_pathLength_[0] < 50 or el_pathLength_[1] < 50)        	    continue; hAnaCutFlow -> Fill(currentcut++);
 			if ( el_first_hit_layer_[0] > 0 or el_first_hit_layer_[1] > 0 )     continue; hAnaCutFlow -> Fill(currentcut++);
 			if (probInt < 0.01)                                    			    continue; hAnaCutFlow -> Fill(currentcut++);
