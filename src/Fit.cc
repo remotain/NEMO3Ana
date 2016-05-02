@@ -1,4 +1,3 @@
-
 #include <iostream>
 
 #include "DataManagement.h"
@@ -89,7 +88,7 @@ namespace Fit{
 		
 		// Return -log(L)
 		
-		return -l_likelihood;
+		return -2*l_likelihood;
 	
 	}
 	
@@ -172,15 +171,17 @@ namespace Fit{
 		// Likelihood Scan
 		if( _DoDrawScan ) {
 		
-			TCanvas * c0 = new TCanvas("likelihood_scan", "Likelihood Scan");
-			c0->Divide(2, min->NFree()/2 + min->NFree()%2 );
+			//TCanvas * c0 = new TCanvas("likelihood_scan", "Likelihood Scan");
+			//c0->Divide(2, min->NFree()/2 + min->NFree()%2 );
 			TIter next4( DataManagement::GetParameterCollection() );
 			while ( Parameter * param = (Parameter *) next4() ){
 				
 				if(param->IsFixed()) continue;
 				
+				TCanvas * c0 = new TCanvas(TString::Format("likelihood_scan_%s", param->GetName()), TString::Format("Likelihood Scan: %s", param->GetName()));
+				
 				double x[_nStepScan], y[_nStepScan];
-				min->Scan(param->GetOrder(), _nStepScan, x, y, param->GetValInit()-10*param->GetValError(), param->GetValInit()+10*param->GetValError());
+				min->Scan(param->GetOrder(), _nStepScan, x, y, param->GetValInit()-1*param->GetValError(), param->GetValInit()+1*param->GetValError());
 				
 				c0->cd(param->GetOrder()+1);
 				TGraph * g = new TGraph(_nStepScan-1, x, y);
@@ -263,7 +264,8 @@ namespace Fit{
 		while ( Observable * obs = (Observable *) next3() ){
 			dof += obs->GetFitRangeUpBin() - obs->GetFitRangeLowBin();
 		} dof -= min->NFree();
-		std::cout << "CHI^2/dof = " << 2*min->MinValue() << "/" << dof << " = " << 2*min->MinValue()/dof << std::endl;	
+		std::cout << "CHI^2/dof = " << min->MinValue() << "/" << dof << " = " << min->MinValue()/dof << std::endl;	
+
 		
 	}
 
