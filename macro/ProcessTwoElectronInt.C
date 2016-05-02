@@ -11,7 +11,7 @@
 	ProcessChannel::SetInputFileName ("TwoElectronNtuplizerExe_Int_output.root");
 	ProcessChannel::SetInputDirName  ("TwoElectronNtuplizer");
 	ProcessChannel::SetInputTreeName ("TwoElectronNtuplizer");	
-	ProcessChannel::SetOutputFilePath("/sps/nemo/scratch/remoto/nemo3/plot/");
+	ProcessChannel::SetOutputFilePath("/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20160429/");
 	ProcessChannel::SetOutputFileName("TwoElectronIntHistos.root");
 	ProcessChannel::SetOutputTreeFileName("TwoElectronIntTree.root");
 		
