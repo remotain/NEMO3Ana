@@ -47,7 +47,7 @@ namespace ProcessChannel {
 	TString GetChannelToProcess(){
 		
 		switch(_ChannelToProcess) {
-			case kOneElectron                   : return "kOneElectron∂";
+			case kOneElectron                   : return "kOneElectron";
 			case kTwoElectronInternal           : return "kTwoElectronInternal";
 		    case kTwoElectronExternal           : return "kTwoElectronExternal";
 		    case kOneElectronOneGammaInternal   : return "kOneElectronOneGammaInternal";
