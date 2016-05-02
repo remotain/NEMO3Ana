@@ -11,7 +11,7 @@
 	ProcessChannel::SetInputFileName ("SingleElectronAnalysis_output.root");
 	ProcessChannel::SetInputDirName  ("SingleElectronSearch");
 	ProcessChannel::SetInputTreeName ("SingleElectronSearch");	
-	ProcessChannel::SetOutputFilePath("/sps/nemo/scratch/remoto/nemo3/plot/");
+	ProcessChannel::SetOutputFilePath("/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20160429/");
 	ProcessChannel::SetOutputFileName("OneElectronHistos.root");
 
 	//ProcessChannel::SetFirstRunNumber(2700);
