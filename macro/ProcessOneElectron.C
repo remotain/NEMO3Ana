@@ -1,7 +1,7 @@
 {
 		
 	gSystem->Load("/afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/build/lib/libNEMO3Ana.so");
-	gROOT->ProcessLine(".x /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/LoadAllDataSample.C+");
+	gROOT->ProcessLine(".x /afs/in2p3.fr/throng/nemo/users/remoto/work/NEMO3Ana/macro/LoadAllDataSampleBkg.C+");
 
 	// Set Channel to process
 	ProcessChannel::SetChannelToProcess(ProcessChannel::kOneElectron);
