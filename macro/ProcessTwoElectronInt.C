@@ -13,6 +13,7 @@
 	ProcessChannel::SetInputTreeName ("TwoElectronNtuplizer");	
 	ProcessChannel::SetOutputFilePath("/sps/nemo/scratch/remoto/nemo3/plot/");
 	ProcessChannel::SetOutputFileName("TwoElectronIntHistos.root");
+	ProcessChannel::SetOutputTreeFileName("TwoElectronIntTree.root");
 		
 	// Run
 	TBenchmark * benchmark = new TBenchmark();

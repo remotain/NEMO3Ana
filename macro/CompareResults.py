@@ -7,11 +7,11 @@ import numpy as np
 names    =      (      r'This work', r'Zac/Benton', r'CdWO$_{4}$' , r'Solotvina', r'NEMO-2' , r'ELEGANT-V'   )
 
 y        = array('d', [0          , 1           , 2          , 3          , 4        , 5           ] )
-t        = array('d', [2.73       , 2.88        , 2.8        , 2.9        , 2.9      , 2.6         ] )
+t        = array('d', [2.74       , 2.88        , 2.8        , 2.9        , 2.9      , 2.6         ] )
 t0nu     = array('d', [1.1        , 1.3         , 1.0        , 1.7        , 0.005    , 0.003       ] )
-stat     = array('d', [0.06       , 0.04        , 0.05       , 0.06       , 0.3      , 0.0         ] )
-syst_low = array('d', [-0.19      , -0.16       , -0.4       , -0.38      , -0.2     , -0.5        ] )
-syst_up  = array('d', [+0.17      , +0.16       , +-0.4      , +0.40      , +0.2     , +0.9        ] )
+stat     = array('d', [0.04       , 0.04        , 0.05       , 0.06       , 0.3      , 0.0         ] )
+syst_low = array('d', [-0.18      , -0.16       , -0.4       , -0.38      , -0.2     , -0.5        ] )
+syst_up  = array('d', [+0.18      , +0.16       , +-0.4      , +0.40      , +0.2     , +0.9        ] )
 color    =      [      'orange'   , 'green'     , 'green'    , 'green'    , 'green'  , 'green'       ]
 
 stat_syst_low = list()

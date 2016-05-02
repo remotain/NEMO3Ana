@@ -3,7 +3,7 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Print cut flow on terminal')
 parser.add_argument('file_path', metavar='file_path', type=str, help='file containing cut flow histogram')
-parser.add_argument('sample', choices=["2NU" , "MM" , "RHC_L", "RHC_E" , "M1" , "M2" , "M3" , "M7" ])
+parser.add_argument('sample', choices=["SSD" , "HSD" , "MM" , "RHC_L", "RHC_E" , "M1" , "M2" , "M3" , "M7" ])
 
 args = parser.parse_args()
 
@@ -30,7 +30,8 @@ fdata = f.Get("Data"); fdata.cd()
 
 sample_dict  = {
     
-    "2NU" : "Cd116_2b2n_m14",
+    "SSD" : "Cd116_2b2n_m14",
+    "HSD" : "Cd116_2b2n_m4",
     "MM"  : "Cd116_2b0n_m1", 
     "RHC_L" : "Cd116_2b0n_m2", 
     "RHC_E" : "Cd116_2b0n_m18",     
