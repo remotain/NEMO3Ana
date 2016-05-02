@@ -8,7 +8,8 @@
 #$ -V
 #$ -j y
 #$ -o /sps/nemo/scratch/remoto/nemo3/plot/
-#$ -t 1-18
+#$ -t 1-24
+#####$ -t 1-24
 
 source /afs/in2p3.fr/throng/nemo/users/remoto/setup.sh
 
@@ -25,17 +26,25 @@ if [ "${SGE_TASK_ID}" -eq "6" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/Colli
 
 if [ "${SGE_TASK_ID}" -eq "7" ]; then ${PATH_EXE}/collieLC ${PATH_OUT}/CollieLC_En_RHC_L_DEF.root           ${PATH_OUT}/CollieIO_En_RHC_L_DEF.root  ; fi
 if [ "${SGE_TASK_ID}" -eq "8" ]; then ${PATH_EXE}/collieLC_m1s ${PATH_OUT}/CollieLC_En_RHC_L_DEF_m1s.root   ${PATH_OUT}/CollieIO_En_RHC_L_DEF.root  ; fi
-if [ "${SGE_TASK_ID}" -eq "9" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_En_MM_RHC_L_p1s.root    ${PATH_OUT}/CollieIO_En_RHC_L_DEF.root  ; fi
+if [ "${SGE_TASK_ID}" -eq "9" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_En_RHC_L_DEF_p1s.root    ${PATH_OUT}/CollieIO_En_RHC_L_DEF.root  ; fi
 
 if [ "${SGE_TASK_ID}" -eq "10" ]; then ${PATH_EXE}/collieLC ${PATH_OUT}/CollieLC_BDT_RHC_L_DEF.root          ${PATH_OUT}/CollieIO_BDT_RHC_L_DEF.root ; fi
 if [ "${SGE_TASK_ID}" -eq "11" ]; then ${PATH_EXE}/collieLC_m1s ${PATH_OUT}/CollieLC_BDT_RHC_L_DEF_m1s.root  ${PATH_OUT}/CollieIO_BDT_RHC_L_DEF.root ; fi
 if [ "${SGE_TASK_ID}" -eq "12" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_BDT_RHC_L_DEF_p1s.root  ${PATH_OUT}/CollieIO_BDT_RHC_L_DEF.root ; fi
 
 if [ "${SGE_TASK_ID}" -eq "13" ]; then ${PATH_EXE}/collieLC ${PATH_OUT}/CollieLC_En_RHC_E_DEF.root          ${PATH_OUT}/CollieIO_En_RHC_E_DEF.root  ; fi
-if [ "${SGE_TASK_ID}" -eq "14" ]; then ${PATH_EXE}/collieLC_m1s ${PATH_OUT}/CollieLC_En_MM_RHC_E_m1s.root   ${PATH_OUT}/CollieIO_En_RHC_E_DEF.root  ; fi
-if [ "${SGE_TASK_ID}" -eq "15" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_En_MM_RHC_E_p1s.root   ${PATH_OUT}/CollieIO_En_RHC_E_DEF.root  ; fi
+if [ "${SGE_TASK_ID}" -eq "14" ]; then ${PATH_EXE}/collieLC_m1s ${PATH_OUT}/CollieLC_En_RHC_E_DEF_m1s.root   ${PATH_OUT}/CollieIO_En_RHC_E_DEF.root  ; fi
+if [ "${SGE_TASK_ID}" -eq "15" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_En_RHC_E_DEF_p1s.root   ${PATH_OUT}/CollieIO_En_RHC_E_DEF.root  ; fi
 
 if [ "${SGE_TASK_ID}" -eq "16" ]; then ${PATH_EXE}/collieLC ${PATH_OUT}/CollieLC_BDT_RHC_E_DEF.root         ${PATH_OUT}/CollieIO_BDT_RHC_E_DEF.root ; fi
 if [ "${SGE_TASK_ID}" -eq "17" ]; then ${PATH_EXE}/collieLC_m1s ${PATH_OUT}/CollieLC_BDT_RHC_E_DEF_m1s.root ${PATH_OUT}/CollieIO_BDT_RHC_E_DEF.root ; fi
 if [ "${SGE_TASK_ID}" -eq "18" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_BDT_RHC_E_DEF_p1s.root ${PATH_OUT}/CollieIO_BDT_RHC_E_DEF.root ; fi
+
+if [ "${SGE_TASK_ID}" -eq "19" ]; then ${PATH_EXE}/collieLC ${PATH_OUT}/CollieLC_En_M1_DEF.root          ${PATH_OUT}/CollieIO_En_M1_DEF.root  ; fi
+if [ "${SGE_TASK_ID}" -eq "20" ]; then ${PATH_EXE}/collieLC_m1s ${PATH_OUT}/CollieLC_En_M1_DEF_m1s.root   ${PATH_OUT}/CollieIO_En_M1_DEF.root  ; fi
+if [ "${SGE_TASK_ID}" -eq "21" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_En_M1_DEF_p1s.root   ${PATH_OUT}/CollieIO_En_M1_DEF.root  ; fi
+
+if [ "${SGE_TASK_ID}" -eq "22" ]; then ${PATH_EXE}/collieLC ${PATH_OUT}/CollieLC_BDT_M1_DEF.root         ${PATH_OUT}/CollieIO_BDT_M1_DEF.root ; fi
+if [ "${SGE_TASK_ID}" -eq "23" ]; then ${PATH_EXE}/collieLC_m1s ${PATH_OUT}/CollieLC_BDT_M1_DEF_m1s.root ${PATH_OUT}/CollieIO_BDT_M1_DEF.root ; fi
+if [ "${SGE_TASK_ID}" -eq "24" ]; then ${PATH_EXE}/collieLC_p1s ${PATH_OUT}/CollieLC_BDT_M1_DEF_p1s.root ${PATH_OUT}/CollieIO_BDT_M1_DEF.root ; fi
 

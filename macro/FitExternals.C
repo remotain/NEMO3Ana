@@ -2,7 +2,7 @@
 		
 	gSystem->Load("/Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/build/lib/libNEMO3Ana.dylib");
 
-	gROOT->ProcessLine(".x /Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/macro/LoadAllDataSample.C+");
+	gROOT->ProcessLine(".x /Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/macro/LoadAllDataSampleBkg.C+");
 
 	gROOT->ProcessLine(".x /Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/macro/PlotStyle.C+");
 
@@ -62,17 +62,17 @@
 	//////////////////////////////////////////////////////////////////////////////	
 	DataManagement::AddComponent( new Component( "Cd116_Bi214"     , "^{214}Bi Cd116"      , DataManagement::FindDataSet( "Cd116_Bi214"    ) , 0.440*0.0004 , 0.440*0.0001 )); DataManagement::FindComponent("Cd116_Bi214")->SetFillColor( kAzure + 11 );
 	DataManagement::AddComponent( new Component( "Cd116_Pb214"     , "^{214}Pb Cd116"      , DataManagement::FindDataSet( "Cd116_Pb214_VT" ) , 0.440*0.0004 , 0.440*0.0001 )); DataManagement::FindComponent("Cd116_Pb214")->SetFillColor( kAzure + 12 );
-	DataManagement::AddComponent( new Component( "Mylar_Bi214"     , "^{214}Bi Mylar"      , DataManagement::FindDataSet( "Mylar_Bi214"    ) , 0.888*0.0028 , 0.888*0.0003 )); DataManagement::FindComponent("Mylar_Bi214")->SetFillColor( kAzure + 13 );
-	DataManagement::AddComponent( new Component( "Mylar_Pb214"     , "^{214}Pb Mylar"      , DataManagement::FindDataSet( "Mylar_Pb214"    ) , 0.888*0.0028 , 0.888*0.0003 )); DataManagement::FindComponent("Mylar_Pb214")->SetFillColor( kAzure + 14 );
+	DataManagement::AddComponent( new Component( "Mylar_Bi214"     , "^{214}Bi Mylar"      , DataManagement::FindDataSet( "Mylar_Bi214"    ) , 0.888*0.0028 , 0.888*0.0002 )); DataManagement::FindComponent("Mylar_Bi214")->SetFillColor( kAzure + 13 );
+	DataManagement::AddComponent( new Component( "Mylar_Pb214"     , "^{214}Pb Mylar"      , DataManagement::FindDataSet( "Mylar_Pb214"    ) , 0.888*0.0028 , 0.888*0.0002 )); DataManagement::FindComponent("Mylar_Pb214")->SetFillColor( kAzure + 14 );
 
-	DataManagement::AddComponent( new Component( "SFoil_Bi214_P1"  , "^{214}Bi SFoil P1  " , DataManagement::FindDataSet( "SFoil_Bi214"    ) , 0.015  , 0.002                                           )); DataManagement::FindComponent( "SFoil_Bi214_P1"  )->SetFillColor( kAzure +  3 );
-	DataManagement::AddComponent( new Component( "SFoil_Pb214_P1"  , "^{214}Pb SFoil P1  " , DataManagement::FindDataSet( "SFoil_Pb214"    ) , 0.015  , 0.002                                           )); DataManagement::FindComponent( "SFoil_Pb214_P1"  )->SetFillColor( kAzure +  4 );
-	DataManagement::AddComponent( new Component( "SFoil_Bi214_P2"  , "^{214}Bi SFoil P2  " , DataManagement::FindDataSet( "SFoil_Bi214"    ) , 0.0013 , 0.0004                                          )); DataManagement::FindComponent( "SFoil_Bi214_P2"  )->SetFillColor( kAzure +  3 );
-	DataManagement::AddComponent( new Component( "SFoil_Pb214_P2"  , "^{214}Pb SFoil P2  " , DataManagement::FindDataSet( "SFoil_Pb214"    ) , 0.0013 , 0.0004                                          )); DataManagement::FindComponent( "SFoil_Pb214_P2"  )->SetFillColor( kAzure +  4 );
-	DataManagement::AddComponent( new Component( "SWire_Bi214_P1"  , "^{214}Bi SWire P1  " , DataManagement::FindDataSet( "SWire_Bi214"    ) , 0.67   , 0.04                                            )); DataManagement::FindComponent( "SWire_Bi214_P1"  )->SetFillColor( kAzure +  1 );
-	DataManagement::AddComponent( new Component( "SWire_Pb214_P1"  , "^{214}Pb SWire P1  " , DataManagement::FindDataSet( "SWire_Pb214"    ) , 0.67   , 0.04                                            )); DataManagement::FindComponent( "SWire_Pb214_P1"  )->SetFillColor( kAzure +  2 );
-	DataManagement::AddComponent( new Component( "SWire_Bi214_P2"  , "^{214}Bi SWire P2  " , DataManagement::FindDataSet( "SWire_Bi214"    ) , 0.091  , 0.006                                           )); DataManagement::FindComponent( "SWire_Bi214_P2"  )->SetFillColor( kAzure +  1 );
-	DataManagement::AddComponent( new Component( "SWire_Pb214_P2"  , "^{214}Pb SWire P2  " , DataManagement::FindDataSet( "SWire_Pb214"    ) , 0.091  , 0.006                                           )); DataManagement::FindComponent( "SWire_Pb214_P2"  )->SetFillColor( kAzure +  2 );
+	DataManagement::AddComponent( new Component( "SFoil_Bi214_P1"  , "^{214}Bi SFoil P1  " , DataManagement::FindDataSet( "SFoil_Bi214"    ) , 0.015  , 0.001                                           )); DataManagement::FindComponent( "SFoil_Bi214_P1"  )->SetFillColor( kAzure +  3 );
+	DataManagement::AddComponent( new Component( "SFoil_Pb214_P1"  , "^{214}Pb SFoil P1  " , DataManagement::FindDataSet( "SFoil_Pb214"    ) , 0.015  , 0.001                                           )); DataManagement::FindComponent( "SFoil_Pb214_P1"  )->SetFillColor( kAzure +  4 );
+	DataManagement::AddComponent( new Component( "SFoil_Bi214_P2"  , "^{214}Bi SFoil P2  " , DataManagement::FindDataSet( "SFoil_Bi214"    ) , 0.0013 , 0.0003                                          )); DataManagement::FindComponent( "SFoil_Bi214_P2"  )->SetFillColor( kAzure +  3 );
+	DataManagement::AddComponent( new Component( "SFoil_Pb214_P2"  , "^{214}Pb SFoil P2  " , DataManagement::FindDataSet( "SFoil_Pb214"    ) , 0.0013 , 0.0003                                          )); DataManagement::FindComponent( "SFoil_Pb214_P2"  )->SetFillColor( kAzure +  4 );
+	DataManagement::AddComponent( new Component( "SWire_Bi214_P1"  , "^{214}Bi SWire P1  " , DataManagement::FindDataSet( "SWire_Bi214"    ) , 0.67   , 0.03                                            )); DataManagement::FindComponent( "SWire_Bi214_P1"  )->SetFillColor( kAzure +  1 );
+	DataManagement::AddComponent( new Component( "SWire_Pb214_P1"  , "^{214}Pb SWire P1  " , DataManagement::FindDataSet( "SWire_Pb214"    ) , 0.67   , 0.03                                            )); DataManagement::FindComponent( "SWire_Pb214_P1"  )->SetFillColor( kAzure +  2 );
+	DataManagement::AddComponent( new Component( "SWire_Bi214_P2"  , "^{214}Bi SWire P2  " , DataManagement::FindDataSet( "SWire_Bi214"    ) , 0.091  , 0.005                                           )); DataManagement::FindComponent( "SWire_Bi214_P2"  )->SetFillColor( kAzure +  1 );
+	DataManagement::AddComponent( new Component( "SWire_Pb214_P2"  , "^{214}Pb SWire P2  " , DataManagement::FindDataSet( "SWire_Pb214"    ) , 0.091  , 0.005                                           )); DataManagement::FindComponent( "SWire_Pb214_P2"  )->SetFillColor( kAzure +  2 );
 	DataManagement::AddComponent( new Component( "FeShield_Bi214"  , "FeShield ^{214}Bi  " , DataManagement::FindDataSet( "FeShield_Bi214" ) , DataManagement::FindParameter( "FeShield_Bi214" ) , 1.00 )); DataManagement::FindComponent( "FeShield_Bi214"  )->SetFillColor( kAzure +  5 );
 	DataManagement::AddComponent( new Component( "PMT_Bi214"       , "PMT ^{214}Bi       " , DataManagement::FindDataSet( "PMT_Bi214"      ) , DataManagement::FindParameter( "PMT_Bi214"      ) , 1.00 )); DataManagement::FindComponent( "PMT_Bi214"       )->SetFillColor( kAzure +  6 );
 	DataManagement::AddComponent( new Component( "SScin_Bi214"     , "SScint ^{214}Bi    " , DataManagement::FindDataSet( "SScin_Bi214"    ) , DataManagement::FindParameter( "SScin_Bi214"    ) , 1.00 )); DataManagement::FindComponent( "SScin_Bi214"     )->SetFillColor( kAzure +  7 );
@@ -248,8 +248,8 @@
 	tot_e_g_energy_P2 -> Draw();                                          (TPad*)gROOT->GetSelectedPad()->Print("FitExternals.pdf");
 	tot_e_g_energy_P2 -> SetLogScale(kTRUE); tot_e_g_energy_P2 -> Draw(); (TPad*)gROOT->GetSelectedPad()->Print("FitExternals.pdf)");
 	
-	tot_e_energy_P2   -> DrawDetails(); (TPad*)gROOT->GetSelectedPad()->Print("FitExternals_Details.pdf(");
-	tot_e_g_energy_P2 -> DrawDetails(); (TPad*)gROOT->GetSelectedPad()->Print("FitExternals_Details.pdf)");
+	//tot_e_energy_P2   -> DrawDetails(); (TPad*)gROOT->GetSelectedPad()->Print("FitExternals_Details.pdf(");
+	//tot_e_g_energy_P2 -> DrawDetails(); (TPad*)gROOT->GetSelectedPad()->Print("FitExternals_Details.pdf)");
 	                            
 }                               
                                 

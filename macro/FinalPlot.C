@@ -10,49 +10,68 @@ void FinalPlot(){
 	gStyle->SetTitleX(0.14);
 	gStyle->SetTitleY(0.93);
 
-	DrawAlphaTrackLength();
-	
-	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf(");
-	
-	DrawSingleElectronEnergy();
-	
-	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-	
-	DrawTotalElectronGammaEnergy();
-	
-	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-    
-	DrawTwoElectronEnergy();
-    
-	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-    
-	DrawTwoElectronEnergyZoom();
-	
-	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-	
-	DrawBDT("MM");
-	
-	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-    
-	DrawBDT("RHC_L");
-	
-	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-    
-	DrawBDT("RHC_E");
-	
-	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-    
-	DrawBDT("M1");
-	
-	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-	
-	DrawFoilRegions();
-    
-	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-    
+	//DrawAlphaTrackLength();
+	////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf(");
+	////
+	//DrawSingleElectronEnergy();
+	////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+	////
+	//DrawTotalElectronGammaEnergy();
+	////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    ////
+	//DrawTwoElectronEnergy();
+    ////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+	////
+	//DrawTwoElectronEnergy("MM");
+    ////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    ////
+	//DrawTwoElectronEnergy("RHC_L");
+    ////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    ////
+	//DrawTwoElectronEnergy("RHC_E");
+    ////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    ////
+	//DrawTwoElectronEnergy("M1");
+    ////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    ////
+	//DrawTwoElectronEnergyZoom();
+	////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+	////
+	//DrawBDT("MM");
+	////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf(");
+    ////
+	//DrawBDT("RHC_L");
+	////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    ////
+	//DrawBDT("RHC_E");
+	////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    ////
+	//DrawBDT("M1");
+	////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+	////
+	//DrawFoilRegions();
+    ////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    //
 	DrawComp();
+	////
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf)");
 	
-	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf)");
+	(TPad*)gROOT->GetSelectedPad()->Print("Bb2nuResultComparison.pdf");
+	
 	
 }
 
@@ -62,78 +81,45 @@ void DrawFoilRegions(){
 		
 	TDirectory * d = (TDirectory *) f->Get("Data");
 		
-	TH1D * H = (TH1D*) d->Get( "Data_h_vtx_z_vs_sect_hot" );
-	TH1D * M = (TH1D*) d->Get( "Data_h_vtx_z_vs_sect_warm" );
-	TH1D * L = (TH1D*) d->Get( "Data_h_vtx_z_vs_sect_cold" );
+	TH1D * h = (TH1D*) d->Get( "Data_h_vtx_z_vs_sect_all" );
 	
-    H->SetStats(kFALSE) ;
-    M->SetStats(kFALSE) ;
-    L->SetStats(kFALSE) ;
+    h->SetStats(kFALSE) ;
 	
-    H->GetYaxis()->CenterTitle(kTRUE) ;
-	M->GetYaxis()->CenterTitle(kTRUE) ;
-	L->GetYaxis()->CenterTitle(kTRUE) ;
+	h->GetYaxis()->CenterTitle(kTRUE) ;
+	h->GetXaxis()->CenterTitle(kTRUE) ;
+	h->GetZaxis()->CenterTitle(kTRUE) ;
+	
+	h->GetYaxis()->SetTitleOffset(1.4);
+	h->GetXaxis()->SetTitleOffset(1.4);
+	h->GetZaxis()->SetTitleOffset(2.0);
+	
+	h->GetZaxis()->SetTitle("No.Events");
+	
+	h->GetZaxis()->SetRangeUser(0,250.);
+	h->GetXaxis()->SetRangeUser(18.08,19.0);
 
-    H->GetXaxis()->CenterTitle(kTRUE) ;
-	M->GetXaxis()->CenterTitle(kTRUE) ;
-	L->GetXaxis()->CenterTitle(kTRUE) ;
-
-    H->GetZaxis()->CenterTitle(kTRUE) ;
-	M->GetZaxis()->CenterTitle(kTRUE) ;
-	L->GetZaxis()->CenterTitle(kTRUE) ;
-
-	H->GetZaxis()->SetTitle("No.Events");
-	M->GetZaxis()->SetTitle("No.Events");
-	L->GetZaxis()->SetTitle("No.Events");
-
-	H->GetZaxis()->SetRangeUser(0,100.);
-	M->GetZaxis()->SetRangeUser(0,100.);
-	L->GetZaxis()->SetRangeUser(0,100.);
-	
-	H->GetZaxis()->SetNdivisions(105) ;
-	M->GetZaxis()->SetNdivisions(105) ;
-	L->GetZaxis()->SetNdivisions(105) ;		
-	
-	
-	TCanvas * Canvas = new TCanvas("FoilRegion", "FoilRegion", 500, 500);
+	h->GetXaxis()->SetNdivisions(105) ;	
+	h->GetYaxis()->SetNdivisions(105) ;
+	h->GetZaxis()->SetNdivisions(105) ;	
 		
-	TPad * pad1 = new TPad("pad1", "pad1", 0, 0.583333, 1, 0.8333333);
-    pad1->SetGrid(kFALSE, kFALSE);
-    pad1->SetTickx() ;
-    pad1->SetTicky() ;
-    pad1->SetTopMargin(0.05)  ;
-    pad1->SetBottomMargin(0.025);  
-    pad1->SetRightMargin(0.20)  ;
-	pad1->Draw();
+	TCanvas * Canvas = new TCanvas("FoilRegion", "FoilRegion", 500, 500);
 
-	TPad * pad2 = new TPad("pad2", "pad2", 0, 0.333333, 1, 0.583333);
-    pad2->SetGrid(kFALSE, kFALSE);
-    pad2->SetTickx() ;
-    pad2->SetTicky() ;
-    pad2->SetTopMargin(0.05)  ;
-    pad2->SetBottomMargin(0.025);  
-    pad2->SetRightMargin(0.20)  ;
-	pad2->Draw();
+	h->SetTitle("NEMO-3 ^{116}Cd - 0.410 g, 5.26 y");
+
+	gPad->SetGridx(kFALSE);
+	gPad->SetGridy(kFALSE);
+
+    gPad->SetTickx() ;
+    gPad->SetTicky() ;
+
+	gPad->SetTopMargin(0.15);
+	gPad->SetBottomMargin(0.15);
+	gPad->SetRightMargin(0.20);
+
+	h->Draw("colz");
 	
-	TPad * pad3 = new TPad("pad3", "pad3", 0, 0, 1, 0.333333);
-    pad3->SetGrid(kFALSE, kFALSE);
-    pad3->SetTickx() ;
-    pad3->SetTicky() ;
-    pad3->SetTopMargin(0.05)  ;
-    pad3->SetBottomMargin(0.30);  
-    pad3->SetRightMargin(0.20)  ;
-	pad3->Draw();
-
-	pad1->cd();
-	H->Draw("col");
-	pad1->RedrawAxis();
-
-	pad2->cd();
-	M->Draw("col");
-
-	pad3->cd();
-	L->Draw("colz");
-
+	Canvas->Update();
+	
 };
 
 void DrawAlphaTrackLength () {
@@ -337,7 +323,7 @@ void DrawAlphaTrackLength () {
     pad3->SetTicky(); 
     pad3->Draw(); 
     
-    TH1F * Res = Data->Clone( "Residuals" ); 
+    TH1F * Res = Data->Clone( "Residual (#sigma)" ); 
     Res->SetTitle("") ;
     Res->Add(Sum, -1); 
     
@@ -345,25 +331,25 @@ void DrawAlphaTrackLength () {
     
     	if (Ratio->GetBinError(i) == 0) continue; 
     	
-    	Res->SetBinContent(i, Res->GetBinContent(i) / TMath::Sqrt( Data->GetBinContent(i) ) );
-    	Res->SetBinError(i, TMath::Sqrt( TMath::Abs(Res->GetBinContent(i)) ) );
+    	Res->SetBinContent(i, Res->GetBinContent(i) / TMath::Sqrt( Sum->GetBinContent(i) ) );
+    	Res->SetBinError(i, 1. );
     }
 	
     Res->GetYaxis()->SetNdivisions(105)   ;
 	Res->GetXaxis()->SetTickLength(0.10);
-    Res->GetYaxis()->SetTitle("Residuals") ;  
+    Res->GetYaxis()->SetTitle("Residual (#sigma)") ;  
     Res->GetYaxis()->CenterTitle(kTRUE) ;
     Res->GetYaxis()->SetRangeUser(-8,8) ;
             
-    TLegend * Leg = new TLegend(0.64,0.8,0.92,0.64);
+    TLegend * Leg = new TLegend(0.73,0.8,0.92,0.52);
 
-    Leg->SetNColumns(2);
+    Leg->SetNColumns(1);
     Leg->SetLineWidth(0);
 
     Leg->AddEntry( Cd116_Bi214 , "Foil bulk"    , "F"  ); 
-    Leg->AddEntry( Mylar_Bi214 , "Mylar"        , "F"  ); 
+    Leg->AddEntry( Mylar_Bi214 , "Mylar bulk"   , "F"  ); 
     Leg->AddEntry( SFoil_Bi214 , "Foil surface" , "F"  ); 
-    Leg->AddEntry( SWire_Bi214 , "Wire" , "F"  ); 
+    Leg->AddEntry( SWire_Bi214 , "Wire surface" , "F"  ); 
     Leg->AddEntry( Data        , TString::Format("Data (%0.f)", Data->GetEntries()), "PL" );  
 
    
@@ -375,12 +361,23 @@ void DrawAlphaTrackLength () {
 
     pad2->cd() ;
     Ratio->Draw("P0"); 
+	pad2->Update();
+	TLine * LineRatio = new TLine(pad2->GetUxmin(),1,pad2->GetUxmax(),1);
+	LineRatio->Draw("same");
+	Ratio->Draw("P0same"); 
 
     pad3->cd(); 
     Res->Draw("P0"); 
+	pad3->Update();
+	TLine * LineRes = new TLine(pad3->GetUxmin(),0,pad3->GetUxmax(),0);
+	LineRes->Draw("same");
+	Res->Draw("P0same"); 
 
     pad1->cd() ;
-    Leg->Draw(); 
+    Leg->Draw();
+	
+	Canvas->cd();
+	Canvas->Update();
 
 };
 
@@ -638,7 +635,7 @@ void DrawSingleElectronEnergy () {
     pad3->SetTicky(); 
     pad3->Draw(); 
     
-    TH1F * Res = Data->Clone( "Residuals" ); 
+    TH1F * Res = Data->Clone( "Residual (#sigma)" ); 
     Res->SetTitle("") ;
     Res->Add(Sum, -1); 
     
@@ -646,13 +643,13 @@ void DrawSingleElectronEnergy () {
     
     	if (Ratio->GetBinError(i) == 0) continue; 
     	
-    	Res->SetBinContent(i, Res->GetBinContent(i) / TMath::Sqrt( Data->GetBinContent(i) ) );
-    	Res->SetBinError(i, TMath::Sqrt( TMath::Abs(Res->GetBinContent(i)) ) );
+    	Res->SetBinContent(i, Res->GetBinContent(i) / TMath::Sqrt( Sum->GetBinContent(i) ) );
+    	Res->SetBinError(i, 1. );
     }
 	
     Res->GetYaxis()->SetNdivisions(105)   ;
 	Res->GetXaxis()->SetTickLength(0.10);
-    Res->GetYaxis()->SetTitle("Residuals") ;  
+    Res->GetYaxis()->SetTitle("Residual (#sigma)") ;  
     Res->GetYaxis()->CenterTitle(kTRUE) ;
     Res->GetYaxis()->SetRangeUser(-8,8) ;
             
@@ -683,13 +680,23 @@ void DrawSingleElectronEnergy () {
 	
     pad2->cd() ;
     Ratio->Draw("P0"); 
+	pad2->Update();
+	TLine * LineRatio = new TLine(pad2->GetUxmin(),1,pad2->GetUxmax(),1);
+	LineRatio->Draw("same");
+	Ratio->Draw("P0same"); 
 
     pad3->cd(); 
     Res->Draw("P0"); 
+	pad3->Update();
+	TLine * LineRes = new TLine(pad2->GetUxmin(),0,pad2->GetUxmax(),0);
+	LineRes->Draw("same");
+	Res->Draw("P0same"); 
 
     pad1->cd() ;
     Leg->Draw(); 
 	
+	Canvas->cd();
+	Canvas->Update();
 	
 };	
 
@@ -932,7 +939,7 @@ void DrawTotalElectronGammaEnergy(){
     pad3->SetTicky(); 
     pad3->Draw(); 
     
-    TH1F * Res = Data->Clone( "Residuals" ); 
+    TH1F * Res = Data->Clone( "Residual (#sigma)" ); 
     Res->SetTitle("") ;
     Res->Add(Sum, -1); 
     
@@ -940,13 +947,13 @@ void DrawTotalElectronGammaEnergy(){
     
     	if (Ratio->GetBinError(i) == 0) continue; 
     	
-    	Res->SetBinContent(i, Res->GetBinContent(i) / TMath::Sqrt( Data->GetBinContent(i) ) );
-    	Res->SetBinError(i, TMath::Sqrt( TMath::Abs(Res->GetBinContent(i)) ) );
+    	Res->SetBinContent(i, Res->GetBinContent(i) / TMath::Sqrt( Sum->GetBinContent(i) ) );
+    	Res->SetBinError(i, 1. );
     }
 	
     Res->GetYaxis()->SetNdivisions(105)   ;
 	Res->GetXaxis()->SetTickLength(0.10);
-    Res->GetYaxis()->SetTitle("Residuals") ;  
+    Res->GetYaxis()->SetTitle("Residual (#sigma)") ;  
     Res->GetYaxis()->CenterTitle(kTRUE) ;
     Res->GetYaxis()->SetRangeUser(-8,8) ;
             
@@ -973,16 +980,29 @@ void DrawTotalElectronGammaEnergy(){
 	
     pad2->cd() ;
     Ratio->Draw("P0"); 
+	pad2->Update();
+	TLine * LineRatio = new TLine(pad2->GetUxmin(),1,pad2->GetUxmax(),1);
+	LineRatio->Draw("same");
+	Ratio->Draw("P0same"); 
+
 
     pad3->cd(); 
     Res->Draw("P0"); 
+	pad3->Update();
+	TLine * LineRes = new TLine(pad2->GetUxmin(),0,pad2->GetUxmax(),0);
+	LineRes->Draw("same");
+	Res->Draw("P0same"); 
 
     pad1->cd() ;
     Leg->Draw(); 
 	
+	Canvas->cd();
+	Canvas->Update();
+	
+	
 };
 
-void DrawTwoElectronEnergy(){
+void DrawTwoElectronEnergy(char * model = ""){
 	
 	gROOT->ProcessLine(".x /Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/macro/LoadAllDataSample.C+");
 	
@@ -1031,11 +1051,13 @@ void DrawTwoElectronEnergy(){
     Double_t ScintPet_K40_weight    = 1.00666           ;
     Double_t MuMetal_Pa234m_weight  = 0.66462           ;
 
+	// weights obtained with limit setting on Etot
     Double_t BB_weight              = 5022.22           ;	
     Double_t MM_weight              = 78.5  * 0.09208   ;
     Double_t RHC_E_weight           = 87.0  * 0.04758   ;
     Double_t RHC_L_weight           = 156.0 * 0.07510   ;        
     Double_t M1_weight              = 900.7 * 0.06308   ;
+
 	
 	TH1D * Cd116_Tl208    = (TH1D*) hcoll->Find( "Cd116_Tl208_h_tot_e_energy"     ); Cd116_Tl208    -> Scale( Cd116_Tl208_weight    / Cd116_Tl208    ->Integral() );
 	TH1D * Cd116_Ac228    = (TH1D*) hcoll->Find( "Cd116_Ac228_h_tot_e_energy"     ); Cd116_Ac228    -> Scale( Cd116_Ac228_weight    / Cd116_Ac228    ->Integral() );
@@ -1068,11 +1090,13 @@ void DrawTwoElectronEnergy(){
 	TH1D * ScintOut_K40   = (TH1D*) hcoll->Find( "ScintOut_K40_h_tot_e_energy"    ); ScintOut_K40   -> Scale( ScintOut_K40_weight   / ScintOut_K40   ->Integral() );
 	TH1D * ScintPet_K40   = (TH1D*) hcoll->Find( "ScintPet_K40_h_tot_e_energy"    ); ScintPet_K40   -> Scale( ScintPet_K40_weight   / ScintPet_K40   ->Integral() );
 	TH1D * MuMetal_Pa234m = (TH1D*) hcoll->Find( "MuMetal_Pa234m_h_tot_e_energy"  ); MuMetal_Pa234m -> Scale( MuMetal_Pa234m_weight / MuMetal_Pa234m ->Integral() );
-	TH1D * BB             = (TH1D*) hcoll->Find( "Cd116_2b2n_m14_h_tot_e_energy"  ); BB             -> Scale( BB_weight             / BB             ->Integral() );
-	TH1D * MM             = (TH1D*) hcoll->Find( "Cd116_2b0n_m1_h_tot_e_energy"    ); MM             -> Scale( MM_weight             / MM             ->Integral() );
-    TH1D * RHC_E          = (TH1D*) hcoll->Find( "Cd116_2b0n_m18_h_tot_e_energy"  ); RHC_E          -> Scale( RHC_E_weight          / RHC_E          ->Integral() );
-    TH1D * RHC_L          = (TH1D*) hcoll->Find( "Cd116_2b0n_m2_h_tot_e_energy"   ); RHC_L          -> Scale( RHC_L_weight          / RHC_L          ->Integral() );
-    TH1D * M1             = (TH1D*) hcoll->Find( "Cd116_2b0n_m5_h_tot_e_energy"   ); M1             -> Scale( M1_weight             / M1             ->Integral() );
+	TH1D * BB             = (TH1D*) hcoll->Find( "Cd116_2b2n_m14_h_tot_e_energy"  ); BB             -> Scale( BB_weight             / BB             ->Integral() );	
+
+	if(model == "MM"    ) { TH1D * MM             = (TH1D*) hcoll->Find( "Cd116_2b0n_m1_h_tot_e_energy"   ); MM             -> Scale( MM_weight             / MM             ->Integral() );} 
+	if(model == "RHC_E" ) { TH1D * RHC_E          = (TH1D*) hcoll->Find( "Cd116_2b0n_m18_h_tot_e_energy"  ); RHC_E          -> Scale( RHC_E_weight          / RHC_E          ->Integral() );} 
+	if(model == "RHC_L" ) { TH1D * RHC_L          = (TH1D*) hcoll->Find( "Cd116_2b0n_m2_h_tot_e_energy"   ); RHC_L          -> Scale( RHC_L_weight          / RHC_L          ->Integral() );} 
+	if(model == "M1"    ) { TH1D * M1             = (TH1D*) hcoll->Find( "Cd116_2b0n_m5_h_tot_e_energy"   ); M1             -> Scale( M1_weight             / M1             ->Integral() );} 
+
 
     TH1D * Tl208 = SWire_Tl208->Clone("Tl208");
     Tl208->Add( Cd116_Tl208 );
@@ -1121,6 +1145,31 @@ void DrawTwoElectronEnergy(){
 	K40       -> SetFillColor( kViolet +  2 );
 	Bi210     -> SetFillColor( kGreen  +  2 );
 	
+	if( model == "MM"    ) {
+		MM    -> SetLineColor(46);
+		MM    -> SetLineStyle(1); 
+		MM    -> SetLineWidth(3); 
+	}
+	
+	if( model == "RHC_E" ) {
+		RHC_E -> SetLineColor(38);
+		RHC_E -> SetLineStyle(3); 
+		RHC_E -> SetLineWidth(3); 
+	}
+	
+	if ( model == "RHC_L" ) {
+	 	RHC_L -> SetLineColor(38);
+	 	RHC_L -> SetLineStyle(2); 
+	 	RHC_L -> SetLineWidth(3); 
+	}
+
+	if( model == "M1" ){
+		M1    -> SetLineColor(30);
+		M1    -> SetLineStyle(1); 
+		M1    -> SetLineWidth(3); 		
+	}
+	
+	
 	THStack * Stack = new THStack("stack","stack");
 	Stack->Add(Tl208    );
 	Stack->Add(Bi214    );
@@ -1130,6 +1179,14 @@ void DrawTwoElectronEnergy(){
 	Stack->Add(Radon    );
 	Stack->Add(Externals);
 	Stack->Add(BB       );
+	
+	THStack * Stack_S = Stack->Clone("Stack_S");
+
+	if ( model == "MM"    ) Stack_S->Add(MM);
+	if ( model == "RHC_L" ) Stack_S->Add(RHC_L);
+	if ( model == "RHC_E" ) Stack_S->Add(RHC_E);
+	if ( model == "M1"     ) Stack_S->Add(M1);
+	
 		
 	TH1D * Sum = Tl208->Clone( "Sum" );
 	Sum->Add(Bi214    );
@@ -1204,7 +1261,7 @@ void DrawTwoElectronEnergy(){
     pad3->SetTicky(); 
     pad3->Draw(); 
     
-    TH1F * Res = Data->Clone( "Residuals" ); 
+    TH1F * Res = Data->Clone( "Residual (#sigma)" ); 
     Res->SetTitle("") ;
     Res->Add(Sum, -1); 
     
@@ -1212,15 +1269,15 @@ void DrawTwoElectronEnergy(){
     	
     	if (Ratio->GetBinError(i) == 0) continue; 
     	
-    	Res->SetBinContent(i, Res->GetBinContent(i) / TMath::Sqrt( Data->GetBinContent(i) ) );
-    	Res->SetBinError(i, TMath::Sqrt( TMath::Abs(Res->GetBinContent(i)) ) );
+    	Res->SetBinContent(i, Res->GetBinContent(i) / TMath::Sqrt( Sum->GetBinContent(i) ) );
+    	Res->SetBinError(i, 1. );
     }
 	
     Res->GetYaxis()->SetNdivisions(105)   ;
 	Res->GetXaxis()->SetTickLength(0.10);
-    Res->GetYaxis()->SetTitle("Residuals") ;  
+    Res->GetYaxis()->SetTitle("Residual (#sigma)") ;  
     Res->GetYaxis()->CenterTitle(kTRUE) ;
-    Res->GetYaxis()->SetRangeUser(-8,8) ;
+    Res->GetYaxis()->SetRangeUser(-3.5,3.5) ;
             
     TLegend * Leg = new TLegend(0.59,0.8,0.92,0.52)   ;      
 
@@ -1235,6 +1292,12 @@ void DrawTwoElectronEnergy(){
 	Leg->AddEntry( K40     	   , "^{40}K"         , "F"  );
 	Leg->AddEntry( Bi214       , "^{214}Bi"       , "F"  );
 	Leg->AddEntry( Tl208       , "^{208}Tl"       , "F"  );
+
+    if ( model == "MM"    ) Leg->AddEntry( MM    , "#LT m_{#beta#beta} #GT" , "L"  );
+	if ( model == "RHC_E" ) Leg->AddEntry( RHC_E , "#LT #eta #GT"           , "L"  );
+	if ( model == "RHC_L" ) Leg->AddEntry( RHC_L , "#LT #lambda #GT"        , "L"  );
+	if ( model == "M1"    ) Leg->AddEntry( M1    , "#chi^{0}_{n=1}"         , "L"  );
+
     Leg->AddEntry( Data        , TString::Format("Data (%0.f)", Data->GetEntries()), "PL" ); 
 
     Data -> GetXaxis()->SetRangeUser(0.6,3.5) ;    
@@ -1243,18 +1306,30 @@ void DrawTwoElectronEnergy(){
 
     pad1->cd() ;    
     Data->Draw(""); 
-    Stack->Draw("A,SAME,HIST");
+    Stack_S->Draw("A,SAME,HIST");
     Data->Draw("SAME") ;
 	pad1->RedrawAxis();
 	
     pad2->cd() ;
     Ratio->Draw("P0"); 
+	pad2->Update();
+	TLine * LineRatio = new TLine(pad2->GetUxmin(),1,pad2->GetUxmax(),1);
+	LineRatio->Draw("same");
+	Ratio->Draw("P0same"); 
 
     pad3->cd(); 
     Res->Draw("P0"); 
+	pad3->Update();
+	TLine * LineRes = new TLine(pad3->GetUxmin(),0,pad3->GetUxmax(),0);
+	LineRes->Draw("same");
+	Res->Draw("P0same"); 
 
     pad1->cd() ;
     Leg->Draw(); 
+
+	Canvas->cd();
+	Canvas->Update();
+
 	
 };
 
@@ -1308,7 +1383,8 @@ void DrawTwoElectronEnergyZoom(){
     Double_t MuMetal_Pa234m_weight  = 0.66462           ;
 
     Double_t BB_weight              = 5022.22           ;	
-    Double_t MM_weight              = 71.2  * 0.09208   ;
+    //Double_t MM_weight              = 71.2  * 0.09208   ;
+	Double_t MM_weight              = 74.7  * 0.09208   ;
     Double_t RHC_E_weight           = 56.8  * 0.07510   ;
     Double_t RHC_L_weight           = 130.7 * 0.04758   ;     
     Double_t M1_weight              = 878.2 * 0.06308   ;
@@ -1507,15 +1583,20 @@ void DrawTwoElectronEnergyZoom(){
 	Data->GetYaxis()->DrawClone("") ;
     Leg->Draw(); 
 	pad1->RedrawAxis();
+
+	Canvas->cd();
+	Canvas->Update();
+
 		
 };
 
 void DrawBDT( char * model = "MM"){
 	
     TFile * f = new TFile( TString::Format("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/TMVApp/TMVApp_%s.root", model ) , "READ" );
+
 	
 	TH1D * Data = (TH1D*) f->Get( "Data_MVA_BDT" );
- 	Data->Sumw2();
+ 	Data->Sumw2(); //Data->Rebin(2);
 	
 	Double_t Cd116_Tl208_weight     = 5.93241           ;
 	Double_t Cd116_Ac228_weight     = 6.92004           ;
@@ -1550,48 +1631,49 @@ void DrawBDT( char * model = "MM"){
 	Double_t MuMetal_Pa234m_weight  = 0.66462           ;
 	
 	Double_t BB_weight              = 5022.22           ;	
-	Double_t MM_weight              = 71.2  * 0.09208   ;
+	//Double_t MM_weight              = 71.2  * 0.09208   ;
+	Double_t MM_weight              = 74.7  * 0.09208   ;
 	Double_t RHC_E_weight           = 56.8  * 0.07510   ;
 	Double_t RHC_L_weight           = 130.7 * 0.04758   ;     
 	Double_t M1_weight              = 878.2 * 0.06308   ;
 	
-	TH1D * Cd116_Tl208    = (TH1D*) f->Get( "Cd116_Tl208_MVA_BDT"           ); Cd116_Tl208    -> Scale( Cd116_Tl208_weight    / Cd116_Tl208    ->Integral() );
-	TH1D * Cd116_Ac228    = (TH1D*) f->Get( "Cd116_Ac228_MVA_BDT"           ); Cd116_Ac228    -> Scale( Cd116_Ac228_weight    / Cd116_Ac228    ->Integral() );
-	TH1D * Cd116_Bi212    = (TH1D*) f->Get( "Cd116_Bi212_MVA_BDT"           ); Cd116_Bi212    -> Scale( Cd116_Bi212_weight    / Cd116_Bi212    ->Integral() );
-	TH1D * Cd116_Bi214    = (TH1D*) f->Get( "Cd116_Bi214_MVA_BDT"           ); Cd116_Bi214    -> Scale( Cd116_Bi214_weight    / Cd116_Bi214    ->Integral() );
-	TH1D * Cd116_Pb214    = (TH1D*) f->Get( "Cd116_Pb214_VT_MVA_BDT"        ); Cd116_Pb214    -> Scale( Cd116_Pb214_weight    / Cd116_Pb214    ->Integral() );
-	TH1D * Mylar_Bi214    = (TH1D*) f->Get( "Mylar_Bi214_MVA_BDT"           ); Mylar_Bi214    -> Scale( Mylar_Bi214_weight    / Mylar_Bi214    ->Integral() );
-	TH1D * Mylar_Pb214    = (TH1D*) f->Get( "Mylar_Pb214_MVA_BDT"           ); Mylar_Pb214    -> Scale( Mylar_Pb214_weight    / Mylar_Pb214    ->Integral() );
-	TH1D * Cd116_K40      = (TH1D*) f->Get( "Cd116_K40_MVA_BDT"             ); Cd116_K40      -> Scale( Cd116_K40_weight      / Cd116_K40      ->Integral() );
-	TH1D * Cd116_Pa234m   = (TH1D*) f->Get( "Cd116_Pa234m_MVA_BDT"          ); Cd116_Pa234m   -> Scale( Cd116_Pa234m_weight   / Cd116_Pa234m   ->Integral() );
-	TH1D * SFoil_Bi210    = (TH1D*) f->Get( "SFoil_Bi210_MVA_BDT"           ); SFoil_Bi210    -> Scale( SFoil_Bi210_weight    / SFoil_Bi210    ->Integral() );
-	TH1D * SWire_Bi210    = (TH1D*) f->Get( "SWire_Bi210_MVA_BDT"           ); SWire_Bi210    -> Scale( SWire_Bi210_weight    / SWire_Bi210    ->Integral() );
-	TH1D * SScin_Bi210    = (TH1D*) f->Get( "SScin_Bi210_MVA_BDT"           ); SScin_Bi210    -> Scale( SScin_Bi210_weight    / SScin_Bi210    ->Integral() );
-	TH1D * SScin_Bi214    = (TH1D*) f->Get( "SScin_Bi214_MVA_BDT"           ); SScin_Bi214    -> Scale( SScin_Bi214_weight    / SScin_Bi214    ->Integral() );
-	TH1D * SWire_Tl208    = (TH1D*) f->Get( "SWire_Tl208_MVA_BDT"           ); SWire_Tl208    -> Scale( SWire_Tl208_weight    / SWire_Tl208    ->Integral() );
-	TH1D * SWire_Bi214    = (TH1D*) f->Get( "SWire_Bi214_MVA_BDT"           ); SWire_Bi214    -> Scale( SWire_Bi214_weight    / SWire_Bi214    ->Integral() );
-	TH1D * SFoil_Bi214    = (TH1D*) f->Get( "SFoil_Bi214_MVA_BDT"           ); SFoil_Bi214    -> Scale( SFoil_Bi214_weight    / SFoil_Bi214    ->Integral() );
-	TH1D * SWire_Pb214    = (TH1D*) f->Get( "SWire_Pb214_MVA_BDT"           ); SWire_Pb214    -> Scale( SWire_Pb214_weight    / SWire_Pb214    ->Integral() );
-	TH1D * SFoil_Pb214    = (TH1D*) f->Get( "SFoil_Pb214_MVA_BDT"           ); SFoil_Pb214    -> Scale( SFoil_Pb214_weight    / SFoil_Pb214    ->Integral() );
-	TH1D * FeShield_Bi214 = (TH1D*) f->Get( "FeShield_Bi214_MVA_BDT"        ); FeShield_Bi214 -> Scale( FeShield_Bi214_weight / FeShield_Bi214 ->Integral() );
-	TH1D * FeShield_Tl208 = (TH1D*) f->Get( "FeShield_Tl208_MVA_BDT"        ); FeShield_Tl208 -> Scale( FeShield_Tl208_weight / FeShield_Tl208 ->Integral() );
-	TH1D * FeShield_Ac228 = (TH1D*) f->Get( "FeShield_Ac228_MVA_BDT"        ); FeShield_Ac228 -> Scale( FeShield_Ac228_weight / FeShield_Ac228 ->Integral() );
-	TH1D * CuTower_Co60   = (TH1D*) f->Get( "CuTower_Co60_MVA_BDT"          ); CuTower_Co60   -> Scale( CuTower_Co60_weight   / CuTower_Co60   ->Integral() );
-	TH1D * Air_Bi214_P1   = (TH1D*) f->Get( "Air_Bi214_MVA_BDT"             ); Air_Bi214_P1   -> Scale( Air_Bi214_P1_weight   / Air_Bi214_P1   ->Integral() );
-	TH1D * PMT_Bi214      = (TH1D*) f->Get( "PMT_Bi214_MVA_BDT"             ); PMT_Bi214      -> Scale( PMT_Bi214_weight      / PMT_Bi214      ->Integral() );
-	TH1D * PMT_Tl208      = (TH1D*) f->Get( "PMT_Tl208_MVA_BDT"             ); PMT_Tl208      -> Scale( PMT_Tl208_weight      / PMT_Tl208      ->Integral() );
-	TH1D * PMT_Ac228      = (TH1D*) f->Get( "PMT_Ac228_MVA_BDT"             ); PMT_Ac228      -> Scale( PMT_Ac228_weight      / PMT_Ac228      ->Integral() );
-	TH1D * PMT_K40        = (TH1D*) f->Get( "PMT_K40_MVA_BDT"               ); PMT_K40        -> Scale( PMT_K40_weight        / PMT_K40        ->Integral() );
-	TH1D * ScintInn_K40   = (TH1D*) f->Get( "ScintInn_K40_MVA_BDT"          ); ScintInn_K40   -> Scale( ScintInn_K40_weight   / ScintInn_K40   ->Integral() );
-	TH1D * ScintOut_K40   = (TH1D*) f->Get( "ScintOut_K40_MVA_BDT"          ); ScintOut_K40   -> Scale( ScintOut_K40_weight   / ScintOut_K40   ->Integral() );
-	TH1D * ScintPet_K40   = (TH1D*) f->Get( "ScintPet_K40_MVA_BDT"          ); ScintPet_K40   -> Scale( ScintPet_K40_weight   / ScintPet_K40   ->Integral() );
-	TH1D * MuMetal_Pa234m = (TH1D*) f->Get( "MuMetal_Pa234m_MVA_BDT"        ); MuMetal_Pa234m -> Scale( MuMetal_Pa234m_weight / MuMetal_Pa234m ->Integral() );
-	TH1D * BB             = (TH1D*) f->Get( "Cd116_2b2n_m14_MVA_BDT"        ); BB             -> Scale( BB_weight             / BB             ->Integral() );
+	TH1D * Cd116_Tl208    = (TH1D*) f->Get( "Cd116_Tl208_MVA_BDT"           ); Cd116_Tl208    -> Scale( Cd116_Tl208_weight    / Cd116_Tl208    ->Integral() ); 
+	TH1D * Cd116_Ac228    = (TH1D*) f->Get( "Cd116_Ac228_MVA_BDT"           ); Cd116_Ac228    -> Scale( Cd116_Ac228_weight    / Cd116_Ac228    ->Integral() ); 
+	TH1D * Cd116_Bi212    = (TH1D*) f->Get( "Cd116_Bi212_MVA_BDT"           ); Cd116_Bi212    -> Scale( Cd116_Bi212_weight    / Cd116_Bi212    ->Integral() ); 
+	TH1D * Cd116_Bi214    = (TH1D*) f->Get( "Cd116_Bi214_MVA_BDT"           ); Cd116_Bi214    -> Scale( Cd116_Bi214_weight    / Cd116_Bi214    ->Integral() ); 
+	TH1D * Cd116_Pb214    = (TH1D*) f->Get( "Cd116_Pb214_VT_MVA_BDT"        ); Cd116_Pb214    -> Scale( Cd116_Pb214_weight    / Cd116_Pb214    ->Integral() ); 
+	TH1D * Mylar_Bi214    = (TH1D*) f->Get( "Mylar_Bi214_MVA_BDT"           ); Mylar_Bi214    -> Scale( Mylar_Bi214_weight    / Mylar_Bi214    ->Integral() ); 
+	TH1D * Mylar_Pb214    = (TH1D*) f->Get( "Mylar_Pb214_MVA_BDT"           ); Mylar_Pb214    -> Scale( Mylar_Pb214_weight    / Mylar_Pb214    ->Integral() ); 
+	TH1D * Cd116_K40      = (TH1D*) f->Get( "Cd116_K40_MVA_BDT"             ); Cd116_K40      -> Scale( Cd116_K40_weight      / Cd116_K40      ->Integral() ); 
+	TH1D * Cd116_Pa234m   = (TH1D*) f->Get( "Cd116_Pa234m_MVA_BDT"          ); Cd116_Pa234m   -> Scale( Cd116_Pa234m_weight   / Cd116_Pa234m   ->Integral() ); 
+	TH1D * SFoil_Bi210    = (TH1D*) f->Get( "SFoil_Bi210_MVA_BDT"           ); SFoil_Bi210    -> Scale( SFoil_Bi210_weight    / SFoil_Bi210    ->Integral() ); 
+	TH1D * SWire_Bi210    = (TH1D*) f->Get( "SWire_Bi210_MVA_BDT"           ); SWire_Bi210    -> Scale( SWire_Bi210_weight    / SWire_Bi210    ->Integral() ); 
+	TH1D * SScin_Bi210    = (TH1D*) f->Get( "SScin_Bi210_MVA_BDT"           ); SScin_Bi210    -> Scale( SScin_Bi210_weight    / SScin_Bi210    ->Integral() ); 
+	TH1D * SScin_Bi214    = (TH1D*) f->Get( "SScin_Bi214_MVA_BDT"           ); SScin_Bi214    -> Scale( SScin_Bi214_weight    / SScin_Bi214    ->Integral() ); 
+	TH1D * SWire_Tl208    = (TH1D*) f->Get( "SWire_Tl208_MVA_BDT"           ); SWire_Tl208    -> Scale( SWire_Tl208_weight    / SWire_Tl208    ->Integral() ); 
+	TH1D * SWire_Bi214    = (TH1D*) f->Get( "SWire_Bi214_MVA_BDT"           ); SWire_Bi214    -> Scale( SWire_Bi214_weight    / SWire_Bi214    ->Integral() ); 
+	TH1D * SFoil_Bi214    = (TH1D*) f->Get( "SFoil_Bi214_MVA_BDT"           ); SFoil_Bi214    -> Scale( SFoil_Bi214_weight    / SFoil_Bi214    ->Integral() ); 
+	TH1D * SWire_Pb214    = (TH1D*) f->Get( "SWire_Pb214_MVA_BDT"           ); SWire_Pb214    -> Scale( SWire_Pb214_weight    / SWire_Pb214    ->Integral() ); 
+	TH1D * SFoil_Pb214    = (TH1D*) f->Get( "SFoil_Pb214_MVA_BDT"           ); SFoil_Pb214    -> Scale( SFoil_Pb214_weight    / SFoil_Pb214    ->Integral() ); 
+	TH1D * FeShield_Bi214 = (TH1D*) f->Get( "FeShield_Bi214_MVA_BDT"        ); FeShield_Bi214 -> Scale( FeShield_Bi214_weight / FeShield_Bi214 ->Integral() ); 
+	TH1D * FeShield_Tl208 = (TH1D*) f->Get( "FeShield_Tl208_MVA_BDT"        ); FeShield_Tl208 -> Scale( FeShield_Tl208_weight / FeShield_Tl208 ->Integral() ); 
+	TH1D * FeShield_Ac228 = (TH1D*) f->Get( "FeShield_Ac228_MVA_BDT"        ); FeShield_Ac228 -> Scale( FeShield_Ac228_weight / FeShield_Ac228 ->Integral() ); 
+	TH1D * CuTower_Co60   = (TH1D*) f->Get( "CuTower_Co60_MVA_BDT"          ); CuTower_Co60   -> Scale( CuTower_Co60_weight   / CuTower_Co60   ->Integral() ); 
+	TH1D * Air_Bi214_P1   = (TH1D*) f->Get( "Air_Bi214_MVA_BDT"             ); Air_Bi214_P1   -> Scale( Air_Bi214_P1_weight   / Air_Bi214_P1   ->Integral() ); 
+	TH1D * PMT_Bi214      = (TH1D*) f->Get( "PMT_Bi214_MVA_BDT"             ); PMT_Bi214      -> Scale( PMT_Bi214_weight      / PMT_Bi214      ->Integral() ); 
+	TH1D * PMT_Tl208      = (TH1D*) f->Get( "PMT_Tl208_MVA_BDT"             ); PMT_Tl208      -> Scale( PMT_Tl208_weight      / PMT_Tl208      ->Integral() ); 
+	TH1D * PMT_Ac228      = (TH1D*) f->Get( "PMT_Ac228_MVA_BDT"             ); PMT_Ac228      -> Scale( PMT_Ac228_weight      / PMT_Ac228      ->Integral() ); 
+	TH1D * PMT_K40        = (TH1D*) f->Get( "PMT_K40_MVA_BDT"               ); PMT_K40        -> Scale( PMT_K40_weight        / PMT_K40        ->Integral() ); 
+	TH1D * ScintInn_K40   = (TH1D*) f->Get( "ScintInn_K40_MVA_BDT"          ); ScintInn_K40   -> Scale( ScintInn_K40_weight   / ScintInn_K40   ->Integral() ); 
+	TH1D * ScintOut_K40   = (TH1D*) f->Get( "ScintOut_K40_MVA_BDT"          ); ScintOut_K40   -> Scale( ScintOut_K40_weight   / ScintOut_K40   ->Integral() ); 
+	TH1D * ScintPet_K40   = (TH1D*) f->Get( "ScintPet_K40_MVA_BDT"          ); ScintPet_K40   -> Scale( ScintPet_K40_weight   / ScintPet_K40   ->Integral() ); 
+	TH1D * MuMetal_Pa234m = (TH1D*) f->Get( "MuMetal_Pa234m_MVA_BDT"        ); MuMetal_Pa234m -> Scale( MuMetal_Pa234m_weight / MuMetal_Pa234m ->Integral() ); 
+	TH1D * BB             = (TH1D*) f->Get( "Cd116_2b2n_m14_MVA_BDT"        ); BB             -> Scale( BB_weight             / BB             ->Integral() ); 
 
-	if(model == "MM" )    { TH1D * MM             = (TH1D*) f->Get( "Cd116_2b0n_m1_MVA_BDT"         ); MM             -> Scale( MM_weight             / MM             ->Integral() );}
-	if(model == "RHC_E" ) { TH1D * RHC_E          = (TH1D*) f->Get( "Cd116_2b0n_m18_MVA_BDT"        ); RHC_E          -> Scale( RHC_E_weight          / RHC_E          ->Integral() );}
-	if(model == "RHC_L" ) { TH1D * RHC_L          = (TH1D*) f->Get( "Cd116_2b0n_m2_MVA_BDT"         ); RHC_L          -> Scale( RHC_L_weight          / RHC_L          ->Integral() );}
-	if(model == "M1"    ) { TH1D * M1             = (TH1D*) f->Get( "Cd116_2b0n_m5_MVA_BDT"         ); M1             -> Scale( M1_weight             / M1             ->Integral() );}
+	if(model == "MM" )    { TH1D * MM             = (TH1D*) f->Get( "Cd116_2b0n_m1_MVA_BDT"         ); MM             -> Scale( MM_weight             / MM             ->Integral() );} 
+	if(model == "RHC_E" ) { TH1D * RHC_E          = (TH1D*) f->Get( "Cd116_2b0n_m18_MVA_BDT"        ); RHC_E          -> Scale( RHC_E_weight          / RHC_E          ->Integral() );} 
+	if(model == "RHC_L" ) { TH1D * RHC_L          = (TH1D*) f->Get( "Cd116_2b0n_m2_MVA_BDT"         ); RHC_L          -> Scale( RHC_L_weight          / RHC_L          ->Integral() );} 
+	if(model == "M1"    ) { TH1D * M1             = (TH1D*) f->Get( "Cd116_2b0n_m5_MVA_BDT"         ); M1             -> Scale( M1_weight             / M1             ->Integral() );} 
 	
 	TH1D * Tl208 = SWire_Tl208->Clone("Tl208");
 	Tl208->Add( Cd116_Tl208 );
@@ -1631,20 +1713,20 @@ void DrawBDT( char * model = "MM"){
 	Externals->Add( SScin_Bi214    );
 	Externals->Add( MuMetal_Pa234m );
 	
-    Tl208     -> Rebin();
-    Bi214     -> Rebin();
-    Radon     -> Rebin();
-    Externals -> Rebin();
-    K40       -> Rebin();
-    Pa234m    -> Rebin();
-    Bi210     -> Rebin();
-    BB        -> Rebin();    
-    Data      -> Rebin();
-    
-	if( model == "MM"    ) { MM    -> Rebin(); }
-	if( model == "RHC_E" ) { RHC_E -> Rebin(); }
-	if( model == "RHC_L" ) { RHC_L -> Rebin(); }
-	if( model == "M1"    ) { M1    -> Rebin(); }
+    Tl208     -> Rebin(2);
+    Bi214     -> Rebin(2);
+    Radon     -> Rebin(2);
+    Externals -> Rebin(2);
+    K40       -> Rebin(2);
+    Pa234m    -> Rebin(2);
+    Bi210     -> Rebin(2);
+    BB        -> Rebin(2);    
+    Data      -> Rebin(2);	
+	
+	if( model == "MM"    ) { MM    -> Rebin(2); }
+	if( model == "RHC_E" ) { RHC_E -> Rebin(2); }
+	if( model == "RHC_L" ) { RHC_L -> Rebin(2); }
+	if( model == "M1"    ) { M1    -> Rebin(2); }
 		
 	Tl208     -> SetFillColor( kOrange + 10 );
 	Bi214     -> SetFillColor( kGreen  +  0 );
@@ -1769,7 +1851,7 @@ void DrawBDT( char * model = "MM"){
     pad3->SetTicky(); 
     pad3->Draw(); 
     
-    TH1F * Res = Data->Clone( "Residuals" ); 
+    TH1F * Res = Data->Clone( "Residual (#sigma)" ); 
     Res->SetTitle("") ;
     Res->Add(Sum, -1); 
     
@@ -1777,16 +1859,17 @@ void DrawBDT( char * model = "MM"){
     	
     	if (Ratio->GetBinError(i) == 0) continue; 
     	
-    	Res->SetBinContent(i, Res->GetBinContent(i) / TMath::Sqrt( Data->GetBinContent(i) ) );
-    	Res->SetBinError(i, TMath::Sqrt( TMath::Abs(Res->GetBinContent(i)) ) );
+    	Res->SetBinContent(i, Res->GetBinContent(i) / TMath::Sqrt( Sum->GetBinContent(i) ) );
+    	Res->SetBinError(i, 1. );
+		
     }
 	
     Res->GetYaxis()->SetNdivisions(105)   ;
 	Res->GetXaxis()->SetTickLength(0.10);
-    Res->GetYaxis()->SetTitle("Residuals") ;  
+    Res->GetYaxis()->SetTitle("Residual (#sigma)") ;  
     Res->GetYaxis()->CenterTitle(kTRUE) ;
-    Res->GetYaxis()->SetRangeUser(-8.5,8.5) ;
-            
+    Res->GetYaxis()->SetRangeUser(-3.5,3.5) ;
+    	        
     TLegend * Leg = new TLegend(0.59,0.8,0.92,0.52)   ;      
 
     Leg->SetNColumns(2);
@@ -1826,13 +1909,25 @@ void DrawBDT( char * model = "MM"){
 	pad1->RedrawAxis();
 	
     pad2->cd() ;
-    Ratio->Draw("P0"); 
-
+    Ratio->Draw("P0");
+	pad2->Update();
+	TLine * LineRatio = new TLine(pad2->GetUxmin(),1,pad2->GetUxmax(),1);
+	LineRatio->Draw("same");
+    Ratio->Draw("P0same");
+	
     pad3->cd(); 
-    Res->Draw("P0"); 
+    Res->Draw("P0");
+	pad3->Update();
+	TLine * LineRes = new TLine(pad3->GetUxmin(),0,pad3->GetUxmax(),0);
+	LineRes->Draw("same");
+	Res->Draw("P0same");
 
     pad1->cd() ;
     Leg->Draw(); 
+
+	Canvas->cd();
+	Canvas->Update();
+
 
 };
 
@@ -1858,13 +1953,13 @@ void DrawComp(){
 	frame->GetYaxis()->SetBinLabel(4, "NEMO-2"    );		
 	frame->GetYaxis()->SetBinLabel(5, "ELEGANT-V" );		
 				
-	comp_stat->SetPoint(0, 2.73, 0.5 ); 
+	comp_stat->SetPoint(0, 2.74, 0.5 ); 
 	comp_stat->SetPoint(1, 2.80, 1.5 ); 	
 	comp_stat->SetPoint(2, 2.90, 2.5 );
 	comp_stat->SetPoint(3, 2.90, 3.5 );	
 	comp_stat->SetPoint(4, 2.60, 4.5 );
 
-	comp_stat->SetPointError(0, 0.06, 0.0 ); 
+	comp_stat->SetPointError(0, 0.04, 0.0 ); 
 	comp_stat->SetPointError(1, 0.05, 0.0 ); 	
 	comp_stat->SetPointError(2, 0.06, 0.0 );
 	comp_stat->SetPointError(3, 0.30, 0.0 );	
@@ -1875,13 +1970,13 @@ void DrawComp(){
 	comp_stat->SetMarkerSize(1.0);	
 	comp_stat->SetLineWidth(3);	
 	
-	comp_syst->SetPoint(0, 2.73, 0.5 ); 
+	comp_syst->SetPoint(0, 2.74, 0.5 ); 
 	comp_syst->SetPoint(1, 2.80, 1.5 ); 	
 	comp_syst->SetPoint(2, 2.90, 2.5 );
 	comp_syst->SetPoint(3, 2.90, 3.5 );	
 	comp_syst->SetPoint(4, 2.60, 4.5 );
 	
-	comp_syst->SetPointError(0, TMath::Sqrt(0.06**2 + 0.19**2) , TMath::Sqrt(0.06**2 + 0.17**2) , 0.06, 0.06); 
+	comp_syst->SetPointError(0, TMath::Sqrt(0.04**2 + 0.18**2) , TMath::Sqrt(0.04**2 + 0.18**2) , 0.06, 0.06); 
 	comp_syst->SetPointError(1, TMath::Sqrt(0.05**2 + 0.40**2) , TMath::Sqrt(0.05**2 + 0.40**2) , 0.06, 0.06);
 	comp_syst->SetPointError(2, TMath::Sqrt(0.06**2 + 0.38**2) , TMath::Sqrt(0.06**2 + 0.40**2) , 0.06, 0.06);
 	comp_syst->SetPointError(3, TMath::Sqrt(0.30**2 + 0.20**2) , TMath::Sqrt(0.30**2 + 0.20**2) , 0.06, 0.06);	
@@ -1894,8 +1989,8 @@ void DrawComp(){
 	comp_syst->SetFillColor(kGreen+1);	
 	
 	
-	this_work->SetPoint(0, 2.73, 0.5 ); 
-	this_work->SetPointError(0, TMath::Sqrt(0.06**2 + 0.19**2) , TMath::Sqrt(0.06**2 + 0.17**2), 0.06, 0.06); 
+	this_work->SetPoint(0, 2.74, 0.5 ); 
+	this_work->SetPointError(0, TMath::Sqrt(0.04**2 + 0.18**2) , TMath::Sqrt(0.04**2 + 0.18**2), 0.06, 0.06); 
 	this_work->SetMarkerStyle(1);
 	this_work->SetMarkerColor(kBlack);
 	this_work->SetMarkerSize(0.);	

@@ -761,6 +761,8 @@ def DrawObservable( model, obs, norm = None, min = None, max = None, zoom = Fals
     "Bi214"          :  Bi214          ,
     "Tl208"          :  Tl208          } 
      
+    print [Signal, hsum, bkg_dict] 
+     
     return [Signal, hsum, bkg_dict]        
 
 ###########################################################################
@@ -1151,6 +1153,7 @@ if __name__ == "__main__":
         [sig, bkg, bkg_list] = DrawObservable(args.model, args.observable,Norm90CL[args.observable][args.model], min=-0.35, max=0.35)     
     else:                                       
         [sig, bkg, bkg_list] = DrawObservable(args.model, args.observable,Norm90CL[args.observable][args.model], min=-0.35, max=0.6)     
+
     raw_input('wait...')
     
     # Draw En/BDT zoom
