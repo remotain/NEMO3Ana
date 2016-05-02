@@ -240,8 +240,7 @@ void Observable::Draw(Option_t* option){
 		if( hratio->GetBinError(i) == 0 ) continue;
 		
 		hres->SetBinContent(i, hres->GetBinContent(i) / TMath::Sqrt( _Data->GetBinContent(i) ) );
-		hres->SetBinError(i, TMath::Sqrt( TMath::Abs(hres->GetBinContent(i)) ) );
-	
+		hres->SetBinError(i, 1. );
 	
 	}  
 	
