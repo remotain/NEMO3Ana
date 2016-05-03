@@ -301,7 +301,7 @@ namespace ProcessChannel {
 	    cutNames->push_back("All events ");
 	    cutNames->push_back("Run status = 1 (GOOD RUN) ");
 		cutNames->push_back("Cd-116 sector (18) ");
-	    cutNames->push_back("Energy of the electron > 200 keV ");
+	    cutNames->push_back("Energy of the electron > 300 keV ");
 		cutNames->push_back("Electron track length > 60 cm ");
 	    cutNames->push_back("Negative track sign");
 		cutNames->push_back("Not an hot spot");
@@ -467,7 +467,7 @@ namespace ProcessChannel {
 			if ( IsExcludedSpot(el_vtx_z_, vertexSector) ) continue; hAnaCutFlow -> Fill(currentcut++);
 			
 			if ( el_trkSign > 0)  						                     continue; hAnaCutFlow -> Fill(currentcut++); // Negative track only
-			if ( el_energy < 0.2) 						                     continue; hAnaCutFlow -> Fill(currentcut++); // E > 500 keV only
+			if ( el_energy < 0.3) 						                     continue; hAnaCutFlow -> Fill(currentcut++); // E > 500 keV only
 			if ( el_pathLength < 60 )					                     continue; hAnaCutFlow -> Fill(currentcut++);
 			
 			
