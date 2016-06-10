@@ -316,6 +316,7 @@ namespace ProcessChannel {
 		// Make all other histos
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_run"                   , d->GetName()) , "; Run; No.Events",    200, 1000, 9500                              ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_electronEnergy"        , d->GetName()) , "; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_electronEnergyHigh"    , d->GetName()) , "; E_{e} / MeV; No.Events / 0.1 MeV", 100, 0, 10                    ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_trackLength"           , d->GetName()) , "; Track Length / cm; No.Events / cm", 200, 0, 200                  ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_trackSign"             , d->GetName()) , "; Sign of Track Curvature; No.Events", 10, -2, 2                   ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_electronIobt"          , d->GetName()) , "; IOBT; No.Events", 5, -0.5, 4.5                                   ) );
@@ -485,6 +486,7 @@ namespace ProcessChannel {
 			// Fill histogram
 		    histo_collection->Find( TString::Format("%s_h_run"              , d->GetName()) ) -> Fill(run                   , weight);
 		    histo_collection->Find( TString::Format("%s_h_electronEnergy"   , d->GetName()) ) -> Fill(el_energy             , weight);
+		    histo_collection->Find( TString::Format("%s_h_electronEnergyHigh"   , d->GetName()) ) -> Fill(el_energy             , weight);			
 			histo_collection->Find( TString::Format("%s_h_trackLength"      , d->GetName()) ) -> Fill(el_pathLength         , weight);
 			histo_collection->Find( TString::Format("%s_h_trackSign"        , d->GetName()) ) -> Fill(el_trkSign            , weight);
 			histo_collection->Find( TString::Format("%s_h_electronIobt"     , d->GetName()) ) -> Fill(el_caloiobt           , weight);
