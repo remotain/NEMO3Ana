@@ -1948,19 +1948,19 @@ void DrawComp(){
 	frame->GetXaxis()->SetTitleOffset(1.5);
 		
 	frame->GetYaxis()->SetBinLabel(1, "This work" );
-	frame->GetYaxis()->SetBinLabel(2, "CdWO_{4}"  );
+	frame->GetYaxis()->SetBinLabel(2, "Aurora"  );
 	frame->GetYaxis()->SetBinLabel(3, "Solotvina" );	
 	frame->GetYaxis()->SetBinLabel(4, "NEMO-2"    );		
 	frame->GetYaxis()->SetBinLabel(5, "ELEGANT-V" );		
 				
 	comp_stat->SetPoint(0, 2.74, 0.5 ); 
-	comp_stat->SetPoint(1, 2.80, 1.5 ); 	
+	comp_stat->SetPoint(1, 2.62, 1.5 ); 	
 	comp_stat->SetPoint(2, 2.90, 2.5 );
 	comp_stat->SetPoint(3, 2.90, 3.5 );	
 	comp_stat->SetPoint(4, 2.60, 4.5 );
 
 	comp_stat->SetPointError(0, 0.04, 0.0 ); 
-	comp_stat->SetPointError(1, 0.05, 0.0 ); 	
+	comp_stat->SetPointError(1, 0.02, 0.0 ); 	
 	comp_stat->SetPointError(2, 0.06, 0.0 );
 	comp_stat->SetPointError(3, 0.30, 0.0 );	
 	comp_stat->SetPointError(4, 0.00, 0.0 );
@@ -1971,13 +1971,13 @@ void DrawComp(){
 	comp_stat->SetLineWidth(3);	
 	
 	comp_syst->SetPoint(0, 2.74, 0.5 ); 
-	comp_syst->SetPoint(1, 2.80, 1.5 ); 	
+	comp_syst->SetPoint(1, 2.62, 1.5 ); 	
 	comp_syst->SetPoint(2, 2.90, 2.5 );
 	comp_syst->SetPoint(3, 2.90, 3.5 );	
 	comp_syst->SetPoint(4, 2.60, 4.5 );
 	
 	comp_syst->SetPointError(0, TMath::Sqrt(0.04**2 + 0.18**2) , TMath::Sqrt(0.04**2 + 0.18**2) , 0.06, 0.06); 
-	comp_syst->SetPointError(1, TMath::Sqrt(0.05**2 + 0.40**2) , TMath::Sqrt(0.05**2 + 0.40**2) , 0.06, 0.06);
+	comp_syst->SetPointError(1, TMath::Sqrt(0.02**2 + 0.14**2) , TMath::Sqrt(0.02**2 + 0.14**2) , 0.06, 0.06);
 	comp_syst->SetPointError(2, TMath::Sqrt(0.06**2 + 0.38**2) , TMath::Sqrt(0.06**2 + 0.40**2) , 0.06, 0.06);
 	comp_syst->SetPointError(3, TMath::Sqrt(0.30**2 + 0.20**2) , TMath::Sqrt(0.30**2 + 0.20**2) , 0.06, 0.06);	
 	comp_syst->SetPointError(4, 0.5                            , 0.9                            , 0.06, 0.06);	
