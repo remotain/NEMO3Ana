@@ -52,7 +52,7 @@ namespace Fit{
 					norm = comp->GetAdjustment() * DataManagement::GetTotalLiveTime( ) / comp->GetDataSet()->GetGeneratedEvents();	
 				}
 				// Add histogram to the sum
-				h_mc->Add(h_comp, norm);
+				h_mc->Add(h_comp, TMath::Abs(norm));
 
 			}
 					

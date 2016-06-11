@@ -247,7 +247,7 @@ void Observable::Draw(Option_t* option){
 	hres->GetYaxis()->SetNdivisions(505) ; 
 	hres->GetYaxis()->SetTitle("Residuals") ; 
 	hres->GetYaxis()->CenterTitle(kTRUE);
-	hres->GetYaxis()->SetRangeUser(-5.0,5.0);
+	hres->GetYaxis()->SetRangeUser(-6.,6.);
 	hres->Draw();
 	
 };
