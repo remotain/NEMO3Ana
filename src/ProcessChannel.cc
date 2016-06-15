@@ -316,7 +316,7 @@ namespace ProcessChannel {
 		// Make all other histos
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_run"                   , d->GetName()) , "; Run; No.Events",    200, 1000, 9500                              ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_electronEnergy"        , d->GetName()) , "; E_{e} / MeV; No.Events / 0.1 MeV", 35, 0, 3.5                    ) );
-		histo_collection->Add( new TH1D ( TString::Format("%s_h_electronEnergyHigh"    , d->GetName()) , "; E_{e} / MeV; No.Events / 0.1 MeV", 100, 0, 10                    ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_electronEnergyHigh"    , d->GetName()) , "; E_{e} / MeV; No.Events / 0.1 MeV", 100, 0, 10                    ) );		
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_trackLength"           , d->GetName()) , "; Track Length / cm; No.Events / cm", 200, 0, 200                  ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_trackSign"             , d->GetName()) , "; Sign of Track Curvature; No.Events", 10, -2, 2                   ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_electronIobt"          , d->GetName()) , "; IOBT; No.Events", 5, -0.5, 4.5                                   ) );
@@ -368,6 +368,15 @@ namespace ProcessChannel {
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2"           , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );		
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2_warm"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
 		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_P2_cold"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 35, 0, 3.5                  ) );
+
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_high_P1"           , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 100, 0, 10                  ) );		
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_high_P1_warm"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 100, 0, 10                  ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_high_P1_cold"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 100, 0, 10                  ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_high_P2"           , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 100, 0, 10                  ) );		
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_high_P2_warm"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 100, 0, 10                  ) );
+		histo_collection->Add( new TH1D ( TString::Format("%s_h_e_energy_high_P2_cold"      , d->GetName()) , "; E_{e} / MeV; No.Events / 0.01 MeV", 100, 0, 10                  ) );
+
+
 
 		// Get TTree
 		TDirectoryFile * f1 = (TDirectoryFile*) _InputFile->Get(_InputDirName);	
@@ -451,6 +460,9 @@ namespace ProcessChannel {
 	        if(std::string::npos != name.find("Bi210")){
 	        	weight *= exp(-(log(2)/(22.3*365.25*86400.0))*eventTime);
 	        }
+	        if(std::string::npos != name.find("Cd113m")){
+	        	weight *= exp(-(log(2)/(14.1*365.25*86400.0))*eventTime);
+	        }
 	        if(std::string::npos != name.find("Co60")){
 	        	weight *= exp(-(log(2)/(1925.2*86400.0))*eventTime);
 	        }
@@ -486,7 +498,7 @@ namespace ProcessChannel {
 			// Fill histogram
 		    histo_collection->Find( TString::Format("%s_h_run"              , d->GetName()) ) -> Fill(run                   , weight);
 		    histo_collection->Find( TString::Format("%s_h_electronEnergy"   , d->GetName()) ) -> Fill(el_energy             , weight);
-		    histo_collection->Find( TString::Format("%s_h_electronEnergyHigh"   , d->GetName()) ) -> Fill(el_energy             , weight);			
+		    histo_collection->Find( TString::Format("%s_h_electronEnergyHigh" , d->GetName()) ) -> Fill(el_energy             , weight);			
 			histo_collection->Find( TString::Format("%s_h_trackLength"      , d->GetName()) ) -> Fill(el_pathLength         , weight);
 			histo_collection->Find( TString::Format("%s_h_trackSign"        , d->GetName()) ) -> Fill(el_trkSign            , weight);
 			histo_collection->Find( TString::Format("%s_h_electronIobt"     , d->GetName()) ) -> Fill(el_caloiobt           , weight);
@@ -524,15 +536,18 @@ namespace ProcessChannel {
 		    if (run < 3396) {
 				
 				histo_collection->Find(TString::Format("%s_h_e_energy_P1", d->GetName())) -> Fill(el_energy , weight);			 
+				histo_collection->Find(TString::Format("%s_h_e_energy_high_P1", d->GetName())) -> Fill(el_energy , weight);			 
 				histo_collection->Find( TString::Format("%s_h_vertexZ_P1"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
 				histo_collection->Find( TString::Format("%s_h_vertexSector_P1"  , d->GetName()) ) -> Fill(vertexSector, weight);
 				
 				if( IsWarmSpot(el_vtx_z_, vertexSector) ) {
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P1_warm" , d->GetName())) -> Fill(el_energy , weight);
+			 		histo_collection->Find(TString::Format("%s_h_e_energy_high_P1_warm" , d->GetName())) -> Fill(el_energy , weight);					
 					histo_collection->Find( TString::Format("%s_h_vertexZ_P1_warm"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
 					histo_collection->Find( TString::Format("%s_h_vertexSector_P1_warm"  , d->GetName()) ) -> Fill(vertexSector, weight);
 				} else if( IsColdSpot(el_vtx_z_, vertexSector) ) {
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P1_cold" , d->GetName())) -> Fill(el_energy , weight);
+			 		histo_collection->Find(TString::Format("%s_h_e_energy_high_P1_cold" , d->GetName())) -> Fill(el_energy , weight);					
 					histo_collection->Find( TString::Format("%s_h_vertexZ_P1_cold"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
 					histo_collection->Find( TString::Format("%s_h_vertexSector_P1_cold"  , d->GetName()) ) -> Fill(vertexSector, weight);
 				}
@@ -540,15 +555,18 @@ namespace ProcessChannel {
 			} else {
 			
 				histo_collection->Find(TString::Format("%s_h_e_energy_P2", d->GetName())) -> Fill(el_energy , weight);
+				histo_collection->Find(TString::Format("%s_h_e_energy_high_P2", d->GetName())) -> Fill(el_energy , weight);				
 				histo_collection->Find( TString::Format("%s_h_vertexZ_P2"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
 				histo_collection->Find( TString::Format("%s_h_vertexSector_P2"  , d->GetName()) ) -> Fill(vertexSector, weight);
 
 				if( IsWarmSpot(el_vtx_z_, vertexSector) ) {
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P2_warm" , d->GetName())) -> Fill(el_energy , weight);
+			 		histo_collection->Find(TString::Format("%s_h_e_energy_high_P2_warm" , d->GetName())) -> Fill(el_energy , weight);					
 					histo_collection->Find( TString::Format("%s_h_vertexZ_P2_warm"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
 					histo_collection->Find( TString::Format("%s_h_vertexSector_P2_warm"  , d->GetName()) ) -> Fill(vertexSector, weight);
 				} else if( IsColdSpot(el_vtx_z_, vertexSector) ) {
 			 		histo_collection->Find(TString::Format("%s_h_e_energy_P2_cold" , d->GetName())) -> Fill(el_energy , weight);
+			 		histo_collection->Find(TString::Format("%s_h_e_energy_high_P2_cold" , d->GetName())) -> Fill(el_energy , weight);					
 					histo_collection->Find( TString::Format("%s_h_vertexZ_P2_cold"       , d->GetName()) ) -> Fill(el_vtx_z_   , weight);
 					histo_collection->Find( TString::Format("%s_h_vertexSector_P2_cold"  , d->GetName()) ) -> Fill(vertexSector, weight);
 				}
