@@ -10,66 +10,70 @@ void FinalPlot(){
 	gStyle->SetTitleX(0.14);
 	gStyle->SetTitleY(0.93);
 
-	//DrawAlphaTrackLength();
-	////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf(");
-	////
-	//DrawSingleElectronEnergy();
-	////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-	////
-	//DrawTotalElectronGammaEnergy();
-	////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-    ////
-	//DrawTwoElectronEnergy();
-    ////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-	////
-	//DrawTwoElectronEnergy("MM");
-    ////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-    ////
-	//DrawTwoElectronEnergy("RHC_L");
-    ////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-    ////
-	//DrawTwoElectronEnergy("RHC_E");
-    ////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-    ////
-	//DrawTwoElectronEnergy("M1");
-    ////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-    ////
-	//DrawTwoElectronEnergyZoom();
-	////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-	////
+	DrawAlphaTrackLength();
+	//
+	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf(");
+	//
+	DrawCrossingElectronEnergy();
+	//
+	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+	//	
+	DrawSingleElectronEnergy();
+	//
+	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+	//
+	DrawTotalElectronGammaEnergy();
+	//
+	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    //
+	DrawTwoElectronEnergy();
+    //
+	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+	//
+	DrawTwoElectronEnergy("MM");
+    //
+	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    //
+	DrawTwoElectronEnergy("RHC_L");
+    //
+	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    //
+	DrawTwoElectronEnergy("RHC_E");
+    //
+	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    //
+	DrawTwoElectronEnergy("M1");
+    //
+	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    //
+	DrawTwoElectronEnergyZoom();
+	//
+	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+	//
 	//DrawBDT("MM");
-	////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf(");
-    ////
-	//DrawBDT("RHC_L");
-	////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-    ////
-	//DrawBDT("RHC_E");
-	////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-    ////
-	//DrawBDT("M1");
-	////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
-	////
-	//DrawFoilRegions();
-    ////
+	//
 	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
     //
+	//DrawBDT("RHC_L");
+	//
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    //
+	//DrawBDT("RHC_E");
+	//
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    //
+	//DrawBDT("M1");
+	//
+	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+	//
+	DrawFoilRegions();
+    //
+	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf");
+    //
 	DrawComp();
-	////
-	//(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf)");
-	
+	//
+	(TPad*)gROOT->GetSelectedPad()->Print("FinalPlots.pdf)");
+	//
 	(TPad*)gROOT->GetSelectedPad()->Print("Bb2nuResultComparison.pdf");
 	
 	
@@ -380,6 +384,301 @@ void DrawAlphaTrackLength () {
 	Canvas->Update();
 
 };
+
+void DrawCrossingElectronEnergy () {
+	
+	gROOT->ProcessLine(".x /Users/alberto/Software/SuperNEMO/work/nemo3/NEMO3Ana/macro/LoadAllDataSampleBkg.C+");
+	
+	HistoCollection * hcoll= new HistoCollection("OneElectronHistos", "OneElectronHistos");
+
+	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20150622/TwoElectronExtHistos.root");
+	
+	TDirectory * fdir = 0;
+	TIter next(DataManagement::GetDataSetCollection()); DataSet * ds;	
+	while( ds = (DataSet*) next() ){
+		fdir = (TDirectory *) f->Get(ds->GetName()); fdir->cd();
+		hcoll->Load(fdir);
+	}
+	
+	TH1D * Data = (TH1D*) hcoll->Find( "Data_h_tot_e_energy_P1" );
+	Data->Add( hcoll->Find( "Data_h_tot_e_energy_P2" ));
+	
+    Double_t Cd116_Bi214_weight    =  0.0183795;
+    Double_t Cd116_Pb214_weight    = 0.00145869;
+    Double_t Mylar_Bi214_weight    =  0.0741864;
+ //   Double_t Mylar_Pb214_weight    =          0;
+    Double_t SWire_Bi214_weight    =    915.745;
+    Double_t SWire_Pb214_weight    =    12.6295;
+    Double_t SFoil_Bi214_weight    =   0.179074;
+ //   Double_t SFoil_Pb214_weight    =          0;
+    Double_t SScin_Bi214_weight    =    1344.27;
+    Double_t SScin_Pb214_weight    =     13.789;
+    Double_t PMT_Tl208_weight      =      21927;
+    Double_t PMT_Ac228_weight      =    1662.52;
+    Double_t FeShield_Tl208_weight =    832.019;
+    Double_t FeShield_Ac228_weight =    49.3192;
+    Double_t Air_Tl208_weight      =    472.979;
+    Double_t CuTower_Co60_weight   =    2331.63;
+    Double_t SScin_Bi210_weight    =    2107.29;
+    Double_t MuMetal_Pa234m_weight =    134.964;
+    Double_t Air_Bi214_weight      =    3933.27;
+ //   Double_t Air_Pb214_P1_weight   =          0;
+    Double_t PMT_Bi214_weight      =    21694.2;
+    Double_t FeShield_Bi214_weight =    19984.4;
+    Double_t ScintPet_K40_weight   =    1264.31;
+    Double_t ScintOut_K40_weight   =    2016.97;
+    Double_t ScintInn_K40_weight   =    3550.68;
+    Double_t PMT_K40_weight        =    12472.1;
+	
+	TH1F * Cd116_Bi214    = (TH1F*) hcoll->Find( "Cd116_Bi214_h_tot_e_energy_P1"    )->Clone( "Cd116_Bi214"    ) ; Cd116_Bi214    -> Add( (TH1F*) hcoll->Find( "Cd116_Bi214_h_tot_e_energy_P2"    )); Cd116_Bi214    -> Scale( Cd116_Bi214_weight    / Cd116_Bi214    -> Integral() );
+	TH1F * Cd116_Pb214    = (TH1F*) hcoll->Find( "Cd116_Pb214_VT_h_tot_e_energy_P1" )->Clone( "Cd116_Pb214"    ) ; Cd116_Pb214    -> Add( (TH1F*) hcoll->Find( "Cd116_Pb214_VT_h_tot_e_energy_P2" )); Cd116_Pb214    -> Scale( Cd116_Pb214_weight    / Cd116_Pb214    -> Integral() );
+	TH1F * Mylar_Bi214    = (TH1F*) hcoll->Find( "Mylar_Bi214_h_tot_e_energy_P1"    )->Clone( "Mylar_Bi214"    ) ; Mylar_Bi214    -> Add( (TH1F*) hcoll->Find( "Mylar_Bi214_h_tot_e_energy_P2"    )); Mylar_Bi214    -> Scale( Mylar_Bi214_weight    / Mylar_Bi214    -> Integral() );
+//	TH1F * Mylar_Pb214    = (TH1F*) hcoll->Find( "Mylar_Pb214_h_tot_e_energy_P1"    )->Clone( "Mylar_Pb214"    ) ; Mylar_Pb214    -> Add( (TH1F*) hcoll->Find( "Mylar_Pb214_h_tot_e_energy_P2"    )); Mylar_Pb214    -> Scale( Mylar_Pb214_weight    / Mylar_Pb214    -> Integral() );
+	TH1F * SWire_Bi214    = (TH1F*) hcoll->Find( "SWire_Bi214_h_tot_e_energy_P1"    )->Clone( "SWire_Bi214"    ) ; SWire_Bi214    -> Add( (TH1F*) hcoll->Find( "SWire_Bi214_h_tot_e_energy_P2"    )); SWire_Bi214    -> Scale( SWire_Bi214_weight    / SWire_Bi214    -> Integral() );
+	TH1F * SWire_Pb214    = (TH1F*) hcoll->Find( "SWire_Pb214_h_tot_e_energy_P1"    )->Clone( "SWire_Pb214"    ) ; SWire_Pb214    -> Add( (TH1F*) hcoll->Find( "SWire_Pb214_h_tot_e_energy_P2"    )); SWire_Pb214    -> Scale( SWire_Pb214_weight    / SWire_Pb214    -> Integral() );
+	TH1F * SFoil_Bi214    = (TH1F*) hcoll->Find( "SFoil_Bi214_h_tot_e_energy_P1"    )->Clone( "SFoil_Bi214"    ) ; SFoil_Bi214    -> Add( (TH1F*) hcoll->Find( "SFoil_Bi214_h_tot_e_energy_P2"    )); SFoil_Bi214    -> Scale( SFoil_Bi214_weight    / SFoil_Bi214    -> Integral() );
+//	TH1F * SFoil_Pb214    = (TH1F*) hcoll->Find( "SFoil_Pb214_h_tot_e_energy_P1"    )->Clone( "SFoil_Pb214"    ) ; SFoil_Pb214    -> Add( (TH1F*) hcoll->Find( "SFoil_Pb214_h_tot_e_energy_P2"    )); SFoil_Pb214    -> Scale( SFoil_Pb214_weight    / SFoil_Pb214    -> Integral() );
+	TH1F * SScin_Bi214    = (TH1F*) hcoll->Find( "SScin_Bi214_h_tot_e_energy_P1"    )->Clone( "SScin_Bi214"    ) ; SScin_Bi214    -> Add( (TH1F*) hcoll->Find( "SScin_Bi214_h_tot_e_energy_P2"    )); SScin_Bi214    -> Scale( SScin_Bi214_weight    / SScin_Bi214    -> Integral() ); 
+	TH1F * SScin_Pb214    = (TH1F*) hcoll->Find( "SScin_Pb214_h_tot_e_energy_P1"    )->Clone( "SScin_Pb214"    ) ; SScin_Pb214    -> Add( (TH1F*) hcoll->Find( "SScin_Pb214_h_tot_e_energy_P2"    )); SScin_Pb214    -> Scale( SScin_Pb214_weight    / SScin_Pb214    -> Integral() ); 
+	TH1F * PMT_Tl208      = (TH1F*) hcoll->Find( "PMT_Tl208_h_tot_e_energy_P1"      )->Clone( "PMT_Tl208"      ) ; PMT_Tl208      -> Add( (TH1F*) hcoll->Find( "PMT_Tl208_h_tot_e_energy_P2"      )); PMT_Tl208      -> Scale( PMT_Tl208_weight      / PMT_Tl208      -> Integral() ); 
+	TH1F * PMT_Ac228      = (TH1F*) hcoll->Find( "PMT_Ac228_h_tot_e_energy_P1"      )->Clone( "PMT_Ac228"      ) ; PMT_Ac228      -> Add( (TH1F*) hcoll->Find( "PMT_Ac228_h_tot_e_energy_P2"      )); PMT_Ac228      -> Scale( PMT_Ac228_weight      / PMT_Ac228      -> Integral() ); 
+	TH1F * FeShield_Tl208 = (TH1F*) hcoll->Find( "FeShield_Tl208_h_tot_e_energy_P1" )->Clone( "FeShield_Tl208" ) ; FeShield_Tl208 -> Add( (TH1F*) hcoll->Find( "FeShield_Tl208_h_tot_e_energy_P2" )); FeShield_Tl208 -> Scale( FeShield_Tl208_weight / FeShield_Tl208 -> Integral() ); 
+	TH1F * FeShield_Ac228 = (TH1F*) hcoll->Find( "FeShield_Ac228_h_tot_e_energy_P1" )->Clone( "FeShield_Ac228" ) ; FeShield_Ac228 -> Add( (TH1F*) hcoll->Find( "FeShield_Ac228_h_tot_e_energy_P2" )); FeShield_Ac228 -> Scale( FeShield_Ac228_weight / FeShield_Ac228 -> Integral() ); 
+	TH1F * Air_Tl208      = (TH1F*) hcoll->Find( "Air_Tl208_h_tot_e_energy_P1"      )->Clone( "Air_Tl208"      ) ;                                                                                          Air_Tl208      -> Scale( Air_Tl208_weight      / Air_Tl208      -> Integral() ); 
+	TH1F * CuTower_Co60   = (TH1F*) hcoll->Find( "CuTower_Co60_h_tot_e_energy_P1"   )->Clone( "CuTower_Co60"   ) ; CuTower_Co60   -> Add( (TH1F*) hcoll->Find( "CuTower_Co60_h_tot_e_energy_P2"   )); CuTower_Co60   -> Scale( CuTower_Co60_weight   / CuTower_Co60   -> Integral() ); 
+	TH1F * SScin_Bi210    = (TH1F*) hcoll->Find( "SScin_Bi210_h_tot_e_energy_P1"    )->Clone( "SScin_Bi210"    ) ; SScin_Bi210    -> Add( (TH1F*) hcoll->Find( "SScin_Bi210_h_tot_e_energy_P2"    )); SScin_Bi210    -> Scale( SScin_Bi210_weight    / SScin_Bi210    -> Integral() ); 
+	TH1F * MuMetal_Pa234m = (TH1F*) hcoll->Find( "MuMetal_Pa234m_h_tot_e_energy_P1" )->Clone( "MuMetal_Pa234m" ) ; MuMetal_Pa234m -> Add( (TH1F*) hcoll->Find( "MuMetal_Pa234m_h_tot_e_energy_P2" )); MuMetal_Pa234m -> Scale( MuMetal_Pa234m_weight / MuMetal_Pa234m -> Integral() ); 
+	TH1F * Air_Bi214      = (TH1F*) hcoll->Find( "Air_Bi214_h_tot_e_energy_P1"      )->Clone( "Air_Bi214"      ) ;                                                                                          Air_Bi214      -> Scale( Air_Bi214_weight      / Air_Bi214      -> Integral() ); 
+//	TH1F * Air_Pb214      = (TH1F*) hcoll->Find( "Air_Pb214_h_tot_e_energy_P1"      )->Clone( "Air_Pb214"      ) ;                                                                                          Air_Pb214      -> Scale( Air_Pb214_weight      / Air_Pb214      -> Integral() ); 
+	TH1F * PMT_Bi214      = (TH1F*) hcoll->Find( "PMT_Bi214_h_tot_e_energy_P1"      )->Clone( "PMT_Bi214"      ) ; PMT_Bi214      -> Add( (TH1F*) hcoll->Find( "PMT_Bi214_h_tot_e_energy_P2"      )); PMT_Bi214      -> Scale( PMT_Bi214_weight      / PMT_Bi214      -> Integral() ); 
+	TH1F * FeShield_Bi214 = (TH1F*) hcoll->Find( "FeShield_Bi214_h_tot_e_energy_P1" )->Clone( "FeShield_Bi214" ) ; FeShield_Bi214 -> Add( (TH1F*) hcoll->Find( "FeShield_Bi214_h_tot_e_energy_P2" )); FeShield_Bi214 -> Scale( FeShield_Bi214_weight / FeShield_Bi214 -> Integral() ); 
+	TH1F * ScintPet_K40   = (TH1F*) hcoll->Find( "ScintPet_K40_h_tot_e_energy_P1"   )->Clone( "ScintPet_K40"   ) ; ScintPet_K40   -> Add( (TH1F*) hcoll->Find( "ScintPet_K40_h_tot_e_energy_P2"   )); ScintPet_K40   -> Scale( ScintPet_K40_weight   / ScintPet_K40   -> Integral() ); 
+	TH1F * ScintOut_K40   = (TH1F*) hcoll->Find( "ScintOut_K40_h_tot_e_energy_P1"   )->Clone( "ScintOut_K40"   ) ; ScintOut_K40   -> Add( (TH1F*) hcoll->Find( "ScintOut_K40_h_tot_e_energy_P2"   )); ScintOut_K40   -> Scale( ScintOut_K40_weight   / ScintOut_K40   -> Integral() ); 
+	TH1F * ScintInn_K40   = (TH1F*) hcoll->Find( "ScintInn_K40_h_tot_e_energy_P1"   )->Clone( "ScintInn_K40"   ) ; ScintInn_K40   -> Add( (TH1F*) hcoll->Find( "ScintInn_K40_h_tot_e_energy_P2"   )); ScintInn_K40   -> Scale( ScintInn_K40_weight   / ScintInn_K40   -> Integral() ); 
+	TH1F * PMT_K40        = (TH1F*) hcoll->Find( "PMT_K40_h_tot_e_energy_P1"        )->Clone( "PMT_K40"        ) ; PMT_K40        -> Add( (TH1F*) hcoll->Find( "PMT_K40_h_tot_e_energy_P2"        )); PMT_K40        -> Scale( PMT_K40_weight        / PMT_K40        -> Integral() ); 
+
+	TH1D * Bi214Int = Cd116_Bi214 ->Clone("Bi214Int");
+	Bi214Int->Add(Cd116_Pb214);
+	Bi214Int->Add(Mylar_Bi214);
+//	Bi214Int->Add(Mylar_Pb214);	
+	
+	TH1D * Radon = Cd116_Bi214 ->Clone("Radon");
+	Radon->Add(SFoil_Bi214);
+//	Radon->Add("SFoil_Pb214");
+	Radon->Add(SWire_Bi214);
+	Radon->Add(SWire_Pb214);
+	
+	TH1D * Bi214Scint = SScin_Bi214->Clone("Bi214Scint");
+	Bi214Scint->Add(SScin_Pb214);
+
+//	Bi214Air->Add(Air_Pb214);
+	
+	TH1D * Tl208FeShield = FeShield_Tl208->Clone("Tl208FeShield");
+	Tl208FeShield->Add(FeShield_Ac228);
+	
+	TH1D * Tl208PMT = PMT_Tl208->Clone("Tl208PMT");
+	Tl208PMT->Add(PMT_Ac228);	
+
+	TH1D * K40Scint = ScintPet_K40->Clone("K40Scint");
+	K40Scint->Add(ScintOut_K40);
+	K40Scint->Add(ScintInn_K40);
+
+	TH1D * Bi214Air      = Air_Bi214      -> Clone( "Bi214Air"      );	
+	TH1D * Pa234mMuMetal = MuMetal_Pa234m -> Clone( "Pa234mMuMetal" );
+	TH1D * Bi210Scint    = SScin_Bi210    -> Clone( "Bi210Scint"    );
+	TH1D * Co60          = CuTower_Co60   -> Clone( "Co60"          );
+	TH1D * Tl208Air	     = Air_Tl208      -> Clone( "Tl208Air"	    );
+	TH1D * Bi214FeShield = FeShield_Bi214 -> Clone( "Bi214FeShield" );	
+	TH1D * Bi214PMT	     = PMT_Bi214      -> Clone( "Bi214PMT"	    );
+	TH1D * K40PMT	     = PMT_K40        -> Clone( "K40PMT"	    );
+	
+		
+	Radon          -> SetFillColor( kAzure  +  1 );
+	Pa234mMuMetal  -> SetFillColor( kViolet +  2 );
+	Bi210Scint     -> SetFillColor( kViolet +  0 );
+	Co60           -> SetFillColor( kViolet +  1 );
+	Tl208Air       -> SetFillColor( kGreen  +  4 );
+	Tl208FeShield  -> SetFillColor( kGreen  +  2 );
+	Tl208PMT       -> SetFillColor( kGreen  +  1 );
+	Bi214Air       -> SetFillColor( kAzure  +  9 );
+	Bi214Int       -> SetFillColor( kAzure  + 11 );
+	Bi214Scint     -> SetFillColor( kAzure  +  7 );
+	Bi214FeShield  -> SetFillColor( kAzure  +  5 );
+	Bi214PMT       -> SetFillColor( kAzure  +  6 );
+	K40Scint       -> SetFillColor( kOrange +  8 );
+	K40PMT         -> SetFillColor( kOrange + 10 );
+
+	
+	THStack * Stack = new THStack("stack","stack");
+	Stack->Add(Radon          );
+	Stack->Add(Pa234mMuMetal  );
+	Stack->Add(Bi210Scint     );
+	Stack->Add(Co60           );
+	Stack->Add(Tl208Air       );
+	Stack->Add(Tl208FeShield  );
+	Stack->Add(Tl208PMT       );
+	Stack->Add(Bi214Air       );
+	Stack->Add(Bi214Int       );
+	Stack->Add(Bi214Scint     );
+	Stack->Add(Bi214FeShield  );
+	Stack->Add(Bi214PMT       );
+	Stack->Add(K40Scint       );
+	Stack->Add(K40PMT         );
+
+	
+	TH1D * Sum = Radon->Clone( "Sum" );
+	Sum->Add(Pa234mMuMetal  );
+	Sum->Add(Bi210Scint     );
+	Sum->Add(Co60           );
+	Sum->Add(Tl208Air       );
+	Sum->Add(Tl208FeShield  );
+	Sum->Add(Tl208PMT       );
+	Sum->Add(Bi214Air       );
+	Sum->Add(Bi214Int       );
+	Sum->Add(Bi214Scint     );
+	Sum->Add(Bi214FeShield  );
+	Sum->Add(Bi214PMT       );
+	Sum->Add(K40Scint       );
+	Sum->Add(K40PMT         );
+	
+	TCanvas * Canvas = new TCanvas("CrossingElectronEnergy", "CrossingElectronEnergy", 500, 500);
+	
+    Bool_t _LogScale    = kFALSE  ;
+    Bool_t _Grid        = kFALSE ;
+    Style_t _MarkerStyle = 20     ;
+    Size_t _MarkerSize  = 0.8    ;
+    Color_t _MarkerColor = kBlack ;
+	
+    gStyle->SetTitleBorderSize(0);
+    gStyle->SetLegendBorderSize(0);
+
+	
+	
+    TPad * pad1 = new TPad("pad1", "pad1", 0, 0.40, 1, 1.0);
+    pad1->SetGrid(_Grid, _Grid);
+    pad1->SetLogy( _LogScale ) ;
+    pad1->SetTickx() ;
+    pad1->SetTicky() ;
+    pad1->SetTopMargin(0.15)  ;
+    pad1->SetBottomMargin(0.01);  
+    pad1->SetRightMargin(0.05)  ;
+    pad1->Draw() ;
+    pad1->cd() ;
+        
+    Data->SetTitle("NEMO-3 ^{116}Cd - 0.410 g, 5.26 y");
+    Data->SetLineWidth(2) ;
+    Data->SetMarkerColor( _MarkerColor ) ;
+    Data->SetMarkerStyle( _MarkerStyle ) ;	
+    Data->SetMarkerSize( _MarkerSize ) ;
+    Data->SetStats(kFALSE) ;
+    Data->GetXaxis()->SetTitle("E_{e} (MeV)") ;
+    Data->GetYaxis()->SetTitle("No.Events") ;
+    Data->GetYaxis()->CenterTitle(kTRUE) ;
+    Data->GetXaxis()->CenterTitle(kTRUE) ;
+    //Data->GetYaxis().SetRangeUser(1e-1,5e+3) ;
+		
+    Canvas->cd() ;	
+    TPad * pad2 = new TPad("pad2", "pad2", 0, 0.25, 1, 0.40) ;
+    pad2->SetGrid(_Grid, _Grid);
+    pad2->SetTopMargin(0.1) ;
+    pad2->SetBottomMargin(0.01) ;
+    pad2->SetRightMargin(0.05)  ;
+    pad2->SetTickx() ;
+    pad2->SetTicky() ;
+    pad2->Draw() ;
+    pad2->cd() ;
+    
+    TH1F * Ratio = Data->Clone( "Ratio" );
+    Ratio->SetTitle("") ;
+    Ratio->Divide(Sum) ;
+
+    Ratio->GetYaxis()->SetNdivisions(105) ;  
+	Ratio->GetXaxis()->SetTickLength(0.15);
+    Ratio->GetYaxis()->SetTitle("Data/MC") ;  
+    Ratio->GetYaxis()->CenterTitle(kTRUE) ;
+    Ratio->GetYaxis()->SetRangeUser(0.25,1.75) ;
+    
+    Canvas->cd() 	;
+    TPad * pad3 = new TPad("pad3", "pad3", 0, 0.01, 1, 0.25) ;
+    pad3->SetGrid(_Grid, _Grid);
+    pad3->SetTopMargin(0.1) ;
+    pad3->SetBottomMargin(0.4) ;
+    pad3->SetRightMargin(0.05);  
+    pad3->SetTickx() ;
+    pad3->SetTicky(); 
+    pad3->Draw(); 
+    
+    TH1F * Res = Data->Clone( "Residual (#sigma)" ); 
+    Res->SetTitle("") ;
+    Res->Add(Sum, -1); 
+    
+    for ( int i = 1 ; i < Ratio->GetNbinsX()+1; i++){
+    
+    	if (Ratio->GetBinError(i) == 0) continue; 
+    	
+    	Res->SetBinContent(i, Res->GetBinContent(i) / TMath::Sqrt( Sum->GetBinContent(i) ) );
+    	Res->SetBinError(i, 1. );
+    }
+	
+    Res->GetYaxis()->SetNdivisions(105)   ;
+	Res->GetXaxis()->SetTickLength(0.10);
+    Res->GetYaxis()->SetTitle("Residual (#sigma)") ;  
+    Res->GetYaxis()->CenterTitle(kTRUE) ;
+    Res->GetYaxis()->SetRangeUser(-8,8) ;
+            
+    TLegend * Leg = new TLegend(0.50,0.8,0.92,0.20)   ;      
+
+    Leg->SetNColumns(2);
+    Leg->SetLineWidth(0);
+
+	Leg->AddEntry( Bi214Int      , "^{214}Bi Internal"  , "F" );
+	Leg->AddEntry( Radon         , "Radon"              , "F" );
+	Leg->AddEntry( Bi214Scint    , "^{214}Bi Scint"     , "F" );
+	Leg->AddEntry( Bi214Air      , "^{214}Bi Air"       , "F" );
+	Leg->AddEntry( Tl208FeShield , "^{208}Tl Fe Shield" , "F" );
+	Leg->AddEntry( Tl208PMT      , "^{208}Tl PMT"       , "F" );
+	Leg->AddEntry( K40Scint	     , "^{40}K Scint"       , "F" );
+	Leg->AddEntry( K40PMT        , "^{40}K PMT"         , "F" );
+	Leg->AddEntry( Pa234mMuMetal , "^{234m}Pa Mu Metal" , "F" );
+	Leg->AddEntry( Bi210Scint    , "^{210}Bi Scint"     , "F" );
+	Leg->AddEntry( Co60          , "^{60}Co"            , "F" );
+	Leg->AddEntry( Tl208Air	     , "^{208}Tl Air"       , "F" );
+	Leg->AddEntry( Bi214FeShield , "^{214}Tl Fe Shield" , "F" );
+	Leg->AddEntry( Bi214PMT	     , "^{214}Bi PMT"       , "F" );
+
+    Leg->AddEntry( Data        , TString::Format("Data (%0.f)", Data->GetEntries()), "PL" ); 
+
+    Data -> GetXaxis()->SetRangeUser(0.5,10.0) ;    
+	Ratio-> GetXaxis()->SetRangeUser(0.5,10.0) ;        
+    Res  -> GetXaxis()->SetRangeUser(0.5,10.0) ;    
+
+    pad1->cd() ;    
+    Data->Draw(""); 
+    Stack->Draw("A,SAME,HIST");
+    Data->Draw("SAME") ;
+	pad1->RedrawAxis();
+	
+    pad2->cd() ;
+    Ratio->Draw("P0"); 
+	pad2->Update();
+	TLine * LineRatio = new TLine(pad2->GetUxmin(),1,pad2->GetUxmax(),1);
+	LineRatio->Draw("same");
+	Ratio->Draw("P0same"); 
+
+    pad3->cd(); 
+    Res->Draw("P0"); 
+	pad3->Update();
+	TLine * LineRes = new TLine(pad2->GetUxmin(),0,pad2->GetUxmax(),0);
+	LineRes->Draw("same");
+	Res->Draw("P0same"); 
+
+    pad1->cd() ;
+    Leg->Draw(); 
+	
+	Canvas->cd();
+	Canvas->Update();
+	
+};	
 
 void DrawSingleElectronEnergy () {
 	
@@ -1008,7 +1307,7 @@ void DrawTwoElectronEnergy(char * model = ""){
 	
 	HistoCollection * hcoll= new HistoCollection("TwoElectronHistos", "TwoElectronHistos");
 
-	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/TwoElectronIntHistos.root");
+	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20160429/TwoElectronIntHistos.root");
 	
 	TDirectory * fdir = 0;
 	TIter next(DataManagement::GetDataSetCollection()); DataSet * ds;	
@@ -1339,7 +1638,7 @@ void DrawTwoElectronEnergyZoom(){
 	
 	HistoCollection * hcoll= new HistoCollection("TwoElectronHistosZoom", "TwoElectronHistosZoom");
 
-	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/TwoElectronIntHistos.root");
+	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20160429/TwoElectronIntHistos.root");
 	
 	TDirectory * fdir = 0;
 	TIter next(DataManagement::GetDataSetCollection()); DataSet * ds;	
@@ -1592,7 +1891,7 @@ void DrawTwoElectronEnergyZoom(){
 
 void DrawBDT( char * model = "MM"){
 	
-    TFile * f = new TFile( TString::Format("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/TMVApp/TMVApp_%s.root", model ) , "READ" );
+    TFile * f = new TFile( TString::Format("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20160429/TMVApp/TMVApp_%s.root", model ) , "READ" );
 
 	
 	TH1D * Data = (TH1D*) f->Get( "Data_MVA_BDT" );

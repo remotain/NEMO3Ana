@@ -13,7 +13,7 @@
 //	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20150622/TwoElectronIntHistos_FirstGgHitOnly.root");
 //	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20150622/TwoElectronIntHistos_NoGgLayerCut_NoVertexCut_Eth300keV.root");
 
-	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/TwoElectronIntHistos.root");
+	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20160429/TwoElectronIntHistos.root");
 			
 	TDirectory * fdir = 0;
 	TIter next(DataManagement::GetDataSetCollection()); DataSet * ds;	
@@ -37,49 +37,49 @@
 	//syst_radon  = (1 + sign * 0.026);
 	
 	double syst_int    = 1; 
-	syst_int    = (1 + 0.555);
-	//syst_int    = (1 - 0.244);
+	//syst_int    = (1 + 0.35);
+	//syst_int    = (1 - 0.35);
 	
 	double syst_ext    = 1; 
-	//syst_ext    = (1 + 0.486);	
-	//syst_ext    = (1 - 0.228);	
+	//syst_ext    = (1 + 0.21);	
+	syst_ext    = (1 - 0.21);	
 
 	//////////////////////////////////////////////////////////////////////////////
 	//
 	// Fit parameters
 	//
 	//////////////////////////////////////////////////////////////////////////////	
-	DataManagement::AddParameter( new Parameter( "cBB"       , "cBB"       ,  0 , 3.65594e-01    , 10. ) ); 
+	DataManagement::AddParameter( new Parameter( "cBB"       , "cBB"       ,  0 , 3.65343e-01    , 10. ) ); 
 	
-	DataManagement::AddParameter( new Parameter( "cCd116_K40_cold"    , "cCd116_K40_cold"     ,  1 , syst_int    * 9.99694e-01 , 1 ) ); DataManagement::FindParameter( "cCd116_K40_cold"    ) -> SetFix();  
-	DataManagement::AddParameter( new Parameter( "cCd116_Pa234m_cold" , "cCd116_Pa234m_cold"  ,  2 , syst_int    * 9.95322e-01 , 1 ) ); DataManagement::FindParameter( "cCd116_Pa234m_cold" ) -> SetFix();  
-	DataManagement::AddParameter( new Parameter( "cCd116_K40_warm"    , "cCd116_K40_warm"     ,  3 , syst_int    * 9.99899e-01 , 1 ) ); DataManagement::FindParameter( "cCd116_K40_warm"    ) -> SetFix();  
-	DataManagement::AddParameter( new Parameter( "cCd116_Pa234m_warm" , "cCd116_Pa234m_warm"  ,  4 , syst_int    * 9.97186e-01 , 1 ) ); DataManagement::FindParameter( "cCd116_Pa234m_warm" ) -> SetFix();  
-	DataManagement::AddParameter( new Parameter( "cSFoil_Bi210_cold"  , "cSFoil_Bi210_cold"   ,  5 , syst_int    * 9.99924e-01 , 1 ) ); DataManagement::FindParameter( "cSFoil_Bi210_cold"  ) -> SetFix();  
-	DataManagement::AddParameter( new Parameter( "cSFoil_Bi210_warm"  , "cSFoil_Bi210_warm"   ,  6 , syst_int    * 9.99988e-01 , 1 ) ); DataManagement::FindParameter( "cSFoil_Bi210_warm"  ) -> SetFix();  
-	DataManagement::AddParameter( new Parameter( "cSWire_Bi210_P1"    , "cSWire_Bi210_P1"     ,  7 , syst_int    * 9.97500e-01 , 1 ) ); DataManagement::FindParameter( "cSWire_Bi210_P1"    ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cSWire_Bi210_P2"    , "cSWire_Bi210_P2"     ,  8 , syst_int    * 9.97533e-01 , 1 ) ); DataManagement::FindParameter( "cSWire_Bi210_P2"    ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cCd116_Tl208"       , "cCd116_Tl208"        ,  9 , syst_tl_208 * 9.80039e-01 , 1 ) ); DataManagement::FindParameter( "cCd116_Tl208"       ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cCd116_Bi214"       , "cCd116_Bi214"        , 10 , syst_bi_214 * 9.46897e-01 , 1 ) ); DataManagement::FindParameter( "cCd116_Bi214"       ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cMylar_Bi214"       , "cMylar_Bi214"        , 11 , syst_bi_214 * 9.95075e-01 , 1 ) ); DataManagement::FindParameter( "cMylar_Bi214"       ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cSwire_Tl208_P1"    , "cSwire_Tl208_P1"     , 12 , syst_tl_208 * 9.87121e-01 , 1 ) ); DataManagement::FindParameter( "cSwire_Tl208_P1"    ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cSwire_Tl208_P2"    , "cSwire_Tl208_P2"     , 13 , syst_tl_208 * 9.82115e-01 , 1 ) ); DataManagement::FindParameter( "cSwire_Tl208_P2"    ) -> SetFix();	
-	DataManagement::AddParameter( new Parameter( "cSwire_Bi214_P1"    , "cSwire_Bi214_P1"     , 14 , syst_radon  * 9.97398e-01 , 1 ) ); DataManagement::FindParameter( "cSwire_Bi214_P1"    ) -> SetFix();	
-	DataManagement::AddParameter( new Parameter( "cSwire_Bi214_P2"    , "cSwire_Bi214_P2"     , 15 , syst_radon  * 9.97297e-01 , 1 ) ); DataManagement::FindParameter( "cSwire_Bi214_P2"    ) -> SetFix();	
-	DataManagement::AddParameter( new Parameter( "cSfoil_Bi214_P1"    , "cSfoil_Bi214_P1"     , 16 , syst_radon  * 9.95057e-01 , 1 ) ); DataManagement::FindParameter( "cSfoil_Bi214_P1"    ) -> SetFix();	
-	DataManagement::AddParameter( new Parameter( "cSfoil_Bi214_P2"    , "cSfoil_Bi214_P2"     , 17 , syst_radon  * 9.52748e-01 , 1 ) ); DataManagement::FindParameter( "cSfoil_Bi214_P2"    ) -> SetFix();	
-	DataManagement::AddParameter( new Parameter( "cFeShield_Bi214"    , "cFeShield_Bi214"     , 18 , syst_ext    * 9.65627e-01 , 1 ) ); DataManagement::FindParameter( "cFeShield_Bi214"    ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cFeShield_Tl208"    , "cFeShield_Tl208"     , 19 , syst_ext    * 6.50111e-01 , 1 ) ); DataManagement::FindParameter( "cFeShield_Tl208"    ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cCuTower_Co60"      , "cCuTower_Co60"       , 20 , syst_ext    * 9.58398e-01 , 1 ) ); DataManagement::FindParameter( "cCuTower_Co60"      ) -> SetFix();	
-	DataManagement::AddParameter( new Parameter( "cAir_Bi214_P1"      , "cAir_Bi214_P1"       , 21 , syst_ext    * 9.98824e-01 , 1 ) ); DataManagement::FindParameter( "cAir_Bi214_P1"      ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cAir_Tl208_P1"      , "cAir_Tl208_P1"       , 22 , syst_ext    * 9.57870e-01 , 1 ) ); DataManagement::FindParameter( "cAir_Tl208_P1"      ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cPMT_Bi214"         , "cPMT_Bi214"          , 23 , syst_ext    * 9.71110e-01 , 1 ) ); DataManagement::FindParameter( "cPMT_Bi214"         ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cPMT_Tl208"         , "cPMT_Tl208"          , 24 , syst_ext    * 9.99152e-01 , 1 ) ); DataManagement::FindParameter( "cPMT_Tl208"         ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cPMT_K40"           , "cPMT_K40"            , 25 , syst_ext    * 9.98685e-01 , 1 ) ); DataManagement::FindParameter( "cPMT_K40"           ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cScint_K40"         , "cScint_K40"          , 26 , syst_ext    * 9.74942e-01 , 1 ) ); DataManagement::FindParameter( "cScint_K40"         ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cSScin_Bi210"       , "cSScin_Bi210"        , 27 , syst_ext    * 9.80747e-01 , 1 ) ); DataManagement::FindParameter( "cSScin_Bi210"       ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cSScin_Bi214"       , "cSScin_Bi214"        , 28 , syst_ext    * 9.86007e-01 , 1 ) ); DataManagement::FindParameter( "cSScin_Bi214"       ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cMuMetal_Pa234m"    , "cMuMetal_Pa234m"     , 29 , syst_ext    * 8.56325e-01 , 1 ) ); DataManagement::FindParameter( "cMuMetal_Pa234m"    ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cCd116_K40_cold"    , "cCd116_K40_cold"     ,  1 , syst_int    *     3.65343e-01 , 1 ) ); DataManagement::FindParameter( "cCd116_K40_cold"    ) -> SetFix();  
+	DataManagement::AddParameter( new Parameter( "cCd116_Pa234m_cold" , "cCd116_Pa234m_cold"  ,  2 , syst_int    *     9.99692e-01 , 1 ) ); DataManagement::FindParameter( "cCd116_Pa234m_cold" ) -> SetFix();  
+	DataManagement::AddParameter( new Parameter( "cCd116_K40_warm"    , "cCd116_K40_warm"     ,  3 , syst_int    *     9.95358e-01 , 1 ) ); DataManagement::FindParameter( "cCd116_K40_warm"    ) -> SetFix();  
+	DataManagement::AddParameter( new Parameter( "cCd116_Pa234m_warm" , "cCd116_Pa234m_warm"  ,  4 , syst_int    *     9.99900e-01 , 1 ) ); DataManagement::FindParameter( "cCd116_Pa234m_warm" ) -> SetFix();  
+	DataManagement::AddParameter( new Parameter( "cSFoil_Bi210_cold"  , "cSFoil_Bi210_cold"   ,  5 , syst_int    *     9.97151e-01 , 1 ) ); DataManagement::FindParameter( "cSFoil_Bi210_cold"  ) -> SetFix();  
+	DataManagement::AddParameter( new Parameter( "cSFoil_Bi210_warm"  , "cSFoil_Bi210_warm"   ,  6 , syst_int    *     9.99924e-01 , 1 ) ); DataManagement::FindParameter( "cSFoil_Bi210_warm"  ) -> SetFix();  
+	DataManagement::AddParameter( new Parameter( "cSWire_Bi210_P1"    , "cSWire_Bi210_P1"     ,  7 , syst_int    *     9.99988e-01 , 1 ) ); DataManagement::FindParameter( "cSWire_Bi210_P1"    ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cSWire_Bi210_P2"    , "cSWire_Bi210_P2"     ,  8 , syst_int    *     9.97501e-01 , 1 ) ); DataManagement::FindParameter( "cSWire_Bi210_P2"    ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cCd116_Tl208"       , "cCd116_Tl208"        ,  9 , syst_tl_208 *     9.97534e-01 , 1 ) ); DataManagement::FindParameter( "cCd116_Tl208"       ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cCd116_Bi214"       , "cCd116_Bi214"        , 10 , syst_bi_214 *     9.80027e-01 , 1 ) ); DataManagement::FindParameter( "cCd116_Bi214"       ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cMylar_Bi214"       , "cMylar_Bi214"        , 11 , syst_bi_214 *     9.46646e-01 , 1 ) ); DataManagement::FindParameter( "cMylar_Bi214"       ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cSwire_Tl208_P1"    , "cSwire_Tl208_P1"     , 12 , syst_tl_208 *     9.95069e-01 , 1 ) ); DataManagement::FindParameter( "cSwire_Tl208_P1"    ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cSwire_Tl208_P2"    , "cSwire_Tl208_P2"     , 13 , syst_tl_208 *     9.87122e-01 , 1 ) ); DataManagement::FindParameter( "cSwire_Tl208_P2"    ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cSwire_Bi214_P1"    , "cSwire_Bi214_P1"     , 14 , syst_radon  *     9.82112e-01 , 1 ) ); DataManagement::FindParameter( "cSwire_Bi214_P1"    ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cSwire_Bi214_P2"    , "cSwire_Bi214_P2"     , 15 , syst_radon  *     9.97443e-01 , 1 ) ); DataManagement::FindParameter( "cSwire_Bi214_P2"    ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cSfoil_Bi214_P1"    , "cSfoil_Bi214_P1"     , 16 , syst_radon  *     9.97288e-01 , 1 ) ); DataManagement::FindParameter( "cSfoil_Bi214_P1"    ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cSfoil_Bi214_P2"    , "cSfoil_Bi214_P2"     , 17 , syst_radon  *     9.95076e-01 , 1 ) ); DataManagement::FindParameter( "cSfoil_Bi214_P2"    ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cFeShield_Bi214"    , "cFeShield_Bi214"     , 18 , syst_ext    *     9.52671e-01 , 1 ) ); DataManagement::FindParameter( "cFeShield_Bi214"    ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cFeShield_Tl208"    , "cFeShield_Tl208"     , 19 , syst_ext    *     9.65451e-01 , 1 ) ); DataManagement::FindParameter( "cFeShield_Tl208"    ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cCuTower_Co60"      , "cCuTower_Co60"       , 20 , syst_ext    *     6.50152e-01 , 1 ) ); DataManagement::FindParameter( "cCuTower_Co60"      ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cAir_Bi214_P1"      , "cAir_Bi214_P1"       , 21 , syst_ext    *     9.58620e-01 , 1 ) ); DataManagement::FindParameter( "cAir_Bi214_P1"      ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cAir_Tl208_P1"      , "cAir_Tl208_P1"       , 22 , syst_ext    *     9.98824e-01 , 1 ) ); DataManagement::FindParameter( "cAir_Tl208_P1"      ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cPMT_Bi214"         , "cPMT_Bi214"          , 23 , syst_ext    *     9.57871e-01 , 1 ) ); DataManagement::FindParameter( "cPMT_Bi214"         ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cPMT_Tl208"         , "cPMT_Tl208"          , 24 , syst_ext    *     9.71131e-01 , 1 ) ); DataManagement::FindParameter( "cPMT_Tl208"         ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cPMT_K40"           , "cPMT_K40"            , 25 , syst_ext    *     9.99147e-01 , 1 ) ); DataManagement::FindParameter( "cPMT_K40"           ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cScint_K40"         , "cScint_K40"          , 26 , syst_ext    *     9.98685e-01 , 1 ) ); DataManagement::FindParameter( "cScint_K40"         ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cSScin_Bi210"       , "cSScin_Bi210"        , 27 , syst_ext    *     9.74930e-01 , 1 ) ); DataManagement::FindParameter( "cSScin_Bi210"       ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cSScin_Bi214"       , "cSScin_Bi214"        , 28 , syst_ext    *     9.80756e-01 , 1 ) ); DataManagement::FindParameter( "cSScin_Bi214"       ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cMuMetal_Pa234m"    , "cMuMetal_Pa234m"     , 29 , syst_ext    *     9.86006e-01 , 1 ) ); DataManagement::FindParameter( "cMuMetal_Pa234m"    ) -> SetFix();	
 	
 	
 	
