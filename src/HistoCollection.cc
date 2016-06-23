@@ -64,7 +64,7 @@ void HistoCollection::Load(TDirectory * dir){
 	while( ( k = (TKey*) next() ) ) {
 		
 		_collection->Add( (TH1 *) k->ReadObj() );
-		Info("Load()","Add %s to collection", k->GetName());
+		//Info("Load()","Add %s to collection", k->GetName());
 		
 	}
 	

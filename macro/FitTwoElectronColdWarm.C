@@ -808,7 +808,7 @@
 	DataManagement::AddObservable( tot_e_energy_P2_warm );	
 
 	//Fit::DoDrawCorrelationMatrix();
-	Fit::DoDrawScan();
+	//Fit::DoDrawScan();
 	//Fit::DoDrawContour();
 	Fit::Run("Minuit", "Minimize");
     

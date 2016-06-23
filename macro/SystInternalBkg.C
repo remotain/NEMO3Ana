@@ -13,7 +13,7 @@
 //	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20150622/TwoElectronIntHistos_FirstGgHitOnly.root");
 //	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_20150622/TwoElectronIntHistos_NoGgLayerCut_NoVertexCut_Eth300keV.root");
 
-	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/TwoElectronIntHistos.root");
+	TFile * f = new TFile("/Users/alberto/Software/SuperNEMO/work/nemo3/plot/plot_UPDATE_TECHNOTE_20160429/TwoElectronIntHistos.root");
 			
 	TDirectory * fdir = 0;
 	TIter next(DataManagement::GetDataSetCollection()); DataSet * ds;	
@@ -29,38 +29,38 @@
 	// Fit parameters
 	//
 	//////////////////////////////////////////////////////////////////////////////	
-	DataManagement::AddParameter( new Parameter( "cBB"       , "cBB"       ,  0 , 3.65594e-01    , 0.0001 ) ); DataManagement::FindParameter( "cBB"    ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cBB"       , "cBB"       ,  0 , 3.65594e-01    , 0.0001 ) ); //DataManagement::FindParameter( "cBB"    ) -> SetFix(); 
 	
-	DataManagement::AddParameter( new Parameter( "cCd116_K40_cold"    , "cCd116_K40_cold"     ,  1 , 0.0054 , 0.1 ) ); //ataManagement::FindParameter( "cCd116_K40_cold"    ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cCd116_Pa234m_cold" , "cCd116_Pa234m_cold"  ,  2 , 0.0013 , 0.1 ) ); //ataManagement::FindParameter( "cCd116_Pa234m_cold" ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cCd116_K40_warm"    , "cCd116_K40_warm"     ,  3 , 0.0098 , 0.1 ) ); //ataManagement::FindParameter( "cCd116_K40_warm"    ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cCd116_Pa234m_warm" , "cCd116_Pa234m_warm"  ,  4 , 0.0024 , 0.1 ) ); DataManagement::FindParameter( "cCd116_Pa234m_warm" ) -> SetLimit(0.0001, 10.); //DataManagement::FindParameter( "cCd116_Pa234m_warm" ) -> SetFix();
-	DataManagement::AddParameter( new Parameter( "cSFoil_Bi210_cold"  , "cSFoil_Bi210_cold"   ,  5 , 1.15   , 0.1 ) ); DataManagement::FindParameter( "cSFoil_Bi210_cold"  ) -> SetLimit(0., 10.); //DataManagement::FindParameter( "cSFoil_Bi210_cold"  ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cCd116_K40_cold"    , "cCd116_K40_cold"     ,  1 , 0.0054 , 0.1 ) ); DataManagement::FindParameter( "cCd116_K40_cold"    ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cCd116_Pa234m_cold" , "cCd116_Pa234m_cold"  ,  2 , 0.0013 , 0.1 ) ); DataManagement::FindParameter( "cCd116_Pa234m_cold" ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cCd116_K40_warm"    , "cCd116_K40_warm"     ,  3 , 0.0098 , 0.1 ) ); DataManagement::FindParameter( "cCd116_K40_warm"    ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cCd116_Pa234m_warm" , "cCd116_Pa234m_warm"  ,  4 , 0.0024 , 0.1 ) ); DataManagement::FindParameter( "cCd116_Pa234m_warm" ) -> SetFix();
+	DataManagement::AddParameter( new Parameter( "cSFoil_Bi210_cold"  , "cSFoil_Bi210_cold"   ,  5 , 1.15   , 0.1 ) ); //DataManagement::FindParameter( "cSFoil_Bi210_cold"  ) -> SetFix(); 
 	DataManagement::AddParameter( new Parameter( "cSFoil_Bi210_warm"  , "cSFoil_Bi210_warm"   ,  6 , 2.75   , 0.1 ) ); //DataManagement::FindParameter( "cSFoil_Bi210_warm"  ) -> SetFix(); 
 
-	DataManagement::AddParameter( new Parameter( "cSWire_Bi210_P1"    , "cSWire_Bi210_P1"     ,  7 , 9.97500e-01 , 0.1 ) ); DataManagement::FindParameter( "cSWire_Bi210_P1"    ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cSWire_Bi210_P2"    , "cSWire_Bi210_P2"     ,  8 , 9.97533e-01 , 0.1 ) ); DataManagement::FindParameter( "cSWire_Bi210_P2"    ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cCd116_Tl208"       , "cCd116_Tl208"        ,  9 , 9.80039e-01 , 0.1 ) ); DataManagement::FindParameter( "cCd116_Tl208"       ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cCd116_Bi214"       , "cCd116_Bi214"        , 10 , 9.46897e-01 , 0.1 ) ); DataManagement::FindParameter( "cCd116_Bi214"       ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cMylar_Bi214"       , "cMylar_Bi214"        , 11 , 9.95075e-01 , 0.1 ) ); DataManagement::FindParameter( "cMylar_Bi214"       ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cSwire_Tl208_P1"    , "cSwire_Tl208_P1"     , 12 , 9.87121e-01 , 0.1 ) ); DataManagement::FindParameter( "cSwire_Tl208_P1"    ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cSwire_Tl208_P2"    , "cSwire_Tl208_P2"     , 13 , 9.82115e-01 , 0.1 ) ); DataManagement::FindParameter( "cSwire_Tl208_P2"    ) -> SetFix();	
-	DataManagement::AddParameter( new Parameter( "cSwire_Bi214_P1"    , "cSwire_Bi214_P1"     , 14 , 9.97398e-01 , 0.1 ) ); DataManagement::FindParameter( "cSwire_Bi214_P1"    ) -> SetFix();	
-	DataManagement::AddParameter( new Parameter( "cSwire_Bi214_P2"    , "cSwire_Bi214_P2"     , 15 , 9.97297e-01 , 0.1 ) ); DataManagement::FindParameter( "cSwire_Bi214_P2"    ) -> SetFix();	
-	DataManagement::AddParameter( new Parameter( "cSfoil_Bi214_P1"    , "cSfoil_Bi214_P1"     , 16 , 9.95057e-01 , 0.1 ) ); DataManagement::FindParameter( "cSfoil_Bi214_P1"    ) -> SetFix();	
-	DataManagement::AddParameter( new Parameter( "cSfoil_Bi214_P2"    , "cSfoil_Bi214_P2"     , 17 , 9.52748e-01 , 0.1 ) ); DataManagement::FindParameter( "cSfoil_Bi214_P2"    ) -> SetFix();	
-	DataManagement::AddParameter( new Parameter( "cFeShield_Bi214"    , "cFeShield_Bi214"     , 18 , 9.65627e-01 , 0.1 ) ); DataManagement::FindParameter( "cFeShield_Bi214"    ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cFeShield_Tl208"    , "cFeShield_Tl208"     , 19 , 6.50111e-01 , 0.1 ) ); DataManagement::FindParameter( "cFeShield_Tl208"    ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cCuTower_Co60"      , "cCuTower_Co60"       , 20 , 9.58398e-01 , 0.1 ) ); DataManagement::FindParameter( "cCuTower_Co60"      ) -> SetFix();	
-	DataManagement::AddParameter( new Parameter( "cAir_Bi214_P1"      , "cAir_Bi214_P1"       , 21 , 9.98824e-01 , 0.1 ) ); DataManagement::FindParameter( "cAir_Bi214_P1"      ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cAir_Tl208_P1"      , "cAir_Tl208_P1"       , 22 , 9.57870e-01 , 0.1 ) ); DataManagement::FindParameter( "cAir_Tl208_P1"      ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cPMT_Bi214"         , "cPMT_Bi214"          , 23 , 9.71110e-01 , 0.1 ) ); DataManagement::FindParameter( "cPMT_Bi214"         ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cPMT_Tl208"         , "cPMT_Tl208"          , 24 , 9.99152e-01 , 0.1 ) ); DataManagement::FindParameter( "cPMT_Tl208"         ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cPMT_K40"           , "cPMT_K40"            , 25 , 9.98685e-01 , 0.1 ) ); DataManagement::FindParameter( "cPMT_K40"           ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cScint_K40"         , "cScint_K40"          , 26 , 9.74942e-01 , 0.1 ) ); DataManagement::FindParameter( "cScint_K40"         ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cSScin_Bi210"       , "cSScin_Bi210"        , 27 , 9.80747e-01 , 0.1 ) ); DataManagement::FindParameter( "cSScin_Bi210"       ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cSScin_Bi214"       , "cSScin_Bi214"        , 28 , 9.86007e-01 , 0.1 ) ); DataManagement::FindParameter( "cSScin_Bi214"       ) -> SetFix(); 
-	DataManagement::AddParameter( new Parameter( "cMuMetal_Pa234m"    , "cMuMetal_Pa234m"     , 29 , 8.56325e-01 , 0.1 ) ); DataManagement::FindParameter( "cMuMetal_Pa234m"    ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cSWire_Bi210_P1"    , "cSWire_Bi210_P1"     ,  7 , 9.97500e-01 , 0.1 ) ); //DataManagement::FindParameter( "cSWire_Bi210_P1"    ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cSWire_Bi210_P2"    , "cSWire_Bi210_P2"     ,  8 , 9.97533e-01 , 0.1 ) ); //DataManagement::FindParameter( "cSWire_Bi210_P2"    ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cCd116_Tl208"       , "cCd116_Tl208"        ,  9 , 9.80039e-01 , 0.1 ) ); //DataManagement::FindParameter( "cCd116_Tl208"       ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cCd116_Bi214"       , "cCd116_Bi214"        , 10 , 9.46897e-01 , 0.1 ) ); //DataManagement::FindParameter( "cCd116_Bi214"       ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cMylar_Bi214"       , "cMylar_Bi214"        , 11 , 9.95075e-01 , 0.1 ) ); //DataManagement::FindParameter( "cMylar_Bi214"       ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cSwire_Tl208_P1"    , "cSwire_Tl208_P1"     , 12 , 9.87121e-01 , 0.1 ) ); //DataManagement::FindParameter( "cSwire_Tl208_P1"    ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cSwire_Tl208_P2"    , "cSwire_Tl208_P2"     , 13 , 9.82115e-01 , 0.1 ) ); //DataManagement::FindParameter( "cSwire_Tl208_P2"    ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cSwire_Bi214_P1"    , "cSwire_Bi214_P1"     , 14 , 9.97398e-01 , 0.1 ) ); //DataManagement::FindParameter( "cSwire_Bi214_P1"    ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cSwire_Bi214_P2"    , "cSwire_Bi214_P2"     , 15 , 9.97297e-01 , 0.1 ) ); //DataManagement::FindParameter( "cSwire_Bi214_P2"    ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cSfoil_Bi214_P1"    , "cSfoil_Bi214_P1"     , 16 , 9.95057e-01 , 0.1 ) ); //DataManagement::FindParameter( "cSfoil_Bi214_P1"    ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cSfoil_Bi214_P2"    , "cSfoil_Bi214_P2"     , 17 , 9.52748e-01 , 0.1 ) ); //DataManagement::FindParameter( "cSfoil_Bi214_P2"    ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cFeShield_Bi214"    , "cFeShield_Bi214"     , 18 , 9.65627e-01 , 0.1 ) ); //DataManagement::FindParameter( "cFeShield_Bi214"    ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cFeShield_Tl208"    , "cFeShield_Tl208"     , 19 , 6.50111e-01 , 0.1 ) ); //DataManagement::FindParameter( "cFeShield_Tl208"    ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cCuTower_Co60"      , "cCuTower_Co60"       , 20 , 9.58398e-01 , 0.1 ) ); //DataManagement::FindParameter( "cCuTower_Co60"      ) -> SetFix();	
+	DataManagement::AddParameter( new Parameter( "cAir_Bi214_P1"      , "cAir_Bi214_P1"       , 21 , 9.98824e-01 , 0.1 ) ); //DataManagement::FindParameter( "cAir_Bi214_P1"      ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cAir_Tl208_P1"      , "cAir_Tl208_P1"       , 22 , 9.57870e-01 , 0.1 ) ); //DataManagement::FindParameter( "cAir_Tl208_P1"      ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cPMT_Bi214"         , "cPMT_Bi214"          , 23 , 9.71110e-01 , 0.1 ) ); //DataManagement::FindParameter( "cPMT_Bi214"         ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cPMT_Tl208"         , "cPMT_Tl208"          , 24 , 9.99152e-01 , 0.1 ) ); //DataManagement::FindParameter( "cPMT_Tl208"         ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cPMT_K40"           , "cPMT_K40"            , 25 , 9.98685e-01 , 0.1 ) ); //DataManagement::FindParameter( "cPMT_K40"           ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cScint_K40"         , "cScint_K40"          , 26 , 9.74942e-01 , 0.1 ) ); //DataManagement::FindParameter( "cScint_K40"         ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cSScin_Bi210"       , "cSScin_Bi210"        , 27 , 9.80747e-01 , 0.1 ) ); //DataManagement::FindParameter( "cSScin_Bi210"       ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cSScin_Bi214"       , "cSScin_Bi214"        , 28 , 9.86007e-01 , 0.1 ) ); //DataManagement::FindParameter( "cSScin_Bi214"       ) -> SetFix(); 
+	DataManagement::AddParameter( new Parameter( "cMuMetal_Pa234m"    , "cMuMetal_Pa234m"     , 29 , 8.56325e-01 , 0.1 ) ); //DataManagement::FindParameter( "cMuMetal_Pa234m"    ) -> SetFix();	
 	
 	
 	
@@ -218,28 +218,15 @@
 	{
 	
 		Observable * tot_e_energy_P1_cold  = new Observable("tot_e_energy_P1_cold" , "2e - E_{e1} + E_{e2} - Phase 1 cold" , kPhaseOne , hcoll->Find( "Data_h_tot_e_energy_P1_cold" ) ); tot_e_energy_P1_cold -> SetLogScale(kFALSE); tot_e_energy_P1_cold -> AddGroupAll(DataManagement::GetGroupCollection()); tot_e_energy_P1_cold -> SetDrawGroup(kTRUE); //tot_e_energy_P1_cold -> SetFitRangeLowEdge(0.5);
-		Observable * min_e_energy_P1_cold  = new Observable("min_e_energy_P1_cold" , "2e - E_{e,min} - Phase 1 cold"       , kPhaseOne , hcoll->Find( "Data_h_min_e_energy_P1_cold" ) ); min_e_energy_P1_cold -> SetLogScale(kFALSE); min_e_energy_P1_cold -> AddGroupAll(DataManagement::GetGroupCollection()); min_e_energy_P1_cold -> SetDrawGroup(kTRUE); 
-		Observable * max_e_energy_P1_cold  = new Observable("max_e_energy_P1_cold" , "2e - E_{e,max} - Phase 1 cold"       , kPhaseOne , hcoll->Find( "Data_h_max_e_energy_P1_cold" ) ); max_e_energy_P1_cold -> SetLogScale(kFALSE); max_e_energy_P1_cold -> AddGroupAll(DataManagement::GetGroupCollection()); max_e_energy_P1_cold -> SetDrawGroup(kTRUE); 
-		Observable * cosTheta_P1_cold      = new Observable("cosTheta_P1_cold"     , "2e - Cos(#Theta) - Phase 1 cold"     , kPhaseOne , hcoll->Find( "Data_h_cosTheta_P1_cold"     ) ); cosTheta_P1_cold     -> SetLogScale(kFALSE); cosTheta_P1_cold     -> AddGroupAll(DataManagement::GetGroupCollection()); cosTheta_P1_cold     -> SetDrawGroup(kTRUE); 
-		hcoll->Find( "Data_h_cosTheta_P1_cold" ) ->GetYaxis()->SetRangeUser(0.5,500);
 	
 		Observable * tot_e_energy_P1_warm  = new Observable("tot_e_energy_P1_warm" , "2e - E_{e1} + E_{e2} - Phase 1 warm" , kPhaseOne , hcoll->Find( "Data_h_tot_e_energy_P1_warm" ) ); tot_e_energy_P1_warm -> SetLogScale(kFALSE); tot_e_energy_P1_warm -> AddGroupAll(DataManagement::GetGroupCollection()); tot_e_energy_P1_warm -> SetDrawGroup(kTRUE); //tot_e_energy_P1_warm -> SetFitRangeLowEdge(0.5);
-		Observable * min_e_energy_P1_warm  = new Observable("min_e_energy_P1_warm" , "2e - E_{e,min} - Phase 1 warm"       , kPhaseOne , hcoll->Find( "Data_h_min_e_energy_P1_warm" ) ); min_e_energy_P1_warm -> SetLogScale(kFALSE); min_e_energy_P1_warm -> AddGroupAll(DataManagement::GetGroupCollection()); min_e_energy_P1_warm -> SetDrawGroup(kTRUE); 
-		Observable * max_e_energy_P1_warm  = new Observable("max_e_energy_P1_warm" , "2e - E_{e,max} - Phase 1 warm"       , kPhaseOne , hcoll->Find( "Data_h_max_e_energy_P1_warm" ) ); max_e_energy_P1_warm -> SetLogScale(kFALSE); max_e_energy_P1_warm -> AddGroupAll(DataManagement::GetGroupCollection()); max_e_energy_P1_warm -> SetDrawGroup(kTRUE); 
-		Observable * cosTheta_P1_warm      = new Observable("cosTheta_P1_warm"     , "2e - Cos(#Theta) - Phase 1 warm"     , kPhaseOne , hcoll->Find( "Data_h_cosTheta_P1_warm"     ) ); cosTheta_P1_warm     -> SetLogScale(kFALSE); cosTheta_P1_warm     -> AddGroupAll(DataManagement::GetGroupCollection()); cosTheta_P1_warm     -> SetDrawGroup(kTRUE); 
-		hcoll->Find( "Data_h_cosTheta_P1_warm" ) ->GetYaxis()->SetRangeUser(0.5,500);
 		
 		Observable * tot_e_energy_P2_cold  = new Observable("tot_e_energy_P2_cold" , "2e - E_{e1} + E_{e2} - Phase 2 cold" , kPhaseTwo , hcoll->Find( "Data_h_tot_e_energy_P2_cold" ) ); tot_e_energy_P2_cold -> SetLogScale(kFALSE); tot_e_energy_P2_cold -> AddGroupAll(DataManagement::GetGroupCollection()); tot_e_energy_P2_cold -> SetDrawGroup(kTRUE); //tot_e_energy_P2_cold -> SetFitRangeLowEdge(0.5);
-		Observable * min_e_energy_P2_cold  = new Observable("min_e_energy_P2_cold" , "2e - E_{e,min} - Phase 2 cold"       , kPhaseTwo , hcoll->Find( "Data_h_min_e_energy_P2_cold" ) ); min_e_energy_P2_cold -> SetLogScale(kFALSE); min_e_energy_P2_cold -> AddGroupAll(DataManagement::GetGroupCollection()); min_e_energy_P2_cold -> SetDrawGroup(kTRUE); 
-		Observable * max_e_energy_P2_cold  = new Observable("max_e_energy_P2_cold" , "2e - E_{e,max} - Phase 2 cold"       , kPhaseTwo , hcoll->Find( "Data_h_max_e_energy_P2_cold" ) ); max_e_energy_P2_cold -> SetLogScale(kFALSE); max_e_energy_P2_cold -> AddGroupAll(DataManagement::GetGroupCollection()); max_e_energy_P2_cold -> SetDrawGroup(kTRUE); 
-		Observable * cosTheta_P2_cold      = new Observable("cosTheta_P2_cold"     , "2e - Cos(#Theta) - Phase 2 cold"     , kPhaseTwo , hcoll->Find( "Data_h_cosTheta_P2_cold"     ) ); cosTheta_P2_cold     -> SetLogScale(kFALSE); cosTheta_P2_cold     -> AddGroupAll(DataManagement::GetGroupCollection()); cosTheta_P2_cold     -> SetDrawGroup(kTRUE); 
-		hcoll->Find( "Data_h_cosTheta_P2_cold" ) ->GetYaxis()->SetRangeUser(0.5,500);
 	
 		Observable * tot_e_energy_P2_warm  = new Observable("tot_e_energy_P2_warm" , "2e - E_{e1} + E_{e2} - Phase 2 warm" , kPhaseTwo , hcoll->Find( "Data_h_tot_e_energy_P2_warm" ) ); tot_e_energy_P2_warm -> SetLogScale(kFALSE); tot_e_energy_P2_warm -> AddGroupAll(DataManagement::GetGroupCollection()); tot_e_energy_P2_warm -> SetDrawGroup(kTRUE); //tot_e_energy_P2_warm -> SetFitRangeLowEdge(0.5);
-		Observable * min_e_energy_P2_warm  = new Observable("min_e_energy_P2_warm" , "2e - E_{e,min} - Phase 2 warm"       , kPhaseTwo , hcoll->Find( "Data_h_min_e_energy_P2_warm" ) ); min_e_energy_P2_warm -> SetLogScale(kFALSE); min_e_energy_P2_warm -> AddGroupAll(DataManagement::GetGroupCollection()); min_e_energy_P2_warm -> SetDrawGroup(kTRUE); 
-		Observable * max_e_energy_P2_warm  = new Observable("max_e_energy_P2_warm" , "2e - E_{e,max} - Phase 2 warm"       , kPhaseTwo , hcoll->Find( "Data_h_max_e_energy_P2_warm" ) ); max_e_energy_P2_warm -> SetLogScale(kFALSE); max_e_energy_P2_warm -> AddGroupAll(DataManagement::GetGroupCollection()); max_e_energy_P2_warm -> SetDrawGroup(kTRUE); 
-		Observable * cosTheta_P2_warm      = new Observable("cosTheta_P2_warm"     , "2e - Cos(#Theta) - Phase 2 warm"     , kPhaseTwo , hcoll->Find( "Data_h_cosTheta_P2_warm"     ) ); cosTheta_P2_warm     -> SetLogScale(kFALSE); cosTheta_P2_warm     -> AddGroupAll(DataManagement::GetGroupCollection()); cosTheta_P2_warm     -> SetDrawGroup(kTRUE); 
-		hcoll->Find( "Data_h_cosTheta_P2_warm" ) ->GetYaxis()->SetRangeUser(0.5,500);
+
+		Observable * tot_e_energy    = new Observable("tot_e_energy" , "2e - E_{e1} + E_{e2}" , kAll , hcoll->Find( "Data_h_tot_e_energy" ) ); tot_e_energy -> SetLogScale(kFALSE); tot_e_energy -> AddGroupAll(DataManagement::GetGroupCollection()); tot_e_energy -> SetDrawGroup(kTRUE);
+
 
 	}
 	//////////////////////////////////////////////////////////////////////////////
@@ -285,113 +272,6 @@
 		tot_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_tot_e_energy_P1_cold" ) );            
 		tot_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_tot_e_energy_P1_cold" ) );      
     	
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Tl208"      ) , hcoll->Find( "Cd116_Tl208_h_min_e_energy_P1_cold"    ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Ac228"      ) , hcoll->Find( "Cd116_Ac228_h_min_e_energy_P1_cold"    ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Bi212"      ) , hcoll->Find( "Cd116_Bi212_h_min_e_energy_P1_cold"    ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Bi214"      ) , hcoll->Find( "Cd116_Bi214_h_min_e_energy_P1_cold"    ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Pb214"      ) , hcoll->Find( "Cd116_Pb214_VT_h_min_e_energy_P1_cold" ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Mylar_Bi214"      ) , hcoll->Find( "Mylar_Bi214_h_min_e_energy_P1_cold"    ) );
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Mylar_Pb214"      ) , hcoll->Find( "Mylar_Pb214_h_min_e_energy_P1_cold"    ) );
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_K40_cold"   ) , hcoll->Find( "Cd116_K40_h_min_e_energy_P1_cold"      ) );
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_cold") , hcoll->Find( "Cd116_Pa234m_h_min_e_energy_P1_cold"   ) );
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_cold" ) , hcoll->Find( "SFoil_Bi210_h_min_e_energy_P1_cold"    ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P1"   ) , hcoll->Find( "SWire_Bi210_h_min_e_energy_P1_cold"    ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SScin_Bi210"      ) , hcoll->Find( "SScin_Bi210_h_min_e_energy_P1_cold"    ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SScin_Bi214"      ) , hcoll->Find( "SScin_Bi214_h_min_e_energy_P1_cold"    ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SScin_Pb214"      ) , hcoll->Find( "SScin_Pb214_h_min_e_energy_P1_cold"    ) );   		
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P1"   ) , hcoll->Find( "SWire_Tl208_h_min_e_energy_P1_cold"    ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P1"   ) , hcoll->Find( "SWire_Bi214_h_min_e_energy_P1_cold"    ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P1"   ) , hcoll->Find( "SFoil_Bi214_h_min_e_energy_P1_cold"    ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P1"   ) , hcoll->Find( "SWire_Pb214_h_min_e_energy_P1_cold"    ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P1"   ) , hcoll->Find( "SFoil_Pb214_h_min_e_energy_P1_cold"    ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Bi214"   ) , hcoll->Find( "FeShield_Bi214_h_min_e_energy_P1_cold" ) );      
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Tl208"   ) , hcoll->Find( "FeShield_Tl208_h_min_e_energy_P1_cold" ) );      
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Ac228"   ) , hcoll->Find( "FeShield_Ac228_h_min_e_energy_P1_cold" ) );      		
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "CuTower_Co60"     ) , hcoll->Find( "CuTower_Co60_h_min_e_energy_P1_cold"   ) );      
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Air_Bi214_P1"     ) , hcoll->Find( "Air_Bi214_h_min_e_energy_P1_cold"      ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Air_Pb214_P1"     ) , hcoll->Find( "Air_Pb214_h_min_e_energy_P1_cold"      ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Air_Tl208_P1"     ) , hcoll->Find( "Air_Tl208_h_min_e_energy_P1_cold"      ) );   
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "PMT_Bi214"        ) , hcoll->Find( "PMT_Bi214_h_min_e_energy_P1_cold"      ) );      
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "PMT_Tl208"        ) , hcoll->Find( "PMT_Tl208_h_min_e_energy_P1_cold"      ) );      
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "PMT_Ac228"        ) , hcoll->Find( "PMT_Ac228_h_min_e_energy_P1_cold"      ) );      
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "PMT_K40"          ) , hcoll->Find( "PMT_K40_h_min_e_energy_P1_cold"        ) );      
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "ScintInn_K40"     ) , hcoll->Find( "ScintInn_K40_h_min_e_energy_P1_cold"   ) );      
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "ScintOut_K40"     ) , hcoll->Find( "ScintOut_K40_h_min_e_energy_P1_cold"   ) );      
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "ScintPet_K40"     ) , hcoll->Find( "ScintPet_K40_h_min_e_energy_P1_cold"   ) );
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_min_e_energy_P1_cold" ) );            
-		min_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_min_e_energy_P1_cold" ) );      
-    	
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Tl208"      ) , hcoll->Find( "Cd116_Tl208_h_max_e_energy_P1_cold"    ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Ac228"      ) , hcoll->Find( "Cd116_Ac228_h_max_e_energy_P1_cold"    ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Bi212"      ) , hcoll->Find( "Cd116_Bi212_h_max_e_energy_P1_cold"    ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Bi214"      ) , hcoll->Find( "Cd116_Bi214_h_max_e_energy_P1_cold"    ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Pb214"      ) , hcoll->Find( "Cd116_Pb214_VT_h_max_e_energy_P1_cold" ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Mylar_Bi214"      ) , hcoll->Find( "Mylar_Bi214_h_max_e_energy_P1_cold"    ) );
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Mylar_Pb214"      ) , hcoll->Find( "Mylar_Pb214_h_max_e_energy_P1_cold"    ) );
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_K40_cold"   ) , hcoll->Find( "Cd116_K40_h_max_e_energy_P1_cold"      ) );
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_cold") , hcoll->Find( "Cd116_Pa234m_h_max_e_energy_P1_cold"   ) );
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_cold" ) , hcoll->Find( "SFoil_Bi210_h_max_e_energy_P1_cold"    ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P1"   ) , hcoll->Find( "SWire_Bi210_h_max_e_energy_P1_cold"    ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SScin_Bi210"      ) , hcoll->Find( "SScin_Bi210_h_max_e_energy_P1_cold"    ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SScin_Bi214"      ) , hcoll->Find( "SScin_Bi214_h_max_e_energy_P1_cold"    ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SScin_Pb214"      ) , hcoll->Find( "SScin_Pb214_h_max_e_energy_P1_cold"    ) );   		
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P1"   ) , hcoll->Find( "SWire_Tl208_h_max_e_energy_P1_cold"    ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P1"   ) , hcoll->Find( "SWire_Bi214_h_max_e_energy_P1_cold"    ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P1"   ) , hcoll->Find( "SFoil_Bi214_h_max_e_energy_P1_cold"    ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P1"   ) , hcoll->Find( "SWire_Pb214_h_max_e_energy_P1_cold"    ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P1"   ) , hcoll->Find( "SFoil_Pb214_h_max_e_energy_P1_cold"    ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Bi214"   ) , hcoll->Find( "FeShield_Bi214_h_max_e_energy_P1_cold" ) );      
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Tl208"   ) , hcoll->Find( "FeShield_Tl208_h_max_e_energy_P1_cold" ) );      
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Ac228"   ) , hcoll->Find( "FeShield_Ac228_h_max_e_energy_P1_cold" ) );      		
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "CuTower_Co60"     ) , hcoll->Find( "CuTower_Co60_h_max_e_energy_P1_cold"   ) );      
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Air_Bi214_P1"     ) , hcoll->Find( "Air_Bi214_h_max_e_energy_P1_cold"      ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Air_Pb214_P1"     ) , hcoll->Find( "Air_Pb214_h_max_e_energy_P1_cold"      ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Air_Tl208_P1"     ) , hcoll->Find( "Air_Tl208_h_max_e_energy_P1_cold"      ) );   
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "PMT_Bi214"        ) , hcoll->Find( "PMT_Bi214_h_max_e_energy_P1_cold"      ) );      
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "PMT_Tl208"        ) , hcoll->Find( "PMT_Tl208_h_max_e_energy_P1_cold"      ) );      
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "PMT_Ac228"        ) , hcoll->Find( "PMT_Ac228_h_max_e_energy_P1_cold"      ) );      
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "PMT_K40"          ) , hcoll->Find( "PMT_K40_h_max_e_energy_P1_cold"        ) );      
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "ScintInn_K40"     ) , hcoll->Find( "ScintInn_K40_h_max_e_energy_P1_cold"   ) );      
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "ScintOut_K40"     ) , hcoll->Find( "ScintOut_K40_h_max_e_energy_P1_cold"   ) );      
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "ScintPet_K40"     ) , hcoll->Find( "ScintPet_K40_h_max_e_energy_P1_cold"   ) );
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_max_e_energy_P1_cold" ) );            
-		max_e_energy_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_max_e_energy_P1_cold" ) );      
-	
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Tl208"      ) , hcoll->Find( "Cd116_Tl208_h_cosTheta_P1_cold"    ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Ac228"      ) , hcoll->Find( "Cd116_Ac228_h_cosTheta_P1_cold"    ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Bi212"      ) , hcoll->Find( "Cd116_Bi212_h_cosTheta_P1_cold"    ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Bi214"      ) , hcoll->Find( "Cd116_Bi214_h_cosTheta_P1_cold"    ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Pb214"      ) , hcoll->Find( "Cd116_Pb214_VT_h_cosTheta_P1_cold" ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "Mylar_Bi214"      ) , hcoll->Find( "Mylar_Bi214_h_cosTheta_P1_cold"    ) );
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "Mylar_Pb214"      ) , hcoll->Find( "Mylar_Pb214_h_cosTheta_P1_cold"    ) );
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_K40_cold"   ) , hcoll->Find( "Cd116_K40_h_cosTheta_P1_cold"      ) );
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_cold") , hcoll->Find( "Cd116_Pa234m_h_cosTheta_P1_cold"   ) );
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_cold" ) , hcoll->Find( "SFoil_Bi210_h_cosTheta_P1_cold"    ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P1"   ) , hcoll->Find( "SWire_Bi210_h_cosTheta_P1_cold"    ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "SScin_Bi210"      ) , hcoll->Find( "SScin_Bi210_h_cosTheta_P1_cold"    ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "SScin_Bi214"      ) , hcoll->Find( "SScin_Bi214_h_cosTheta_P1_cold"    ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "SScin_Pb214"      ) , hcoll->Find( "SScin_Pb214_h_cosTheta_P1_cold"    ) );   		
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P1"   ) , hcoll->Find( "SWire_Tl208_h_cosTheta_P1_cold"    ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P1"   ) , hcoll->Find( "SWire_Bi214_h_cosTheta_P1_cold"    ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P1"   ) , hcoll->Find( "SFoil_Bi214_h_cosTheta_P1_cold"    ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P1"   ) , hcoll->Find( "SWire_Pb214_h_cosTheta_P1_cold"    ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P1"   ) , hcoll->Find( "SFoil_Pb214_h_cosTheta_P1_cold"    ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Bi214"   ) , hcoll->Find( "FeShield_Bi214_h_cosTheta_P1_cold" ) );      
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Tl208"   ) , hcoll->Find( "FeShield_Tl208_h_cosTheta_P1_cold" ) );      
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Ac228"   ) , hcoll->Find( "FeShield_Ac228_h_cosTheta_P1_cold" ) );      		
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "CuTower_Co60"     ) , hcoll->Find( "CuTower_Co60_h_cosTheta_P1_cold"   ) );      
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "Air_Bi214_P1"     ) , hcoll->Find( "Air_Bi214_h_cosTheta_P1_cold"      ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "Air_Pb214_P1"     ) , hcoll->Find( "Air_Pb214_h_cosTheta_P1_cold"      ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "Air_Tl208_P1"     ) , hcoll->Find( "Air_Tl208_h_cosTheta_P1_cold"      ) );   
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "PMT_Bi214"        ) , hcoll->Find( "PMT_Bi214_h_cosTheta_P1_cold"      ) );      
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "PMT_Tl208"        ) , hcoll->Find( "PMT_Tl208_h_cosTheta_P1_cold"      ) );      
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "PMT_Ac228"        ) , hcoll->Find( "PMT_Ac228_h_cosTheta_P1_cold"      ) );      
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "PMT_K40"          ) , hcoll->Find( "PMT_K40_h_cosTheta_P1_cold"        ) );      
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "ScintInn_K40"     ) , hcoll->Find( "ScintInn_K40_h_cosTheta_P1_cold"   ) );      
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "ScintOut_K40"     ) , hcoll->Find( "ScintOut_K40_h_cosTheta_P1_cold"   ) );      
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "ScintPet_K40"     ) , hcoll->Find( "ScintPet_K40_h_cosTheta_P1_cold"   ) );
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_cosTheta_P1_cold" ) );            
-		cosTheta_P1_cold -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_cosTheta_P1_cold" ) );      
 	}
 	// P1 Warm
 	{
@@ -432,114 +312,6 @@
 		tot_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_tot_e_energy_P1_warm"   ) );      		
 		tot_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_tot_e_energy_P1_warm" ) );      
 
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Tl208"      ) , hcoll->Find( "Cd116_Tl208_h_min_e_energy_P1_warm"    ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Ac228"      ) , hcoll->Find( "Cd116_Ac228_h_min_e_energy_P1_warm"    ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Bi212"      ) , hcoll->Find( "Cd116_Bi212_h_min_e_energy_P1_warm"    ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Bi214"      ) , hcoll->Find( "Cd116_Bi214_h_min_e_energy_P1_warm"    ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Pb214"      ) , hcoll->Find( "Cd116_Pb214_VT_h_min_e_energy_P1_warm" ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Mylar_Bi214"      ) , hcoll->Find( "Mylar_Bi214_h_min_e_energy_P1_warm"    ) );
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Mylar_Pb214"      ) , hcoll->Find( "Mylar_Pb214_h_min_e_energy_P1_warm"    ) );
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_K40_warm"   ) , hcoll->Find( "Cd116_K40_h_min_e_energy_P1_warm"      ) );
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_warm") , hcoll->Find( "Cd116_Pa234m_h_min_e_energy_P1_warm"   ) );
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_warm" ) , hcoll->Find( "SFoil_Bi210_h_min_e_energy_P1_warm"    ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P1"   ) , hcoll->Find( "SWire_Bi210_h_min_e_energy_P1_warm"    ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SScin_Bi210"      ) , hcoll->Find( "SScin_Bi210_h_min_e_energy_P1_warm"    ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SScin_Bi214"      ) , hcoll->Find( "SScin_Bi214_h_min_e_energy_P1_warm"    ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SScin_Pb214"      ) , hcoll->Find( "SScin_Pb214_h_min_e_energy_P1_warm"    ) );   		
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P1"   ) , hcoll->Find( "SWire_Tl208_h_min_e_energy_P1_warm"    ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P1"   ) , hcoll->Find( "SWire_Bi214_h_min_e_energy_P1_warm"    ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P1"   ) , hcoll->Find( "SFoil_Bi214_h_min_e_energy_P1_warm"    ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P1"   ) , hcoll->Find( "SWire_Pb214_h_min_e_energy_P1_warm"    ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P1"   ) , hcoll->Find( "SFoil_Pb214_h_min_e_energy_P1_warm"    ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Bi214"   ) , hcoll->Find( "FeShield_Bi214_h_min_e_energy_P1_warm" ) );      
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Tl208"   ) , hcoll->Find( "FeShield_Tl208_h_min_e_energy_P1_warm" ) );      
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Ac228"   ) , hcoll->Find( "FeShield_Ac228_h_min_e_energy_P1_warm" ) );      				
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "CuTower_Co60"     ) , hcoll->Find( "CuTower_Co60_h_min_e_energy_P1_warm"   ) );      
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Air_Bi214_P1"     ) , hcoll->Find( "Air_Bi214_h_min_e_energy_P1_warm"      ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Air_Pb214_P1"     ) , hcoll->Find( "Air_Pb214_h_min_e_energy_P1_warm"      ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Air_Tl208_P1"     ) , hcoll->Find( "Air_Tl208_h_min_e_energy_P1_warm"      ) );   
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "PMT_Bi214"        ) , hcoll->Find( "PMT_Bi214_h_min_e_energy_P1_warm"      ) );      
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "PMT_Tl208"        ) , hcoll->Find( "PMT_Tl208_h_min_e_energy_P1_warm"      ) );      
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "PMT_Ac228"        ) , hcoll->Find( "PMT_Ac228_h_min_e_energy_P1_warm"      ) );      
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "PMT_K40"          ) , hcoll->Find( "PMT_K40_h_min_e_energy_P1_warm"        ) );      
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "ScintInn_K40"     ) , hcoll->Find( "ScintInn_K40_h_min_e_energy_P1_warm"   ) );      
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "ScintOut_K40"     ) , hcoll->Find( "ScintOut_K40_h_min_e_energy_P1_warm"   ) );      
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "ScintPet_K40"     ) , hcoll->Find( "ScintPet_K40_h_min_e_energy_P1_warm"   ) );      
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_min_e_energy_P1_warm"   ) );      		
-		min_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_min_e_energy_P1_warm" ) );      
-
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Tl208"      ) , hcoll->Find( "Cd116_Tl208_h_max_e_energy_P1_warm"    ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Ac228"      ) , hcoll->Find( "Cd116_Ac228_h_max_e_energy_P1_warm"    ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Bi212"      ) , hcoll->Find( "Cd116_Bi212_h_max_e_energy_P1_warm"    ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Bi214"      ) , hcoll->Find( "Cd116_Bi214_h_max_e_energy_P1_warm"    ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Pb214"      ) , hcoll->Find( "Cd116_Pb214_VT_h_max_e_energy_P1_warm" ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Mylar_Bi214"      ) , hcoll->Find( "Mylar_Bi214_h_max_e_energy_P1_warm"    ) );
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Mylar_Pb214"      ) , hcoll->Find( "Mylar_Pb214_h_max_e_energy_P1_warm"    ) );
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_K40_warm"   ) , hcoll->Find( "Cd116_K40_h_max_e_energy_P1_warm"      ) );
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_warm") , hcoll->Find( "Cd116_Pa234m_h_max_e_energy_P1_warm"   ) );
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_warm" ) , hcoll->Find( "SFoil_Bi210_h_max_e_energy_P1_warm"    ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P1"   ) , hcoll->Find( "SWire_Bi210_h_max_e_energy_P1_warm"    ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SScin_Bi210"      ) , hcoll->Find( "SScin_Bi210_h_max_e_energy_P1_warm"    ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SScin_Bi214"      ) , hcoll->Find( "SScin_Bi214_h_max_e_energy_P1_warm"    ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SScin_Pb214"      ) , hcoll->Find( "SScin_Pb214_h_max_e_energy_P1_warm"    ) );   		
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P1"   ) , hcoll->Find( "SWire_Tl208_h_max_e_energy_P1_warm"    ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P1"   ) , hcoll->Find( "SWire_Bi214_h_max_e_energy_P1_warm"    ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P1"   ) , hcoll->Find( "SFoil_Bi214_h_max_e_energy_P1_warm"    ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P1"   ) , hcoll->Find( "SWire_Pb214_h_max_e_energy_P1_warm"    ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P1"   ) , hcoll->Find( "SFoil_Pb214_h_max_e_energy_P1_warm"    ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Bi214"   ) , hcoll->Find( "FeShield_Bi214_h_max_e_energy_P1_warm" ) );      
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Tl208"   ) , hcoll->Find( "FeShield_Tl208_h_max_e_energy_P1_warm" ) );      
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Ac228"   ) , hcoll->Find( "FeShield_Ac228_h_max_e_energy_P1_warm" ) );      				
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "CuTower_Co60"     ) , hcoll->Find( "CuTower_Co60_h_max_e_energy_P1_warm"   ) );      
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Air_Bi214_P1"     ) , hcoll->Find( "Air_Bi214_h_max_e_energy_P1_warm"      ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Air_Pb214_P1"     ) , hcoll->Find( "Air_Pb214_h_max_e_energy_P1_warm"      ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Air_Tl208_P1"     ) , hcoll->Find( "Air_Tl208_h_max_e_energy_P1_warm"      ) );   
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "PMT_Bi214"        ) , hcoll->Find( "PMT_Bi214_h_max_e_energy_P1_warm"      ) );      
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "PMT_Tl208"        ) , hcoll->Find( "PMT_Tl208_h_max_e_energy_P1_warm"      ) );      
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "PMT_Ac228"        ) , hcoll->Find( "PMT_Ac228_h_max_e_energy_P1_warm"      ) );      
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "PMT_K40"          ) , hcoll->Find( "PMT_K40_h_max_e_energy_P1_warm"        ) );      
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "ScintInn_K40"     ) , hcoll->Find( "ScintInn_K40_h_max_e_energy_P1_warm"   ) );      
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "ScintOut_K40"     ) , hcoll->Find( "ScintOut_K40_h_max_e_energy_P1_warm"   ) );      
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "ScintPet_K40"     ) , hcoll->Find( "ScintPet_K40_h_max_e_energy_P1_warm"   ) );      
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_max_e_energy_P1_warm"   ) );      		
-		max_e_energy_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_max_e_energy_P1_warm" ) );      
-	
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Tl208"      ) , hcoll->Find( "Cd116_Tl208_h_cosTheta_P1_warm"    ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Ac228"      ) , hcoll->Find( "Cd116_Ac228_h_cosTheta_P1_warm"    ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Bi212"      ) , hcoll->Find( "Cd116_Bi212_h_cosTheta_P1_warm"    ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Bi214"      ) , hcoll->Find( "Cd116_Bi214_h_cosTheta_P1_warm"    ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Pb214"      ) , hcoll->Find( "Cd116_Pb214_VT_h_cosTheta_P1_warm" ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "Mylar_Bi214"      ) , hcoll->Find( "Mylar_Bi214_h_cosTheta_P1_warm"    ) );
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "Mylar_Pb214"      ) , hcoll->Find( "Mylar_Pb214_h_cosTheta_P1_warm"    ) );
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_K40_warm"   ) , hcoll->Find( "Cd116_K40_h_cosTheta_P1_warm"      ) );
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_warm") , hcoll->Find( "Cd116_Pa234m_h_cosTheta_P1_warm"   ) );
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_warm" ) , hcoll->Find( "SFoil_Bi210_h_cosTheta_P1_warm"    ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P1"   ) , hcoll->Find( "SWire_Bi210_h_cosTheta_P1_warm"    ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "SScin_Bi210"      ) , hcoll->Find( "SScin_Bi210_h_cosTheta_P1_warm"    ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "SScin_Bi214"      ) , hcoll->Find( "SScin_Bi214_h_cosTheta_P1_warm"    ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "SScin_Pb214"      ) , hcoll->Find( "SScin_Pb214_h_cosTheta_P1_warm"    ) );   		
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P1"   ) , hcoll->Find( "SWire_Tl208_h_cosTheta_P1_warm"    ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P1"   ) , hcoll->Find( "SWire_Bi214_h_cosTheta_P1_warm"    ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P1"   ) , hcoll->Find( "SFoil_Bi214_h_cosTheta_P1_warm"    ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P1"   ) , hcoll->Find( "SWire_Pb214_h_cosTheta_P1_warm"    ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P1"   ) , hcoll->Find( "SFoil_Pb214_h_cosTheta_P1_warm"    ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Bi214"   ) , hcoll->Find( "FeShield_Bi214_h_cosTheta_P1_warm" ) );      
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Tl208"   ) , hcoll->Find( "FeShield_Tl208_h_cosTheta_P1_warm" ) );      
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Ac228"   ) , hcoll->Find( "FeShield_Ac228_h_cosTheta_P1_warm" ) );      				
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "CuTower_Co60"     ) , hcoll->Find( "CuTower_Co60_h_cosTheta_P1_warm"   ) );      
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "Air_Bi214_P1"     ) , hcoll->Find( "Air_Bi214_h_cosTheta_P1_warm"      ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "Air_Pb214_P1"     ) , hcoll->Find( "Air_Pb214_h_cosTheta_P1_warm"      ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "Air_Tl208_P1"     ) , hcoll->Find( "Air_Tl208_h_cosTheta_P1_warm"      ) );   
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "PMT_Bi214"        ) , hcoll->Find( "PMT_Bi214_h_cosTheta_P1_warm"      ) );      
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "PMT_Tl208"        ) , hcoll->Find( "PMT_Tl208_h_cosTheta_P1_warm"      ) );      
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "PMT_Ac228"        ) , hcoll->Find( "PMT_Ac228_h_cosTheta_P1_warm"      ) );      
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "PMT_K40"          ) , hcoll->Find( "PMT_K40_h_cosTheta_P1_warm"        ) );      
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "ScintInn_K40"     ) , hcoll->Find( "ScintInn_K40_h_cosTheta_P1_warm"   ) );      
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "ScintOut_K40"     ) , hcoll->Find( "ScintOut_K40_h_cosTheta_P1_warm"   ) );      
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "ScintPet_K40"     ) , hcoll->Find( "ScintPet_K40_h_cosTheta_P1_warm"   ) );      
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_cosTheta_P1_warm"   ) );      		
-		cosTheta_P1_warm -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_cosTheta_P1_warm" ) );      
-	
 		
 	}
 	// P2 Cold
@@ -577,105 +349,6 @@
 		tot_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_tot_e_energy_P2_cold"   ) );      		
 		tot_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_tot_e_energy_P2_cold" ) );      
 
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Tl208"      ) , hcoll->Find( "Cd116_Tl208_h_min_e_energy_P2_cold"    ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Ac228"      ) , hcoll->Find( "Cd116_Ac228_h_min_e_energy_P2_cold"    ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Bi212"      ) , hcoll->Find( "Cd116_Bi212_h_min_e_energy_P2_cold"    ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Bi214"      ) , hcoll->Find( "Cd116_Bi214_h_min_e_energy_P2_cold"    ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Pb214"      ) , hcoll->Find( "Cd116_Pb214_VT_h_min_e_energy_P2_cold" ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Mylar_Bi214"      ) , hcoll->Find( "Mylar_Bi214_h_min_e_energy_P2_cold"    ) );
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Mylar_Pb214"      ) , hcoll->Find( "Mylar_Pb214_h_min_e_energy_P2_cold"    ) );
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_K40_cold"   ) , hcoll->Find( "Cd116_K40_h_min_e_energy_P2_cold"      ) );
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_cold") , hcoll->Find( "Cd116_Pa234m_h_min_e_energy_P2_cold"   ) );
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_cold" ) , hcoll->Find( "SFoil_Bi210_h_min_e_energy_P2_cold"    ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P2"   ) , hcoll->Find( "SWire_Bi210_h_min_e_energy_P2_cold"    ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SScin_Bi210"      ) , hcoll->Find( "SScin_Bi210_h_min_e_energy_P2_cold"    ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SScin_Bi214"      ) , hcoll->Find( "SScin_Bi214_h_min_e_energy_P2_cold"    ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SScin_Pb214"      ) , hcoll->Find( "SScin_Pb214_h_min_e_energy_P2_cold"    ) );   		
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P2"   ) , hcoll->Find( "SWire_Tl208_h_min_e_energy_P2_cold"    ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P2"   ) , hcoll->Find( "SWire_Bi214_h_min_e_energy_P2_cold"    ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P2"   ) , hcoll->Find( "SFoil_Bi214_h_min_e_energy_P2_cold"    ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P2"   ) , hcoll->Find( "SWire_Pb214_h_min_e_energy_P2_cold"    ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P2"   ) , hcoll->Find( "SFoil_Pb214_h_min_e_energy_P2_cold"    ) );   
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Bi214"   ) , hcoll->Find( "FeShield_Bi214_h_min_e_energy_P2_cold" ) );      
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Tl208"   ) , hcoll->Find( "FeShield_Tl208_h_min_e_energy_P2_cold" ) );      
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Ac228"   ) , hcoll->Find( "FeShield_Ac228_h_min_e_energy_P2_cold" ) );      				
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "CuTower_Co60"     ) , hcoll->Find( "CuTower_Co60_h_min_e_energy_P2_cold"   ) );      
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "PMT_Bi214"        ) , hcoll->Find( "PMT_Bi214_h_min_e_energy_P2_cold"      ) );      
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "PMT_Tl208"        ) , hcoll->Find( "PMT_Tl208_h_min_e_energy_P2_cold"      ) );      
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "PMT_Ac228"        ) , hcoll->Find( "PMT_Ac228_h_min_e_energy_P2_cold"      ) );      
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "PMT_K40"          ) , hcoll->Find( "PMT_K40_h_min_e_energy_P2_cold"        ) );      
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "ScintInn_K40"     ) , hcoll->Find( "ScintInn_K40_h_min_e_energy_P2_cold"   ) );      
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "ScintOut_K40"     ) , hcoll->Find( "ScintOut_K40_h_min_e_energy_P2_cold"   ) );      
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "ScintPet_K40"     ) , hcoll->Find( "ScintPet_K40_h_min_e_energy_P2_cold"   ) );      
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_min_e_energy_P2_cold"   ) );      		
-		min_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_min_e_energy_P2_cold" ) );      
-
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Tl208"      ) , hcoll->Find( "Cd116_Tl208_h_max_e_energy_P2_cold"    ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Ac228"      ) , hcoll->Find( "Cd116_Ac228_h_max_e_energy_P2_cold"    ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Bi212"      ) , hcoll->Find( "Cd116_Bi212_h_max_e_energy_P2_cold"    ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Bi214"      ) , hcoll->Find( "Cd116_Bi214_h_max_e_energy_P2_cold"    ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Pb214"      ) , hcoll->Find( "Cd116_Pb214_VT_h_max_e_energy_P2_cold" ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Mylar_Bi214"      ) , hcoll->Find( "Mylar_Bi214_h_max_e_energy_P2_cold"    ) );
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Mylar_Pb214"      ) , hcoll->Find( "Mylar_Pb214_h_max_e_energy_P2_cold"    ) );
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_K40_cold"   ) , hcoll->Find( "Cd116_K40_h_max_e_energy_P2_cold"      ) );
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_cold") , hcoll->Find( "Cd116_Pa234m_h_max_e_energy_P2_cold"   ) );
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_cold" ) , hcoll->Find( "SFoil_Bi210_h_max_e_energy_P2_cold"    ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P2"   ) , hcoll->Find( "SWire_Bi210_h_max_e_energy_P2_cold"    ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SScin_Bi210"      ) , hcoll->Find( "SScin_Bi210_h_max_e_energy_P2_cold"    ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SScin_Bi214"      ) , hcoll->Find( "SScin_Bi214_h_max_e_energy_P2_cold"    ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SScin_Pb214"      ) , hcoll->Find( "SScin_Pb214_h_max_e_energy_P2_cold"    ) );   		
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P2"   ) , hcoll->Find( "SWire_Tl208_h_max_e_energy_P2_cold"    ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P2"   ) , hcoll->Find( "SWire_Bi214_h_max_e_energy_P2_cold"    ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P2"   ) , hcoll->Find( "SFoil_Bi214_h_max_e_energy_P2_cold"    ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P2"   ) , hcoll->Find( "SWire_Pb214_h_max_e_energy_P2_cold"    ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P2"   ) , hcoll->Find( "SFoil_Pb214_h_max_e_energy_P2_cold"    ) );   
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Bi214"   ) , hcoll->Find( "FeShield_Bi214_h_max_e_energy_P2_cold" ) );      
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Tl208"   ) , hcoll->Find( "FeShield_Tl208_h_max_e_energy_P2_cold" ) );      
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Ac228"   ) , hcoll->Find( "FeShield_Ac228_h_max_e_energy_P2_cold" ) );      				
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "CuTower_Co60"     ) , hcoll->Find( "CuTower_Co60_h_max_e_energy_P2_cold"   ) );      
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "PMT_Bi214"        ) , hcoll->Find( "PMT_Bi214_h_max_e_energy_P2_cold"      ) );      
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "PMT_Tl208"        ) , hcoll->Find( "PMT_Tl208_h_max_e_energy_P2_cold"      ) );      
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "PMT_Ac228"        ) , hcoll->Find( "PMT_Ac228_h_max_e_energy_P2_cold"      ) );      
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "PMT_K40"          ) , hcoll->Find( "PMT_K40_h_max_e_energy_P2_cold"        ) );      
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "ScintInn_K40"     ) , hcoll->Find( "ScintInn_K40_h_max_e_energy_P2_cold"   ) );      
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "ScintOut_K40"     ) , hcoll->Find( "ScintOut_K40_h_max_e_energy_P2_cold"   ) );      
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "ScintPet_K40"     ) , hcoll->Find( "ScintPet_K40_h_max_e_energy_P2_cold"   ) );      
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_max_e_energy_P2_cold"   ) );      		
-		max_e_energy_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_max_e_energy_P2_cold" ) );      
-		
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Tl208"      ) , hcoll->Find( "Cd116_Tl208_h_cosTheta_P2_cold"    ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Ac228"      ) , hcoll->Find( "Cd116_Ac228_h_cosTheta_P2_cold"    ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Bi212"      ) , hcoll->Find( "Cd116_Bi212_h_cosTheta_P2_cold"    ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Bi214"      ) , hcoll->Find( "Cd116_Bi214_h_cosTheta_P2_cold"    ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Pb214"      ) , hcoll->Find( "Cd116_Pb214_VT_h_cosTheta_P2_cold" ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "Mylar_Bi214"      ) , hcoll->Find( "Mylar_Bi214_h_cosTheta_P2_cold"    ) );
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "Mylar_Pb214"      ) , hcoll->Find( "Mylar_Pb214_h_cosTheta_P2_cold"    ) );
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_K40_cold"   ) , hcoll->Find( "Cd116_K40_h_cosTheta_P2_cold"      ) );
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_cold") , hcoll->Find( "Cd116_Pa234m_h_cosTheta_P2_cold"   ) );
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_cold" ) , hcoll->Find( "SFoil_Bi210_h_cosTheta_P2_cold"    ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P2"   ) , hcoll->Find( "SWire_Bi210_h_cosTheta_P2_cold"    ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "SScin_Bi210"      ) , hcoll->Find( "SScin_Bi210_h_cosTheta_P2_cold"    ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "SScin_Bi214"      ) , hcoll->Find( "SScin_Bi214_h_cosTheta_P2_cold"    ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "SScin_Pb214"      ) , hcoll->Find( "SScin_Pb214_h_cosTheta_P2_cold"    ) );   		
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P2"   ) , hcoll->Find( "SWire_Tl208_h_cosTheta_P2_cold"    ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P2"   ) , hcoll->Find( "SWire_Bi214_h_cosTheta_P2_cold"    ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P2"   ) , hcoll->Find( "SFoil_Bi214_h_cosTheta_P2_cold"    ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P2"   ) , hcoll->Find( "SWire_Pb214_h_cosTheta_P2_cold"    ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P2"   ) , hcoll->Find( "SFoil_Pb214_h_cosTheta_P2_cold"    ) );   
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Bi214"   ) , hcoll->Find( "FeShield_Bi214_h_cosTheta_P2_cold" ) );      
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Tl208"   ) , hcoll->Find( "FeShield_Tl208_h_cosTheta_P2_cold" ) );      
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "FeShield_Ac228"   ) , hcoll->Find( "FeShield_Ac228_h_cosTheta_P2_cold" ) );      				
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "CuTower_Co60"     ) , hcoll->Find( "CuTower_Co60_h_cosTheta_P2_cold"   ) );      
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "PMT_Bi214"        ) , hcoll->Find( "PMT_Bi214_h_cosTheta_P2_cold"      ) );      
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "PMT_Tl208"        ) , hcoll->Find( "PMT_Tl208_h_cosTheta_P2_cold"      ) );      
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "PMT_Ac228"        ) , hcoll->Find( "PMT_Ac228_h_cosTheta_P2_cold"      ) );      
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "PMT_K40"          ) , hcoll->Find( "PMT_K40_h_cosTheta_P2_cold"        ) );      
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "ScintInn_K40"     ) , hcoll->Find( "ScintInn_K40_h_cosTheta_P2_cold"   ) );      
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "ScintOut_K40"     ) , hcoll->Find( "ScintOut_K40_h_cosTheta_P2_cold"   ) );      
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "ScintPet_K40"     ) , hcoll->Find( "ScintPet_K40_h_cosTheta_P2_cold"   ) );      
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_cosTheta_P2_cold"   ) );      		
-		cosTheta_P2_cold -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_cosTheta_P2_cold" ) );      
-		
 		
 	}
 	// P2 Warm
@@ -713,104 +386,62 @@
 		tot_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_tot_e_energy_P2_warm"   ) );      		
 		tot_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_tot_e_energy_P2_warm" ) );      
 
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Tl208"      ) , hcoll->Find( "Cd116_Tl208_h_max_e_energy_P2_warm"    ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Ac228"      ) , hcoll->Find( "Cd116_Ac228_h_max_e_energy_P2_warm"    ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Bi212"      ) , hcoll->Find( "Cd116_Bi212_h_max_e_energy_P2_warm"    ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Bi214"      ) , hcoll->Find( "Cd116_Bi214_h_max_e_energy_P2_warm"    ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Pb214"      ) , hcoll->Find( "Cd116_Pb214_VT_h_max_e_energy_P2_warm" ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Mylar_Bi214"      ) , hcoll->Find( "Mylar_Bi214_h_max_e_energy_P2_warm"    ) );
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Mylar_Pb214"      ) , hcoll->Find( "Mylar_Pb214_h_max_e_energy_P2_warm"    ) );
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_K40_warm"   ) , hcoll->Find( "Cd116_K40_h_max_e_energy_P2_warm"      ) );
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_warm") , hcoll->Find( "Cd116_Pa234m_h_max_e_energy_P2_warm"   ) );
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_warm" ) , hcoll->Find( "SFoil_Bi210_h_max_e_energy_P2_warm"    ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P2"   ) , hcoll->Find( "SWire_Bi210_h_max_e_energy_P2_warm"    ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SScin_Bi210"      ) , hcoll->Find( "SScin_Bi210_h_max_e_energy_P2_warm"    ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SScin_Bi214"      ) , hcoll->Find( "SScin_Bi214_h_max_e_energy_P2_warm"    ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SScin_Pb214"      ) , hcoll->Find( "SScin_Pb214_h_max_e_energy_P2_warm"    ) );   		
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P2"   ) , hcoll->Find( "SWire_Tl208_h_max_e_energy_P2_warm"    ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P2"   ) , hcoll->Find( "SWire_Bi214_h_max_e_energy_P2_warm"    ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P2"   ) , hcoll->Find( "SFoil_Bi214_h_max_e_energy_P2_warm"    ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P2"   ) , hcoll->Find( "SWire_Pb214_h_max_e_energy_P2_warm"    ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P2"   ) , hcoll->Find( "SFoil_Pb214_h_max_e_energy_P2_warm"    ) );   
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Bi214"   ) , hcoll->Find( "FeShield_Bi214_h_max_e_energy_P2_warm" ) );      
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Tl208"   ) , hcoll->Find( "FeShield_Tl208_h_max_e_energy_P2_warm" ) );      
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Ac228"   ) , hcoll->Find( "FeShield_Ac228_h_max_e_energy_P2_warm" ) );      				
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "CuTower_Co60"     ) , hcoll->Find( "CuTower_Co60_h_max_e_energy_P2_warm"   ) );      
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "PMT_Bi214"        ) , hcoll->Find( "PMT_Bi214_h_max_e_energy_P2_warm"      ) );      
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "PMT_Tl208"        ) , hcoll->Find( "PMT_Tl208_h_max_e_energy_P2_warm"      ) );      
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "PMT_Ac228"        ) , hcoll->Find( "PMT_Ac228_h_max_e_energy_P2_warm"      ) );      
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "PMT_K40"          ) , hcoll->Find( "PMT_K40_h_max_e_energy_P2_warm"        ) );      
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "ScintInn_K40"     ) , hcoll->Find( "ScintInn_K40_h_max_e_energy_P2_warm"   ) );      
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "ScintOut_K40"     ) , hcoll->Find( "ScintOut_K40_h_max_e_energy_P2_warm"   ) );      
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "ScintPet_K40"     ) , hcoll->Find( "ScintPet_K40_h_max_e_energy_P2_warm"   ) );      
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_max_e_energy_P2_warm"   ) );      		
-		max_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_max_e_energy_P2_warm" ) );      
-
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Tl208"      ) , hcoll->Find( "Cd116_Tl208_h_min_e_energy_P2_warm"    ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Ac228"      ) , hcoll->Find( "Cd116_Ac228_h_min_e_energy_P2_warm"    ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Bi212"      ) , hcoll->Find( "Cd116_Bi212_h_min_e_energy_P2_warm"    ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Bi214"      ) , hcoll->Find( "Cd116_Bi214_h_min_e_energy_P2_warm"    ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Pb214"      ) , hcoll->Find( "Cd116_Pb214_VT_h_min_e_energy_P2_warm" ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Mylar_Bi214"      ) , hcoll->Find( "Mylar_Bi214_h_min_e_energy_P2_warm"    ) );
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Mylar_Pb214"      ) , hcoll->Find( "Mylar_Pb214_h_min_e_energy_P2_warm"    ) );
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_K40_warm"   ) , hcoll->Find( "Cd116_K40_h_min_e_energy_P2_warm"      ) );
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_warm") , hcoll->Find( "Cd116_Pa234m_h_min_e_energy_P2_warm"   ) );
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_warm" ) , hcoll->Find( "SFoil_Bi210_h_min_e_energy_P2_warm"    ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P2"   ) , hcoll->Find( "SWire_Bi210_h_min_e_energy_P2_warm"    ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SScin_Bi210"      ) , hcoll->Find( "SScin_Bi210_h_min_e_energy_P2_warm"    ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SScin_Bi214"      ) , hcoll->Find( "SScin_Bi214_h_min_e_energy_P2_warm"    ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SScin_Pb214"      ) , hcoll->Find( "SScin_Pb214_h_min_e_energy_P2_warm"    ) );   		
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P2"   ) , hcoll->Find( "SWire_Tl208_h_min_e_energy_P2_warm"    ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P2"   ) , hcoll->Find( "SWire_Bi214_h_min_e_energy_P2_warm"    ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P2"   ) , hcoll->Find( "SFoil_Bi214_h_min_e_energy_P2_warm"    ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P2"   ) , hcoll->Find( "SWire_Pb214_h_min_e_energy_P2_warm"    ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P2"   ) , hcoll->Find( "SFoil_Pb214_h_min_e_energy_P2_warm"    ) );   
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Bi214"   ) , hcoll->Find( "FeShield_Bi214_h_min_e_energy_P2_warm" ) );      
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Tl208"   ) , hcoll->Find( "FeShield_Tl208_h_min_e_energy_P2_warm" ) );      
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Ac228"   ) , hcoll->Find( "FeShield_Ac228_h_min_e_energy_P2_warm" ) );      				
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "CuTower_Co60"     ) , hcoll->Find( "CuTower_Co60_h_min_e_energy_P2_warm"   ) );      
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "PMT_Bi214"        ) , hcoll->Find( "PMT_Bi214_h_min_e_energy_P2_warm"      ) );      
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "PMT_Tl208"        ) , hcoll->Find( "PMT_Tl208_h_min_e_energy_P2_warm"      ) );      
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "PMT_Ac228"        ) , hcoll->Find( "PMT_Ac228_h_min_e_energy_P2_warm"      ) );      
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "PMT_K40"          ) , hcoll->Find( "PMT_K40_h_min_e_energy_P2_warm"        ) );      
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "ScintInn_K40"     ) , hcoll->Find( "ScintInn_K40_h_min_e_energy_P2_warm"   ) );      
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "ScintOut_K40"     ) , hcoll->Find( "ScintOut_K40_h_min_e_energy_P2_warm"   ) );      
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "ScintPet_K40"     ) , hcoll->Find( "ScintPet_K40_h_min_e_energy_P2_warm"   ) );      
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_min_e_energy_P2_warm"   ) );      		
-		min_e_energy_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_min_e_energy_P2_warm" ) );      
-
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Tl208"      ) , hcoll->Find( "Cd116_Tl208_h_cosTheta_P2_warm"    ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Ac228"      ) , hcoll->Find( "Cd116_Ac228_h_cosTheta_P2_warm"    ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Bi212"      ) , hcoll->Find( "Cd116_Bi212_h_cosTheta_P2_warm"    ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Bi214"      ) , hcoll->Find( "Cd116_Bi214_h_cosTheta_P2_warm"    ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Pb214"      ) , hcoll->Find( "Cd116_Pb214_VT_h_cosTheta_P2_warm" ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "Mylar_Bi214"      ) , hcoll->Find( "Mylar_Bi214_h_cosTheta_P2_warm"    ) );
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "Mylar_Pb214"      ) , hcoll->Find( "Mylar_Pb214_h_cosTheta_P2_warm"    ) );
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_K40_warm"   ) , hcoll->Find( "Cd116_K40_h_cosTheta_P2_warm"      ) );
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_warm") , hcoll->Find( "Cd116_Pa234m_h_cosTheta_P2_warm"   ) );
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_warm" ) , hcoll->Find( "SFoil_Bi210_h_cosTheta_P2_warm"    ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P2"   ) , hcoll->Find( "SWire_Bi210_h_cosTheta_P2_warm"    ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "SScin_Bi210"      ) , hcoll->Find( "SScin_Bi210_h_cosTheta_P2_warm"    ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "SScin_Bi214"      ) , hcoll->Find( "SScin_Bi214_h_cosTheta_P2_warm"    ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "SScin_Pb214"      ) , hcoll->Find( "SScin_Pb214_h_cosTheta_P2_warm"    ) );   		
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P2"   ) , hcoll->Find( "SWire_Tl208_h_cosTheta_P2_warm"    ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P2"   ) , hcoll->Find( "SWire_Bi214_h_cosTheta_P2_warm"    ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P2"   ) , hcoll->Find( "SFoil_Bi214_h_cosTheta_P2_warm"    ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P2"   ) , hcoll->Find( "SWire_Pb214_h_cosTheta_P2_warm"    ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P2"   ) , hcoll->Find( "SFoil_Pb214_h_cosTheta_P2_warm"    ) );   
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Bi214"   ) , hcoll->Find( "FeShield_Bi214_h_cosTheta_P2_warm" ) );      
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Tl208"   ) , hcoll->Find( "FeShield_Tl208_h_cosTheta_P2_warm" ) );      
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "FeShield_Ac228"   ) , hcoll->Find( "FeShield_Ac228_h_cosTheta_P2_warm" ) );      				
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "CuTower_Co60"     ) , hcoll->Find( "CuTower_Co60_h_cosTheta_P2_warm"   ) );      
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "PMT_Bi214"        ) , hcoll->Find( "PMT_Bi214_h_cosTheta_P2_warm"      ) );      
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "PMT_Tl208"        ) , hcoll->Find( "PMT_Tl208_h_cosTheta_P2_warm"      ) );      
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "PMT_Ac228"        ) , hcoll->Find( "PMT_Ac228_h_cosTheta_P2_warm"      ) );      
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "PMT_K40"          ) , hcoll->Find( "PMT_K40_h_cosTheta_P2_warm"        ) );      
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "ScintInn_K40"     ) , hcoll->Find( "ScintInn_K40_h_cosTheta_P2_warm"   ) );      
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "ScintOut_K40"     ) , hcoll->Find( "ScintOut_K40_h_cosTheta_P2_warm"   ) );      
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "ScintPet_K40"     ) , hcoll->Find( "ScintPet_K40_h_cosTheta_P2_warm"   ) );      
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_cosTheta_P2_warm"   ) );      		
-		cosTheta_P2_warm -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_cosTheta_P2_warm" ) );      
+	}
+	// Summed histo
+	{
+		hcoll->Find( "Cd116_K40_h_tot_e_energy_P1_cold"      ) -> Add( hcoll->Find( "Cd116_K40_h_tot_e_energy_P2_cold"      ) );
+		hcoll->Find( "Cd116_Pa234m_h_tot_e_energy_P1_cold"   ) -> Add( hcoll->Find( "Cd116_Pa234m_h_tot_e_energy_P2_cold"   ) );
+		hcoll->Find( "SFoil_Bi210_h_tot_e_energy_P1_cold"    ) -> Add( hcoll->Find( "SFoil_Bi210_h_tot_e_energy_P2_cold"    ) );
+		hcoll->Find( "Cd116_K40_h_tot_e_energy_P1_warm"      ) -> Add( hcoll->Find( "Cd116_K40_h_tot_e_energy_P2_warm"      ) );
+		hcoll->Find( "Cd116_Pa234m_h_tot_e_energy_P1_warm"   ) -> Add( hcoll->Find( "Cd116_Pa234m_h_tot_e_energy_P2_warm"   ) );
+		hcoll->Find( "SFoil_Bi210_h_tot_e_energy_P1_warm"    ) -> Add( hcoll->Find( "SFoil_Bi210_h_tot_e_energy_P2_warm"    ) );
+		
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Cd116_Tl208"      ) , hcoll->Find( "Cd116_Tl208_h_tot_e_energy"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Cd116_Ac228"      ) , hcoll->Find( "Cd116_Ac228_h_tot_e_energy"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Cd116_Bi212"      ) , hcoll->Find( "Cd116_Bi212_h_tot_e_energy"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Cd116_Bi214"      ) , hcoll->Find( "Cd116_Bi214_h_tot_e_energy"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Cd116_Pb214"      ) , hcoll->Find( "Cd116_Pb214_VT_h_tot_e_energy" ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Mylar_Bi214"      ) , hcoll->Find( "Mylar_Bi214_h_tot_e_energy"    ) );
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Mylar_Pb214"      ) , hcoll->Find( "Mylar_Pb214_h_tot_e_energy"    ) );
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Cd116_K40_cold"   ) , hcoll->Find( "Cd116_K40_h_tot_e_energy_P1_cold"      ) );
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_cold") , hcoll->Find( "Cd116_Pa234m_h_tot_e_energy_P1_cold"   ) );
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_cold" ) , hcoll->Find( "SFoil_Bi210_h_tot_e_energy_P1_cold"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Cd116_K40_warm"   ) , hcoll->Find( "Cd116_K40_h_tot_e_energy_P1_warm"      ) );
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Cd116_Pa234m_warm") , hcoll->Find( "Cd116_Pa234m_h_tot_e_energy_P1_warm"   ) );
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SFoil_Bi210_warm" ) , hcoll->Find( "SFoil_Bi210_h_tot_e_energy_P1_warm"    ) );
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P1"   ) , hcoll->Find( "SWire_Bi210_h_tot_e_energy_P1"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SWire_Bi210_P2"   ) , hcoll->Find( "SWire_Bi210_h_tot_e_energy_P2"    ) );   	
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SScin_Bi210"      ) , hcoll->Find( "SScin_Bi210_h_tot_e_energy"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SScin_Bi214"      ) , hcoll->Find( "SScin_Bi214_h_tot_e_energy"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SScin_Pb214"      ) , hcoll->Find( "SScin_Pb214_h_tot_e_energy"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P1"   ) , hcoll->Find( "SWire_Tl208_h_tot_e_energy_P1"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P1"   ) , hcoll->Find( "SWire_Bi214_h_tot_e_energy_P1"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P1"   ) , hcoll->Find( "SFoil_Bi214_h_tot_e_energy_P1"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P1"   ) , hcoll->Find( "SWire_Pb214_h_tot_e_energy_P1"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P1"   ) , hcoll->Find( "SFoil_Pb214_h_tot_e_energy_P1"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SWire_Tl208_P2"   ) , hcoll->Find( "SWire_Tl208_h_tot_e_energy_P2"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SWire_Bi214_P2"   ) , hcoll->Find( "SWire_Bi214_h_tot_e_energy_P2"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SFoil_Bi214_P2"   ) , hcoll->Find( "SFoil_Bi214_h_tot_e_energy_P2"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SWire_Pb214_P2"   ) , hcoll->Find( "SWire_Pb214_h_tot_e_energy_P2"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "SFoil_Pb214_P2"   ) , hcoll->Find( "SFoil_Pb214_h_tot_e_energy_P2"    ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "FeShield_Bi214"   ) , hcoll->Find( "FeShield_Bi214_h_tot_e_energy" ) );      
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "FeShield_Tl208"   ) , hcoll->Find( "FeShield_Tl208_h_tot_e_energy" ) );      
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "FeShield_Ac228"   ) , hcoll->Find( "FeShield_Ac228_h_tot_e_energy" ) );      		
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "CuTower_Co60"     ) , hcoll->Find( "CuTower_Co60_h_tot_e_energy"   ) );      
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Air_Bi214_P1"     ) , hcoll->Find( "Air_Bi214_h_tot_e_energy_P1"      ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Air_Pb214_P1"     ) , hcoll->Find( "Air_Pb214_h_tot_e_energy_P1"      ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Air_Tl208_P1"     ) , hcoll->Find( "Air_Tl208_h_tot_e_energy_P1"      ) );   
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "PMT_Bi214"        ) , hcoll->Find( "PMT_Bi214_h_tot_e_energy"      ) );      
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "PMT_Tl208"        ) , hcoll->Find( "PMT_Tl208_h_tot_e_energy"      ) );      
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "PMT_Ac228"        ) , hcoll->Find( "PMT_Ac228_h_tot_e_energy"      ) );      
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "PMT_K40"          ) , hcoll->Find( "PMT_K40_h_tot_e_energy"        ) );      
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "ScintInn_K40"     ) , hcoll->Find( "ScintInn_K40_h_tot_e_energy"   ) );      
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "ScintOut_K40"     ) , hcoll->Find( "ScintOut_K40_h_tot_e_energy"   ) );      
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "ScintPet_K40"     ) , hcoll->Find( "ScintPet_K40_h_tot_e_energy"   ) );      
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "MuMetal_Pa234m"   ) , hcoll->Find( "MuMetal_Pa234m_h_tot_e_energy"   ) );      	
+		tot_e_energy -> AddComponent( DataManagement::FindComponent( "Cd116_2b2n_m14"   ) , hcoll->Find( "Cd116_2b2n_m14_h_tot_e_energy" ) );      
+		
+		
 	}
 	//////////////////////////////////////////////////////////////////////////////
 	//	
@@ -825,6 +456,10 @@
 	Fit::Run("Minuit", "Minimize");
     
 	cout << "T_{1/2}^{2\\nu} = " << 1/DataManagement::FindParameter("cBB")->GetValInit() << "+/-" << 1/DataManagement::FindParameter("cBB")->GetValInit()**2*DataManagement::FindParameter("cBB")->GetValError() << " 1e+19 y" << endl;	
+	
+	tot_e_energy -> Draw();
+	
+	tot_e_energy->PrintDetails();
 	
 }
 
