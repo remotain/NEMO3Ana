@@ -96,7 +96,7 @@ int main(int argc, char* argv[]) {
 
   
   
-	TString infileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/TMVApp/" );
+	TString infileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20160429/TMVApp/" );
     TString infileName;
 	infileName.Form( "TMVApp_%s.root", myModel.Data() );	
 
@@ -187,7 +187,7 @@ int main(int argc, char* argv[]) {
     CollieIOFile* cfile = new CollieIOFile();
     // Specify outputfile and channel name  
   
-	TString outfileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20151118/Collie/" );
+	TString outfileDir( "/sps/nemo/scratch/remoto/nemo3/plot/plot_UPDATE_TECHNOTE_20160429/Collie/" );
     TString outfileName;
 	outfileName.Form( "CollieIO_BDT_%s_%s.root", myModel.Data(), myEcut.Data() );	
   	outfileName = outfileDir + outfileName;
