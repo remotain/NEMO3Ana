@@ -1361,6 +1361,10 @@ namespace ProcessChannel {
 
 		    histo_collection->Find(TString::Format("%s_h_max_e_vtx_s"       , d->GetName()) ) -> Fill(el_vtx_s_max      , weight);
 		    histo_collection->Find(TString::Format("%s_h_max_e_vtx_z"       , d->GetName()) ) -> Fill(el_vtx_max.z()    , weight);
+
+			histo_collection->Find(TString::Format("%s_h_e_energy"         , d->GetName()) ) -> Fill(el_energy_min , weight);
+			histo_collection->Find(TString::Format("%s_h_e_energy"         , d->GetName()) ) -> Fill(el_energy_max , weight);
+
 			
 			// Start P1
 		    if (run < 3396) {
