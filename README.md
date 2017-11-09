@@ -9,7 +9,7 @@ Reference code used in the following scientific publication:
 
 [Phys. Rev. D 95, 012007 (2017)](https://journals.aps.org/prd/abstract/10.1103/PhysRevD.95.012007)
 
-[ArXiv:1610.03226] (https://arxiv.org/abs/1610.03226)
+[ArXiv:1610.03226](https://arxiv.org/abs/1610.03226)
 
 Install
 -------
